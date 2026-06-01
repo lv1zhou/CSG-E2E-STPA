@@ -1,0 +1,600 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_uca_generation",
+  "task_type": "UCA",
+  "action_key": "forward_drive",
+  "action_name_cn": "前进驱动",
+  "action_name_en": "Forward drive",
+  "generation_method": "lora",
+  "generation_method_label": "SFT",
+  "source_result_file": "avp_uca_lora_forward_drive_20260405_232343.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 50,
+    "target_items_per_run": 10
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-1",
+      "description": "在存在障碍物、行人或车辆时，AVP系统仍提供了前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-2",
+      "description": "在倒车泊车阶段，AVP系统提供了前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-3",
+      "description": "在泊车完成或达到停车边界后，AVP系统仍提供了前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-4",
+      "description": "在需要前进以完成泊车时，AVP系统未提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-5",
+      "description": "在泊车过程中，由于倒车动作中断，AVP系统未提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-6",
+      "description": "在倒车或侧方泊车操作中，提供前进驱动指令过早或过晚。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-7",
+      "description": "在完成泊车前，提供前进驱动指令过早停止。",
+      "linked_hazard_ids": [
+        "H-AVP-3",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-8",
+      "description": "在需要加速时，提供前进驱动指令过晚。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-9",
+      "description": "在需要完成泊车时，提供前进驱动指令过短。",
+      "linked_hazard_ids": [
+        "H-AVP-3",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-10",
+      "description": "在完成泊车后，提供前进驱动指令过长。",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-6-PCH",
+      "description": "当车辆已经停止时，仍提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-7-PCH",
+      "description": "在倒车泊车过程中，仍提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-8-PCH",
+      "description": "当车辆速度已高于安全范围时，仍提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-3-NPCH",
+      "description": "当车辆需要前进完成泊车时，未提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-4-NPCH",
+      "description": "当车辆需要完成倒车泊车时，未提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-9-TOUCA",
+      "description": "当需要减速完成倒车泊车时，过早地提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-10-TOUCA",
+      "description": "当需要转向完成倒车泊车时，过晚地提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-11-TOUCA",
+      "description": "当需要横向避障时，提供前进驱动指令过晚。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-12-STTS",
+      "description": "当需要停车完成倒车泊车时，过早地停止提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-13-STTS",
+      "description": "当需要完成倒车泊车时，过早地停止提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-4",
+      "description": "在已有障碍物的情况下提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-5",
+      "description": "在没有障碍物的情况下提供不必要的加速/减速指令。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-3",
+      "description": "在车辆开始泊车/靠近车位的过程中，未提供前进驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-6",
+      "description": "在需要加速/减速以完成泊车动作时，未提供驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-2",
+      "description": "在车辆已进入车位且无需前进/后退时，过早提供驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-7",
+      "description": "在需要加速/减速时，过晚地提供驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-8",
+      "description": "在需要停车时，过晚地停止提供驱动指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-1",
+      "description": "在需要进入车位时，提供驱动指令的时间过短。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-9",
+      "description": "在需要加速/减速时，提供驱动指令的时间过长。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-10",
+      "description": "在需要停车时，提供驱动指令的时间过长。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-1",
+      "description": "在检测到障碍物或车位边界时，提供了前进指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-2",
+      "description": "在检测到前方车辆已停或存在行人时，提供了前进指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-3",
+      "description": "在检测到停车完成时，继续提供前进指令。",
+      "linked_hazard_ids": [
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-4",
+      "description": "在检测到障碍物或停车完成时，未停止前进指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-5",
+      "description": "在检测到车辆前方有障碍物时，未提供停车或转向指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-6",
+      "description": "在需要转向或停车时，未提供转向或停止指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-7",
+      "description": "在检测到障碍物时，提供转向指令过晚。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-8",
+      "description": "在检测到障碍物时，提供停止指令过晚。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-9",
+      "description": "在检测到停车完成时，停止前进指令过晚。",
+      "linked_hazard_ids": [
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-10",
+      "description": "在停车状态下，继续提供前进指令太久。",
+      "linked_hazard_ids": [
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-3-1",
+      "description": "在有障碍物/行人/停车边界的情况下，提供了前进指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-3-2",
+      "description": "在车道变窄时提供了加速指令，使车辆偏离。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-3-3",
+      "description": "在后方存在障碍物时提供了加速指令，导致与后方车辆/障碍物的碰撞。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-3-4",
+      "description": "在接近障碍物/行人/停车边界时，未提供停车指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-3-5",
+      "description": "在需要减速/停车以避免碰撞时，未提供减速/停车指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-3-6",
+      "description": "在需要启动/加速推进停车时，未提供启动/加速指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-3-7",
+      "description": "在到达停车位前过早停止，导致无法完成任务。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-3-8",
+      "description": "在需要停车时过晚停止，导致碰撞。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-3-9",
+      "description": "在不需要时过早加速，导致不必要的急动。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-3-10",
+      "description": "加速时间过长导致越界，或过短导致无法停车。",
+      "linked_hazard_ids": [
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    }
+  ]
+}

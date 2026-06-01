@@ -1,0 +1,1203 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "manual_expert_delivery_audit_and_extraction_result",
+  "task_type": "UCA",
+  "audit_statement": "This file summarizes manual expert extraction, quality scoring, semantic merge, and final delivery audit outcomes. It contains no model debug payloads, request identifiers, service identifiers, or local execution paths.",
+  "aggregate_counts": {
+    "total_reviewed_items": 815,
+    "expert_usable_items_before_merge": 183,
+    "expert_kept_items_after_semantic_merge": 83,
+    "final_deliverable_items_after_expert_audit": 85,
+    "final_delivery_retention_rate": 1.0241
+  },
+  "experiment_audit_records": [
+    {
+      "task_name": "UCA identification",
+      "action_key": "forward_drive",
+      "action_name_cn": "前进驱动",
+      "action_name_en": "Forward drive",
+      "generation_method": "zero_shot",
+      "generation_method_label": "ZS",
+      "total_reviewed_items": 55,
+      "expert_usable_items_before_merge": 6,
+      "expert_kept_items_after_semantic_merge": 2,
+      "final_deliverable_items_after_expert_audit": 2,
+      "semantic_merge_retention_rate": 0.3333,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "summary": "前进驱动过长致越界"
+          },
+          {
+            "uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "summary": "未入位前过早停前进驱动"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:1",
+            "kept_uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it2:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it4:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it5:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 2
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "forward_drive",
+      "action_name_cn": "前进驱动",
+      "action_name_en": "Forward drive",
+      "generation_method": "few_1_shot",
+      "generation_method_label": "FS-1",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 9,
+      "expert_kept_items_after_semantic_merge": 5,
+      "final_deliverable_items_after_expert_audit": 5,
+      "semantic_merge_retention_rate": 0.5556,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-9",
+            "summary": "过早停止前进驱动致未完全入位"
+          },
+          {
+            "uca_id": "UCA-8__dup4",
+            "summary": "到达前过早提供前进驱动"
+          },
+          {
+            "uca_id": "UCA-7__dup5",
+            "summary": "调向时过早提供前进驱动致偏离"
+          },
+          {
+            "uca_id": "UCA-8__dup5",
+            "summary": "需减速时过晚提供前进驱动"
+          },
+          {
+            "uca_id": "UCA-10__dup5",
+            "summary": "需减速时持续前进驱动过久"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA-9__dup2",
+            "kept_uca_id": "UCA-9",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup3",
+            "kept_uca_id": "UCA-9",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup4",
+            "kept_uca_id": "UCA-9",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup5",
+            "kept_uca_id": "UCA-9",
+            "reason": "same_text_diff_hazard_merge"
+          }
+        ],
+        "kept_count": 5
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "forward_drive",
+      "action_name_cn": "前进驱动",
+      "action_name_en": "Forward drive",
+      "generation_method": "few_3_shot",
+      "generation_method_label": "FS-3",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 10,
+      "expert_kept_items_after_semantic_merge": 6,
+      "final_deliverable_items_after_expert_audit": 6,
+      "semantic_merge_retention_rate": 0.6,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-4",
+            "summary": "到达目标位置后未停止前进驱动"
+          },
+          {
+            "uca_id": "UCA-5",
+            "summary": "过早提供前进驱动导致进入不安全区域"
+          },
+          {
+            "uca_id": "UCA-8",
+            "summary": "持续前进驱动过长导致越出停车区域"
+          },
+          {
+            "uca_id": "UCA-7",
+            "summary": "过早停止前进驱动致未完全入位"
+          },
+          {
+            "uca_id": "UCA-10__dup4",
+            "summary": "持续前进驱动时间过长致越界或非预期运动"
+          },
+          {
+            "uca_id": "UCA-9__dup4",
+            "summary": "过早停止前进驱动致停在不安全位置"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA-5__dup2",
+            "kept_uca_id": "UCA-5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup2",
+            "kept_uca_id": "UCA-8",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-8__dup2",
+            "kept_uca_id": "UCA-7",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-10__dup3",
+            "kept_uca_id": "UCA-9__dup4",
+            "reason": "context_inclusion"
+          }
+        ],
+        "kept_count": 6
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "forward_drive",
+      "action_name_cn": "前进驱动",
+      "action_name_en": "Forward drive",
+      "generation_method": "lora",
+      "generation_method_label": "SFT",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 12,
+      "expert_kept_items_after_semantic_merge": 10,
+      "final_deliverable_items_after_expert_audit": 10,
+      "semantic_merge_retention_rate": 0.8333,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-AVP-2",
+            "summary": "倒车阶段错误提供前进驱动"
+          },
+          {
+            "uca_id": "UCA-AVP-7",
+            "summary": "泊车完成前过早停止前进驱动"
+          },
+          {
+            "uca_id": "UCA-AVP-6",
+            "summary": "倒车/侧方泊车中前进驱动时机错误"
+          },
+          {
+            "uca_id": "UCA-7-PCH",
+            "summary": "倒车过程中误发前进驱动"
+          },
+          {
+            "uca_id": "UCA-6-PCH",
+            "summary": "车辆已停仍提供前进驱动"
+          },
+          {
+            "uca_id": "UCA-10-TOUCA",
+            "summary": "需转向时过晚提供前进驱动"
+          },
+          {
+            "uca_id": "UCA-9-TOUCA",
+            "summary": "需减速时过早提供前进驱动"
+          },
+          {
+            "uca_id": "UCA-13-STTS",
+            "summary": "需完成泊车时过早停止前进驱动"
+          },
+          {
+            "uca_id": "UCA-AVP-8__dup2",
+            "summary": "需停车时过晚停止前进驱动"
+          },
+          {
+            "uca_id": "UCA-AVP-2__dup2",
+            "summary": "车位内无需移动时过早驱动"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA-12-STTS",
+            "kept_uca_id": "UCA-13-STTS",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-3-7",
+            "kept_uca_id": "UCA-13-STTS",
+            "reason": "context_inclusion"
+          }
+        ],
+        "kept_count": 10
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "search_slot",
+      "action_name_cn": "搜索车位",
+      "action_name_en": "Parking-slot search",
+      "generation_method": "zero_shot",
+      "generation_method_label": "ZS",
+      "total_reviewed_items": 55,
+      "expert_usable_items_before_merge": 14,
+      "expert_kept_items_after_semantic_merge": 3,
+      "final_deliverable_items_after_expert_audit": 5,
+      "semantic_merge_retention_rate": 0.2143,
+      "final_delivery_retention_rate": 1.6667,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA@it1:wrong_timing_or_order:0",
+            "summary": "过早确认车位致非预期运动"
+          },
+          {
+            "uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "summary": "过早停止搜索致泊车失败"
+          },
+          {
+            "uca_id": "UCA@it2:wrong_timing_or_order:1",
+            "summary": "过晚确认车位错过泊车时机"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA@it2:wrong_timing_or_order:0",
+            "kept_uca_id": "UCA@it1:wrong_timing_or_order:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it2:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it3:wrong_timing_or_order:1",
+            "kept_uca_id": "UCA@it2:wrong_timing_or_order:1",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it3:wrong_timing_or_order:0",
+            "kept_uca_id": "UCA@it1:wrong_timing_or_order:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it4:wrong_timing_or_order:1",
+            "kept_uca_id": "UCA@it2:wrong_timing_or_order:1",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it4:wrong_timing_or_order:0",
+            "kept_uca_id": "UCA@it1:wrong_timing_or_order:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it4:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it5:wrong_timing_or_order:1",
+            "kept_uca_id": "UCA@it2:wrong_timing_or_order:1",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it5:wrong_timing_or_order:0",
+            "kept_uca_id": "UCA@it1:wrong_timing_or_order:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it5:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 3
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "search_slot",
+      "action_name_cn": "搜索车位",
+      "action_name_en": "Parking-slot search",
+      "generation_method": "few_1_shot",
+      "generation_method_label": "FS-1",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 13,
+      "expert_kept_items_after_semantic_merge": 4,
+      "final_deliverable_items_after_expert_audit": 4,
+      "semantic_merge_retention_rate": 0.3077,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-6",
+            "summary": "过早确认车位致提前移动"
+          },
+          {
+            "uca_id": "UCA-8",
+            "summary": "过早停止搜索致停不安全位"
+          },
+          {
+            "uca_id": "UCA-7__dup2",
+            "summary": "过晚确认车位致不合时移动"
+          },
+          {
+            "uca_id": "UCA-9__dup5",
+            "summary": "搜索过久致滞留交通流"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA-6__dup2",
+            "kept_uca_id": "UCA-6",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup3",
+            "kept_uca_id": "UCA-6",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup4",
+            "kept_uca_id": "UCA-6",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup5",
+            "kept_uca_id": "UCA-6",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup2",
+            "kept_uca_id": "UCA-8",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-7__dup3",
+            "kept_uca_id": "UCA-7__dup2",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup3",
+            "kept_uca_id": "UCA-8",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup4",
+            "kept_uca_id": "UCA-8",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-8__dup5",
+            "kept_uca_id": "UCA-8",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 4
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "search_slot",
+      "action_name_cn": "搜索车位",
+      "action_name_en": "Parking-slot search",
+      "generation_method": "few_3_shot",
+      "generation_method_label": "FS-3",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 14,
+      "expert_kept_items_after_semantic_merge": 3,
+      "final_deliverable_items_after_expert_audit": 3,
+      "semantic_merge_retention_rate": 0.2143,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-6",
+            "summary": "过早确认车位导致泊车时机不当"
+          },
+          {
+            "uca_id": "UCA-7",
+            "summary": "过晚确认车位导致泊车时机不当"
+          },
+          {
+            "uca_id": "UCA-9",
+            "summary": "过早停止搜索导致无法找到车位"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA-6__dup2",
+            "kept_uca_id": "UCA-6",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup3",
+            "kept_uca_id": "UCA-6",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup4",
+            "kept_uca_id": "UCA-6",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup5",
+            "kept_uca_id": "UCA-6",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup2",
+            "kept_uca_id": "UCA-9",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup3",
+            "kept_uca_id": "UCA-9",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup4",
+            "kept_uca_id": "UCA-9",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup5",
+            "kept_uca_id": "UCA-9",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-7__dup3",
+            "kept_uca_id": "UCA-7",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-7__dup4",
+            "kept_uca_id": "UCA-7",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-7__dup5",
+            "kept_uca_id": "UCA-7",
+            "reason": "same_text_diff_hazard_merge"
+          }
+        ],
+        "kept_count": 3
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "search_slot",
+      "action_name_cn": "搜索车位",
+      "action_name_en": "Parking-slot search",
+      "generation_method": "lora",
+      "generation_method_label": "SFT",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 3,
+      "expert_kept_items_after_semantic_merge": 3,
+      "final_deliverable_items_after_expert_audit": 3,
+      "semantic_merge_retention_rate": 1.0,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-AVP-1.7",
+            "summary": "过早确认候选车位致任务失败"
+          },
+          {
+            "uca_id": "UCA-AVP-4",
+            "summary": "动态障碍下过早确认车位致碰撞"
+          },
+          {
+            "uca_id": "UCA-AVP-8",
+            "summary": "倒车前过早确认车位致路径受限"
+          }
+        ],
+        "merged_duplicate_items": [],
+        "kept_count": 3
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "emergency_brake",
+      "action_name_cn": "紧急制动",
+      "action_name_en": "Emergency braking",
+      "generation_method": "zero_shot",
+      "generation_method_label": "ZS",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 15,
+      "expert_kept_items_after_semantic_merge": 6,
+      "final_deliverable_items_after_expert_audit": 6,
+      "semantic_merge_retention_rate": 0.4,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA@it3:wrong_timing_or_order:1",
+            "summary": "制动过晚致未能避障"
+          },
+          {
+            "uca_id": "UCA@it3:wrong_timing_or_order:0",
+            "summary": "制动过早致阻碍其他车辆"
+          },
+          {
+            "uca_id": "UCA@it4:wrong_timing_or_order:0",
+            "summary": "制动过早致未入停车位"
+          },
+          {
+            "uca_id": "UCA@it5:wrong_timing_or_order:1",
+            "summary": "制动过晚致未及时减速"
+          },
+          {
+            "uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "summary": "制动时间短致未完全停止"
+          },
+          {
+            "uca_id": "UCA@it5:stopped_too_soon_or_applied_too_long:2",
+            "summary": "制动时间长致停错位置"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA@it1:wrong_timing_or_order:1",
+            "kept_uca_id": "UCA@it3:wrong_timing_or_order:1",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it2:wrong_timing_or_order:1",
+            "kept_uca_id": "UCA@it3:wrong_timing_or_order:1",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it4:wrong_timing_or_order:1",
+            "kept_uca_id": "UCA@it3:wrong_timing_or_order:1",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it1:wrong_timing_or_order:0",
+            "kept_uca_id": "UCA@it3:wrong_timing_or_order:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it2:wrong_timing_or_order:0",
+            "kept_uca_id": "UCA@it3:wrong_timing_or_order:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it2:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA@it4:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA@it5:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+            "reason": "same_text_diff_hazard_merge"
+          }
+        ],
+        "kept_count": 6
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "emergency_brake",
+      "action_name_cn": "紧急制动",
+      "action_name_en": "Emergency braking",
+      "generation_method": "few_1_shot",
+      "generation_method_label": "FS-1",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 4,
+      "expert_kept_items_after_semantic_merge": 4,
+      "final_deliverable_items_after_expert_audit": 4,
+      "semantic_merge_retention_rate": 1.0,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-6__dup2",
+            "summary": "过早制动致停位不当"
+          },
+          {
+            "uca_id": "UCA-9__dup2",
+            "summary": "过早停止制动致未停稳"
+          },
+          {
+            "uca_id": "UCA-10__dup2",
+            "summary": "制动过长致过度减速"
+          },
+          {
+            "uca_id": "UCA-8__dup5",
+            "summary": "过晚制动致越界"
+          }
+        ],
+        "merged_duplicate_items": [],
+        "kept_count": 4
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "emergency_brake",
+      "action_name_cn": "紧急制动",
+      "action_name_en": "Emergency braking",
+      "generation_method": "few_3_shot",
+      "generation_method_label": "FS-3",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 16,
+      "expert_kept_items_after_semantic_merge": 4,
+      "final_deliverable_items_after_expert_audit": 4,
+      "semantic_merge_retention_rate": 0.25,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-7__dup4",
+            "summary": "过晚制动致越界"
+          },
+          {
+            "uca_id": "UCA-6__dup4",
+            "summary": "过早制动致未入位"
+          },
+          {
+            "uca_id": "UCA-9__dup3",
+            "summary": "过早终止制动致未停稳"
+          },
+          {
+            "uca_id": "UCA-10__dup4",
+            "summary": "制动过长影响交通"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA-7",
+            "kept_uca_id": "UCA-7__dup4",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_uca_id": "UCA-8__dup2",
+            "kept_uca_id": "UCA-7__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-7__dup2",
+            "kept_uca_id": "UCA-6__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-6",
+            "kept_uca_id": "UCA-6__dup4",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup3",
+            "kept_uca_id": "UCA-6__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup5",
+            "kept_uca_id": "UCA-6__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9",
+            "kept_uca_id": "UCA-9__dup3",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup2",
+            "kept_uca_id": "UCA-9__dup3",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup4",
+            "kept_uca_id": "UCA-9__dup3",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup5",
+            "kept_uca_id": "UCA-9__dup3",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-7__dup3",
+            "kept_uca_id": "UCA-7__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-7__dup5",
+            "kept_uca_id": "UCA-7__dup4",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 4
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "emergency_brake",
+      "action_name_cn": "紧急制动",
+      "action_name_en": "Emergency braking",
+      "generation_method": "lora",
+      "generation_method_label": "SFT",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 10,
+      "expert_kept_items_after_semantic_merge": 8,
+      "final_deliverable_items_after_expert_audit": 8,
+      "semantic_merge_retention_rate": 0.8,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-28",
+            "summary": "接近障碍物/边界时过晚制动"
+          },
+          {
+            "uca_id": "UCA-29",
+            "summary": "完全停止后仍继续紧急制动"
+          },
+          {
+            "uca_id": "UCA-AVP-2",
+            "summary": "不需要时过早制动致急停"
+          },
+          {
+            "uca_id": "UCA-AVP-5",
+            "summary": "需制动时过晚（超最小响应时间）"
+          },
+          {
+            "uca_id": "UCA007",
+            "summary": "未判障前过早制动致任务失败"
+          },
+          {
+            "uca_id": "UCA010",
+            "summary": "未停稳前过早释放制动"
+          },
+          {
+            "uca_id": "UCA-AVP-3-7",
+            "summary": "近停车边界时制动过晚"
+          },
+          {
+            "uca_id": "UCA-AVP-3-8",
+            "summary": "无障碍时过早制动致扰动"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA-AVP-6",
+            "kept_uca_id": "UCA-AVP-2",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA008",
+            "kept_uca_id": "UCA-28",
+            "reason": "context_inclusion"
+          }
+        ],
+        "kept_count": 8
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "lateral_control",
+      "action_name_cn": "横向控制",
+      "action_name_en": "Lateral control",
+      "generation_method": "zero_shot",
+      "generation_method_label": "ZS",
+      "total_reviewed_items": 55,
+      "expert_usable_items_before_merge": 8,
+      "expert_kept_items_after_semantic_merge": 4,
+      "final_deliverable_items_after_expert_audit": 4,
+      "semantic_merge_retention_rate": 0.5,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA@it1:wrong_timing_or_order:0",
+            "summary": "过早提供转向指令致偏离路径"
+          },
+          {
+            "uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:1",
+            "summary": "转向指令过长致超出停车区"
+          },
+          {
+            "uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "summary": "过早停止转向致未入位"
+          },
+          {
+            "uca_id": "UCA@it4:wrong_timing_or_order:1",
+            "summary": "过晚提供转向指令致越界"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA@it2:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it4:wrong_timing_or_order:0",
+            "kept_uca_id": "UCA@it1:wrong_timing_or_order:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it4:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA@it5:stopped_too_soon_or_applied_too_long:0",
+            "kept_uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 4
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "lateral_control",
+      "action_name_cn": "横向控制",
+      "action_name_en": "Lateral control",
+      "generation_method": "few_1_shot",
+      "generation_method_label": "FS-1",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 14,
+      "expert_kept_items_after_semantic_merge": 3,
+      "final_deliverable_items_after_expert_audit": 3,
+      "semantic_merge_retention_rate": 0.2143,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-9__dup4",
+            "summary": "过晚转向致无法及时避障"
+          },
+          {
+            "uca_id": "UCA-8__dup4",
+            "summary": "过早转向致提前偏离路径撞人"
+          },
+          {
+            "uca_id": "UCA-10__dup4",
+            "summary": "过早停转致未完全入位"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA-9",
+            "kept_uca_id": "UCA-9__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup2",
+            "kept_uca_id": "UCA-9__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup3",
+            "kept_uca_id": "UCA-9__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup5",
+            "kept_uca_id": "UCA-9__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-8",
+            "kept_uca_id": "UCA-8__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-8__dup2",
+            "kept_uca_id": "UCA-8__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-8__dup3",
+            "kept_uca_id": "UCA-8__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-8__dup5",
+            "kept_uca_id": "UCA-8__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-10",
+            "kept_uca_id": "UCA-10__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-10__dup3",
+            "kept_uca_id": "UCA-10__dup4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-10__dup5",
+            "kept_uca_id": "UCA-10__dup4",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 3
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "lateral_control",
+      "action_name_cn": "横向控制",
+      "action_name_en": "Lateral control",
+      "generation_method": "few_3_shot",
+      "generation_method_label": "FS-3",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 21,
+      "expert_kept_items_after_semantic_merge": 5,
+      "final_deliverable_items_after_expert_audit": 5,
+      "semantic_merge_retention_rate": 0.2381,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA-5",
+            "summary": "过早提供转向指令"
+          },
+          {
+            "uca_id": "UCA-6",
+            "summary": "过晚提供转向指令"
+          },
+          {
+            "uca_id": "UCA-8",
+            "summary": "过早停止提供转向指令"
+          },
+          {
+            "uca_id": "UCA-9",
+            "summary": "转向指令持续时间过长"
+          },
+          {
+            "uca_id": "UCA-10__dup4",
+            "summary": "转向指令持续时间不足"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA-6__dup2",
+            "kept_uca_id": "UCA-6",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-5__dup2",
+            "kept_uca_id": "UCA-5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-10__dup2",
+            "kept_uca_id": "UCA-9",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-8__dup2",
+            "kept_uca_id": "UCA-8",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup3",
+            "kept_uca_id": "UCA-6",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-5__dup3",
+            "kept_uca_id": "UCA-5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup3",
+            "kept_uca_id": "UCA-9",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-8__dup3",
+            "kept_uca_id": "UCA-8",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup4",
+            "kept_uca_id": "UCA-6",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-5__dup4",
+            "kept_uca_id": "UCA-5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup4",
+            "kept_uca_id": "UCA-9",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-8__dup4",
+            "kept_uca_id": "UCA-8",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-7__dup5",
+            "kept_uca_id": "UCA-6",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-6__dup5",
+            "kept_uca_id": "UCA-5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_uca_id": "UCA-10__dup5",
+            "kept_uca_id": "UCA-9",
+            "reason": "same_text_diff_hazard_merge"
+          },
+          {
+            "removed_uca_id": "UCA-9__dup5",
+            "kept_uca_id": "UCA-8",
+            "reason": "same_text_diff_hazard_merge"
+          }
+        ],
+        "kept_count": 5
+      }
+    },
+    {
+      "task_name": "UCA identification",
+      "action_key": "lateral_control",
+      "action_name_cn": "横向控制",
+      "action_name_en": "Lateral control",
+      "generation_method": "lora",
+      "generation_method_label": "SFT",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 14,
+      "expert_kept_items_after_semantic_merge": 13,
+      "final_deliverable_items_after_expert_audit": 13,
+      "semantic_merge_retention_rate": 0.9286,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_uca_items": [
+          {
+            "uca_id": "UCA1-10",
+            "summary": "横向控制指令过早或过晚提供"
+          },
+          {
+            "uca_id": "UCA-AVP-7",
+            "summary": "泊车结束后继续提供转向指令"
+          },
+          {
+            "uca_id": "UCA-AVP-10",
+            "summary": "泊车结束时过早停止转向指令"
+          },
+          {
+            "uca_id": "UCA-AVP-15",
+            "summary": "过早提供横向控制导致轨迹偏离"
+          },
+          {
+            "uca_id": "UCA-AVP-19",
+            "summary": "需急转时过早停止横向控制"
+          },
+          {
+            "uca_id": "UCA-AVP-21",
+            "summary": "需右转时过早提供横向控制"
+          },
+          {
+            "uca_id": "UCA-AVP-20",
+            "summary": "需左转时过晚提供横向控制"
+          },
+          {
+            "uca_id": "UCA-AVP-14__dup2",
+            "summary": "直行通过区域时过早横向控制"
+          },
+          {
+            "uca_id": "UCA-AVP-15__dup2",
+            "summary": "进入车位时过晚提供横向控制"
+          },
+          {
+            "uca_id": "UCA-AVP-13__dup2",
+            "summary": "进入停车区需转向时过晚控制"
+          },
+          {
+            "uca_id": "UCA-AVP-14__dup3",
+            "summary": "驶入车位前过早提供转向指令"
+          },
+          {
+            "uca_id": "UCA-AVP-15__dup3",
+            "summary": "泊车完成后过早停止横向控制"
+          },
+          {
+            "uca_id": "UCA-AVP-13__dup3",
+            "summary": "侧向碰撞前过晚提供转向指令"
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_uca_id": "UCA1-11",
+            "kept_uca_id": "UCA-AVP-10",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 13
+      }
+    }
+  ]
+}

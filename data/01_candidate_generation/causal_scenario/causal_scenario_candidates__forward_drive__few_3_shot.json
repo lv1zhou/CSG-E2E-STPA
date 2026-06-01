@@ -1,0 +1,524 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_causal_scenario_generation",
+  "task_type": "causal_scenario",
+  "action_key": "forward_drive",
+  "action_name_cn": "前进驱动",
+  "action_name_en": "Forward drive",
+  "generation_method": "few_3_shot",
+  "generation_method_label": "FS-3",
+  "source_result_file": "scenario_few_3_shot_forward_drive_20260407_105306.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 50,
+    "target_items_per_run": 10
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-FD-01",
+      "description": "【超声波雷达误报】超声波雷达检测到一个不存在的障碍物(FB-AVP-FD-1)，导致环境位置信念(PM-AVP-FD-1)误判前方有障碍物。尽管路径有效，控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致泊车失败。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-FD-02",
+      "description": "【路径通信丢包】路径通信丢包(FB-AVP-FD-4)导致任务与路径信念(PM-AVP-FD-2)错误，控制器认为路径无效。控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致泊车失败。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-FD-03",
+      "description": "【CAN信号延迟】车辆CAN信号延迟(FB-AVP-FD-2)导致控制器未能及时获取车辆状态，环境位置信念(PM-AVP-FD-1)错误更新。控制算法(CA-AVP-FD-1)发出前进驱动指令，但实际车辆位置已接近障碍物，导致碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-FD-04",
+      "description": "【执行确认超时】执行确认超时(FB-AVP-FD-3)导致执行效果信念(PM-AVP-FD-3)错误，控制算法(CA-AVP-FD-3)未停止前进驱动指令，导致车辆越界或驶入危险区域。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-FD-05",
+      "description": "【超声波雷达丢失】超声波雷达信号丢失(FB-AVP-FD-1)导致环境位置信念(PM-AVP-FD-1)错误，控制器误判前方无障碍物。控制算法(CA-AVP-FD-1)发出前进驱动指令，导致车辆碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-FD-06",
+      "description": "【路径阶段不一致】路径阶段与实际泊车状态不一致(FB-AVP-FD-4)导致任务与路径信念(PM-AVP-FD-2)错误，控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致泊车失败。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-FD-07",
+      "description": "【CAN信号丢包】车辆CAN信号丢包(FB-AVP-FD-2)导致控制器未能及时获取车辆状态，环境位置信念(PM-AVP-FD-1)错误更新。控制算法(CA-AVP-FD-1)发出前进驱动指令，但实际车辆位置已接近障碍物，导致碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-FD-08",
+      "description": "【执行器故障】执行器故障导致执行确认不一致(FB-AVP-FD-3)，执行效果信念(PM-AVP-FD-3)错误。控制算法(CA-AVP-FD-3)未停止前进驱动指令，导致车辆越界或驶入危险区域。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-FD-09",
+      "description": "【路径通信延迟】路径通信延迟(FB-AVP-FD-4)导致任务与路径信念(PM-AVP-FD-2)错误，控制器认为路径无效。控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致泊车失败。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-FD-10",
+      "description": "【CAN信号异常】车辆CAN信号异常(FB-AVP-FD-2)导致控制器未能及时获取车辆状态，环境位置信念(PM-AVP-FD-1)错误更新。控制算法(CA-AVP-FD-1)发出前进驱动指令，但实际车辆位置已接近障碍物，导致碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-FD-01",
+      "description": "【超声波雷达误报】超声波雷达检测到一个不存在的障碍物(FB-AVP-FD-1)，导致环境位置信念(PM-AVP-FD-1)误判前方有障碍物。尽管路径有效，控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致泊车失败。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-FD-02",
+      "description": "【路径通信丢包】上位机路径通信丢包(FB-AVP-FD-4)，导致任务与路径信念(PM-AVP-FD-2)错误认为路径不完整。控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致泊车失败。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-FD-03",
+      "description": "【CAN信号延迟】车辆CAN信号延迟(FB-AVP-FD-2)，导致环境位置信念(PM-AVP-FD-1)误判车辆位置。控制算法(CA-AVP-FD-1)发出前进驱动指令，但实际车辆位置已接近障碍物，导致碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-FD-04",
+      "description": "【执行确认超时】执行确认超时(FB-AVP-FD-3)，导致执行效果信念(PM-AVP-FD-3)误判执行失败。控制算法(CA-AVP-FD-3)停止前进驱动指令，导致泊车失败。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-FD-05",
+      "description": "【超声波雷达丢失】超声波雷达信号丢失(FB-AVP-FD-1)，导致环境位置信念(PM-AVP-FD-1)误判前方无障碍物。控制算法(CA-AVP-FD-1)发出前进驱动指令，导致车辆驶入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-FD-06",
+      "description": "【路径阶段不一致】路径阶段与实际泊车状态不一致(FB-AVP-FD-4)，导致任务与路径信念(PM-AVP-FD-2)误判路径无效。控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致泊车失败。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-FD-07",
+      "description": "【CAN信号丢包】车辆CAN信号丢包(FB-AVP-FD-2)，导致环境位置信念(PM-AVP-FD-1)误判车辆位置。控制算法(CA-AVP-FD-1)发出前进驱动指令，但实际车辆位置已接近边界，导致越界。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-FD-08",
+      "description": "【执行器故障】执行器故障导致执行确认不一致(FB-AVP-FD-3)，导致执行效果信念(PM-AVP-FD-3)误判执行失败。控制算法(CA-AVP-FD-3)停止前进驱动指令，导致泊车失败。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-FD-09",
+      "description": "【路径通信延迟】上位机路径通信延迟(FB-AVP-FD-4)，导致任务与路径信念(PM-AVP-FD-2)误判路径无效。控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致泊车失败。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-FD-10",
+      "description": "【CAN信号异常】车辆CAN信号异常(FB-AVP-FD-2)，导致环境位置信念(PM-AVP-FD-1)误判车辆位置。控制算法(CA-AVP-FD-1)发出前进驱动指令，但实际车辆位置已接近障碍物，导致碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-FD-01",
+      "description": "【超声波传感器误报】超声波雷达在泊车过程中误报前方有障碍物(FB-AVP-FD-1)，但环境位置信念(PM-AVP-FD-1)未及时更新。路径有效且前方可通行，但控制算法(CA-AVP-FD-1)错误地认为前方不可通行，导致未提供前进驱动指令(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-FD-02",
+      "description": "【路径通信丢包】上位机路径通信丢包(FB-AVP-FD-4)，导致任务与路径信念(PM-AVP-FD-2)错误认为路径未更新。控制算法(CA-AVP-FD-1)继续提供前进驱动指令，但实际路径已变更，导致车辆驶入危险区域(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-FD-03",
+      "description": "【CAN信号延迟】车辆CAN信号延迟(FB-AVP-FD-2)，导致控制器未能及时接收到车辆接近目标终点的信息。控制算法(CA-AVP-FD-2)未能及时停止前进驱动指令，导致车辆越界(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-FD-04",
+      "description": "【执行确认超时】执行确认超时(FB-AVP-FD-3)，控制算法(CA-AVP-FD-3)未能及时停止前进驱动指令。车辆继续前进，导致越界或财产损失(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-FD-05",
+      "description": "【超声波传感器丢失】超声波雷达在泊车过程中丢失信号(FB-AVP-FD-1)，导致环境位置信念(PM-AVP-FD-1)错误认为前方无障碍物。控制算法(CA-AVP-FD-1)继续提供前进驱动指令，导致碰撞(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-FD-06",
+      "description": "【路径阶段不一致】任务与路径信念(PM-AVP-FD-2)错误认为路径阶段不一致，控制算法(CA-AVP-FD-1)未能提供前进驱动指令，导致车辆停留在不可接受位置(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-FD-07",
+      "description": "【执行效果信念错误】执行效果信念(PM-AVP-FD-3)错误认为前进指令未产生期望位移，控制算法(CA-AVP-FD-3)停止前进驱动指令，导致车辆停留在不可接受位置(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-FD-08",
+      "description": "【CAN信号丢包】车辆CAN信号丢包(FB-AVP-FD-2)，导致控制器未能及时接收到车辆接近目标终点的信息。控制算法(CA-AVP-FD-2)未能及时停止前进驱动指令，导致车辆越界(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-FD-09",
+      "description": "【路径通信延迟】上位机路径通信延迟(FB-AVP-FD-4)，导致任务与路径信念(PM-AVP-FD-2)错误认为路径未更新。控制算法(CA-AVP-FD-1)继续提供前进驱动指令，但实际路径已变更，导致车辆驶入危险区域(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-FD-10",
+      "description": "【执行确认不一致】执行确认不一致(FB-AVP-FD-3)，控制算法(CA-AVP-FD-3)未能及时停止前进驱动指令。车辆继续前进，导致越界或财产损失(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-FD-01",
+      "description": "【超声波雷达误报】超声波雷达检测到一个不存在的障碍物(FB-AVP-FD-1)，导致环境位置信念(PM-AVP-FD-1)误判前方有障碍物。尽管路径有效，控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致无法完成泊车。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-FD-02",
+      "description": "【路径通信丢包】上位机路径通信丢包(FB-AVP-FD-4)，导致任务与路径信念(PM-AVP-FD-2)错误认为路径不完整。控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致无法完成泊车。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-FD-03",
+      "description": "【CAN信号延迟】车辆CAN信号延迟(FB-AVP-FD-2)，导致环境位置信念(PM-AVP-FD-1)误判车辆位置。控制算法(CA-AVP-FD-1)发出前进驱动指令，但实际车辆位置已接近障碍物，导致碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-FD-04",
+      "description": "【超声波雷达丢失】超声波雷达信号丢失(FB-AVP-FD-1)，导致环境位置信念(PM-AVP-FD-1)无法准确判断前方障碍物。控制算法(CA-AVP-FD-1)发出前进驱动指令，导致车辆驶入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-FD-05",
+      "description": "【执行确认超时】执行确认超时(FB-AVP-FD-3)，导致执行效果信念(PM-AVP-FD-3)误判执行失败。控制算法(CA-AVP-FD-3)停止前进驱动指令，导致车辆停留在不可接受位置。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-FD-06",
+      "description": "【CAN信号丢包】车辆CAN信号丢包(FB-AVP-FD-2)，导致环境位置信念(PM-AVP-FD-1)误判车辆位置。控制算法(CA-AVP-FD-1)发出前进驱动指令，但实际车辆位置已接近边界，导致越界。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-FD-07",
+      "description": "【路径通信延迟】上位机路径通信延迟(FB-AVP-FD-4)，导致任务与路径信念(PM-AVP-FD-2)错误认为路径未更新。控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致无法完成泊车。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-FD-08",
+      "description": "【执行器状态回读不一致】执行器状态回读不一致(FB-AVP-FD-3)，导致执行效果信念(PM-AVP-FD-3)误判执行失败。控制算法(CA-AVP-FD-3)停止前进驱动指令，导致车辆停留在不可接受位置。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-FD-09",
+      "description": "【超声波雷达误检】超声波雷达误检前方障碍物(FB-AVP-FD-1)，导致环境位置信念(PM-AVP-FD-1)误判前方不可通行。控制算法(CA-AVP-FD-1)未发出前进驱动指令，导致无法完成泊车。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-FD-10",
+      "description": "【CAN信号异常】车辆CAN信号异常(FB-AVP-FD-2)，导致环境位置信念(PM-AVP-FD-1)误判车辆位置。控制算法(CA-AVP-FD-1)发出前进驱动指令，但实际车辆位置已接近障碍物，导致碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-FD-01",
+      "description": "【超声波传感器误报】超声波雷达在检测到地面凹凸时误报障碍物(FB-AVP-FD-1)，环境位置信念(PM-AVP-FD-1)误判前方有障碍物，导致前进驱动指令(UCA-1)被取消，车辆停滞在不可接受的位置。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-FD-02",
+      "description": "【路径通信丢包】上位机路径通信丢包(FB-AVP-FD-4)，导致任务与路径信念(PM-AVP-FD-2)错误更新，路径阶段不一致，前进驱动指令(UCA-1)被错误提供，车辆驶入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-FD-03",
+      "description": "【CAN信号延迟】车辆CAN信号延迟(FB-AVP-FD-2)，导致车辆状态反馈不及时，环境位置信念(PM-AVP-FD-1)误判车辆位置，前进驱动指令(UCA-1)被错误提供，车辆越界。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-FD-04",
+      "description": "【执行确认超时】执行确认超时(FB-AVP-FD-3)，控制算法(CA-AVP-FD-3)未收到执行确认，前进驱动指令(UCA-2)被停止，导致车辆停留在不可接受位置。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-FD-05",
+      "description": "【超声波传感器丢失】超声波雷达信号丢失(FB-AVP-FD-1)，环境位置信念(PM-AVP-FD-1)无法更新，前进驱动指令(UCA-1)被错误提供，车辆碰撞障碍物。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-FD-06",
+      "description": "【路径阶段不一致】路径阶段不一致(FB-AVP-FD-4)，任务与路径信念(PM-AVP-FD-2)错误更新，前进驱动指令(UCA-1)被错误提供，车辆越界。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-FD-07",
+      "description": "【执行器故障】执行器故障导致扭矩反馈异常(FB-AVP-FD-3)，执行效果信念(PM-AVP-FD-3)误判执行失败，前进驱动指令(UCA-2)被停止，车辆停留在不可接受位置。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-FD-08",
+      "description": "【CAN信号丢包】车辆CAN信号丢包(FB-AVP-FD-2)，导致车辆状态反馈不完整，环境位置信念(PM-AVP-FD-1)误判车辆位置，前进驱动指令(UCA-1)被错误提供，车辆碰撞障碍物。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-FD-09",
+      "description": "【路径通信延迟】上位机路径通信延迟(FB-AVP-FD-4)，导致任务与路径信念(PM-AVP-FD-2)错误更新，路径阶段不一致，前进驱动指令(UCA-1)被错误提供，车辆越界。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-FD-10",
+      "description": "【执行确认不一致】执行确认不一致(FB-AVP-FD-3)，控制算法(CA-AVP-FD-3)误判执行失败，前进驱动指令(UCA-2)被停止，导致车辆停留在不可接受位置。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    }
+  ]
+}

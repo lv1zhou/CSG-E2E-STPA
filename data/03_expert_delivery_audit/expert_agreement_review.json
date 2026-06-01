@@ -1,0 +1,20 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "manual_expert_agreement_review_summary",
+  "review_source": "manual_expert_review",
+  "expert_agreement_review_from_paper": {
+    "sample_size": 60,
+    "uca_samples": 30,
+    "causal_scenario_samples": 30,
+    "overall_agreement_rate": 0.967,
+    "uca_agreement_rate": 0.933,
+    "causal_scenario_agreement_rate": 1.0,
+    "cohens_kappa": 0.78
+  }
+}

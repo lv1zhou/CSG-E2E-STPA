@@ -1,0 +1,540 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_causal_scenario_generation",
+  "task_type": "causal_scenario",
+  "action_key": "lateral_control",
+  "action_name_cn": "横向控制",
+  "action_name_en": "Lateral control",
+  "generation_method": "lora",
+  "generation_method_label": "SFT",
+  "source_result_file": "scenario_lora_lateral_control_20260407_113300.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 50,
+    "target_items_per_run": null
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-LAT-1",
+      "description": "反馈导致的过程模型错误：环视摄像头(FB-AVP-LAT-1)因雨雪遮挡未能识别车位边界，系统对边界位置产生错误认知或决策偏差(PM-AVP-LAT-2)，导致横向控制指令提供过晚或幅度过大。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-LAT-2",
+      "description": "控制算法问题 - 软件缺陷：横向控制算法(CA-AVP-LAT-1)在路径曲率较大的情况下，因PID参数整定不当导致转向响应迟缓，使轨迹偏差累积，触发UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-LAT-3",
+      "description": "反馈导致的过程模型错误：车辆侧方移动时，侧向障碍物(FB-AVP-LAT-4)的点云数据因传感器采样率不足出现断续，系统状态估计(PM-AVP-LAT-1)滞后，使避障控制失效，触发UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-LAT-4",
+      "description": "控制路径故障：转向电机因机械故障卡死，导致系统持续输出最大转向指令(FB-AVP-LAT-2异常)，进入UCA-1的危险状态。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-LAT-5",
+      "description": "反馈导致的过程模型错误：环视摄像头(FB-AVP-LAT-1)因光线反射错误地将白线识别为虚线，系统对停车轨迹产生错误认知(PM-AVP-LAT-2)，导致横向控制提供错误的方向或持续时间。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-LAT-6",
+      "description": "反馈路径中断：由于摄像头供电电缆被夹住并发生间歇性断开，系统无法获得边界感知反馈(FB-AVP-LAT-1丢失)，使横向控制指令因缺乏输入而停止提供，触发UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-LAT-7",
+      "description": "控制算法问题 - 软件缺陷：横向控制算法(CA-AVP-LAT-3)在收到执行器故障信号后，因逻辑缺陷未能正确切换至保守模式，而是继续保持已发出的危险转向指令。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-LAT-8",
+      "description": "过程模型与现实不符：车辆因前轮轮胎漏气导致实际转向半径显著大于设计值，系统对车身响应的信念(PM-AVP-LAT-3)错误，使横向控制指令持续时间不足，触发UCA-2或UCA-4。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-LAT-9",
+      "description": "控制算法问题 - 软件缺陷：在车位尽头有斜坡的场景下，路径跟踪算法(CA-AVP-LAT-1)未考虑坡度对横向运动的影响，使横向推进过快，导致UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-LAT-10",
+      "description": "反馈路径中断：由于网络总线负载过高，转向角回读信号(FB-AVP-LAT-2)在传输中发生丢包，使系统对受控过程状态产生错误认知或决策偏差(PM-AVP-LAT-1)，从而触发控制指令的错误决策。此处反馈路径中断使控制器对执行状态产生错误认知或决策偏差。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "环视摄像头（FB-AVP-LAT-1）在逆光环境下失效，提供错误的边界线位置。控制器基于此错误反馈（过程模型PM-AVP-LAT-1不准确），持续提供使车辆驶向真实边界的转向指令，导致擦碰。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "目标轨迹的曲率（PM-AVP-LAT-2）因高精度地图数据错误而被高估。系统基于此错误信念计算出不必要的大转角指令，导致车辆在直道上剧烈蛇形，偏离轨迹。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "由于计算单元负载过高，系统处理轨迹跟踪的算法（CA-AVP-LAT-1）卡顿，导致横向控制指令更新频率显著下降。车辆横向位姿持续漂移，偏差在控制周期内累积。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "控制器-AVP横向规划与控制模块因软件缺陷进入死循环，未提供任何转向指令。当车辆因路面摩擦系数变化产生偏移时，系统无法纠正，导致轨迹偏离。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "横向控制指令已正确生成，但因转向电机的动力系统故障（执行器问题），车辆无法完成指令要求的大转角。导致在泊入车位时持续偏离目标路径。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "系统正确识别了侧向障碍物（FB-AVP-LAT-4正常），但其路径规划算法（CA-AVP-LAT-2）对障碍物与车身轮廓的碰撞边界计算错误。使车辆因过度避让而偏离车位中心轨迹。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "由于摄像头分辨率不足，系统将远处的停车线识别为近处的边界（过程模型PM-AVP-LAT-1错误），导致提前并过度转向，使车辆擦碰真实边界。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "转向控制指令正确下发并执行，但系统对车身姿态的位姿估计（FB-AVP-LAT-3）因IMU传感器标定错误而持续累积误差。导致系统认为车辆仍在路径上，实际上已偏离。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "在泊车过程中，环视摄像头（FB-AVP-LAT-1）因遮挡短暂失效。系统基于最后一次有效的边界位置继续提供转向指令，但此位置已不再准确，导致越界。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "系统在窄车位泊入时，路径跟踪算法（CA-AVP-LAT-1）对路径的曲率不连续点处理不当。在需要急转的瞬间，系统未能及时切换控制模式，导致轨迹跟踪失败。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-LAT-1",
+      "description": "控制器-AVP横向规划与控制模块的过程模型(PM-AVP-LAT-1)错误，基于一个过时的、未更新的位姿估计，在路径末端发出了一个过晚的横向修正指令，导致轨迹偏差累积。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-LAT-2",
+      "description": "环视摄像头(FB-AVP-LAT-1)因雨雾导致停车线识别模糊，使目标轨迹的曲率(PM-AVP-LAT-2)与实际不符，控制器-AVP横向规划与控制模块计算出的横向控制指令过大，导致车辆越界。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-LAT-3",
+      "description": "转向电机因高温保护停机，控制器-AVP横向规划与控制模块未收到电机故障状态(FB-AVP-LAT-2)，其过程模型(PM-AVP-LAT-3)中“已正确执行”的信念错误，导致横向控制被持续但无效地提供。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-LAT-4",
+      "description": "车辆在窄车位并列泊车时，侧向障碍物近距测距(FB-AVP-LAT-4)的传感器被遮挡，控制器-AVP横向规划与控制模块的路径跟踪-转向执行-姿态反馈闭环(PM-AVP-LAT-2)因缺乏障碍物约束，横向控制被持续提供直至发生擦碰。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-LAT-5",
+      "description": "控制器-AVP横向规划与控制模块因处理高负载任务导致运算延迟，使横向控制指令的提供时机(受控过程状态更新)与当前车辆状态不匹配，导致轨迹偏离。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-LAT-6",
+      "description": "车辆在需要急转弯的泊车路径上，控制器-AVP横向规划与控制模块对目标轨迹曲率(PM-AVP-LAT-2)的认知正确，但其控制算法(CA-AVP-LAT-1)的响应速度不足，导致横向控制指令幅度过小且持续时间不足。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-LAT-7",
+      "description": "转向角回读信号(FB-AVP-LAT-2)因CAN总线干扰而丢失，控制器-AVP横向规划与控制模块在等待反馈确认时，未提供横向控制指令；当反馈恢复后，系统对受控过程状态产生混淆，延迟了控制的重新提供。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-LAT-8",
+      "description": "控制器-AVP横向规划与控制模块的一个软件缺陷导致，在特定车位形状下，横向控制指令被错误地设置为0度；当系统应提供非零转角时，持续提供零控制。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-LAT-9",
+      "description": "控制器-AVP横向规划与控制模块基于正确的位姿误差计算了横向控制指令，但由于该指令通过控制器局域网(CAN)发送时因总线繁忙而发生延迟，导致控制动作与车辆状态不匹配，使调整过晚。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-LAT-10",
+      "description": "控制器-AVP横向规划与控制模块的轨迹跟踪控制算法(CA-AVP-LAT-1)设计存在缺陷，对特定类型的连续小幅度横向偏差处理不当，导致其横向控制指令的持续时间和强度不足，无法有效纠正。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-LAT-1",
+      "description": "反馈路径(FB-AVP-LAT-1)问题：环视摄像头因污损未能识别路肩标记，导致轨迹跟踪算法在转弯时过度切入路肩；使控制器-AVP横向规划与控制模块的过程模型(PM-AVP-LAT-2)对边界位置产生错误认知。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-LAT-2",
+      "description": "控制算法(CA-AVP-LAT-1)问题：横向控制器的PID参数调校过于激进，为纠正小的横向偏差发出过大的转向指令，导致车辆绕圈子；使控制器对受控过程的动态响应产生错误认知。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-LAT-3",
+      "description": "反馈路径(FB-AVP-LAT-2)问题：转向角回读信号在弯道中发生丢失。控制器持续发送转向前轮的指令并进入“等待回正”逻辑，导致指令持续提供且持续时间过长。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-LAT-4",
+      "description": "反馈路径(FB-AVP-LAT-3)问题：车辆因路面颠簸导致轮胎打滑，偏航率传感器(FB-AVP-LAT-3)读数异常。控制器基于错误反馈的过程模型(PM-AVP-LAT-1)发生震荡，触发频繁的小幅转向指令。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-LAT-5",
+      "description": "控制算法(CA-AVP-LAT-2)问题：系统正确识别了侧向障碍物，但其紧急避障逻辑的触发阈值设置过大，导致刹车或避让指令下达过晚；使控制器对受控过程状态产生错误认知。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-LAT-6",
+      "description": "反馈路径(FB-AVP-LAT-4)失效：侧向超声波传感器因被其他车辆遮挡而丢失信号。控制器基于此缺失反馈的过程模型(PM-AVP-LAT-2)对安全距离产生错误认知，导致横向推进不足。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-LAT-7",
+      "description": "硬件故障：电动助力转向(EPS)电机扭矩输出不足，当需要较大转向力度时，实际转向角度远小于指令，导致轨迹偏离；使控制器对执行效果产生错误认知(违反PM-AVP-LAT-3)。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-LAT-8",
+      "description": "控制路径中断：横向控制指令已由控制器正确生成，但与转向ECU之间的CAN总线因物理损坏而断开，指令无法送达；使控制器对受控过程状态产生错误认知。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-LAT-9",
+      "description": "控制算法(CA-AVP-LAT-3)问题：系统接收到一个格式错误的“路径完成”信号，导致其过早停止所有横向控制，车辆在直行中偏离轨迹；使控制器对受控过程状态产生错误认知。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-LAT-10",
+      "description": "反馈路径(FB-AVP-LAT-3)问题：位姿估计算法在低摩擦路面上发生积分漂移。控制器基于此错误的位置认知，持续发出修正指令，使横向偏差越来越大。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "反馈路径(FB-AVP-LAT-1)中，环视摄像头因低光照条件导致车道线识别失败，使系统对横向边界的认知(Belief PM-AVP-LAT-2)产生偏差，触发 UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "控制器软件(CA-AVP-LAT-1)在处理目标轨迹曲率时，因浮点数溢出导致数值异常，使得横向控制指令完全未输出，触发 UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "系统对自车横向位姿的估计(Belief PM-AVP-LAT-1)严重滞后于实际状态（因定位模块卡顿），导致横向控制指令持续提供晚于所需时机，触发 UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "侧向障碍物测距(FB-AVP-LAT-4)传感器因被遮挡而超时未更新。系统在路径跟踪(CA-AVP-LAT-1)时未能及时限制转角，导致擦碰障碍物，触发 UCA-1；同时因路径偏差未及时修正，也触发 UCA-3。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "转向执行ACK(FB-AVP-LAT-2)信号丢失，使控制器软件(CA-AVP-LAT-3)误认为指令已成功下达。然而，转向机未实际动作，导致车辆轨迹偏离，触发 UCA-1 和 UCA-2。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "横向规划器的边界处理算法(CA-AVP-LAT-2)存在缺陷，当车辆接近弯曲边界时，未能基于目标轨迹曲率(Belief PM-AVP-LAT-2)正确计算安全裕度，导致转向指令使车辆越界，触发 UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "系统正常完成了一次横向泊入动作，但转向机机械卡滞。控制器软件(CA-AVP-LAT-1)的反馈路径(FB-AVP-LAT-2)因设计缺陷无法有效监测此类硬件故障，导致横向控制持续生效，车辆被拖拽擦碰固定物体，触发 UCA-1 和 UCA-4。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "车辆在弯道行驶时，车身姿态估计(FB-AVP-LAT-3)受侧倾影响产生偏差。控制器对自车航向角的认知(Belief PM-AVP-LAT-1)错误，导致路径跟踪算法(CA-AVP-LAT-1)输出错误的转向指令，使车辆偏离轨道，触发 UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "横向控制指令持续提供以修正一次较大的横向偏差。然而，由于车辆动力学特性导致响应滞后，控制器未等待到位姿收敛即过早停止指令，导致未对准车位，触发 UCA-2 和 UCA-4。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "控制器软件(CA-AVP-LAT-1)在处理一个需要急转弯的路径时，未能基于当前速度正确计算所需的转向速率，导致转角不足，触发 UCA-3。此外，转向执行器响应过慢，使控制指令持续时间过短，进一步加剧偏差，触发 UCA-4。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    }
+  ]
+}

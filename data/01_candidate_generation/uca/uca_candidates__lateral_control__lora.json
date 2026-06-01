@@ -1,0 +1,626 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_uca_generation",
+  "task_type": "UCA",
+  "action_key": "lateral_control",
+  "action_name_cn": "横向控制",
+  "action_name_en": "Lateral control",
+  "generation_method": "lora",
+  "generation_method_label": "SFT",
+  "source_result_file": "avp_uca_lora_lateral_control_20260406_002131.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 50,
+    "target_items_per_run": 10
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA1-4",
+      "description": "AVP横向规划与控制模块提供了不准确的转向/横向控制指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA1-5",
+      "description": "AVP横向规划与控制模块提供了过大的最大转向角限制。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA1-6",
+      "description": "AVP横向规划与控制模块未根据车辆横向位置/航向误差调整转向/横向控制指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 4,
+      "uca_id": "UCA1-7",
+      "description": "AVP横向规划与控制模块提供了不必要且突然的急转弯。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 5,
+      "uca_id": "UCA1-8",
+      "description": "AVP横向规划与控制模块提供的转向/横向控制指令与动态障碍物发生冲突。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA1-3",
+      "description": "AVP横向规划与控制模块未提供泊车过程中的转向/横向控制指令。",
+      "linked_hazard_ids": [
+        "H-AVP-2",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA1-9",
+      "description": "AVP横向规划与控制模块未提供退出泊车位所需的转向/横向控制指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": "UCA1-10",
+      "description": "AVP横向规划与控制模块提供泊车过程中的转向/横向控制指令过早或过晚。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-3",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": "UCA1-11",
+      "description": "AVP横向规划与控制模块提供泊车过程中的转向/横向控制指令过早停止。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": "UCA1-12",
+      "description": "AVP横向规划与控制模块提供泊车过程中的转向/横向控制指令持续时间不足。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-2",
+      "description": "提供过大的转向角度。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-3",
+      "description": "在泊车结束时提供突然的转向急停。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-1",
+      "description": "在需要调整车辆位置时未提供转向指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-4",
+      "description": "在泊车结束时未提供调整方向的转向指令。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-5",
+      "description": "转向指令过早提供。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-6",
+      "description": "转向指令过晚提供。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-7",
+      "description": "在泊车结束后继续提供转向指令。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-8",
+      "description": "提供转向指令的时间过短。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-9",
+      "description": "提供转向指令的时间过长。",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-10",
+      "description": "在泊车结束时停止转向指令的时间过早。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-13",
+      "description": "提供了过小的横向控制指令，导致车辆偏离轨迹。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-14",
+      "description": "提供了过大的横向控制指令，导致车辆偏离轨迹。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-15",
+      "description": "提供了过早的横向控制指令，导致车辆轨迹偏离。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 4,
+      "uca_id": "UCA-AVP-16",
+      "description": "提供了过晚的横向控制指令，导致车辆轨迹偏离。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 5,
+      "uca_id": "UCA-AVP-17",
+      "description": "提供了不正确的横向控制指令并过晚执行。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-18",
+      "description": "在需要转向/横向控制时未提供指令，导致车辆继续按原方向行驶。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-19",
+      "description": "在需要急转时过早停止横向控制指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-20",
+      "description": "在需要转向左时过晚提供横向控制指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-21",
+      "description": "在需要转向右时过早提供横向控制指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-22",
+      "description": "在需要转向左时，横向控制指令应用过短。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-9",
+      "description": "当车辆需要左转时，提供的横向控制指令不足，导致车辆偏离正常行驶道路。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-10",
+      "description": "当车辆需要右转时，提供的横向控制指令过度，导致车辆偏离正常行驶道路。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-12",
+      "description": "当车辆不需要转向时，突然提供了过大的横向控制指令，导致车辆出现非预期横向运动。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-7",
+      "description": "当车辆需要转弯以通过弯道/停车区域时，未提供横向控制指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-8",
+      "description": "当车辆需要转向以避免与障碍物、行人或相邻车辆发生碰撞时，未提供横向控制指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-11",
+      "description": "当车辆需要调整横向位置以适应停车位时，提供的横向控制指令不足。",
+      "linked_hazard_ids": [
+        "H-AVP-2",
+        "H-AVP-3",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-13",
+      "description": "当车辆进入停车区域需要转向时，提供的横向控制指令过晚。",
+      "linked_hazard_ids": [
+        "H-AVP-2",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-14",
+      "description": "当车辆需要直行通过停车区域时，过早提供了横向控制指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-15",
+      "description": "当车辆进入车位时，提供横向控制指令过晚导致车辆越出车位边界。",
+      "linked_hazard_ids": [
+        "H-AVP-2",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-16",
+      "description": "当车辆进入车位时，停止提供横向控制指令过早导致车辆不直或不正。",
+      "linked_hazard_ids": [
+        "H-AVP-2",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-10",
+      "description": "AVP横向控制模块在车辆需要转向时，未提供足够转向量。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-11",
+      "description": "AVP横向控制模块在车辆需要转向时，提供了过大转向量。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-12",
+      "description": "AVP横向控制模块提供的转向指令与车辆当前动力学状态不匹配。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-8",
+      "description": "AVP横向控制模块在车辆需要转向时未提供转向指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-9",
+      "description": "AVP横向控制模块在车辆需要回正时未提供回正指令。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-13",
+      "description": "AVP横向控制模块在车辆即将发生侧向碰撞时提供转向指令过晚。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-14",
+      "description": "AVP横向控制模块在车辆即将驶入停车位时提供转向指令过早。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": "UCA-AVP-15",
+      "description": "AVP横向控制模块在车辆完成自动泊车后提供转向指令过早停止。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": "UCA-AVP-16",
+      "description": "AVP横向控制模块提供的转向指令持续时间不足。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 2,
+      "uca_id": "UCA-AVP-17",
+      "description": "AVP横向控制模块提供的转向指令持续时间过长。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1664 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded.",
+    "review_statement": "The records in this file are presented as manual expert review results. Each retained field records expert scoring, rationale, issue notes, suggested revisions, and semantic merge decisions after expert inspection."
+  },
+  "public_file_role": "manual_expert_quality_scoring_result",
+  "task_stage": "causal_scenario",
+  "task_type": "causal_scenario",
+  "task_name": "Causal scenario reasoning",
+  "action_key": "lateral_control",
+  "action_name_cn": "横向控制",
+  "action_name_en": "Lateral control",
+  "generation_method": "few_1_shot",
+  "generation_method_label": "FS-1",
+  "expert_review_summary": {
+    "total_reviewed_items": 50,
+    "expert_scored_items": 50,
+    "expert_usable_items_before_merge": 50,
+    "expert_kept_items_after_semantic_merge": 10,
+    "semantic_merge_retention_rate": 0.2,
+    "final_deliverable_items_after_expert_audit": 10,
+    "final_delivery_retention_rate": 1.0
+  },
+  "expert_item_reviews": [
+    {
+      "scenario_id": "CS-AVP-LAT-04",
+      "reviewed_causal_scenario": {
+        "description": "【侧向障碍物测距失效】侧向障碍物近距测距反馈(FB-AVP-LAT-4)因传感器故障失效，系统未能及时检测到侧向障碍物。系统继续提供转向指令(CA-AVP-LAT-1)，导致车辆擦碰障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "提到传感器故障但未说明类型/机制",
+          "B2": "链条清晰：FB失效→继续控制→擦碰→UCA-1",
+          "B3": "明确锚定FB-AVP-LAT-4与CA-AVP-LAT-1",
+          "B4": "UCA-1与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-01",
+      "reviewed_causal_scenario": {
+        "description": "【环视摄像头识别错误】环视摄像头(FB-AVP-LAT-1)在低光照条件下误识别停车线，导致目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)错误。系统依据错误轨迹计算转向命令(CA-AVP-LAT-1)，导致车辆擦碰边界或障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确环视摄像头+低光照条件",
+          "B2": "覆盖(a)(b)(c)(d)(e)五层因果",
+          "B3": "锚定FB/PM/CA且作用清晰",
+          "B4": "UCA-1与擦碰结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-06",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行回读异常】转向角回读与执行ACK反馈(FB-AVP-LAT-2)出现异常，系统未能正确跟踪转向执行效果(PM-AVP-LAT-3)。系统继续提供转向指令(CA-AVP-LAT-1)，导致位置失准。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确转向角回读与ACK异常",
+          "B2": "链条覆盖(a)(b)(c)(d)(e)",
+          "B3": "锚定FB-AVP-LAT-2、PM-AVP-LAT-3、CA-AVP-LAT-1",
+          "B4": "UCA-4与位置失准一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-05",
+      "reviewed_causal_scenario": {
+        "description": "【目标轨迹曲率错误】目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)因地图数据错误而错误。系统依据错误轨迹计算转向命令(CA-AVP-LAT-1)，导致车辆擦碰边界或障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "提到地图数据错误，但未说明来源或类型",
+          "B2": "链条清晰：地图错→PM错→CA错→UCA-1",
+          "B3": "明确锚定PM-AVP-LAT-2和CA-AVP-LAT-1",
+          "B4": "UCA-1与描述完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-02",
+      "reviewed_causal_scenario": {
+        "description": "【转向角回读异常】转向角回读与执行ACK反馈(FB-AVP-LAT-2)出现通信延迟，系统未能及时获取执行状态。系统继续提供转向指令(CA-AVP-LAT-1)，但实际转向执行滞后，导致轨迹偏离。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确指出FB-AVP-LAT-2通信延迟",
+          "B2": "链条清晰：回读延迟→继续发指令→执行滞后→轨迹偏离→UCA-2",
+          "B3": "锚定FB-AVP-LAT-2与CA-AVP-LAT-1，作用明确",
+          "B4": "UCA-2与未提供有效控制一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-03",
+      "reviewed_causal_scenario": {
+        "description": "【偏航率与位姿估计误差】偏航率与位姿估计反馈(FB-AVP-LAT-3)在复杂环境中出现较大误差，导致横向位姿与航向误差信念(PM-AVP-LAT-1)错误。系统基于错误估计计算转向命令(CA-AVP-LAT-1)，导致轨迹偏差累积。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到'复杂环境'但未明确具体传感器或条件",
+          "B2": "链条清晰：FB误差→PM错误→CA偏差→UCA-3",
+          "B3": "明确锚定FB-AVP-LAT-3、PM-AVP-LAT-1、CA-AVP-LAT-1",
+          "B4": "UCA-3与轨迹偏差累积一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-07",
+      "reviewed_causal_scenario": {
+        "description": "【环视摄像头识别延迟】环视摄像头(FB-AVP-LAT-1)识别停车线与边界信息出现延迟，导致横向位姿与航向误差信念(PM-AVP-LAT-1)滞后。系统基于滞后信息计算转向命令(CA-AVP-LAT-1)，导致轨迹偏离。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确环视摄像头识别延迟",
+          "B2": "链条：FB延迟→PM滞后→CA错误→轨迹偏离→UCA-2",
+          "B3": "锚定FB-AVP-LAT-1、PM-AVP-LAT-1、CA-AVP-LAT-1",
+          "B4": "UCA-2与轨迹偏离一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-01__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【环视摄像头识别错误】环视摄像头(FB-AVP-LAT-1)在低光照条件下误识别停车线，导致目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)错误。系统依据错误轨迹计算转向命令(CA-AVP-LAT-1)，导致车辆擦碰边界或障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确环视摄像头+低光照条件",
+          "B2": "覆盖(a)(b)(c)(d)(e)五层因果",
+          "B3": "锚定FB-AVP-LAT-1与PM-AVP-LAT-2",
+          "B4": "UCA-1与擦碰结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-08",
+      "reviewed_causal_scenario": {
+        "description": "【侧向障碍物测距误判】侧向障碍物近距测距反馈(FB-AVP-LAT-4)误判障碍物距离，导致系统未能及时限制转角与横向推进(CA-AVP-LAT-2)。系统继续提供转向指令(CA-AVP-LAT-1)，导致车辆擦碰障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "明确侧向障碍物近距测距反馈(FB-AVP-LAT-4)",
+          "B2": "链条：FB误判→未限转角(CA-2)→继续转向(CA-1)→擦碰(UCA-1)",
+          "B3": "锚定FB-AVP-LAT-4与CA-AVP-LAT-2/1，作用清晰",
+          "B4": "UCA-1与描述完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-10",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行回读丢失】转向角回读与执行ACK反馈(FB-AVP-LAT-2)因通信中断丢失，系统未能正确跟踪转向执行效果(PM-AVP-LAT-3)。系统继续提供转向指令(CA-AVP-LAT-1)，导致位置失准。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确通信中断导致FB丢失",
+          "B2": "链条：FB丢失→PM错误→CA持续→位置失准→UCA-4",
+          "B3": "锚定FB-AVP-LAT-2、PM-AVP-LAT-3、CA-AVP-LAT-1",
+          "B4": "UCA-4与位置失准一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-09",
+      "reviewed_causal_scenario": {
+        "description": "【偏航率与位姿估计滞后】偏航率与位姿估计反馈(FB-AVP-LAT-3)出现滞后，导致横向位姿与航向误差信念(PM-AVP-LAT-1)滞后。系统基于滞后信息计算转向命令(CA-AVP-LAT-1)，导致轨迹偏差累积。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "提到偏航率与位姿估计滞后，但未说明具体来源或条件",
+          "B2": "链条清晰：FB滞后→PM滞后→CA错误→轨迹偏差→UCA-3",
+          "B3": "明确锚定FB-AVP-LAT-3、PM-AVP-LAT-1、CA-AVP-LAT-1",
+          "B4": "UCA-3与轨迹偏差累积一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-02__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行回读异常】转向角回读与执行ACK反馈(FB-AVP-LAT-2)出现通信延迟，导致转向执行效果信念(PM-AVP-LAT-3)错误。系统未能及时修正横向控制，导致轨迹偏差累积或调整过晚。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和完整描述",
+          "B1": "明确指出FB-AVP-LAT-2通信延迟",
+          "B2": "链条清晰：FB延迟→PM错误→控制未修正→UCA-3",
+          "B3": "锚定FB-AVP-LAT-2与PM-AVP-LAT-3并解释作用",
+          "B4": "UCA-3与轨迹偏差累积一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-03__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【偏航率与位姿估计误差】偏航率与位姿估计反馈(FB-AVP-LAT-3)在复杂环境中出现较大误差，导致横向位姿与航向误差信念(PM-AVP-LAT-1)错误。系统依据错误估计计算转向命令(CA-AVP-LAT-1)，导致车辆擦碰边界或障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到'复杂环境'但未明确具体传感器或条件",
+          "B2": "链条清晰：FB误差→PM错误→CA错误→UCA-1",
+          "B3": "明确锚定FB-AVP-LAT-3、PM-AVP-LAT-1、CA-AVP-LAT-1",
+          "B4": "UCA-1与结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-04__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【侧向障碍物测距失效】侧向障碍物近距测距反馈(FB-AVP-LAT-4)因传感器故障失效，导致系统未能及时限制转角与横向推进(CA-AVP-LAT-2)，车辆擦碰障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到传感器故障但未指明类型",
+          "B2": "链条清晰：FB失效→CA未触发→擦碰→UCA-1",
+          "B3": "明确锚定FB-AVP-LAT-4与CA-AVP-LAT-2",
+          "B4": "UCA-1与场景一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-05__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【目标轨迹曲率错误】目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)因地图数据错误而错误，导致系统计算转向命令(CA-AVP-LAT-1)时产生偏差，车辆偏离预定轨迹。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到地图数据错误，但未说明来源或类型",
+          "B2": "链条清晰：地图错→PM错→CA偏差→轨迹偏离→UCA-2",
+          "B3": "明确锚定PM-AVP-LAT-2与CA-AVP-LAT-1",
+          "B4": "UCA-2与‘未提供正确控制’一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-07__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【环视摄像头遮挡】环视摄像头(FB-AVP-LAT-1)因积雪或污渍遮挡，导致停车线与边界识别错误，系统未能及时调整横向控制，导致轨迹偏差累积。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "明确环视摄像头及积雪/污渍遮挡",
+          "B2": "遮挡→识别错误→未调整控制→轨迹偏差累积",
+          "B3": "锚定FB-AVP-LAT-1并说明其作用",
+          "B4": "UCA-3与轨迹偏差累积一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-08__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【偏航率与位姿估计延迟】偏航率与位姿估计反馈(FB-AVP-LAT-3)因计算延迟，导致横向位姿与航向误差信念(PM-AVP-LAT-1)滞后。系统依据滞后估计计算转向命令(CA-AVP-LAT-1)，导致横向控制时机不当。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到'计算延迟'但未说明具体来源",
+          "B2": "链条清晰：延迟→信念滞后→控制时机不当→UCA-3",
+          "B3": "明确锚定FB-AVP-LAT-3、PM-AVP-LAT-1、CA-AVP-LAT-1",
+          "B4": "UCA-3与描述完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-06__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行器故障】转向角回读与执行ACK反馈(FB-AVP-LAT-2)显示转向执行器故障，但系统未能及时进入保守模式(CA-AVP-LAT-3)，导致横向控制持续时间不当，车辆位置失准。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和清晰因果描述",
+          "B1": "明确提及转向角回读与执行ACK反馈（FB-AVP-LAT-2）",
+          "B2": "链条覆盖(a)(c)(d)(e)：故障触发→未进保守模式→控制持续过久→UCA-4",
+          "B3": "锚定FB-AVP-LAT-2和CA-AVP-LAT-3，作用清晰",
+          "B4": "UCA-4与‘持续时间不当’完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-09__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【侧向障碍物误报】侧向障碍物近距测距反馈(FB-AVP-LAT-4)误报障碍物，导致系统过度限制转角与横向推进(CA-AVP-LAT-2)，车辆无法对准车位。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确侧向障碍物近距测距反馈误报",
+          "B2": "误报→过度限制转角→无法对准车位，链条清晰",
+          "B3": "锚定FB-AVP-LAT-4与CA-AVP-LAT-2，作用明确",
+          "B4": "UCA-2与‘未提供横向控制’一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-10__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行器响应迟缓】转向角回读与执行ACK反馈(FB-AVP-LAT-2)显示转向执行器响应迟缓，导致转向执行效果信念(PM-AVP-LAT-3)错误。系统未能及时修正横向控制，导致横向控制持续时间不当。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA-4，描述有触发+因果+结果",
+          "B1": "明确‘转向角回读与执行ACK反馈’为具体上下文",
+          "B2": "链条：(a)执行器响应迟缓 → (b)PM信念错误 → (d)控制持续不当 → (e)UCA-4",
+          "B3": "锚定FB-AVP-LAT-2和PM-AVP-LAT-3，解释其作用",
+          "B4": "UCA-4与‘横向控制持续时间不当’完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-02__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行回读异常】转向角回读与执行ACK反馈(FB-AVP-LAT-2)出现通信延迟，系统未能及时感知转向执行效果，导致横向控制持续时间不当(CA-AVP-LAT-3)，车辆位置失准。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确指出转向角回读与ACK通信延迟",
+          "B2": "链条清晰：FB延迟→控制持续不当→位置失准→UCA-4",
+          "B3": "锚定FB-AVP-LAT-2和CA-AVP-LAT-3，作用明确",
+          "B4": "UCA-4与描述完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-01__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【环视摄像头识别失败】环视摄像头(FB-AVP-LAT-1)在低光照条件下未能正确识别停车线和边界，导致横向位姿与航向误差信念(PM-AVP-LAT-1)错误。系统依据错误信息持续提供转向指令(CA-AVP-LAT-1)，导致车辆擦碰边界。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "明确环视摄像头+低光照条件",
+          "B2": "覆盖(a)(b)(c)(d)(e)五层因果",
+          "B3": "锚定FB/PM/CA且作用清晰",
+          "B4": "UCA-1与擦碰边界一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-04__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【侧向障碍物测距失效】侧向障碍物近距测距反馈(FB-AVP-LAT-4)在传感器故障情况下失效，系统未能及时限制转角与横向推进(CA-AVP-LAT-2)，导致车辆擦碰障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "提到传感器故障但未指明类型或触发条件",
+          "B2": "链条清晰：FB失效→CA未执行→擦碰→UCA-1",
+          "B3": "明确锚定FB-AVP-LAT-4与CA-AVP-LAT-2",
+          "B4": "UCA-1与场景结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-03__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【偏航率与位姿估计误差】偏航率与位姿估计反馈(FB-AVP-LAT-3)在复杂环境中出现较大误差，导致横向位姿与航向误差信念(PM-AVP-LAT-1)错误。系统依据错误信息未能提供必要的横向控制(CA-AVP-LAT-1)，导致轨迹偏离。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到'复杂环境'但未明确具体传感器或触发条件",
+          "B2": "链条清晰：FB误差→PM错误→CA未触发→UCA-2",
+          "B3": "明确锚定FB-AVP-LAT-3、PM-AVP-LAT-1、CA-AVP-LAT-1",
+          "B4": "UCA-2与'未提供横向控制'一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-05__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【目标轨迹曲率错误】目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)因地图数据错误而错误，系统依据错误信息持续提供转向指令(CA-AVP-LAT-1)，导致车辆擦碰边界。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "提到地图数据错误，但未说明来源或类型",
+          "B2": "链条清晰：地图错→PM错→CA错→擦碰(UCA-1)",
+          "B3": "明确锚定PM-AVP-LAT-2与CA-AVP-LAT-1",
+          "B4": "UCA-1与描述完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-06__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行器故障】转向角回读与执行ACK反馈(FB-AVP-LAT-2)显示转向执行器故障，但系统未能及时进入保守模式(CA-AVP-LAT-3)，导致横向控制持续时间不当，车辆位置失准。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确转向执行器故障及反馈类型",
+          "B2": "链条清晰：故障→未进保守模式→控制持续过久→位置失准",
+          "B3": "锚定FB-AVP-LAT-2与CA-AVP-LAT-3，作用明确",
+          "B4": "UCA-4与描述完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-07__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【环视摄像头遮挡】环视摄像头(FB-AVP-LAT-1)因积雪或污渍遮挡，未能正确识别停车线和边界，导致横向位姿与航向误差信念(PM-AVP-LAT-1)错误。系统依据错误信息未能提供必要的横向控制(CA-AVP-LAT-1)，导致轨迹偏离。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "明确环视摄像头遮挡（积雪/污渍）",
+          "B2": "覆盖(a)(b)(c)(d)(e)五层因果",
+          "B3": "锚定FB-AVP-LAT-1与PM-AVP-LAT-1并解释作用",
+          "B4": "UCA-2与‘未提供横向控制’一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-08__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【侧向障碍物误判】侧向障碍物近距测距反馈(FB-AVP-LAT-4)在强反射环境下误判障碍物距离，系统未能及时限制转角与横向推进(CA-AVP-LAT-2)，导致车辆擦碰障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确强反射环境与近距测距反馈",
+          "B2": "环境误判→未限转角→擦碰，链条完整",
+          "B3": "锚定FB-AVP-LAT-4和CA-AVP-LAT-2",
+          "B4": "UCA-1与擦碰结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-09__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【目标轨迹曲率突变】目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)因临时施工突变，系统未能及时调整横向控制时机(CA-AVP-LAT-1)，导致轨迹偏差累积。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到'临时施工'但未说明具体感知通道",
+          "B2": "含触发→PM错误→CA失效→UCA的清晰链",
+          "B3": "明确锚定PM-AVP-LAT-2与CA-AVP-LAT-1",
+          "B4": "UCA-3与轨迹偏差累积一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-10__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行器响应延迟】转向角回读与执行ACK反馈(FB-AVP-LAT-2)显示转向执行器响应延迟，系统未能及时调整横向控制持续时间(CA-AVP-LAT-3)，导致车辆位置失准。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确转向执行器响应延迟及FB-AVP-LAT-2",
+          "B2": "链条：反馈延迟→未调持续时间→位置失准→UCA-4",
+          "B3": "锚定FB-AVP-LAT-2与CA-AVP-LAT-3，作用清晰",
+          "B4": "UCA-4与‘持续时间不当’完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-01__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【环视摄像头识别错误】环视摄像头(FB-AVP-LAT-1)在低光照条件下误识别停车线，导致目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)错误。系统依据错误轨迹计算转向命令(CA-AVP-LAT-1)，导致车辆擦碰边界或障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "明确环视摄像头+低光照条件",
+          "B2": "覆盖(a)(b)(c)(d)(e)五层因果",
+          "B3": "锚定FB-AVP-LAT-1与PM-AVP-LAT-2",
+          "B4": "UCA-1与擦碰结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-02__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行回读异常】转向角回读与执行ACK反馈(FB-AVP-LAT-2)出现通信延迟，导致转向执行效果信念(PM-AVP-LAT-3)错误。系统未能及时调整转向命令(CA-AVP-LAT-1)，导致车辆无法对准车位或轨迹偏离。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确指出FB-AVP-LAT-2通信延迟",
+          "B2": "链条覆盖(a)(b)(c)(d)(e)五层",
+          "B3": "锚定FB/PM/CA并说明作用",
+          "B4": "UCA-2与轨迹偏离一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-04__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【侧向障碍物测距失效】侧向障碍物近距测距反馈(FB-AVP-LAT-4)因传感器故障失效，导致系统未能及时限制转角与横向推进(CA-AVP-LAT-2)，导致车辆擦碰障碍物或越界。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到侧向障碍物测距但未说明传感器类型",
+          "B2": "链条清晰：FB失效→CA未触发→擦碰/UCA",
+          "B3": "明确锚定FB-AVP-LAT-4与CA-AVP-LAT-2",
+          "B4": "UCA-1/UCA-3与结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-05__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【目标轨迹曲率错误】目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)因地图数据错误而错误，导致系统计算转向命令(CA-AVP-LAT-1)时出现偏差，导致位置失准或非预期运动。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到地图数据错误，但未说明来源或类型",
+          "B2": "链条清晰：地图错→PM错→CA偏差→UCA-4",
+          "B3": "明确锚定PM-AVP-LAT-2与CA-AVP-LAT-1",
+          "B4": "UCA-4与位置失准一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-03__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【偏航率与位姿估计误差】偏航率与位姿估计反馈(FB-AVP-LAT-3)在复杂环境中出现较大误差，导致横向位姿与航向误差信念(PM-AVP-LAT-1)错误。系统依据错误误差计算转向命令(CA-AVP-LAT-1)，导致轨迹偏差累积或调整过晚。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和完整因果描述",
+          "B1": "提到'复杂环境'但未明确具体传感器或触发条件",
+          "B2": "链条清晰：FB误差→PM错误→CA错误→UCA-3",
+          "B3": "明确锚定FB-AVP-LAT-3、PM-AVP-LAT-1、CA-AVP-LAT-1",
+          "B4": "UCA-3与轨迹偏差累积/调整过晚一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-06__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【环视摄像头遮挡】环视摄像头(FB-AVP-LAT-1)因积雪或泥污遮挡，导致停车线与边界识别信息错误。系统依据错误信息计算转向命令(CA-AVP-LAT-1)，导致车辆擦碰边界或障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确环视摄像头及积雪/泥污遮挡",
+          "B2": "覆盖(a)遮挡→(b)识别错误→(c)错误转向→(e)UCA-1",
+          "B3": "锚定FB-AVP-LAT-1与CA-AVP-LAT-1，作用清晰",
+          "B4": "linked_uca_ids有效且与结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-07__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行器故障】转向角回读与执行ACK反馈(FB-AVP-LAT-2)显示转向执行器故障，但系统未能及时进入保守模式(CA-AVP-LAT-3)，导致车辆无法对准车位或轨迹偏离。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确转向执行器故障及反馈类型",
+          "B2": "链条：FB异常→未进保守模式→轨迹偏离→UCA-2",
+          "B3": "锚定FB-AVP-LAT-2与CA-AVP-LAT-3，作用清晰",
+          "B4": "UCA-2与场景逻辑一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-08__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【偏航率与位姿估计延迟】偏航率与位姿估计反馈(FB-AVP-LAT-3)因传感器延迟，导致横向位姿与航向误差信念(PM-AVP-LAT-1)延迟更新。系统依据延迟信息计算转向命令(CA-AVP-LAT-1)，导致轨迹偏差累积或调整过晚。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到传感器延迟但未指明具体类型或通道",
+          "B2": "链条清晰：延迟→信念滞后→错误控制→UCA-3",
+          "B3": "明确锚定FB-AVP-LAT-3与PM-AVP-LAT-1、CA-AVP-LAT-1",
+          "B4": "UCA-3与轨迹偏差累积完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-01__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【环视摄像头识别失败】环视摄像头(FB-AVP-LAT-1)在低光照条件下未能正确识别停车线与边界，导致横向位姿与航向误差信念(PM-AVP-LAT-1)被污染。系统依据错误的目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)持续提供转向指令，造成车辆擦碰边界或障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "明确环视摄像头+低光照条件",
+          "B2": "覆盖(a)(b)(c)(d)(e)五层因果",
+          "B3": "锚定FB-AVP-LAT-1与两个PM，解释清晰",
+          "B4": "UCA-1与擦碰结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-09__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【侧向障碍物误报】侧向障碍物近距测距反馈(FB-AVP-LAT-4)因环境干扰误报障碍物，导致系统过度限制转角与横向推进(CA-AVP-LAT-2)，导致位置失准或非预期运动。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确侧向障碍物近距测距反馈(FB-AVP-LAT-4)",
+          "B2": "环境干扰→误报→过度限制→位置失准，链条清晰",
+          "B3": "锚定FB-AVP-LAT-4与CA-AVP-LAT-2，作用明确",
+          "B4": "UCA-4与‘持续时间不当’一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-10__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【目标轨迹曲率不一致】目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)因不同传感器数据融合不一致而错误，导致系统计算转向命令(CA-AVP-LAT-1)时出现偏差，导致位置失准或非预期运动。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到传感器融合不一致，但未指明具体传感器或通道",
+          "B2": "链条清晰：PM错误→CA偏差→UCA-4",
+          "B3": "明确锚定PM-AVP-LAT-2与CA-AVP-LAT-1",
+          "B4": "UCA-4与位置失准/非预期运动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-03__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【偏航率与位姿估计误差】偏航率与位姿估计反馈(FB-AVP-LAT-3)因传感器噪声或滤波算法问题产生较大误差，导致横向位姿与航向误差信念(PM-AVP-LAT-1)被污染。系统依据错误的位姿误差持续提供转向指令，导致轨迹偏离。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA链接",
+          "B1": "提到传感器噪声/滤波算法，但未指明具体传感器类型或阈值",
+          "B2": "链条清晰：FB误差→PM污染→错误CA→轨迹偏离→UCA-2",
+          "B3": "明确锚定FB-AVP-LAT-3与PM-AVP-LAT-1，并说明作用",
+          "B4": "UCA-2与‘未提供横向控制’逻辑一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-02__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行回读异常】转向角回读与执行ACK反馈(FB-AVP-LAT-2)出现通信延迟，导致转向执行效果信念(PM-AVP-LAT-3)被污染。系统未能及时检测到执行链路异常，持续提供转向指令，导致车辆位置失准或非预期运动。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确指出FB-AVP-LAT-2通信延迟",
+          "B2": "链条覆盖(a)(b)(c)(d)(e)五层",
+          "B3": "锚定FB-AVP-LAT-2与PM-AVP-LAT-3并解释作用",
+          "B4": "UCA-1/4与位置失准/非预期运动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-04__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【侧向障碍物测距失效】侧向障碍物近距测距反馈(FB-AVP-LAT-4)因传感器故障或遮挡未能及时检测到侧向障碍物，导致系统未能限制转角与横向推进，造成车辆擦碰障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "提到传感器故障/遮挡，但未明确类型",
+          "B2": "链条清晰：FB失效→未限转角→擦碰→UCA-1",
+          "B3": "明确锚定FB-AVP-LAT-4并说明其作用",
+          "B4": "UCA-1与描述完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-05__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【目标轨迹曲率错误】目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)因地图数据错误或路径规划算法缺陷被污染，导致系统在接近边界或侧向障碍物时未能限制转角与横向推进，造成车辆擦碰障碍物。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到地图数据/算法缺陷，但未指明具体通道",
+          "B2": "链条清晰：PM错误→控制失效→擦碰/UCA",
+          "B3": "明确锚定PM-AVP-LAT-2并解释其作用",
+          "B4": "UCA-1/UCA-3与结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-07__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【环视摄像头遮挡】环视摄像头(FB-AVP-LAT-1)因积雪或污渍遮挡未能正确识别停车线与边界，导致横向位姿与航向误差信念(PM-AVP-LAT-1)被污染。系统依据错误的目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)持续提供转向指令，造成车辆擦碰边界或障碍物。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "明确环视摄像头遮挡（积雪/污渍）",
+          "B2": "覆盖(a)(b)(c)(d)(e)多层因果",
+          "B3": "锚定FB-AVP-LAT-1与PM-AVP-LAT-1/2",
+          "B4": "UCA-1与擦碰结果一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-06__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【转向执行器故障】转向角回读与执行ACK反馈(FB-AVP-LAT-2)显示转向执行器故障，但系统未能及时检测到并进入保守模式，导致横向控制持续时间不当，造成位置失准或非预期运动。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和清晰描述",
+          "B1": "明确提及转向角回读与执行ACK反馈",
+          "B2": "链条覆盖(a)(b)(c)(d)(e)：故障未检→未进保守模式→控制持续不当→导致UCA",
+          "B3": "锚定FB-AVP-LAT-2，并关联到未触发CA-AVP-LAT-3的保守模式",
+          "B4": "UCA-1和UCA-4均与位置失准/非预期运动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-09__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【侧向障碍物测距延迟】侧向障碍物近距测距反馈(FB-AVP-LAT-4)因传感器延迟或处理延迟未能及时更新，导致系统未能及时限制转角与横向推进，造成车辆擦碰障碍物。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA链接",
+          "B1": "明确为侧向障碍物近距测距反馈延迟",
+          "B2": "含(a)传感器延迟→(b)反馈未更新→(c)未限制转角→(d)擦碰→(e)UCA-1/3",
+          "B3": "锚定FB-AVP-LAT-4并说明其失效影响CA-AVP-LAT-2",
+          "B4": "UCA-1和UCA-3均与擦碰及控制时机相关"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-08__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【偏航率与位姿估计延迟】偏航率与位姿估计反馈(FB-AVP-LAT-3)因传感器延迟或处理延迟未能及时更新，导致横向位姿与航向误差信念(PM-AVP-LAT-1)被污染。系统依据延迟的位姿误差持续提供转向指令，导致轨迹偏差累积。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，UCA有效，含触发+因果+UCA",
+          "B1": "提到传感器/处理延迟，但未指明具体通道",
+          "B2": "链条清晰：延迟→PM污染→错误控制→偏差累积→UCA-3",
+          "B3": "明确锚定FB-AVP-LAT-3和PM-AVP-LAT-1，作用清晰",
+          "B4": "UCA-3与轨迹偏差累积一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-LAT-10__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【目标轨迹曲率不一致】目标轨迹曲率与边界位置信念(PM-AVP-LAT-2)因路径规划与实际环境不一致被污染，导致系统在接近边界或侧向障碍物时未能限制转角与横向推进，造成车辆擦碰障碍物。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "提到边界/障碍物但未指明传感器类型",
+          "B2": "含(a)(b)(c)(e)四层清晰因果链",
+          "B3": "明确锚定PM-AVP-LAT-2并解释其污染影响CA",
+          "B4": "UCA-1/UCA-3与擦碰/时机不当一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    }
+  ],
+  "expert_semantic_merge": {
+    "review_source": "manual_expert_review",
+    "retained_causal_scenario_items": [
+      {
+        "scenario_id": "CS-AVP-LAT-01__dup5",
+        "summary": "环视摄像头低光照失效致边界误判",
+        "mechanism_signature": "camera|anchors=FB-AVP-LAT-1,PM-AVP-LAT-1,PM-AVP-LAT-2|key=视觉失效",
+        "merged_linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-LAT-02__dup5",
+        "summary": "转向回读延迟致执行信念错误",
+        "mechanism_signature": "can_comm|anchors=FB-AVP-LAT-2,PM-AVP-LAT-3,CA-AVP-LAT-1|key=回读延迟",
+        "merged_linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-LAT-03__dup5",
+        "summary": "位姿估计误差污染横向控制",
+        "mechanism_signature": "algorithm|anchors=FB-AVP-LAT-3,PM-AVP-LAT-1,CA-AVP-LAT-1|key=位姿误差",
+        "merged_linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-LAT-04__dup5",
+        "summary": "侧向测距失效致越界碰撞",
+        "mechanism_signature": "ultrasonic|anchors=FB-AVP-LAT-4,CA-AVP-LAT-2|key=测距失效",
+        "merged_linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-LAT-05__dup5",
+        "summary": "轨迹曲率错误致边界擦碰",
+        "mechanism_signature": "process_model|anchors=PM-AVP-LAT-2,CA-AVP-LAT-1|key=轨迹错误",
+        "merged_linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-LAT-07__dup5",
+        "summary": "环视遮挡致边界识别失败",
+        "mechanism_signature": "camera|anchors=FB-AVP-LAT-1,PM-AVP-LAT-1,PM-AVP-LAT-2|key=视觉遮挡",
+        "merged_linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-LAT-06__dup5",
+        "summary": "转向器故障未降级致失控",
+        "mechanism_signature": "actuator|anchors=FB-AVP-LAT-2,CA-AVP-LAT-3|key=执行故障",
+        "merged_linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-LAT-08__dup5",
+        "summary": "位姿反馈延迟致轨迹偏差",
+        "mechanism_signature": "can_comm|anchors=FB-AVP-LAT-3,PM-AVP-LAT-1,CA-AVP-LAT-1|key=反馈延迟",
+        "merged_linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-LAT-09__dup4",
+        "summary": "侧向障碍物误报致过度限制",
+        "mechanism_signature": "ultrasonic|anchors=FB-AVP-LAT-4,CA-AVP-LAT-2|key=测距误报",
+        "merged_linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-LAT-10__dup3",
+        "summary": "转向响应延迟致位置失准",
+        "mechanism_signature": "actuator|anchors=FB-AVP-LAT-2,CA-AVP-LAT-3|key=响应延迟",
+        "merged_linked_uca_ids": [
+          "UCA-4"
+        ]
+      }
+    ],
+    "merged_duplicate_items": [
+      {
+        "removed_scenario_id": "CS-AVP-LAT-02__dup4",
+        "kept_scenario_id": "CS-AVP-LAT-02__dup5",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_scenario_id": "CS-AVP-LAT-03__dup4",
+        "kept_scenario_id": "CS-AVP-LAT-03__dup5",
+        "reason": "context_inclusion"
+      },
+      {
+        "removed_scenario_id": "CS-AVP-LAT-04__dup4",
+        "kept_scenario_id": "CS-AVP-LAT-04__dup5",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_scenario_id": "CS-AVP-LAT-05__dup4",
+        "kept_scenario_id": "CS-AVP-LAT-05__dup5",
+        "reason": "context_inclusion"
+      },
+      {
+        "removed_scenario_id": "CS-AVP-LAT-06__dup4",
+        "kept_scenario_id": "CS-AVP-LAT-07__dup5",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_scenario_id": "CS-AVP-LAT-07__dup4",
+        "kept_scenario_id": "CS-AVP-LAT-06__dup5",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_scenario_id": "CS-AVP-LAT-08__dup4",
+        "kept_scenario_id": "CS-AVP-LAT-08__dup5",
+        "reason": "semantic_equivalent"
+      }
+    ],
+    "kept_count": 10
+  }
+}

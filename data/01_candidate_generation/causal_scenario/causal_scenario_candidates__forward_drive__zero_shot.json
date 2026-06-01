@@ -1,0 +1,576 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_causal_scenario_generation",
+  "task_type": "causal_scenario",
+  "action_key": "forward_drive",
+  "action_name_cn": "前进驱动",
+  "action_name_en": "Forward drive",
+  "generation_method": "zero_shot",
+  "generation_method_label": "ZS",
+  "source_result_file": "scenario_zero_shot_forward_drive_20260407_104715.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 50,
+    "target_items_per_run": 10
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "超声波雷达传感器数据异常丢失，导致控制器误判前方无障碍物，发出前进驱动指令，造成碰撞或驶入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "环视摄像头视频流受干扰，导致控制器误判路径状态，发出不适当的前进驱动指令，造成越界或财产损失。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "车辆底层状态反馈延迟，导致控制器未能及时停止前进驱动指令，造成非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "执行确认超时，但控制器未能检测到此问题，继续发出前进驱动指令，导致执行失败或风险上升。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "车辆接近目标终点时，控制器未能及时停止前进驱动指令，导致车辆越界或停在不可接受位置。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "路径通信丢包，导致控制器未能接收到最新的路径信息，发出错误的前进驱动指令，造成越界或财产损失。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "控制器误判车辆位置，导致前进驱动指令发出时机不当，造成非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "控制器未能正确判断车辆档位状态，导致前进驱动指令发出后车辆无法移动，造成无法完成泊车。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "控制器未能正确处理执行器状态回读，导致前进驱动指令执行失败，造成无法完成泊车或停留在不可接受位置。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "控制器未能正确处理通信时延，导致前进驱动指令发出时机不当，造成非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "超声波雷达传感器数据异常丢失，导致控制器误判前方无障碍物，从而不安全地提供前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "环视摄像头视频流受干扰，导致控制器误判车辆位置，从而在不适当的时间提供前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "车辆底层状态反馈延迟，导致控制器未能及时停止前进驱动指令，造成越界或财产损失。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "执行确认超时，但控制器未能及时停止前进驱动指令，导致非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "路径通信丢包，导致控制器未能接收到最新的路径信息，从而在不适当的位置提供前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "车辆接近目标终点时，控制器未能及时停止前进驱动指令，导致车辆越界或碰撞。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "控制器误判车辆位置，导致在不应提供前进驱动的情况下提供指令，造成车辆停留在不可接受位置。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "控制器未能正确处理执行器状态回读，导致前进驱动指令执行失败但未被检测到，造成车辆无法完成泊车。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "通信时延导致控制器未能及时接收车辆状态反馈，从而在不适当的时间提供前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "控制器未能正确处理路径通信的序列号和时间戳，导致前进驱动指令在不适当的时间提供，造成非预期运动。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "超声波雷达传感器数据异常丢失，导致控制器误判前方无障碍物，从而不安全地提供前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "环视摄像头视频流受干扰，导致控制器误判车辆位置，从而不安全地提供前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "车辆底层状态反馈延迟，导致控制器未能及时停止前进驱动指令，造成越界或财产损失。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "执行确认超时，但控制器未能及时停止前进驱动指令，导致非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "路径通信丢包，导致控制器未能接收到最新的路径信息，从而未能提供必要的前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "车辆接近目标终点时，控制器未能及时停止前进驱动指令，导致车辆超出预定位置。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "控制器误判车辆位置，导致前进驱动指令的时机不当，造成非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "控制器未能正确处理执行器状态回读，导致前进驱动指令的持续时间不当，造成非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "控制器未能正确处理车辆CAN轮速、偏航、转角与档位回读，导致前进驱动指令的持续时间不当，造成非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "控制器未能正确处理上位机路径通信的序列号、时间戳、丢包与延迟状态，导致前进驱动指令的时机不当，造成非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "超声波雷达传感器数据异常丢失，导致控制器误判前方无障碍物，从而不安全地提供前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "环视摄像头视频流传输延迟，导致控制器未能及时获取周围环境变化，从而在不适当的时间提供前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "车辆底层状态反馈中的轮速、偏航、转角与档位回读存在延迟或丢包，导致控制器未能准确判断车辆状态，从而提供不当的前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "执行确认超时或回读不一致，但控制算法未能及时停止前进驱动，导致车辆继续前进至危险区域。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "路径通信的序列号、时间戳、丢包与延迟状态导致路径信息不完整或过时，控制器据此提供错误的前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "控制器错误地认为路径是最新且完整的，但实际上路径已发生变化，导致提供不适当的前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "控制器错误地认为前进指令会产生期望位移，但由于执行器故障，实际位移与预期不符，导致车辆越界或停在不可接受的位置。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "控制器未能正确判断车辆位置与障碍物距离，导致在不安全的情况下提供前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "控制器未能及时停止前进驱动指令，导致车辆越过目标终点或边界阈值，造成越界或财产损失。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "控制器未能正确处理执行确认与通信状态，导致前进驱动指令未能按预期执行，车辆停留在不可接受的位置。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "超声波雷达传感器数据异常丢失，导致控制器误判前方无障碍物，发出前进驱动指令，造成碰撞或驶入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "环视摄像头视频流受干扰，导致控制器误判路径状态，发出不适当的前进驱动指令，造成越界或财产损失。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "车辆底层状态反馈延迟，导致控制器未能及时停止前进驱动指令，造成非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "执行确认超时，但控制器未能检测到此问题，继续发出前进驱动指令，导致执行失败或风险上升。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "车辆接近目标终点时，控制器未能及时停止前进驱动指令，导致车辆越界或停在不可接受位置。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "路径通信丢包，导致控制器接收到不完整或过时的路径信息，发出不适当的前进驱动指令，造成越界或财产损失。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "控制器误判车辆位置，认为前方可通行，但实际上存在障碍物，发出前进驱动指令，造成碰撞或驶入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "控制器误判路径状态，认为车辆应继续前进，但实际上已到达目标位置，发出不适当的前进驱动指令，造成越界或财产损失。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "执行器状态回读不一致，但控制器未能检测到此问题，继续发出前进驱动指令，导致执行失败或风险上升。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "控制器未能正确处理通信时延，导致前进驱动指令发出时机不当，造成非预期运动或风险上升。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    }
+  ]
+}

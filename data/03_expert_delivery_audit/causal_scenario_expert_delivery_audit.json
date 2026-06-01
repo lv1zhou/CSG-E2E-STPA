@@ -1,0 +1,2397 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "manual_expert_delivery_audit_and_extraction_result",
+  "task_type": "causal_scenario",
+  "audit_statement": "This file summarizes manual expert extraction, quality scoring, semantic merge, and final delivery audit outcomes. It contains no model debug payloads, request identifiers, service identifiers, or local execution paths.",
+  "aggregate_counts": {
+    "total_reviewed_items": 796,
+    "expert_usable_items_before_merge": 622,
+    "expert_kept_items_after_semantic_merge": 199,
+    "final_deliverable_items_after_expert_audit": 199,
+    "final_delivery_retention_rate": 1.0
+  },
+  "experiment_audit_records": [
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "forward_drive",
+      "action_name_cn": "前进驱动",
+      "action_name_en": "Forward drive",
+      "generation_method": "zero_shot",
+      "generation_method_label": "ZS",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 21,
+      "expert_kept_items_after_semantic_merge": 6,
+      "final_deliverable_items_after_expert_audit": 6,
+      "semantic_merge_retention_rate": 0.2857,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-1",
+            "summary": "超声波数据丢失致误判前方无障碍",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1|key=超声丢失",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-2",
+            "summary": "环视摄像头干扰致路径误判",
+            "mechanism_signature": "camera|anchors=none|key=视觉干扰",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-6",
+            "summary": "路径通信丢包致指令错误或缺失",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4|key=路径丢包",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-4__dup2",
+            "summary": "执行确认超时未停驱致非预期运动",
+            "mechanism_signature": "actuator|anchors=CA-AVP-FD-3,FB-AVP-FD-3|key=确认超时",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-10__dup3",
+            "summary": "路径通信状态处理错误致时机不当",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4|key=时序错乱",
+            "merged_linked_uca_ids": [
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-9__dup3",
+            "summary": "CAN回读异常致驱动持续时间不当",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=CAN异常",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-5__dup3",
+            "kept_scenario_id": "CS-6",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-3__dup4",
+            "kept_scenario_id": "CS-9__dup3",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-6__dup5",
+            "kept_scenario_id": "CS-6",
+            "reason": "same_text_diff_uca_merge"
+          }
+        ],
+        "kept_count": 6
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "forward_drive",
+      "action_name_cn": "前进驱动",
+      "action_name_en": "Forward drive",
+      "generation_method": "few_1_shot",
+      "generation_method_label": "FS-1",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 47,
+      "expert_kept_items_after_semantic_merge": 10,
+      "final_deliverable_items_after_expert_audit": 10,
+      "semantic_merge_retention_rate": 0.2128,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-AVP-01__dup5",
+            "summary": "超声波失效致误判前方无障碍",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1,PM-AVP-FD-1,CA-AVP-FD-1|key=误判通行",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-02__dup5",
+            "summary": "路径通信丢包致越界",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4,PM-AVP-FD-2,CA-AVP-FD-1|key=路径丢包",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-03__dup5",
+            "summary": "CAN反馈延迟致非预期运动",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2,PM-AVP-FD-3,CA-AVP-FD-1|key=状态延迟",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-04__dup5",
+            "summary": "执行确认超时致越界或风险上升",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3,PM-AVP-FD-3,CA-AVP-FD-3|key=确认超时",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-05__dup5",
+            "summary": "路径不完整致无法完成泊车",
+            "mechanism_signature": "upstream_comm|anchors=PM-AVP-FD-2,CA-AVP-FD-1|key=路径缺失",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-06__dup5",
+            "summary": "超声波误报障碍致未发指令",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1,PM-AVP-FD-1,CA-AVP-FD-1|key=误报障碍",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-07__dup5",
+            "summary": "CAN反馈丢包致无法完成泊车",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2,PM-AVP-FD-3,CA-AVP-FD-1|key=状态丢包",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-08__dup5",
+            "summary": "执行确认失败致未发指令",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3,PM-AVP-FD-3,CA-AVP-FD-1|key=确认失败",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-09__dup5",
+            "summary": "路径终点丢包致越界",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4,PM-AVP-FD-2,CA-AVP-FD-1|key=终点丢包",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-10__dup5",
+            "summary": "超声波置信度低致碰撞",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1,PM-AVP-FD-1,CA-AVP-FD-1|key=置信不足",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-AVP-04__dup3",
+            "kept_scenario_id": "CS-AVP-04__dup5",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-05__dup3",
+            "kept_scenario_id": "CS-AVP-05__dup5",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-06__dup3",
+            "kept_scenario_id": "CS-AVP-01__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-07__dup3",
+            "kept_scenario_id": "CS-AVP-03__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-08__dup3",
+            "kept_scenario_id": "CS-AVP-04__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-10__dup3",
+            "kept_scenario_id": "CS-AVP-01__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-09__dup3",
+            "kept_scenario_id": "CS-AVP-05__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-06__dup4",
+            "kept_scenario_id": "CS-AVP-04__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-08__dup4",
+            "kept_scenario_id": "CS-AVP-06__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-09__dup4",
+            "kept_scenario_id": "CS-AVP-07__dup5",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 10
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "forward_drive",
+      "action_name_cn": "前进驱动",
+      "action_name_en": "Forward drive",
+      "generation_method": "few_3_shot",
+      "generation_method_label": "FS-3",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 50,
+      "expert_kept_items_after_semantic_merge": 15,
+      "final_deliverable_items_after_expert_audit": 15,
+      "semantic_merge_retention_rate": 0.3,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-AVP-FD-05",
+            "summary": "超声波丢失致误判无障碍",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1,PM-AVP-FD-1,CA-AVP-FD-1|key=超声丢失",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-01__dup4",
+            "summary": "超声波误报致误判有障碍",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1,PM-AVP-FD-1,CA-AVP-FD-1|key=超声误报",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-02",
+            "summary": "路径通信丢包致路径无效",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4,PM-AVP-FD-2,CA-AVP-FD-1|key=路径丢包",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-06",
+            "summary": "路径阶段不一致致指令缺失",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4,PM-AVP-FD-2,CA-AVP-FD-1|key=阶段错位",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-09",
+            "summary": "路径通信延迟致路径无效",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4,PM-AVP-FD-2,CA-AVP-FD-1|key=路径延迟",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-03",
+            "summary": "CAN延迟致位置误判碰撞",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2,PM-AVP-FD-1,CA-AVP-FD-1|key=CAN延迟",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-07",
+            "summary": "CAN丢包致位置误判碰撞",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2,PM-AVP-FD-1,CA-AVP-FD-1|key=CAN丢包",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-10",
+            "summary": "CAN异常致位置误判碰撞",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2,PM-AVP-FD-1,CA-AVP-FD-1|key=CAN异常",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-04",
+            "summary": "执行确认超时未停驱动",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3,PM-AVP-FD-3,CA-AVP-FD-3|key=确认超时",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-08",
+            "summary": "执行器故障致未停驱动",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3,PM-AVP-FD-3,CA-AVP-FD-3|key=执行故障",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-07__dup3",
+            "summary": "执行效果信念错误停驱动",
+            "mechanism_signature": "actuator|anchors=PM-AVP-FD-3,CA-AVP-FD-3|key=信念错误",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-02__dup5",
+            "summary": "路径丢包致错误提供驱动",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4,PM-AVP-FD-2,CA-AVP-FD-1|key=路径丢包",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-03__dup5",
+            "summary": "CAN延迟致错误提供驱动越界",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2,PM-AVP-FD-1,CA-AVP-FD-1|key=CAN延迟",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-06__dup5",
+            "summary": "路径阶段错位致错误驱动",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4,PM-AVP-FD-2,CA-AVP-FD-1|key=阶段错位",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-07__dup5",
+            "summary": "执行器故障致停驱动滞留",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3,PM-AVP-FD-3,CA-AVP-FD-3|key=执行故障",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [],
+        "kept_count": 15
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "forward_drive",
+      "action_name_cn": "前进驱动",
+      "action_name_en": "Forward drive",
+      "generation_method": "lora",
+      "generation_method_label": "SFT",
+      "total_reviewed_items": 48,
+      "expert_usable_items_before_merge": 35,
+      "expert_kept_items_after_semantic_merge": 28,
+      "final_deliverable_items_after_expert_audit": 28,
+      "semantic_merge_retention_rate": 0.8,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-AVP-FD-1",
+            "summary": "超声波误报无障碍致碰撞",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1,PM-AVP-FD-1|key=误感前障",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-5",
+            "summary": "路径通信错致危险路径执行",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4,PM-AVP-FD-2|key=路径错更",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-4",
+            "summary": "执行确认丢失致停止动作",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-3,PM-AVP-FD-3|key=ACK丢停",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-3",
+            "summary": "湿滑打滑致位移偏差越界",
+            "mechanism_signature": "process_model|anchors=FB-AVP-FD-2,PM-AVP-FD-1|key=位移失真",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-3",
+            "summary": "主控死锁致未发前进指令",
+            "mechanism_signature": "compute_hw|anchors=PM-AVP-FD-3|key=死锁失驱",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-5",
+            "summary": "执行确认丢失致重复发令",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-3|key=ACK丢重发",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-7",
+            "summary": "轮速断线致位置误判发令",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=轮速断偏",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-8",
+            "summary": "扭矩卡滞致停令无效",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3|key=扭矩卡滞",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-9",
+            "summary": "内存泄漏致路径误判发令",
+            "mechanism_signature": "compute_hw|anchors=PM-AVP-FD-1|key=内存覆错",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-10",
+            "summary": "低照度定位失效致误驱",
+            "mechanism_signature": "camera|anchors=FB-AVP-FD-1,PM-AVP-FD-1|key=视觉失效",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-6__dup2",
+            "summary": "轮速断线致误判停车",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=轮速零停",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-8__dup2",
+            "summary": "计时器竞争致冲过停止点",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-FD-2|key=计时漏停",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-9",
+            "summary": "扭矩故障致停令后仍驱",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3|key=扭矩失控",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-10",
+            "summary": "湿滑致提前停在不可接受位",
+            "mechanism_signature": "process_model|anchors=FB-AVP-FD-2|key=附着误判",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-2__dup3",
+            "summary": "路径更新延迟致过时路径执行",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4|key=路径延更",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-4__dup3",
+            "summary": "侧风超容差致修正碰撞",
+            "mechanism_signature": "process_model|anchors=FB-AVP-FD-2,CA-AVP-FD-1|key=风偏误修",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-7__dup3",
+            "summary": "多感融合缺陷致驱动力不足",
+            "mechanism_signature": "algorithm|anchors=FB-AVP-FD-1,PM-AVP-FD-1|key=融合误距",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-6__dup3",
+            "summary": "档位误报致持续发前进令",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2,PM-AVP-FD-2|key=档位误驱",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-3__dup3",
+            "summary": "执行器卡涩致停发前进令",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3,PM-AVP-FD-3,CA-AVP-FD-3|key=卡涩停驱",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-9__dup2",
+            "summary": "牵引力高估致打滑越界",
+            "mechanism_signature": "process_model|anchors=PM-AVP-FD-3|key=附着高估",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-8__dup2",
+            "summary": "摄像头误判障碍致未驱",
+            "mechanism_signature": "camera|anchors=FB-AVP-FD-1,PM-AVP-FD-1|key=误障停驱",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-3__dup2",
+            "summary": "使能信号丢失致指令丢弃",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-3|key=使能丢弃",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-4__dup2",
+            "summary": "路径跟踪协调缺陷致越界",
+            "mechanism_signature": "algorithm|anchors=FB-AVP-FD-4|key=协同错幅",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-5__dup2",
+            "summary": "使能状态未退出致持续驱",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-FD-1|key=使能滞留",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-7__dup2",
+            "summary": "通信延迟致非预期运动",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4,CA-AVP-FD-1|key=指令延驱",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-9__dup2",
+            "summary": "反馈解析错误致停后续驱",
+            "mechanism_signature": "algorithm|anchors=FB-AVP-FD-3,CA-AVP-FD-3|key=ACK误析",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-10__dup2",
+            "summary": "电机过热保护致驱不动",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3|key=过热失驱",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-FD-10__dup2",
+            "summary": "协同通信延迟致碰撞",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4,PM-AVP-FD-2|key=协同延碰",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-1__dup2",
+            "kept_scenario_id": "CS-AVP-FD-1",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 28
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "search_slot",
+      "action_name_cn": "搜索车位",
+      "action_name_en": "Parking-slot search",
+      "generation_method": "zero_shot",
+      "generation_method_label": "ZS",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 16,
+      "expert_kept_items_after_semantic_merge": 9,
+      "final_deliverable_items_after_expert_audit": 9,
+      "semantic_merge_retention_rate": 0.5625,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-1__dup3",
+            "summary": "超声波异常回波致车位误判",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1|key=超声误检",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-3__dup2",
+            "summary": "轮速丢失致位置误判越界",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=轮速丢包",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-3__dup3",
+            "summary": "环视延迟致错过车位确认",
+            "mechanism_signature": "camera|anchors=FB-AVP-FD-4|key=视觉延迟",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-4__dup3",
+            "summary": "轮速丢失致相对位置误判",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=轮速丢包",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-7__dup3",
+            "summary": "环视不一致致车位尺寸误判",
+            "mechanism_signature": "camera|anchors=FB-AVP-FD-4|key=视觉冲突",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-6__dup3",
+            "summary": "超声丢失致占用状态误判",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1|key=超声丢信",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-8__dup3",
+            "summary": "轮速异常致候选区误判",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=轮速异常",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-7__dup5",
+            "summary": "轮速与位姿不一致致越界误判",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=数据冲突",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-10__dup5",
+            "summary": "停车线不符致几何评估错误",
+            "mechanism_signature": "camera|anchors=FB-AVP-FD-4|key=标线失真",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-3"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-1",
+            "kept_scenario_id": "CS-1__dup3",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-1__dup2",
+            "kept_scenario_id": "CS-1__dup3",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-1__dup4",
+            "kept_scenario_id": "CS-1__dup3",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-1__dup5",
+            "kept_scenario_id": "CS-1__dup3",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-3",
+            "kept_scenario_id": "CS-3__dup2",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-3__dup4",
+            "kept_scenario_id": "CS-3__dup3",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-3__dup5",
+            "kept_scenario_id": "CS-3__dup3",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 9
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "search_slot",
+      "action_name_cn": "搜索车位",
+      "action_name_en": "Parking-slot search",
+      "generation_method": "few_1_shot",
+      "generation_method_label": "FS-1",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 47,
+      "expert_kept_items_after_semantic_merge": 10,
+      "final_deliverable_items_after_expert_audit": 10,
+      "semantic_merge_retention_rate": 0.2128,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-AVP-SS-01",
+            "summary": "超声波异常回波致误判车位",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-SS-1,PM-AVP-SS-1|key=异常回波",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-02__dup5",
+            "summary": "环视摄像头强光丢失停车线",
+            "mechanism_signature": "camera|anchors=FB-AVP-SS-2,PM-AVP-SS-1|key=信息缺失",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-03__dup5",
+            "summary": "轮速误差致车位相对位置误判",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-SS-3,PM-AVP-SS-2|key=里程误差",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-04__dup5",
+            "summary": "APA模式切换延迟致搜索失准",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-SS-4|key=模式延迟",
+            "merged_linked_uca_ids": [
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-05__dup4",
+            "summary": "超声波测距误差致选危险车位",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-SS-1,PM-AVP-SS-1,CA-AVP-SS-2|key=测距误差",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-06__dup4",
+            "summary": "环视摄像头遮挡致无法确认车位",
+            "mechanism_signature": "camera|anchors=FB-AVP-SS-2,PM-AVP-SS-1|key=视觉遮挡",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-07__dup5",
+            "summary": "轮速丢包或延迟致位置信念污染",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-SS-3,PM-AVP-SS-2|key=数据异常",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-08__dup4",
+            "summary": "HMI反馈延迟致搜索时机错误",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-SS-4|key=反馈延迟",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-09",
+            "summary": "超声波异常+摄像头遮挡致误选车位",
+            "mechanism_signature": "ultrasonic,camera|anchors=FB-AVP-SS-1,FB-AVP-SS-2,PM-AVP-SS-1|key=多源失效",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-10",
+            "summary": "轮速误差+APA延迟致双重失准",
+            "mechanism_signature": "can_comm,upstream_comm|anchors=FB-AVP-SS-3,FB-AVP-SS-4,PM-AVP-SS-2|key=复合偏差",
+            "merged_linked_uca_ids": [
+              "UCA-3",
+              "UCA-4"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-AVP-SS-09__dup5",
+            "kept_scenario_id": "CS-AVP-SS-09",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-SS-10__dup5",
+            "kept_scenario_id": "CS-AVP-SS-02__dup5",
+            "reason": "context_inclusion"
+          }
+        ],
+        "kept_count": 10
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "search_slot",
+      "action_name_cn": "搜索车位",
+      "action_name_en": "Parking-slot search",
+      "generation_method": "few_3_shot",
+      "generation_method_label": "FS-3",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 49,
+      "expert_kept_items_after_semantic_merge": 11,
+      "final_deliverable_items_after_expert_audit": 11,
+      "semantic_merge_retention_rate": 0.2245,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-AVP-SS-01__dup5",
+            "summary": "超声波误检致错误确认车位",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-SS-1,PM-AVP-SS-1,CA-AVP-SS-2|key=误检边界",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-02__dup5",
+            "summary": "环视眩光致车位遗漏",
+            "mechanism_signature": "camera|anchors=FB-AVP-SS-2,PM-AVP-SS-1,CA-AVP-SS-2|key=视觉遮挡",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-09__dup4",
+            "summary": "环视误检邻车为车位边界",
+            "mechanism_signature": "camera|anchors=FB-AVP-SS-2,PM-AVP-SS-1|key=误检边界",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-03__dup4",
+            "summary": "搜索启动延迟致错过车位",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-SS-1,PM-AVP-SS-2|key=时机不当",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-04__dup5",
+            "summary": "搜索过早终止致结果失真",
+            "mechanism_signature": "process_model|anchors=FB-AVP-SS-4,CA-AVP-SS-3,CA-AVP-SS-2|key=过程中断",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-06__dup5",
+            "summary": "超声波丢失致车位遗漏",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-SS-1,PM-AVP-SS-1,CA-AVP-SS-2|key=信号丢失",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-07__dup4",
+            "summary": "搜索延迟致晚确认车位",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-SS-1,PM-AVP-SS-2|key=时机不当",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-08__dup5",
+            "summary": "搜索持续过长致结果失真",
+            "mechanism_signature": "process_model|anchors=PM-AVP-SS-3,CA-AVP-SS-3,CA-AVP-SS-2|key=时长失控",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-05__dup5",
+            "summary": "位姿偏差致确认失败",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-SS-3,CA-AVP-SS-3|key=定位偏差",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-10__dup4",
+            "summary": "超声波误检柱子为边界",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-SS-1,PM-AVP-SS-1|key=误检边界",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-09__dup5",
+            "summary": "APA切换致搜索中断",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-SS-4,CA-AVP-SS-3|key=模式切换",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-AVP-SS-01__dup4",
+            "kept_scenario_id": "CS-AVP-SS-01__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-SS-02__dup4",
+            "kept_scenario_id": "CS-AVP-SS-02__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-SS-05__dup4",
+            "kept_scenario_id": "CS-AVP-SS-09__dup4",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-SS-04__dup4",
+            "kept_scenario_id": "CS-AVP-SS-04__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-SS-06__dup4",
+            "kept_scenario_id": "CS-AVP-SS-06__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-SS-08__dup4",
+            "kept_scenario_id": "CS-AVP-SS-08__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-SS-07__dup5",
+            "kept_scenario_id": "CS-AVP-SS-06__dup5",
+            "reason": "context_inclusion"
+          }
+        ],
+        "kept_count": 11
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "search_slot",
+      "action_name_cn": "搜索车位",
+      "action_name_en": "Parking-slot search",
+      "generation_method": "lora",
+      "generation_method_label": "SFT",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 40,
+      "expert_kept_items_after_semantic_merge": 19,
+      "final_deliverable_items_after_expert_audit": 19,
+      "semantic_merge_retention_rate": 0.475,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-1",
+            "summary": "侧向超声波因倾斜/湿滑误判车位",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-SS-1,PM-AVP-SS-1|key=角度偏移虚警",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-2",
+            "summary": "摄像头低光/污损致车位线漏检",
+            "mechanism_signature": "camera|anchors=FB-AVP-SS-2,PM-AVP-SS-1|key=视觉证据缺失",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-3",
+            "summary": "APA激活延迟致错过车位区域",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-SS-4,PM-AVP-SS-2|key=使能信号延迟",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-4__dup2",
+            "summary": "邻车距离判断阈值过松确认危险车位",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-SS-2|key=几何约束过松",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-5",
+            "summary": "轮速计打滑致位置漂移错误搜索",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-SS-3,PM-AVP-SS-2|key=里程计漂移",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-6",
+            "summary": "邻车驶离瞬时空位被误确认",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-SS-2,PM-AVP-SS-1|key=稳定性不足",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-7",
+            "summary": "小障碍物低于阈值被忽略",
+            "mechanism_signature": "process_model|anchors=PM-AVP-SS-1|key=障碍物建模缺陷",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-9",
+            "summary": "油渍/不规则车位致识别失败",
+            "mechanism_signature": "camera|anchors=FB-AVP-SS-2,PM-AVP-SS-1|key=车位线异常",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-10",
+            "summary": "坡道下学习模型置信度虚高",
+            "mechanism_signature": "algorithm|anchors=PM-AVP-SS-3|key=数据分布偏移",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-3",
+            "summary": "总线拥堵致APA信号延迟终止搜索",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-SS-4,PM-AVP-SS-3|key=通信延迟",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-5",
+            "summary": "阴影致传感器歧义未确认车位",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-SS-1,FB-AVP-SS-2|key=感知歧义",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-6",
+            "summary": "HMI卡顿致误选动态驶出车位",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-SS-4|key=人机反馈延迟",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-8",
+            "summary": "轮速计故障致位置漂移启动错位",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-SS-3,PM-AVP-SS-2|key=位置估计失效",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-9",
+            "summary": "超时逻辑缩短致反光抖动取消确认",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-SS-3|key=超时配置错误",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-10",
+            "summary": "车位长度计算错误致泊入危险区",
+            "mechanism_signature": "process_model|anchors=PM-AVP-SS-1|key=几何建模缺陷",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-8__dup3",
+            "summary": "稀疏证据形成固化错误信念",
+            "mechanism_signature": "process_model|anchors=PM-AVP-SS-1|key=认知固化",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-3__dup2",
+            "summary": "轮速滑移致提前终止搜索",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-SS-3|key=滑移误判越界",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-5__dup2",
+            "summary": "多路径反射致超声波误读车位",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-SS-1|key=多径干扰",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-SS-6__dup2",
+            "summary": "置信度阈值过高拒认清晰车位",
+            "mechanism_signature": "algorithm|anchors=FB-AVP-SS-2|key=阈值配置过高",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-AVP-SS-1",
+            "kept_scenario_id": "CS-1",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-1__dup3",
+            "kept_scenario_id": "CS-1",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-2__dup3",
+            "kept_scenario_id": "CS-2",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-3__dup3",
+            "kept_scenario_id": "CS-3",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-4__dup3",
+            "kept_scenario_id": "CS-4__dup2",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-5__dup3",
+            "kept_scenario_id": "CS-5",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-6__dup3",
+            "kept_scenario_id": "CS-6",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-7__dup3",
+            "kept_scenario_id": "CS-7",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-9__dup2",
+            "kept_scenario_id": "CS-9",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-9__dup3",
+            "kept_scenario_id": "CS-9",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-10__dup2",
+            "kept_scenario_id": "CS-10",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 19
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "emergency_brake",
+      "action_name_cn": "紧急制动",
+      "action_name_en": "Emergency braking",
+      "generation_method": "zero_shot",
+      "generation_method_label": "ZS",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 15,
+      "expert_kept_items_after_semantic_merge": 5,
+      "final_deliverable_items_after_expert_audit": 5,
+      "semantic_merge_retention_rate": 0.3333,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-8",
+            "summary": "制动指令因CAN丢包丢失",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2,FB-AVP-FD-4|key=CAN丢包",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-7",
+            "summary": "制动指令因CAN延迟执行",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2,FB-AVP-FD-4|key=CAN延迟",
+            "merged_linked_uca_ids": [
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-10",
+            "summary": "制动反馈误判致效果不佳",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3|key=制动反馈误判",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-8__dup3",
+            "summary": "制动压力传感器故障致解除过早",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3|key=压力传感故障",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-7__dup3",
+            "summary": "轮速传感故障致制动解除过早",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-2|key=轮速传感故障",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-6__dup2",
+            "kept_scenario_id": "CS-7",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-10__dup2",
+            "kept_scenario_id": "CS-10",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-5__dup3",
+            "kept_scenario_id": "CS-7",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-9__dup3",
+            "kept_scenario_id": "CS-8",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-5__dup4",
+            "kept_scenario_id": "CS-7",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-8__dup4",
+            "kept_scenario_id": "CS-8__dup3",
+            "reason": "same_text_diff_uca_merge"
+          },
+          {
+            "removed_scenario_id": "CS-9__dup4",
+            "kept_scenario_id": "CS-8",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-5__dup5",
+            "kept_scenario_id": "CS-7",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-7__dup5",
+            "kept_scenario_id": "CS-10",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-10__dup5",
+            "kept_scenario_id": "CS-8",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 5
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "emergency_brake",
+      "action_name_cn": "紧急制动",
+      "action_name_en": "Emergency braking",
+      "generation_method": "few_1_shot",
+      "generation_method_label": "FS-1",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 43,
+      "expert_kept_items_after_semantic_merge": 9,
+      "final_deliverable_items_after_expert_audit": 9,
+      "semantic_merge_retention_rate": 0.2093,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-AVP-EB-01",
+            "summary": "超声波误报致非预期急停",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-EB-1,PM-AVP-EB-1,CA-AVP-EB-1|key=误报急停",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-02",
+            "summary": "视觉漏报致制动未触发",
+            "mechanism_signature": "camera|anchors=FB-AVP-EB-1,PM-AVP-EB-1,CA-AVP-EB-1|key=漏报碰撞",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-03",
+            "summary": "制动ACK延迟致过长制动",
+            "mechanism_signature": "actuator|anchors=FB-AVP-EB-3,PM-AVP-EB-3,CA-AVP-EB-2|key=ACK延迟",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-04",
+            "summary": "制动器故障未反馈致失效",
+            "mechanism_signature": "actuator|anchors=FB-AVP-EB-3,PM-AVP-EB-3,CA-AVP-EB-3|key=执行失效",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-05",
+            "summary": "CAN丢包致制动延迟执行",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-EB-4,PM-AVP-EB-3|key=指令丢包",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-06",
+            "summary": "轮速异常致过早解除制动",
+            "mechanism_signature": "sensor|anchors=FB-AVP-EB-2,PM-AVP-EB-2,CA-AVP-EB-2|key=轮速误估",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-07",
+            "summary": "IMU异常致持续紧急制动",
+            "mechanism_signature": "sensor|anchors=FB-AVP-EB-2,PM-AVP-EB-2,CA-AVP-EB-2|key=减速度误估",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-08",
+            "summary": "制动压力故障致制动失效",
+            "mechanism_signature": "actuator|anchors=FB-AVP-EB-3,PM-AVP-EB-3,CA-AVP-EB-3|key=压力失效",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-10__dup5",
+            "summary": "CAN丢包致制动指令丢失",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-EB-4,CA-AVP-EB-1|key=指令丢失",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-AVP-EB-09",
+            "kept_scenario_id": "CS-AVP-EB-01",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-EB-09__dup5",
+            "kept_scenario_id": "CS-AVP-EB-01",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-EB-10",
+            "kept_scenario_id": "CS-AVP-EB-06",
+            "reason": "context_inclusion"
+          }
+        ],
+        "kept_count": 9
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "emergency_brake",
+      "action_name_cn": "紧急制动",
+      "action_name_en": "Emergency braking",
+      "generation_method": "few_3_shot",
+      "generation_method_label": "FS-3",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 49,
+      "expert_kept_items_after_semantic_merge": 9,
+      "final_deliverable_items_after_expert_audit": 9,
+      "semantic_merge_retention_rate": 0.1837,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-AVP-EB-01",
+            "summary": "超声波误检障碍物致急停",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1|key=误检障碍",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-02",
+            "summary": "感知延迟致制动过晚碰撞",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1,PM-AVP-FD-1|key=感知延迟",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-03",
+            "summary": "误判风险解除致过早解刹",
+            "mechanism_signature": "process_model|anchors=PM-AVP-FD-1|key=误判解除",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-04__dup2",
+            "summary": "制动ACK丢失致持续制动",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3,PM-AVP-FD-3|key=执行未确认",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-05",
+            "summary": "CAN延迟致制动过晚碰撞",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=CAN延迟",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-07",
+            "summary": "误判停车距致过早解刹",
+            "mechanism_signature": "process_model|anchors=PM-AVP-FD-2|key=误判距离",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-08__dup2",
+            "summary": "视觉感知延迟致制动过晚",
+            "mechanism_signature": "camera|anchors=FB-AVP-FD-1,PM-AVP-FD-1|key=视觉延迟",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-09__dup5",
+            "summary": "误判剩余距离致过早制动",
+            "mechanism_signature": "process_model|anchors=PM-AVP-FD-2|key=误判余距",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-10__dup5",
+            "summary": "制动ACK丢失致任务异常",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3|key=ACK丢失",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-AVP-EB-09__dup2",
+            "kept_scenario_id": "CS-AVP-EB-09__dup5",
+            "reason": "context_inclusion"
+          }
+        ],
+        "kept_count": 9
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "emergency_brake",
+      "action_name_cn": "紧急制动",
+      "action_name_en": "Emergency braking",
+      "generation_method": "lora",
+      "generation_method_label": "SFT",
+      "total_reviewed_items": 48,
+      "expert_usable_items_before_merge": 39,
+      "expert_kept_items_after_semantic_merge": 22,
+      "final_deliverable_items_after_expert_audit": 22,
+      "semantic_merge_retention_rate": 0.5641,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-1__dup2",
+            "summary": "感知误判导致不必要制动",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-EB-1,PM-AVP-EB-1|key=误检虚警",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-2__dup2",
+            "summary": "障碍物漏检致未制动",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-EB-1,PM-AVP-EB-1|key=漏检失效",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-3__dup2",
+            "summary": "制动算法缺陷或崩溃",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-EB-1|key=逻辑死锁",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-3",
+            "summary": "轮速故障致坡道未制动",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-EB-2,PM-AVP-EB-2|key=状态误判",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-5",
+            "summary": "打滑致提前终止制动",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-EB-2,PM-AVP-EB-2|key=车速误判",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-4__dup2",
+            "summary": "制动反馈错误致误解除",
+            "mechanism_signature": "actuator|anchors=FB-AVP-EB-3,PM-AVP-EB-3|key=执行误认",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-4",
+            "summary": "制动器卡死致指令未执行",
+            "mechanism_signature": "actuator|anchors=PM-AVP-EB-3|key=执行失效",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-6",
+            "summary": "CAN断连致指令未达",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-EB-4|key=总线断连",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-5",
+            "summary": "CAN拥塞致过早解制动",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-EB-1,FB-AVP-EB-4|key=反馈延迟",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-7",
+            "summary": "传感器信号错解致误制动",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-EB-2|key=信号混淆",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-9",
+            "summary": "IMU损坏致运动状态误判",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-EB-2,PM-AVP-EB-2|key=惯导失效",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-4",
+            "summary": "踏板卡滞致未触发AEB",
+            "mechanism_signature": "actuator|anchors=FB-AVP-EB-2|key=机械卡滞",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-8",
+            "summary": "液压泵堵转致制动力不足",
+            "mechanism_signature": "actuator|anchors=FB-AVP-EB-3,CA-AVP-EB-3|key=压力不足",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-6",
+            "summary": "湿滑路面制动力评估不足",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-EB-2|key=抓地误估",
+            "merged_linked_uca_ids": [
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-EB-10__dup2",
+            "summary": "控制器卡死致无法响应危险",
+            "mechanism_signature": "compute_hw|anchors=FB-AVP-EB-1,FB-AVP-EB-2,FB-AVP-EB-3,FB-AVP-EB-4,PM-AVP-EB-1,PM-AVP-EB-2,PM-AVP-EB-3|key=硬件冻结",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-2__dup2",
+            "summary": "地图/IMU/轮速致位置误判",
+            "mechanism_signature": "process_model|anchors=FB-AVP-EB-2,PM-AVP-EB-2|key=定位偏差",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-5__dup2",
+            "summary": "感知供电/通信中断致漏检",
+            "mechanism_signature": "upstream_comm|anchors=FB-AVP-EB-1,FB-AVP-EB-4|key=感知中断",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-6__dup2",
+            "summary": "风险解除算法缺陷致制动过久",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-EB-2|key=解除延迟",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-7__dup2",
+            "summary": "CAN抖动致指令延迟或丢失",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-EB-3,FB-AVP-EB-4|key=指令丢包",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-8__dup2",
+            "summary": "旧数据致过时障碍物制动",
+            "mechanism_signature": "process_model|anchors=FB-AVP-EB-1,PM-AVP-EB-1|key=数据陈旧",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-9",
+            "summary": "动态障碍物状态更新延迟",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-EB-1,PM-AVP-EB-1|key=状态滞后",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-10",
+            "summary": "轮速污损致速度低估",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-EB-2,PM-AVP-EB-2|key=速度误读",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-3"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [],
+        "kept_count": 22
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "lateral_control",
+      "action_name_cn": "横向控制",
+      "action_name_en": "Lateral control",
+      "generation_method": "zero_shot",
+      "generation_method_label": "ZS",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 32,
+      "expert_kept_items_after_semantic_merge": 8,
+      "final_deliverable_items_after_expert_audit": 8,
+      "semantic_merge_retention_rate": 0.25,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-1",
+            "summary": "环视摄像头误识别边界导致不安全转向",
+            "mechanism_signature": "camera|anchors=FB-AVP-FD-1,PM-AVP-FD-1|key=视觉误判",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2",
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-3",
+            "summary": "位姿估计误差致轨迹偏离",
+            "mechanism_signature": "algorithm|anchors=PM-AVP-FD-1|key=状态误估",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-4",
+            "summary": "侧向测距丢失或延迟致擦碰",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1|key=测距失效",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-5",
+            "summary": "目标轨迹曲率不准致指令错误",
+            "mechanism_signature": "process_model|anchors=PM-AVP-FD-2|key=轨迹失准",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-2",
+            "summary": "转向角回读异常未检测致失准",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=回读异常",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-8",
+            "summary": "横向位姿与航向误差评估错误",
+            "mechanism_signature": "algorithm|anchors=PM-AVP-FD-1|key=位姿误评",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-10",
+            "summary": "环视信息处理错误致转向时机不当",
+            "mechanism_signature": "camera|anchors=FB-AVP-FD-1,PM-AVP-FD-1|key=视觉处理错",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-7__dup2",
+            "summary": "执行效果跟踪不准致故障未发现",
+            "mechanism_signature": "actuator|anchors=FB-AVP-FD-3,PM-AVP-FD-3|key=执行跟踪失",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2",
+              "UCA-4"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-6__dup2",
+            "kept_scenario_id": "CS-5",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-2__dup4",
+            "kept_scenario_id": "CS-2",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-4__dup4",
+            "kept_scenario_id": "CS-4",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-6__dup4",
+            "kept_scenario_id": "CS-8",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-5__dup4",
+            "kept_scenario_id": "CS-5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-7__dup4",
+            "kept_scenario_id": "CS-7__dup2",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-1__dup5",
+            "kept_scenario_id": "CS-1",
+            "reason": "same_text_diff_uca_merge"
+          },
+          {
+            "removed_scenario_id": "CS-3__dup5",
+            "kept_scenario_id": "CS-3",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 8
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "lateral_control",
+      "action_name_cn": "横向控制",
+      "action_name_en": "Lateral control",
+      "generation_method": "few_1_shot",
+      "generation_method_label": "FS-1",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 50,
+      "expert_kept_items_after_semantic_merge": 10,
+      "final_deliverable_items_after_expert_audit": 10,
+      "semantic_merge_retention_rate": 0.2,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-AVP-LAT-01__dup5",
+            "summary": "环视摄像头低光照失效致边界误判",
+            "mechanism_signature": "camera|anchors=FB-AVP-LAT-1,PM-AVP-LAT-1,PM-AVP-LAT-2|key=视觉失效",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-02__dup5",
+            "summary": "转向回读延迟致执行信念错误",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-LAT-2,PM-AVP-LAT-3,CA-AVP-LAT-1|key=回读延迟",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-03__dup5",
+            "summary": "位姿估计误差污染横向控制",
+            "mechanism_signature": "algorithm|anchors=FB-AVP-LAT-3,PM-AVP-LAT-1,CA-AVP-LAT-1|key=位姿误差",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-04__dup5",
+            "summary": "侧向测距失效致越界碰撞",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-LAT-4,CA-AVP-LAT-2|key=测距失效",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-05__dup5",
+            "summary": "轨迹曲率错误致边界擦碰",
+            "mechanism_signature": "process_model|anchors=PM-AVP-LAT-2,CA-AVP-LAT-1|key=轨迹错误",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-07__dup5",
+            "summary": "环视遮挡致边界识别失败",
+            "mechanism_signature": "camera|anchors=FB-AVP-LAT-1,PM-AVP-LAT-1,PM-AVP-LAT-2|key=视觉遮挡",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-06__dup5",
+            "summary": "转向器故障未降级致失控",
+            "mechanism_signature": "actuator|anchors=FB-AVP-LAT-2,CA-AVP-LAT-3|key=执行故障",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-08__dup5",
+            "summary": "位姿反馈延迟致轨迹偏差",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-LAT-3,PM-AVP-LAT-1,CA-AVP-LAT-1|key=反馈延迟",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-09__dup4",
+            "summary": "侧向障碍物误报致过度限制",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-LAT-4,CA-AVP-LAT-2|key=测距误报",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-10__dup3",
+            "summary": "转向响应延迟致位置失准",
+            "mechanism_signature": "actuator|anchors=FB-AVP-LAT-2,CA-AVP-LAT-3|key=响应延迟",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-AVP-LAT-02__dup4",
+            "kept_scenario_id": "CS-AVP-LAT-02__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-LAT-03__dup4",
+            "kept_scenario_id": "CS-AVP-LAT-03__dup5",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-LAT-04__dup4",
+            "kept_scenario_id": "CS-AVP-LAT-04__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-LAT-05__dup4",
+            "kept_scenario_id": "CS-AVP-LAT-05__dup5",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-LAT-06__dup4",
+            "kept_scenario_id": "CS-AVP-LAT-07__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-LAT-07__dup4",
+            "kept_scenario_id": "CS-AVP-LAT-06__dup5",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-LAT-08__dup4",
+            "kept_scenario_id": "CS-AVP-LAT-08__dup5",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 10
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "lateral_control",
+      "action_name_cn": "横向控制",
+      "action_name_en": "Lateral control",
+      "generation_method": "few_3_shot",
+      "generation_method_label": "FS-3",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 49,
+      "expert_kept_items_after_semantic_merge": 10,
+      "final_deliverable_items_after_expert_audit": 10,
+      "semantic_merge_retention_rate": 0.2041,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-AVP-LAT-01",
+            "summary": "强光致摄像头误识别边界",
+            "mechanism_signature": "camera|anchors=PM-AVP-LAT-2|key=误识别边界",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-05",
+            "summary": "高精地图失配致轨迹错误",
+            "mechanism_signature": "algorithm|anchors=PM-AVP-LAT-2|key=轨迹曲率错",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-09",
+            "summary": "多传感器融合致轨迹不一致",
+            "mechanism_signature": "algorithm|anchors=PM-AVP-LAT-2|key=轨迹不一致",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-02",
+            "summary": "转向回读通信异常致失控",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-LAT-2|key=回读异常",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-06",
+            "summary": "转向执行器故障未检测",
+            "mechanism_signature": "actuator|anchors=FB-AVP-LAT-2|key=执行器故障",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-10",
+            "summary": "转向执行器响应延迟",
+            "mechanism_signature": "actuator|anchors=FB-AVP-LAT-2|key=响应延迟",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-03",
+            "summary": "复杂光照致位姿估计误差",
+            "mechanism_signature": "algorithm|anchors=FB-AVP-LAT-3,PM-AVP-LAT-1|key=位姿误差",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-07",
+            "summary": "复杂地形致位姿估计误差",
+            "mechanism_signature": "algorithm|anchors=FB-AVP-LAT-3,PM-AVP-LAT-1|key=位姿误差",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-04",
+            "summary": "雨雪天气致侧向误检障碍",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-LAT-4|key=侧向误检",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-08",
+            "summary": "夜间低光致侧向误判障碍",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-LAT-4|key=侧向误判",
+            "merged_linked_uca_ids": [
+              "UCA-4"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [
+          {
+            "removed_scenario_id": "CS-AVP-LAT-02__dup5",
+            "kept_scenario_id": "CS-AVP-LAT-02",
+            "reason": "semantic_equivalent"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-LAT-03__dup5",
+            "kept_scenario_id": "CS-AVP-LAT-03",
+            "reason": "context_inclusion"
+          },
+          {
+            "removed_scenario_id": "CS-AVP-LAT-04__dup5",
+            "kept_scenario_id": "CS-AVP-LAT-02",
+            "reason": "semantic_equivalent"
+          }
+        ],
+        "kept_count": 10
+      }
+    },
+    {
+      "task_name": "Causal scenario reasoning",
+      "action_key": "lateral_control",
+      "action_name_cn": "横向控制",
+      "action_name_en": "Lateral control",
+      "generation_method": "lora",
+      "generation_method_label": "SFT",
+      "total_reviewed_items": 50,
+      "expert_usable_items_before_merge": 40,
+      "expert_kept_items_after_semantic_merge": 18,
+      "final_deliverable_items_after_expert_audit": 18,
+      "semantic_merge_retention_rate": 0.45,
+      "final_delivery_retention_rate": 1.0,
+      "expert_semantic_merge": {
+        "review_source": "manual_expert_review",
+        "retained_causal_scenario_items": [
+          {
+            "scenario_id": "CS-AVP-LAT-1",
+            "summary": "雨雪遮挡导致边界误识别",
+            "mechanism_signature": "camera|anchors=FB-AVP-LAT-1,PM-AVP-LAT-2|key=感知错误",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-6",
+            "summary": "摄像头供电中断致反馈丢失",
+            "mechanism_signature": "camera|anchors=FB-AVP-LAT-1|key=反馈中断",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-5",
+            "summary": "光线反射致白线误判为虚线",
+            "mechanism_signature": "camera|anchors=FB-AVP-LAT-1,PM-AVP-LAT-2|key=感知错误",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-4",
+            "summary": "转向电机卡死致持续输出指令",
+            "mechanism_signature": "actuator|anchors=FB-AVP-LAT-2|key=执行卡滞",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-3",
+            "summary": "侧向点云断续致避障失效",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-LAT-4,PM-AVP-LAT-1|key=感知断续",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-2",
+            "summary": "高精地图错误致轨迹曲率高估",
+            "mechanism_signature": "upstream_comm|anchors=PM-AVP-LAT-2|key=地图错误",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-3",
+            "summary": "计算负载过高致控制更新延迟",
+            "mechanism_signature": "compute_hw|anchors=CA-AVP-LAT-1|key=算力不足",
+            "merged_linked_uca_ids": [
+              "UCA-3",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-6",
+            "summary": "碰撞边界计算错误致过度避让",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-LAT-2,FB-AVP-LAT-4|key=规划错误",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-8",
+            "summary": "IMU标定错误致位姿估计漂移",
+            "mechanism_signature": "process_model|anchors=FB-AVP-LAT-3|key=状态误判",
+            "merged_linked_uca_ids": [
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-7",
+            "summary": "分辨率不足致停车线误判距离",
+            "mechanism_signature": "camera|anchors=PM-AVP-LAT-1|key=感知模糊",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-8",
+            "summary": "轮胎漏气致实际转向半径变大",
+            "mechanism_signature": "process_model|anchors=PM-AVP-LAT-3|key=模型失配",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-10",
+            "summary": "总线丢包致转向角回读缺失",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-LAT-2,PM-AVP-LAT-1|key=反馈丢包",
+            "merged_linked_uca_ids": [
+              "UCA-2",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-7",
+            "summary": "算法缺陷致故障后未降级",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-LAT-3|key=逻辑缺陷",
+            "merged_linked_uca_ids": [
+              "UCA-1"
+            ]
+          },
+          {
+            "scenario_id": "CS-5__dup2",
+            "summary": "转向ACK丢失致误判执行成功",
+            "mechanism_signature": "can_comm|anchors=FB-AVP-LAT-2,CA-AVP-LAT-3|key=确认丢失",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-4__dup2",
+            "summary": "侧向测距遮挡致转角未限制",
+            "mechanism_signature": "ultrasonic|anchors=FB-AVP-LAT-4,CA-AVP-LAT-1|key=感知遮挡",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-3"
+            ]
+          },
+          {
+            "scenario_id": "CS-7__dup2",
+            "summary": "转向机卡滞且反馈无法监测",
+            "mechanism_signature": "actuator|anchors=CA-AVP-LAT-1,FB-AVP-LAT-2|key=硬件卡滞",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-4"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-9__dup3",
+            "summary": "错误路径完成信号致提前停止",
+            "mechanism_signature": "algorithm|anchors=CA-AVP-LAT-3|key=信号误判",
+            "merged_linked_uca_ids": [
+              "UCA-2"
+            ]
+          },
+          {
+            "scenario_id": "CS-AVP-LAT-10__dup3",
+            "summary": "低附着路面致位姿积分漂移",
+            "mechanism_signature": "process_model|anchors=FB-AVP-LAT-3|key=状态漂移",
+            "merged_linked_uca_ids": [
+              "UCA-1",
+              "UCA-3"
+            ]
+          }
+        ],
+        "merged_duplicate_items": [],
+        "kept_count": 18
+      }
+    }
+  ]
+}

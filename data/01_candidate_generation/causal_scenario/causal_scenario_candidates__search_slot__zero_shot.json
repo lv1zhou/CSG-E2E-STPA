@@ -1,0 +1,566 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_causal_scenario_generation",
+  "task_type": "causal_scenario",
+  "action_key": "search_slot",
+  "action_name_cn": "搜索车位",
+  "action_name_en": "Parking-slot search",
+  "generation_method": "zero_shot",
+  "generation_method_label": "ZS",
+  "source_result_file": "scenario_zero_shot_search_slot_20260407_105918.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 50,
+    "target_items_per_run": 10
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "侧向超声波传感器出现异常回波，导致系统错误地确认了不可用的车位。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "环视摄像头提供的停车线信息不准确，导致系统未能及时确认可用车位。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "轮速里程计数据丢失，导致系统误判车辆位置，错过了目标车位。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "APA模式切换延迟，导致系统未能及时启动车位搜索，错过了最佳搜索时机。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "系统在确认车位过程中，由于通信时延导致反馈信息滞后，最终选择了错误的车位。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "系统在车位搜索过程中，由于传感器数据融合错误，导致车位尺寸判断失误。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "系统在车位确认阶段，由于自车位姿估计误差，导致确认超时。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "系统在车位搜索过程中，由于环视摄像头视野被遮挡，导致车位搜索结果失真。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "系统在车位确认阶段，由于侧向超声波传感器丢失信息，导致车位确认失败。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "系统在车位搜索过程中，由于APA模式切换失败，导致车位搜索未能启动。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "侧向超声波传感器出现异常回波，导致系统错误地确认了不可用的车位。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "环视摄像头提供的停车线信息不准确，导致系统未能及时确认可用车位。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "轮速里程计数据丢失，导致系统误判车辆已越过候选车位。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "APA模式切换延迟，导致系统未能及时启动车位搜索。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "系统未能正确处理侧向超声波和环视摄像头的不一致信息，导致车位确认失败。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "系统在确认车位过程中发生通信时延，导致车位确认超时。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "系统未能正确判断车辆与候选车位的相对位置，导致车位确认失败。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "系统在车位搜索过程中发生执行器状态回读错误，导致车位搜索结果失真。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "系统未能正确处理APA模式与HMI反馈的不一致信息，导致车位确认失败。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "系统在车位搜索过程中发生通信丢包，导致车位搜索结果失真。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "侧向超声波传感器出现异常回波，导致系统错误地识别车位边界，进而错误确认车位。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "环视摄像头提供的停车线信息不准确，导致系统未能正确确认车位，从而无法完成泊车任务。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "由于环视摄像头信息延迟，系统错过了最佳车位确认时机，导致错过目标车位。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "轮速里程计数据丢失，导致系统无法准确判断车辆与车位的相对位置，从而错误确认车位。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "APA模式切换过程中，系统未能及时接收到HMI确认反馈，导致车位搜索过程被中断。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "系统在确认车位时，由于侧向超声波传感器丢失信息，未能正确识别车位占用情况，导致确认错误。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "系统在确认车位时，由于环视摄像头信息不一致，未能正确识别车位尺寸，导致确认错误。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "系统在确认车位时，由于轮速里程计数据异常，未能正确判断车辆是否已越过候选区域，导致确认错误。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "系统在确认车位时，由于APA模式切换过程中通信时延，未能及时接收到HMI确认反馈，导致确认超时。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "系统在确认车位时，由于侧向超声波传感器异常回波，未能正确识别车位边界，导致确认错误。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "侧向超声波传感器出现异常回波，导致系统错误地确认了不可用的车位。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "环视摄像头提供的停车线信息不准确，导致系统未能及时确认可用车位。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "轮速里程计数据丢失，导致系统错过了最佳车位确认时机。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "APA模式切换延迟，导致系统未能及时启动车位搜索。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "系统在确认车位过程中，由于通信时延导致确认超时，未能及时取消确认。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "系统在车位搜索过程中，由于传感器数据不一致，导致车位选择结果失真。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "系统在车位确认过程中，由于自车位置估计误差，导致确认失败。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "系统在车位搜索过程中，由于环视摄像头视野受限，导致错过目标车位。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "系统在车位确认过程中，由于APA模式切换失败，导致确认失败。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "系统在车位搜索过程中，由于侧向超声波传感器丢失信息，导致车位选择结果失真。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "侧向超声波传感器出现异常回波，导致系统错误地确认了不可用的车位。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "环视摄像头提供的停车线信息不准确，导致系统未能及时确认可用车位。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "轮速里程计数据延迟，导致系统错过了最佳车位确认时机。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "APA模式切换过程中出现通信时延，导致车位搜索过程被不恰当地终止。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "系统未能正确处理侧向超声波传感器丢失的信息，导致车位确认失败。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "环视摄像头提供的邻车轮廓信息不完整，导致系统未能正确评估车位占用情况。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "轮速里程计与自车位姿估计信息不一致，导致系统误判车辆已越过候选车位。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "APA模式与HMI反馈不一致，导致系统未能及时确认车位。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "系统未能正确处理侧向超声波传感器的异常回波，导致车位搜索过程被不恰当地终止。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "环视摄像头提供的停车线信息与实际不符，导致系统未能正确评估车位几何尺寸。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    }
+  ]
+}

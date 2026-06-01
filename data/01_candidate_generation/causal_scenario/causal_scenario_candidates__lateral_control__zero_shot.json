@@ -1,0 +1,622 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_causal_scenario_generation",
+  "task_type": "causal_scenario",
+  "action_key": "lateral_control",
+  "action_name_cn": "横向控制",
+  "action_name_en": "Lateral control",
+  "generation_method": "zero_shot",
+  "generation_method_label": "ZS",
+  "source_result_file": "scenario_zero_shot_lateral_control_20260407_112315.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 50,
+    "target_items_per_run": 10
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "环视摄像头未能正确识别停车线和边界，导致系统误判横向位置，提供不正确的转向指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "转向角回读出现异常，但系统未能检测到并继续提供转向指令，导致车辆位置失准。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "偏航率和位姿估计反馈存在较大误差，系统基于错误数据提供转向指令，导致轨迹偏离。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "侧向障碍物测距反馈丢失，系统未能及时调整转向指令，导致擦碰障碍物。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "系统未能正确评估目标轨迹曲率和边界位置，导致转向指令时机不当，轨迹偏差累积。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "系统未能正确处理转向执行回读异常，继续提供转向指令，导致位置失准。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "系统未能及时响应侧向障碍物测距反馈，导致转向指令时机不当，擦碰障碍物。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "系统未能正确评估横向位姿与航向误差，导致转向指令不准确，轨迹偏离。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "系统未能正确跟踪转向执行效果，导致转向指令持续时间不当，位置失准。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "系统未能正确处理环视摄像头识别信息，导致转向指令时机不当，轨迹偏离。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "环视摄像头识别信息丢失或误识别，导致系统无法准确判断边界位置，从而提供不正确的横向控制指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "转向角回读异常或执行ACK延迟，导致系统未能及时调整横向控制策略，造成轨迹偏差累积。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "偏航率与位姿估计反馈不准确，导致系统对当前横向位置的估计出现偏差，进而影响横向控制指令的准确性。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "侧向障碍物测距反馈失效，导致系统未能及时限制转角与横向推进，增加了擦碰风险。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "系统未能正确估计横向偏差与姿态，导致横向控制指令未能有效纠正轨迹偏差。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "目标轨迹曲率与边界位置信息不准确，导致系统提供的横向控制指令未能有效避免擦碰。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "转向执行效果跟踪不准确，导致系统未能及时发现执行器故障，继续提供不安全的横向控制指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "系统未能及时检测到转向执行回读异常，导致横向控制指令未能及时调整，造成轨迹偏离。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "系统未能正确处理路径状态不一致的情况，导致横向控制指令未能有效纠正轨迹偏差。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "系统未能及时检测到侧向障碍物，导致横向控制指令未能有效避免擦碰。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "环视摄像头识别信息丢失或误识别，导致系统无法准确判断边界和障碍物位置，从而提供不安全的横向控制指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "转向角回读异常，系统未能及时检测到执行器故障，导致横向控制指令未能正确执行。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "偏航率和位姿估计反馈出现较大误差，系统基于错误的状态信息提供了不适当的横向控制指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "侧向障碍物测距反馈延迟，系统未能及时调整横向控制策略，导致车辆擦碰障碍物。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "系统未能正确评估目标轨迹曲率和边界位置，导致横向控制指令未能有效避免擦碰。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "系统未能正确处理转向执行回读异常，继续提供横向控制指令，导致车辆位置失准。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "系统未能及时检测到车辆横向位姿与航向误差，导致横向控制指令未能及时调整。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "系统未能正确评估侧向障碍物距离，导致横向控制指令未能有效避免擦碰。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "系统未能正确处理转向执行器故障，导致横向控制指令未能正确执行。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "系统未能正确评估目标轨迹曲率和边界位置，导致横向控制指令未能有效避免擦碰。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "环视摄像头识别信息丢失或误识别，导致系统无法准确判断边界位置，从而提供不安全的横向控制指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "转向角回读异常，系统未能及时检测到执行器故障，导致横向控制指令未能正确执行。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "偏航率与位姿估计反馈出现较大误差，系统基于错误的位姿信息提供横向控制指令，导致轨迹偏离。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "侧向障碍物测距反馈延迟，系统未能及时调整横向控制策略，导致擦碰障碍物。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "目标轨迹曲率与边界位置信息不准确，系统基于错误的目标轨迹提供横向控制指令，导致车辆擦碰边界。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "系统未能正确估计横向偏差与姿态，导致横向控制指令时机不当，轨迹偏差累积。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "通信时延导致转向角回读信息滞后，系统未能及时调整横向控制指令，导致位置失准。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "系统未能正确跟踪转向执行效果，导致横向控制持续时间不当，引起非预期运动。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "系统未能及时检测到侧向障碍物，导致横向控制时机不当，轨迹偏离。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "系统未能正确处理转向执行回读异常，导致横向控制指令未能正确执行，轨迹偏离。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "环视摄像头识别信息丢失或误识别，导致系统无法准确判断边界和障碍物位置，从而提供不安全的横向控制指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "转向角回读异常，系统未能及时检测到执行器故障，导致横向控制指令未能正确执行。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "偏航率和位姿估计反馈出现较大误差，系统基于错误的状态信息提供了不合适的横向控制指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "侧向障碍物测距反馈延迟，系统未能及时调整横向控制策略，导致车辆擦碰障碍物。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "系统未能正确评估目标轨迹曲率和边界位置，导致横向控制指令未能有效跟踪目标轨迹。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "系统未能正确处理转向执行回读异常，继续提供横向控制指令，导致车辆位置失准。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "系统未能及时检测到车辆横向位姿与航向误差，导致横向控制指令未能及时调整。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "系统未能正确评估侧向障碍物距离，导致横向控制指令未能有效避障。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "系统未能正确处理转向执行器故障，导致横向控制指令未能正确执行。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "系统未能正确评估目标轨迹曲率和边界位置，导致横向控制指令未能有效跟踪目标轨迹。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3",
+        "UCA-4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,512 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_causal_scenario_generation",
+  "task_type": "causal_scenario",
+  "action_key": "forward_drive",
+  "action_name_cn": "前进驱动",
+  "action_name_en": "Forward drive",
+  "generation_method": "lora",
+  "generation_method_label": "SFT",
+  "source_result_file": "scenario_lora_forward_drive_20260407_105759.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 48,
+    "target_items_per_run": null
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 8,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-FD-1",
+      "description": "【反馈导致过程模型错误】超声波雷达传感器(FB-AVP-FD-1)因地面反光或遮挡，错误地报告前方无障碍。控制器的过程模型(PM-AVP-FD-1)基于此错误反馈，持续提供前进驱动指令，导致碰撞低矮障碍物。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-FD-2",
+      "description": "【控制算法缺陷】控制器的泊车决策算法(CA-AVP-FD-1)在处理中存在一个除零错误的代码缺陷。当计算目标点坐标时，分母为零导致车辆在直行时陷入死循环，持续下发前进指令。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-FD-3",
+      "description": "【过程模型与现实不符】车辆在湿滑路面上因打滑导致实际位移远小于控制器回读的轮速数据(FB-AVP-FD-2)。控制器的位置信念(PM-AVP-FD-1)与现实产生偏差，在修正路径时持续前进并偏离车位。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-FD-4",
+      "description": "【反馈路径故障】前进驱动的执行确认信号(FB-AVP-FD-3)因CAN总线错误丢失。控制器的执行效果信念(PM-AVP-FD-3)错误地认为指令未执行，触发降级逻辑并停止所有动作。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-FD-5",
+      "description": "【过程模型错误】上位机路径通信(FB-AVP-FD-4)因序列号错误被重复处理。控制器的任务与路径信念(PM-AVP-FD-2)被错误更新为一个无效的、指向危险区域的路径，因此提供前进驱动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-FD-6",
+      "description": "【控制算法缺陷】前进驱动指令的持续时间计算算法(CA-AVP-FD-1)存在一个整型溢出问题。在处理大数值时，指令持续时间被错误计算为极短时间，导致车辆未能完全驶入车位。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-FD-7",
+      "description": "【反馈路径延迟】环视摄像头视频流(FB-AVP-FD-1)因图像处理单元过载，导致画面更新延迟。控制器基于旧画面提供前进指令，未能感知新出现的行人，导致碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-FD-8",
+      "description": "【控制路径硬件故障】车辆的电机驱动硬件卡死在前进状态。即使控制器已发出停止指令，车辆仍受硬件故障影响继续前进并发生碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "超声波雷达传感器(FB-AVP-FD-1)在车辆前端失效，未能检测到一个突然出现的低矮障碍物。控制器基于该传感器缺失或错误的读数，其对环境位置的信念(PM-AVP-FD-1)产生偏差，错误地提供了前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "泊车路径规划算法(CA-AVP-FD-1)存在设计缺陷，在计算终点坐标时出现了计算精度损失，导致前进驱动指令使车辆在接近终点时继续前进超出车位边界，触发UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "控制器-AVP的主处理器因软件死锁而停止工作。在控制器完全失去功能的情况下，其对自身状态和执行效果的信念(PM-AVP-FD-3)错误地维持在“正常”，从而未能提供所需的前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "当车辆即将到达停车点时，控制算法(CA-AVP-FD-2)因处理一个低优先级的软件中断而产生约500ms的延迟。此延迟违反了对过程模型状态更新的及时性要求，导致前进指令停止过晚，发生越界。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "执行确认信号从电机控制器到泊车决策模块的反馈路径(FB-AVP-FD-3)因电气干扰而丢失。控制器因未收到“已执行”的确认，错误地认为上一条前进指令失败，于是重复发送指令，导致动力持续输出。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "泊车决策模块收到了一个因网络风暴而乱序的路径更新消息。它基于这个旧的、不完整的路径信息的过程模型(PM-AVP-FD-2)，错误地发出了一个不必要的前进驱动指令，使车辆偏离了当前正确的路径。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "车辆底层CAN总线上的轮速传感器信号(FB-AVP-FD-2)因线路松动而断开。泊车系统基于此反馈的状态估计器对车辆位置产生了严重偏差，错误地提供了不必要的前进指令以“纠正”这个虚构的误差。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "电机控制器的扭矩传感器(FB-AVP-FD-3)因长期振动而发生机械卡滞，卡在了一个非零的扭矩输出位置。此时即使控制器正确地发出了“停止”指令，实际输出的驱动力仍然存在，违反了对受控过程状态的信念。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "控制器-AVP的内存管理系统因长期运行而发生内存泄漏。在某个高负载的操作中，用于泊车决策的关键数据结构被覆盖。该软件缺陷导致过程模型(PM-AVP-FD-1)错误地认为前方是可通行的，从而提供了危险的前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "车辆的定位系统(环视摄像头或激光雷达)在低照度停车场内因图像模糊而失效。该传感器故障导致系统对车辆位置的环境信念(PM-AVP-FD-1)完全错误。在尝试进行路径跟踪时，它错误地发出了前进指令，导致车辆驶向一个危险区域。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-FD-1",
+      "description": "【反馈缺陷】超声波雷达传感器(FB-AVP-FD-1)因被雨水遮蔽而完全失明，控制器基于错误的『前方无障碍』信念(PM-AVP-FD-1)持续提供前进指令。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-FD-2",
+      "description": "【控制算法缺陷】泊车路径规划软件因坐标系转换错误，向控制器提供了错误的终点坐标；控制器使能了前进指令但越过了实际车位边界。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-FD-3",
+      "description": "【控制算法缺陷】泊车决策算法(CA-AVP-FD-1)因软件死循环卡死，持续发送前进指令；车辆直线冲出车位。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-FD-4",
+      "description": "【反馈缺陷】车辆底层档位挂入P挡并锁死；控制器发出的前进指令因机械锁止无法执行(FB-AVP-FD-2回读档位为P)，导致停车。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-FD-5",
+      "description": "【过程模型缺陷】控制器(AVP-决策)与上位机路径规划模块(FB-AVP-FD-4)之间发生通信延迟；控制器基于旧的『路径仍在延伸』信念(PM-AVP-FD-2)继续前进。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-FD-6",
+      "description": "【反馈缺陷】车辆CAN总线上反馈轮速(FB-AVP-FD-2)的信号线断开；控制器收到零轮速反馈，错误地判断车辆已停止，过早结束了泊车任务。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-FD-7",
+      "description": "【过程模型缺陷】泊车路径规划软件计算出的泊车轨迹终点过于靠近墙体边界；控制器基于此轨迹持续提供前进指令，导致轻微擦碰。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-FD-8",
+      "description": "【控制算法缺陷】控制器在收到『即将到达目标点』的反馈后，用于停止驱动的计时器(CA-AVP-FD-2)因多线程竞争而未被及时触发，导致冲过停止点。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-FD-9",
+      "description": "【反馈缺陷】电机扭矩传感器(FB-AVP-FD-3)故障，持续输出最大扭矩；控制器正常结束前进指令，但电机因机械问题持续转动，推着车辆前进。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-FD-10",
+      "description": "【过程模型缺陷】车辆因地面湿滑打滑；控制器基于正常的轮速反馈(FB-AVP-FD-2)认为已完成泊车，提前停止了前进指令，导致车辆停留在不可接受位置。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-FD-1",
+      "description": "控制器-AVP的过程模型(PM-AVP-FD-1)因前向超声波雷达(FB-AVP-FD-1)传感器表面被油污遮挡，错误地读取了障碍物的距离。因此，在受控进程(CP)中存在一个不可见的柱子，控制器基于此错误认知，提供了错误的前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-FD-2",
+      "description": "控制器-AVP的软件逻辑缺陷。它收到了一个针对不同泊车位的路径点(FB-AVP-FD-4)，但由于处理线程优先级配置错误，该更新指令被延迟处理。因此，它基于一个已过时但完整的路径(FB-AVP-FD-4)，继续提供了前进驱动。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-FD-3",
+      "description": "受控过程(CP)中的车辆底盘执行器发生机械卡涩。当控制器-AVP发出前进指令时，驱动扭矩反馈(FB-AVP-FD-3)异常，控制器的过程模型(PM-AVP-FD-3)因此被更新为“执行器故障”。根据其算法(CA-AVP-FD-3)，它停止了所有前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-FD-4",
+      "description": "车辆在泊车时受到侧风影响，横向偏移量超出传感器融合算法(FB-AVP-FD-2)的容差范围。控制器-AVP的路径跟踪算法(CA-AVP-FD-1)为纠正偏差，错误地发出了一个大角度的前进修正指令，导致车辆转向不足并碰撞到障碍物。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-FD-5",
+      "description": "控制器-AVP因软件死循环或硬件看门狗故障而完全停止工作。当车辆处于坡道上时，由于动力中断(FB-AVP-FD-2轮速为0)，车辆开始向后溜车。控制器未能提供任何前进驱动来防止倒退。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-FD-6",
+      "description": "反馈路径(FB-AVP-FD-2)中用于确认档位状态的CAN信号因线束接触不良，间歇性地报告“前进挡”。控制器-AVP的软件状态机(PM-AVP-FD-2)基于此错误反馈，错误地认为车辆已处于正确模式，并持续提供前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-FD-7",
+      "description": "在复杂停车场环境中，超声波雷达(FB-AVP-FD-1)与环视摄像头(FB-AVP-FD-1)对同一障碍物产生了不同的距离读数。由于传感器融合算法设计缺陷，控制器-AVP的过程模型(PM-AVP-FD-1)对安全距离产生了错误认知，并基于此错误模型提供了不充分的前进驱动。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-FD-8",
+      "description": "控制器-AVP接收到一个高优先级的远程软件升级指令，该指令强制其进入OTA升级模式。在此模式下，出于安全原因，其控制算法(CA-AVP-FD-1)被设计为禁止任何前进驱动，以防止在升级过程中发生移动。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-FD-9",
+      "description": "车辆在低附着路面上进行泊车。控制器-AVP的纵向动力学模型(PM-AVP-FD-3)过于乐观，高估了轮胎的牵引力。因此，当它提供正常水平的前进驱动指令时，车辆发生了打滑和侧向移动，导致偏离预期泊车轨迹。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-FD-10",
+      "description": "在多车协同泊车的场景中，主控车辆的控制器-AVP因通信延迟(FB-AVP-FD-4)未能及时收到从车辆完成泊车的信号。它基于一个过时的协同路径模型(PM-AVP-FD-2)，继续提供了前进驱动，导致与已完成泊车的从车辆发生碰撞。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "【反馈导致过程模型错误】超声波雷达(FB-AVP-FD-1)硬件故障，返回错误的距离为0。控制器基于此错误反馈，过程模型(PM-AVP-FD-1)错误认知前方无障碍，从而不安全地提供了前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "【控制算法缺陷】控制算法(CA-AVP-FD-2)中停止路径的边界判断逻辑存在死循环，导致即使到达目标位置也无法终止前进驱动。使控制器对受控过程状态产生错误认知或决策偏差；从而触发 UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "【反馈路径中断】执行器使能信号因CAN总线卡顿未及时收到(FB-AVP-FD-3)。控制器持续重试下发前进指令，但因执行器未使能，导致指令持续被丢弃，使控制器对受控过程状态产生错误认知或决策偏差；从而触发 UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "【控制算法缺陷】泊车路径规划(FB-AVP-FD-4)与跟踪算法存在协调缺陷。在狭窄车位中，前进驱动指令的幅度计算错误，导致车辆在前进时超出车位边界，使控制器对受控过程状态产生错误认知或决策偏差；从而触发 UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "【控制算法缺陷】由于软件BUG，控制器的前进驱动使能状态(CA-AVP-FD-1)在路径点更新后未能及时退出，导致车辆持续前进而无法响应新的停止需求。使控制器对受控过程状态产生错误认知或决策偏差；从而触发 UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "【控制算法缺陷】在坡道上泊车时，控制算法(CA-AVP-FD-3)未正确补偿重力影响。当驾驶员手动接管后释放制动，系统恢复自动模式时，因算法未考虑车辆可能因重力后溜，错误地提供了前进驱动指令以纠正，导致车辆突然加速。使控制器对受控过程状态产生错误认知或决策偏差；从而触发 UCA-4。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "【过程模型不一致】上位机发送了前进指令，但由于通信延迟(FB-AVP-FD-4)，控制器在收到指令时车辆已经因其他原因停止。控制算法(CA-AVP-FD-1)基于延迟的指令提供前进驱动，导致非预期运动。使控制器对受控过程状态产生错误认知或决策偏差；从而触发 UCA-4。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "【反馈导致过程模型错误】环视摄像头(FB-AVP-FD-1)因雨天反光而产生视觉误判，使控制器的过程模型(PM-AVP-FD-1)错误地认为前方有障碍物并停止。因此，在实际前方无障碍时，系统未能提供必要的前进驱动。使控制器对受控过程状态产生错误认知或决策偏差；从而触发 UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "【控制算法缺陷】控制算法(CA-AVP-FD-3)在接收执行器状态反馈(FB-AVP-FD-3)时，因软件缺陷错误地解析了一个正常的“驱动完成”信号为“驱动失败”。因此，系统停止并拒绝提供后续的前进驱动指令。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "【控制路径硬件故障】电机驱动模块的功率晶体管(FB-AVP-FD-3)因过热而进入保护模式，导致即使控制器正确发出了前进指令，电机也无法产生足够的扭矩使车辆前进。使控制器对受控过程状态产生错误认知或决策偏差；从而触发 UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    }
+  ]
+}

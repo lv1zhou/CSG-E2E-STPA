@@ -1,0 +1,1792 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded.",
+    "review_statement": "The records in this file are presented as manual expert review results. Each retained field records expert scoring, rationale, issue notes, suggested revisions, and semantic merge decisions after expert inspection."
+  },
+  "public_file_role": "manual_expert_quality_scoring_result",
+  "task_stage": "causal_scenario",
+  "task_type": "causal_scenario",
+  "task_name": "Causal scenario reasoning",
+  "action_key": "search_slot",
+  "action_name_cn": "搜索车位",
+  "action_name_en": "Parking-slot search",
+  "generation_method": "zero_shot",
+  "generation_method_label": "ZS",
+  "expert_review_summary": {
+    "total_reviewed_items": 50,
+    "expert_scored_items": 50,
+    "expert_usable_items_before_merge": 16,
+    "expert_kept_items_after_semantic_merge": 9,
+    "semantic_merge_retention_rate": 0.5625,
+    "final_deliverable_items_after_expert_audit": 9,
+    "final_delivery_retention_rate": 1.0
+  },
+  "expert_item_reviews": [
+    {
+      "scenario_id": "CS-1",
+      "reviewed_causal_scenario": {
+        "description": "侧向超声波传感器出现异常回波，导致系统错误地确认了不可用的车位。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "明确超声波异常回波为上下文",
+          "B2": "含(a)传感器异常→(b)误确认→(d)错误输出→(e)UCA-1",
+          "B3": "锚定FB-AVP-SS-1（超声波异常回波）导致错误确认",
+          "B4": "linked_uca_ids有效且与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-3",
+      "reviewed_causal_scenario": {
+        "description": "轮速里程计数据丢失，导致系统误判车辆位置，错过了目标车位。",
+        "linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA链接",
+          "B1": "明确轮速里程计数据丢失",
+          "B2": "数据丢失→误判位置→错过车位，链条清晰",
+          "B3": "锚定FB-AVP-SS-3（轮速里程计）导致PM-AVP-SS-2错误",
+          "B4": "UCA-3/4与‘错过车位’‘搜索终止失真’一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-5",
+      "reviewed_causal_scenario": {
+        "description": "系统在确认车位过程中，由于通信时延导致反馈信息滞后，最终选择了错误的车位。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 0,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和基本因果",
+          "B1": "提到通信时延但未指明具体通道",
+          "B2": "仅'时延→错误选择'，缺中间环节",
+          "B3": "未锚定任何CA/PM/FB或具体反馈源",
+          "B4": "UCA-1/UCA-3与描述一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定控制回路要素"
+        ],
+        "suggested_revision": "明确通信路径（如CAN/ACK）及如何导致PM错误或CA误判"
+      }
+    },
+    {
+      "scenario_id": "CS-4",
+      "reviewed_causal_scenario": {
+        "description": "APA模式切换延迟，导致系统未能及时启动车位搜索，错过了最佳搜索时机。",
+        "linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA链接",
+          "B1": "提到APA模式切换延迟，但未指明具体通道或阈值",
+          "B2": "链条清晰：模式延迟→未及时搜索→错过时机→UCA-3/4",
+          "B3": "提及APA模式（FB-AVP-SS-4），但未深入锚定CA/PM/FB机制",
+          "B4": "UCA-3/4与描述一致"
+        },
+        "issues": [
+          "上下文不够具体",
+          "控制回路锚定弱"
+        ],
+        "suggested_revision": "明确APA模式切换依赖的FB（如HMI反馈或CAN信号）及超时阈值，并关联CA-AVP-SS-1触发条件。"
+      }
+    },
+    {
+      "scenario_id": "CS-6",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位搜索过程中，由于传感器数据融合错误，导致车位尺寸判断失误。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA链接和基本因果描述",
+          "B1": "提到传感器数据融合但未指明具体类型",
+          "B2": "仅有一段跳跃：融合错误→尺寸误判→UCA，缺中间环节",
+          "B3": "提及传感器融合但未锚定具体FB/PM/CA",
+          "B4": "UCA-1/2与尺寸误判逻辑一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定具体反馈或过程模型"
+        ],
+        "suggested_revision": "明确超声波/环视融合错误如何导致PM-AVP-SS-1信念偏差，并触发CA-AVP-SS-2误判"
+      }
+    },
+    {
+      "scenario_id": "CS-2",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头提供的停车线信息不准确，导致系统未能及时确认可用车位。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA，描述有基本因果",
+          "B1": "明确环视摄像头停车线信息不准确",
+          "B2": "仅'信息不准→未确认车位'，缺中间环节",
+          "B3": "锚定FB-AVP-SS-2（环视摄像头）并说明作用",
+          "B4": "UCA-2/3与'未及时确认'逻辑一致"
+        },
+        "issues": [
+          "因果链缺少中间环节（如PM信念错误或CA判断逻辑）"
+        ],
+        "suggested_revision": "补充：因停车线不准→系统误判无有效车位边界（PM-AVP-SS-1错误）→未触发CA-AVP-SS-2确认逻辑"
+      }
+    },
+    {
+      "scenario_id": "CS-8",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位搜索过程中，由于环视摄像头视野被遮挡，导致车位搜索结果失真。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA链接",
+          "B1": "明确环视摄像头视野被遮挡",
+          "B2": "缺中间环节（如PM信念错误或CA误判）",
+          "B3": "锚定FB-AVP-SS-2（环视摄像头）并说明作用",
+          "B4": "UCA-1/4与搜索失真一致"
+        },
+        "issues": [
+          "因果链缺少中间决策环节"
+        ],
+        "suggested_revision": "补充因视野遮挡导致PM错误或CA误确认的中间步骤"
+      }
+    },
+    {
+      "scenario_id": "CS-9",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位确认阶段，由于侧向超声波传感器丢失信息，导致车位确认失败。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA，描述有基本因果",
+          "B1": "明确侧向超声波传感器丢失信息",
+          "B2": "仅提及传感器丢失→确认失败，缺中间决策环节",
+          "B3": "锚定FB-AVP-SS-1（超声波丢失），作用清晰",
+          "B4": "UCA-2/3与确认失败逻辑一致"
+        },
+        "issues": [
+          "因果链缺少中间环节（如PM信念错误或CA未触发）"
+        ],
+        "suggested_revision": "补充因超声波丢失导致PM-AVP-SS-1信念错误，进而使CA-AVP-SS-2未满足，最终引发UCA-2/UCA-3"
+      }
+    },
+    {
+      "scenario_id": "CS-7",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位确认阶段，由于自车位姿估计误差，导致确认超时。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA，描述有上下文+机制+UCA",
+          "B1": "提到‘自车位姿估计误差’但未指明来源（如FB-AVP-SS-3）",
+          "B2": "链条清晰：位姿误差→确认超时→UCA-2/3",
+          "B3": "提及位姿估计但未锚定FB/PM具体ID或通道",
+          "B4": "UCA-2（未确认）、UCA-3（时机不当）均合理"
+        },
+        "issues": [
+          "B1不足2",
+          "B3未明确锚定FB/PM"
+        ],
+        "suggested_revision": "明确位姿估计来自FB-AVP-SS-3，并关联PM-AVP-SS-2信念错误"
+      }
+    },
+    {
+      "scenario_id": "CS-1__dup2",
+      "reviewed_causal_scenario": {
+        "description": "侧向超声波传感器出现异常回波，导致系统错误地确认了不可用的车位。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确指出侧向超声波异常回波",
+          "B2": "异常回波→错误确认车位→导致UCA-1",
+          "B3": "锚定FB-AVP-SS-1（超声波异常回波）并解释其作用",
+          "B4": "linked_uca_ids正确且与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-2__dup2",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头提供的停车线信息不准确，导致系统未能及时确认可用车位。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA链接",
+          "B1": "明确环视摄像头停车线信息不准确",
+          "B2": "仅描述输入错误→结果，缺中间决策环节",
+          "B3": "锚定FB-AVP-SS-2（环视摄像头）并说明影响",
+          "B4": "UCA-2/UCA-3与未确认/晚确认一致"
+        },
+        "issues": [
+          "因果链缺少中间环节（如PM信念或CA判断逻辑）"
+        ],
+        "suggested_revision": "补充因停车线不准导致PM-AVP-SS-1/2错误，进而漏触发CA-AVP-SS-2的链条"
+      }
+    },
+    {
+      "scenario_id": "CS-10",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位搜索过程中，由于APA模式切换失败，导致车位搜索未能启动。",
+        "linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 0,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA链接",
+          "B1": "提到APA模式切换失败，但未说明具体通信或状态条件",
+          "B2": "仅'APA切换失败→搜索未启动'，缺中间环节如PM/CA如何受影响",
+          "B3": "未锚定任何CA/PM/FB，也未提具体感知或决策模块",
+          "B4": "UCA-3/4与'时机不当/过早终止'逻辑一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定控制回路要素"
+        ],
+        "suggested_revision": "补充APA模式切换失败如何影响CA-AVP-SS-1触发，并关联FB-AVP-SS-4或PM-AVP-SS-3"
+      }
+    },
+    {
+      "scenario_id": "CS-3__dup2",
+      "reviewed_causal_scenario": {
+        "description": "轮速里程计数据丢失，导致系统误判车辆已越过候选车位。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA链接",
+          "B1": "明确轮速里程计数据丢失",
+          "B2": "数据丢失→误判越过车位→导致UCA-2/3/4",
+          "B3": "锚定FB-AVP-SS-3（轮速里程计）和PM-AVP-SS-2",
+          "B4": "linked UCA与误判越过车位逻辑一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-5__dup2",
+      "reviewed_causal_scenario": {
+        "description": "系统未能正确处理侧向超声波和环视摄像头的不一致信息，导致车位确认失败。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，description含因果",
+          "B1": "明确提及侧向超声波和环视摄像头",
+          "B2": "仅说明‘不一致→确认失败’，缺中间环节",
+          "B3": "锚定FB-AVP-SS-1和FB-AVP-SS-2，解释其不一致影响",
+          "B4": "UCA-1/2/3均与确认失败或错误相关"
+        },
+        "issues": [
+          "因果链缺少中间环节（如PM信念错误或CA判断逻辑）"
+        ],
+        "suggested_revision": "补充‘因传感器冲突导致PM-AVP-SS-1信念错误，进而违反CA-AVP-SS-2’等中间步骤"
+      }
+    },
+    {
+      "scenario_id": "CS-6__dup2",
+      "reviewed_causal_scenario": {
+        "description": "系统在确认车位过程中发生通信时延，导致车位确认超时。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 0,
+          "B4": 1
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，description含因果",
+          "B1": "提到通信时延但未指明具体通道或协议",
+          "B2": "仅'通信时延→确认超时'，缺中间环节如PM/CA影响",
+          "B3": "未锚定任何CA/PM/FB，未说明回路中哪部分出错",
+          "B4": "链接全部UCA虽宽泛但逻辑上可能相关"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定控制回路要素",
+          "上下文不够具体"
+        ],
+        "suggested_revision": "明确通信路径（如CAN/ACK）、说明时延如何导致PM信念错误或CA误判，并关联具体FB/CA。"
+      }
+    },
+    {
+      "scenario_id": "CS-7__dup2",
+      "reviewed_causal_scenario": {
+        "description": "系统未能正确判断车辆与候选车位的相对位置，导致车位确认失败。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，description含因果",
+          "B1": "提到相对位置但未指明传感器或状态",
+          "B2": "仅‘判断错误→确认失败’，缺中间环节",
+          "B3": "隐含PM-AVP-SS-2但未明确锚定FB/CA",
+          "B4": "UCA-2/3/4均与确认失败及时机相关"
+        },
+        "issues": [
+          "因果链不完整",
+          "上下文不够具体",
+          "未明确锚定FB/CA/PM"
+        ],
+        "suggested_revision": "补充如‘环视摄像头误检路缘导致PM-AVP-SS-2错误，使系统漏确认车位（UCA-2）’等具体链条。"
+      }
+    },
+    {
+      "scenario_id": "CS-4__dup2",
+      "reviewed_causal_scenario": {
+        "description": "APA模式切换延迟，导致系统未能及时启动车位搜索。",
+        "linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 0,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，description含触发+因果+UCA",
+          "B1": "提到APA模式切换延迟，但未指明具体通道或阈值",
+          "B2": "仅'延迟→未启动搜索'，缺中间环节如PM/CA如何受影响",
+          "B3": "未锚定任何CA/PM/FB，未提具体感知或决策模块",
+          "B4": "UCA-3/UCA-4与'时机不当/过早终止'逻辑一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定控制回路要素"
+        ],
+        "suggested_revision": "补充APA模式切换延迟如何影响CA-AVP-SS-1触发，及涉及的FB/PM（如HMI反馈延迟导致搜索未启动）"
+      }
+    },
+    {
+      "scenario_id": "CS-8__dup2",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位搜索过程中发生执行器状态回读错误，导致车位搜索结果失真。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 0,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，description含因果",
+          "B1": "提到执行器回读错误，但未明确具体通道或条件",
+          "B2": "仅‘执行器回读错误→结果失真’，缺中间环节",
+          "B3": "未锚定任何CA/PM/FB，也未提具体反馈类型",
+          "B4": "链接全部UCA且与‘结果失真’逻辑一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定控制回路要素"
+        ],
+        "suggested_revision": "明确执行器回读错误如何影响FB（如CAN回读）及PM信念，并补全决策环节"
+      }
+    },
+    {
+      "scenario_id": "CS-9__dup2",
+      "reviewed_causal_scenario": {
+        "description": "系统未能正确处理APA模式与HMI反馈的不一致信息，导致车位确认失败。",
+        "linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，linked_uca_ids有效，description含因果",
+          "B1": "提到APA模式与HMI反馈，但未说明具体不一致形式",
+          "B2": "仅说‘不一致导致确认失败’，缺中间环节",
+          "B3": "提及HMI反馈（FB-AVP-SS-4），但未说明如何影响PM/CA",
+          "B4": "UCA-3/4与‘确认失败/时机不当’逻辑一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "上下文不够具体",
+          "FB锚定未解释作用机制"
+        ],
+        "suggested_revision": "明确HMI反馈类型（如ACK缺失）、说明如何导致PM错误或CA漏触发，并补全中间决策环节。"
+      }
+    },
+    {
+      "scenario_id": "CS-3__dup3",
+      "reviewed_causal_scenario": {
+        "description": "由于环视摄像头信息延迟，系统错过了最佳车位确认时机，导致错过目标车位。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和基本因果",
+          "B1": "明确环视摄像头信息延迟",
+          "B2": "延迟→错过确认时机→错过车位，链条清晰",
+          "B3": "锚定FB-AVP-SS-2（环视摄像头）并说明其作用",
+          "B4": "UCA-3与‘错过确认时机’一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-10__dup2",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位搜索过程中发生通信丢包，导致车位搜索结果失真。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 0,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，description含因果",
+          "B1": "提到通信丢包但未指明具体通道或上下文",
+          "B2": "仅‘丢包→结果失真’，缺中间环节与决策逻辑",
+          "B3": "未锚定任何CA/PM/FB，未说明如何影响控制回路",
+          "B4": "链接全部UCA且与描述方向一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定控制回路要素"
+        ],
+        "suggested_revision": "明确通信路径（如CAN/ACK）、说明丢包如何导致PM错误或CA误判"
+      }
+    },
+    {
+      "scenario_id": "CS-1__dup3",
+      "reviewed_causal_scenario": {
+        "description": "侧向超声波传感器出现异常回波，导致系统错误地识别车位边界，进而错误确认车位。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确指出侧向超声波异常回波",
+          "B2": "异常回波→误识边界→错误确认车位，链条清晰",
+          "B3": "锚定FB-AVP-SS-1（超声波异常回波）并解释其导致PM/CA错误",
+          "B4": "UCA-1与错误确认车位直接一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-4__dup3",
+      "reviewed_causal_scenario": {
+        "description": "轮速里程计数据丢失，导致系统无法准确判断车辆与车位的相对位置，从而错误确认车位。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "明确轮速里程计数据丢失",
+          "B2": "触发→PM错误→错误确认→UCA",
+          "B3": "锚定FB-AVP-SS-3与PM-AVP-SS-2",
+          "B4": "UCA-1/2均与错误/漏确认相关"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-2__dup3",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头提供的停车线信息不准确，导致系统未能正确确认车位，从而无法完成泊车任务。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，描述含因果",
+          "B1": "明确环视摄像头停车线信息不准确",
+          "B2": "仅‘信息不准→未确认车位’，缺中间环节",
+          "B3": "锚定FB-AVP-SS-2（环视摄像头停车线）",
+          "B4": "UCA-2匹配‘应确认未确认’"
+        },
+        "issues": [
+          "因果链不完整，缺少PM/CA决策环节"
+        ],
+        "suggested_revision": "补充‘因停车线不准→PM-AVP-SS-1错误判断车位占用→违反CA-AVP-SS-2→未确认车位’"
+      }
+    },
+    {
+      "scenario_id": "CS-7__dup3",
+      "reviewed_causal_scenario": {
+        "description": "系统在确认车位时，由于环视摄像头信息不一致，未能正确识别车位尺寸，导致确认错误。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA，描述有基本因果",
+          "B1": "明确提到环视摄像头信息不一致",
+          "B2": "环视异常→尺寸误识→确认错误→UCA-1/2",
+          "B3": "锚定FB-AVP-SS-2（环视）导致PM-AVP-SS-1错误",
+          "B4": "UCA-1/2均与错误/遗漏确认车位一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-6__dup3",
+      "reviewed_causal_scenario": {
+        "description": "系统在确认车位时，由于侧向超声波传感器丢失信息，未能正确识别车位占用情况，导致确认错误。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "明确侧向超声波传感器丢失信息",
+          "B2": "链条：传感器丢信→误判占用→错误确认→UCA-1",
+          "B3": "锚定FB-AVP-SS-1（超声波）并解释其导致PM错误",
+          "B4": "UCA-1与描述完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-5__dup3",
+      "reviewed_causal_scenario": {
+        "description": "APA模式切换过程中，系统未能及时接收到HMI确认反馈，导致车位搜索过程被中断。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效且description含基本因果",
+          "B1": "提到HMI确认反馈但未说明具体通信路径或时序",
+          "B2": "仅描述‘未接收反馈→中断搜索’，缺中间环节如PM/CA如何响应",
+          "B3": "提及HMI反馈但未锚定FB-AVP-SS-4或解释其在回路中作用",
+          "B4": "UCA-4与‘搜索过早终止’一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "FB锚定弱"
+        ],
+        "suggested_revision": "补充HMI反馈丢失如何影响PM-AVP-SS-3及触发CA-AVP-SS-3取消逻辑"
+      }
+    },
+    {
+      "scenario_id": "CS-8__dup3",
+      "reviewed_causal_scenario": {
+        "description": "系统在确认车位时，由于轮速里程计数据异常，未能正确判断车辆是否已越过候选区域，导致确认错误。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "明确轮速里程计异常为上下文",
+          "B2": "链条：里程计异常→误判位置→确认错误→UCA",
+          "B3": "锚定FB-AVP-SS-3（轮速里程计）并影响PM-AVP-SS-2",
+          "B4": "UCA-1/2/3均与确认错误相关"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-9__dup3",
+      "reviewed_causal_scenario": {
+        "description": "系统在确认车位时，由于APA模式切换过程中通信时延，未能及时接收到HMI确认反馈，导致确认超时。",
+        "linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA链接",
+          "B1": "提到APA模式切换和HMI反馈，但未指明通信路径",
+          "B2": "链条清晰：通信时延→未收HMI反馈→确认超时→UCA-3/4",
+          "B3": "提及HMI反馈（FB-AVP-SS-4），但未说明如何影响PM或CA",
+          "B4": "UCA-3/4与确认超时逻辑一致"
+        },
+        "issues": [
+          "B1不足2",
+          "B3未明确锚定CA/PM/FB作用机制"
+        ],
+        "suggested_revision": "明确HMI反馈所属FB编号，并说明其缺失如何导致PM信念错误或CA未触发"
+      }
+    },
+    {
+      "scenario_id": "CS-10__dup3",
+      "reviewed_causal_scenario": {
+        "description": "系统在确认车位时，由于侧向超声波传感器异常回波，未能正确识别车位边界，导致确认错误。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和基本因果",
+          "B1": "明确侧向超声波异常回波",
+          "B2": "缺中间环节（如PM错误或CA误判）",
+          "B3": "锚定FB-AVP-SS-1，解释其导致边界误识",
+          "B4": "UCA-1/2均与错误/漏确认车位一致"
+        },
+        "issues": [
+          "因果链缺少PM或CA环节"
+        ],
+        "suggested_revision": "补充‘系统因异常回波形成错误车位边界信念（PM-AVP-SS-1），导致违反CA-AVP-SS-2而错误确认’"
+      }
+    },
+    {
+      "scenario_id": "CS-1__dup4",
+      "reviewed_causal_scenario": {
+        "description": "侧向超声波传感器出现异常回波，导致系统错误地确认了不可用的车位。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确指出侧向超声波异常回波",
+          "B2": "异常回波→错误确认车位→导致UCA-1，链条清晰",
+          "B3": "锚定FB-AVP-SS-1（超声波异常回波）并解释其导致错误确认",
+          "B4": "linked_uca_ids正确且与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-2__dup4",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头提供的停车线信息不准确，导致系统未能及时确认可用车位。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "明确环视摄像头停车线信息不准确",
+          "B2": "缺中间环节（如PM信念或CA逻辑）",
+          "B3": "锚定FB-AVP-SS-2，解释其导致漏确认",
+          "B4": "UCA-2与描述一致"
+        },
+        "issues": [
+          "因果链缺少中间决策环节"
+        ],
+        "suggested_revision": "补充因停车线错误如何影响PM/CA判断的中间步骤"
+      }
+    },
+    {
+      "scenario_id": "CS-4__dup4",
+      "reviewed_causal_scenario": {
+        "description": "APA模式切换延迟，导致系统未能及时启动车位搜索。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 0,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，UCA-3有效，描述含触发与结果",
+          "B1": "提到APA模式切换延迟，但未说明具体来源",
+          "B2": "仅'延迟→未及时启动'，缺中间环节",
+          "B3": "未锚定任何CA/PM/FB或具体感知通道",
+          "B4": "UCA-3明确对应时机不当"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定控制回路要素"
+        ],
+        "suggested_revision": "补充APA模式切换延迟的具体来源（如HMI反馈FB-AVP-SS-4）及如何影响搜索启动逻辑（CA-AVP-SS-1）"
+      }
+    },
+    {
+      "scenario_id": "CS-3__dup4",
+      "reviewed_causal_scenario": {
+        "description": "轮速里程计数据丢失，导致系统错过了最佳车位确认时机。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA-3，描述有上下文+因果+UCA",
+          "B1": "明确‘轮速里程计数据丢失’为具体FB-AVP-SS-3",
+          "B2": "链条：FB丢失→错过确认时机→UCA-3，覆盖(a)(b)(e)",
+          "B3": "锚定FB-AVP-SS-3，解释其导致PM/CA失效",
+          "B4": "UCA-3与‘错过确认时机’完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-5__dup4",
+      "reviewed_causal_scenario": {
+        "description": "系统在确认车位过程中，由于通信时延导致确认超时，未能及时取消确认。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA，描述有基本因果",
+          "B1": "提到'通信时延'但未指明具体通道或协议",
+          "B2": "链条清晰：时延→确认超时→未取消确认→导致UCA-1/3",
+          "B3": "提及'确认超时'关联CA-AVP-SS-3，但未锚定FB/PM具体项",
+          "B4": "UCA-1和UCA-3均与错误/延迟确认车位一致"
+        },
+        "issues": [
+          "B1未达2",
+          "B3未达2",
+          "总分<9"
+        ],
+        "suggested_revision": "明确通信路径（如CAN/ACK）并关联FB-AVP-SS-4或PM-AVP-SS-3"
+      }
+    },
+    {
+      "scenario_id": "CS-6__dup4",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位搜索过程中，由于传感器数据不一致，导致车位选择结果失真。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，UCA有效，含基本因果",
+          "B1": "提到传感器数据不一致，但未指明类型",
+          "B2": "仅‘数据不一致→结果失真’，缺中间环节",
+          "B3": "泛称传感器，未锚定具体FB/PM/CA",
+          "B4": "UCA-1/4与描述一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定具体反馈或过程模型"
+        ],
+        "suggested_revision": "明确如‘环视摄像头误检停车线+超声波异常回波→PM-AVP-SS-1错误→错误确认车位’"
+      }
+    },
+    {
+      "scenario_id": "CS-7__dup4",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位确认过程中，由于自车位置估计误差，导致确认失败。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，UCA有效，含基本因果",
+          "B1": "提到自车位置估计，但未指明来源",
+          "B2": "仅‘位置误差→确认失败’，缺中间环节",
+          "B3": "隐含PM-AVP-SS-2，但未明确锚定FB/CA",
+          "B4": "UCA-2/3与确认失败/时机不当一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定具体FB/CA/PM",
+          "上下文不够具体"
+        ],
+        "suggested_revision": "明确位置估计依赖的FB（如FB-AVP-SS-3），并说明如何导致PM错误及CA未触发。"
+      }
+    },
+    {
+      "scenario_id": "CS-8__dup4",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位搜索过程中，由于环视摄像头视野受限，导致错过目标车位。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA-3，描述有上下文+因果+UCA",
+          "B1": "明确指出环视摄像头视野受限，具体可检验",
+          "B2": "仅'视野受限→错过车位'，缺中间环节如PM/CA如何失效",
+          "B3": "提到环视摄像头(FB-AVP-SS-2)，但未说明如何影响PM或CA",
+          "B4": "UCA-3与'错过目标车位'一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "FB锚定未解释对决策的影响"
+        ],
+        "suggested_revision": "补充环视受限如何导致PM错误或CA漏触发，形成完整链条"
+      }
+    },
+    {
+      "scenario_id": "CS-10__dup4",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位搜索过程中，由于侧向超声波传感器丢失信息，导致车位选择结果失真。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "明确侧向超声波丢失信息",
+          "B2": "仅提及传感器丢失→结果失真，缺中间决策环节",
+          "B3": "锚定FB-AVP-SS-1（超声波丢失）并影响车位选择",
+          "B4": "UCA-1/4与描述一致"
+        },
+        "issues": [
+          "因果链缺少中间环节（如PM信念错误或CA误判）"
+        ],
+        "suggested_revision": "补充‘因超声波丢失导致PM-AVP-SS-1错误，进而使CA-AVP-SS-2误确认’等中间逻辑"
+      }
+    },
+    {
+      "scenario_id": "CS-2__dup5",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头提供的停车线信息不准确，导致系统未能及时确认可用车位。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "明确环视摄像头与停车线信息",
+          "B2": "缺中间环节（如PM信念或CA逻辑）",
+          "B3": "锚定FB-AVP-SS-2，作用清晰",
+          "B4": "UCA-2与漏确认一致"
+        },
+        "issues": [
+          "因果链缺少中间决策环节"
+        ],
+        "suggested_revision": "补充因停车线不准如何影响PM/CA判断"
+      }
+    },
+    {
+      "scenario_id": "CS-9__dup4",
+      "reviewed_causal_scenario": {
+        "description": "系统在车位确认过程中，由于APA模式切换失败，导致确认失败。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 0,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，description含基本因果",
+          "B1": "提到APA模式切换，但未说明具体触发条件或状态",
+          "B2": "仅'APA切换失败→确认失败'，缺中间环节如反馈/PM/CA",
+          "B3": "未锚定任何CA/PM/FB，也未提具体感知或决策环节",
+          "B4": "UCA-2/UCA-4与'确认失败/搜索终止'逻辑一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定控制回路要素"
+        ],
+        "suggested_revision": "明确APA切换失败如何影响FB输入、PM信念或CA执行，例如：'因HMI未回传APA激活ACK（FB-AVP-SS-4），系统误判模式未激活（PM-AVP-SS-3），导致未触发车位确认（违反CA-AVP-SS-2），引发UCA-2。'"
+      }
+    },
+    {
+      "scenario_id": "CS-1__dup5",
+      "reviewed_causal_scenario": {
+        "description": "侧向超声波传感器出现异常回波，导致系统错误地确认了不可用的车位。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "明确超声波异常回波为上下文",
+          "B2": "异常回波→错误确认车位→导致UCA-1",
+          "B3": "锚定FB-AVP-SS-1，解释其致错作用",
+          "B4": "UCA-1与描述完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-3__dup5",
+      "reviewed_causal_scenario": {
+        "description": "轮速里程计数据延迟，导致系统错过了最佳车位确认时机。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，描述含触发+因果+UCA",
+          "B1": "明确‘轮速里程计数据延迟’为具体上下文",
+          "B2": "链条：(a)轮速延迟 → (b)错过确认时机 → (e)UCA-3",
+          "B3": "锚定FB-AVP-SS-3（轮速里程计），影响车位相对位置判断（PM-AVP-SS-2）",
+          "B4": "UCA-3与‘错过确认时机’完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-4__dup5",
+      "reviewed_causal_scenario": {
+        "description": "APA模式切换过程中出现通信时延，导致车位搜索过程被不恰当地终止。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 0,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA-4，描述有基本因果",
+          "B1": "提到APA模式切换和通信时延，但未指明具体通信路径或反馈类型",
+          "B2": "仅'通信时延→搜索终止'，缺中间环节如PM/CA如何受影响",
+          "B3": "未锚定任何CA/PM/FB，未说明哪类反馈或决策逻辑出错",
+          "B4": "UCA-4明确对应搜索过早终止"
+        },
+        "issues": [
+          "因果链不完整",
+          "未锚定控制回路要素"
+        ],
+        "suggested_revision": "明确通信路径（如CAN/HMI）及如何导致PM信念错误或CA违反"
+      }
+    },
+    {
+      "scenario_id": "CS-7__dup5",
+      "reviewed_causal_scenario": {
+        "description": "轮速里程计与自车位姿估计信息不一致，导致系统误判车辆已越过候选车位。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA，描述有因果",
+          "B1": "明确轮速里程计与位姿估计不一致",
+          "B2": "触发→误判已越过车位→导致UCA-2/4",
+          "B3": "锚定FB-AVP-SS-3，影响PM-AVP-SS-2",
+          "B4": "UCA-2/4与漏确认/过早终止一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-5__dup5",
+      "reviewed_causal_scenario": {
+        "description": "系统未能正确处理侧向超声波传感器丢失的信息，导致车位确认失败。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，description含因果",
+          "B1": "明确提到侧向超声波传感器丢失信息",
+          "B2": "仅'丢失信息→确认失败'，缺中间环节如PM/CA影响",
+          "B3": "锚定FB-AVP-SS-1（超声波丢失），与PM/CA逻辑一致",
+          "B4": "UCA-1/2均与车位确认错误/失败直接相关"
+        },
+        "issues": [
+          "因果链缺少中间环节（如PM信念错误或CA未触发）"
+        ],
+        "suggested_revision": "补充‘因超声波丢失导致PM-AVP-SS-1信念错误，进而CA-AVP-SS-2未满足’等中间逻辑"
+      }
+    },
+    {
+      "scenario_id": "CS-6__dup5",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头提供的邻车轮廓信息不完整，导致系统未能正确评估车位占用情况。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA链接",
+          "B1": "明确环视摄像头邻车轮廓信息不完整",
+          "B2": "缺少中间环节（如PM错误或CA误判）",
+          "B3": "锚定FB-AVP-SS-2，解释其影响占用评估",
+          "B4": "UCA-1/3与车位误评/时机错配一致"
+        },
+        "issues": [
+          "因果链缺中间环节（B2=1）"
+        ],
+        "suggested_revision": "补充因轮廓缺失导致PM-AVP-SS-1错误，进而误触发CA-AVP-SS-2"
+      }
+    },
+    {
+      "scenario_id": "CS-8__dup5",
+      "reviewed_causal_scenario": {
+        "description": "APA模式与HMI反馈不一致，导致系统未能及时确认车位。",
+        "linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，description含因果",
+          "B1": "提到APA模式与HMI反馈，但未说明具体不一致形式",
+          "B2": "仅说'不一致导致未确认'，缺中间环节如PM错误或CA逻辑",
+          "B3": "提及HMI反馈（FB-AVP-SS-4），但未解释如何影响PM/CA",
+          "B4": "UCA-3/4均涉及时机/终止问题，与描述一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "上下文不够具体",
+          "控制回路锚定弱"
+        ],
+        "suggested_revision": "明确HMI反馈类型（如ACK缺失）、说明如何导致PM-AVP-SS-3失效，并链接CA-AVP-SS-3取消逻辑。"
+      }
+    },
+    {
+      "scenario_id": "CS-10__dup5",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头提供的停车线信息与实际不符，导致系统未能正确评估车位几何尺寸。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA链接",
+          "B1": "明确环视摄像头停车线信息不符",
+          "B2": "环视失真→几何误判→错误确认/时机错误→UCA-1/3",
+          "B3": "锚定FB-AVP-SS-2（环视）影响PM-AVP-SS-1（几何信念）",
+          "B4": "UCA-1/3与车位误判/时机错误一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-9__dup5",
+      "reviewed_causal_scenario": {
+        "description": "系统未能正确处理侧向超声波传感器的异常回波，导致车位搜索过程被不恰当地终止。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "manual_expert_review",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 1,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和基本因果描述",
+          "B1": "明确提及侧向超声波异常回波",
+          "B2": "仅说明异常回波→终止搜索，缺中间决策环节",
+          "B3": "锚定FB-AVP-SS-1（超声波异常回波）并关联搜索终止",
+          "B4": "UCA-1/UCA-4与过早终止/错误确认一致"
+        },
+        "issues": [
+          "因果链缺少中间环节（如PM信念错误或CA逻辑误判）"
+        ],
+        "suggested_revision": "补充异常回波如何导致PM错误或CA误判的具体机制"
+      }
+    }
+  ],
+  "expert_semantic_merge": {
+    "review_source": "manual_expert_review",
+    "retained_causal_scenario_items": [
+      {
+        "scenario_id": "CS-1__dup3",
+        "summary": "超声波异常回波致车位误判",
+        "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1|key=超声误检",
+        "merged_linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      {
+        "scenario_id": "CS-3__dup2",
+        "summary": "轮速丢失致位置误判越界",
+        "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=轮速丢包",
+        "merged_linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      {
+        "scenario_id": "CS-3__dup3",
+        "summary": "环视延迟致错过车位确认",
+        "mechanism_signature": "camera|anchors=FB-AVP-FD-4|key=视觉延迟",
+        "merged_linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      {
+        "scenario_id": "CS-4__dup3",
+        "summary": "轮速丢失致相对位置误判",
+        "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=轮速丢包",
+        "merged_linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      {
+        "scenario_id": "CS-7__dup3",
+        "summary": "环视不一致致车位尺寸误判",
+        "mechanism_signature": "camera|anchors=FB-AVP-FD-4|key=视觉冲突",
+        "merged_linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      {
+        "scenario_id": "CS-6__dup3",
+        "summary": "超声丢失致占用状态误判",
+        "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1|key=超声丢信",
+        "merged_linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      {
+        "scenario_id": "CS-8__dup3",
+        "summary": "轮速异常致候选区误判",
+        "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=轮速异常",
+        "merged_linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      {
+        "scenario_id": "CS-7__dup5",
+        "summary": "轮速与位姿不一致致越界误判",
+        "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=数据冲突",
+        "merged_linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      {
+        "scenario_id": "CS-10__dup5",
+        "summary": "停车线不符致几何评估错误",
+        "mechanism_signature": "camera|anchors=FB-AVP-FD-4|key=标线失真",
+        "merged_linked_uca_ids": [
+          "UCA-1",
+          "UCA-3"
+        ]
+      }
+    ],
+    "merged_duplicate_items": [
+      {
+        "removed_scenario_id": "CS-1",
+        "kept_scenario_id": "CS-1__dup3",
+        "reason": "context_inclusion"
+      },
+      {
+        "removed_scenario_id": "CS-1__dup2",
+        "kept_scenario_id": "CS-1__dup3",
+        "reason": "context_inclusion"
+      },
+      {
+        "removed_scenario_id": "CS-1__dup4",
+        "kept_scenario_id": "CS-1__dup3",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_scenario_id": "CS-1__dup5",
+        "kept_scenario_id": "CS-1__dup3",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_scenario_id": "CS-3",
+        "kept_scenario_id": "CS-3__dup2",
+        "reason": "context_inclusion"
+      },
+      {
+        "removed_scenario_id": "CS-3__dup4",
+        "kept_scenario_id": "CS-3__dup3",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_scenario_id": "CS-3__dup5",
+        "kept_scenario_id": "CS-3__dup3",
+        "reason": "semantic_equivalent"
+      }
+    ],
+    "kept_count": 9
+  }
+}

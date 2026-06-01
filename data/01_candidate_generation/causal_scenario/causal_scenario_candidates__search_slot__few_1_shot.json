@@ -1,0 +1,525 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_causal_scenario_generation",
+  "task_type": "causal_scenario",
+  "action_key": "search_slot",
+  "action_name_cn": "搜索车位",
+  "action_name_en": "Parking-slot search",
+  "generation_method": "few_1_shot",
+  "generation_method_label": "FS-1",
+  "source_result_file": "scenario_few_1_shot_search_slot_20260407_110136.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 50,
+    "target_items_per_run": 10
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-SS-01",
+      "description": "【侧向超声波异常回波】侧向超声波传感器检测到异常回波(FB-AVP-SS-1)，导致系统误判车位边界。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错误确认并选择危险区域作为车位，形成UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-SS-02",
+      "description": "【环视摄像头遮挡】环视摄像头被异物遮挡(FB-AVP-SS-2)，无法提供停车线与邻车轮廓信息。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统未能确认可用车位，导致任务中断，形成UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-SS-03",
+      "description": "【轮速里程计误差】轮速里程计出现较大误差(FB-AVP-SS-3)，导致系统误判车辆与车位的相对位置。自车相对车位位置与已越过距离信念(PM-AVP-SS-2)被污染，系统错过目标车位，形成UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-SS-04",
+      "description": "【APA模式切换延迟】APA模式切换延迟(FB-AVP-SS-4)，导致系统未能及时启动车位搜索。搜索过程持续时间不当或过早终止，车位选择结果失真，形成UCA-4。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-SS-05",
+      "description": "【超声波丢失信息】侧向超声波传感器丢失信息(FB-AVP-SS-1)，导致系统无法准确识别车位边界。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错误确认并选择危险区域作为车位，形成UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-SS-06",
+      "description": "【环视摄像头故障】环视摄像头故障(FB-AVP-SS-2)，无法提供停车线与邻车轮廓信息。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统未能确认可用车位，导致任务中断，形成UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-SS-07",
+      "description": "【轮速里程计复位】轮速里程计复位(FB-AVP-SS-3)，导致系统误判车辆与车位的相对位置。自车相对车位位置与已越过距离信念(PM-AVP-SS-2)被污染，系统错过目标车位，形成UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-SS-08",
+      "description": "【HMI反馈延迟】HMI反馈延迟(FB-AVP-SS-4)，导致系统未能及时确认APA模式。搜索过程持续时间不当或过早终止，车位选择结果失真，形成UCA-4。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-SS-09",
+      "description": "【超声波异常回波与环视摄像头遮挡】侧向超声波传感器检测到异常回波(FB-AVP-SS-1)且环视摄像头被异物遮挡(FB-AVP-SS-2)，导致系统无法准确识别车位边界和占用情况。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错误确认并选择危险区域作为车位，形成UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-SS-10",
+      "description": "【轮速里程计误差与APA模式切换延迟】轮速里程计出现较大误差(FB-AVP-SS-3)且APA模式切换延迟(FB-AVP-SS-4)，导致系统误判车辆与车位的相对位置且搜索过程持续时间不当。自车相对车位位置与已越过距离信念(PM-AVP-SS-2)被污染，系统错过目标车位且车位选择结果失真，形成UCA-3和UCA-4。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-SS-01",
+      "description": "【侧向超声波异常回波】侧向超声波传感器检测到异常回波(FB-AVP-SS-1)，导致系统误判车位边界。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错误确认并选择危险区域作为车位，形成UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-SS-02",
+      "description": "【环视摄像头遮挡】环视摄像头视野被临时遮挡(FB-AVP-SS-2)，导致系统未能及时识别停车线和邻车轮廓。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统未能确认可用车位，形成UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-SS-03",
+      "description": "【轮速里程计误差】轮速里程计出现较大误差(FB-AVP-SS-3)，导致系统错误估计车辆与车位的相对位置。自车相对车位位置与已越过距离信念(PM-AVP-SS-2)被污染，系统错过目标车位，形成UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-SS-04",
+      "description": "【APA模式切换延迟】APA模式切换延迟(FB-AVP-SS-4)，导致系统未能及时启动车位搜索。候选车位确认置信度与搜索状态信念(PM-AVP-SS-3)被污染，系统错过最佳搜索时机，形成UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-SS-05",
+      "description": "【超声波丢失信息】侧向超声波传感器丢失信息(FB-AVP-SS-1)，导致系统未能完整识别车位边界。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错误确认并选择危险区域作为车位，形成UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-SS-06",
+      "description": "【环视摄像头故障】环视摄像头故障(FB-AVP-SS-2)，导致系统未能识别停车线和邻车轮廓。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统未能确认可用车位，形成UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-SS-07",
+      "description": "【轮速里程计复位】轮速里程计复位(FB-AVP-SS-3)，导致系统错误估计车辆与车位的相对位置。自车相对车位位置与已越过距离信念(PM-AVP-SS-2)被污染，系统错过目标车位，形成UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-SS-08",
+      "description": "【APA模式切换失败】APA模式切换失败(FB-AVP-SS-4)，导致系统未能启动车位搜索。候选车位确认置信度与搜索状态信念(PM-AVP-SS-3)被污染，系统错过最佳搜索时机，形成UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-SS-09",
+      "description": "【超声波传感器干扰】侧向超声波传感器受到干扰(FB-AVP-SS-1)，导致系统误判车位边界。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错误确认并选择危险区域作为车位，形成UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-SS-10",
+      "description": "【环视摄像头视角受限】环视摄像头视角受限(FB-AVP-SS-2)，导致系统未能识别停车线和邻车轮廓。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统未能确认可用车位，形成UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-SS-01",
+      "description": "【侧向超声波异常回波】侧向超声波传感器检测到异常回波(FB-AVP-SS-1)，导致系统误判车位边界。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错误确认并选择危险区域作为车位，触发UCA-1。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-SS-02",
+      "description": "【环视摄像头遮挡】环视摄像头视野被临时遮挡(FB-AVP-SS-2)，导致系统未能及时识别停车线和邻车轮廓。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统未能确认可用车位，触发UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-SS-03",
+      "description": "【轮速里程计误差】轮速里程计数据出现较大误差(FB-AVP-SS-3)，导致系统误判车辆与车位的相对位置。自车相对车位位置与已越过距离信念(PM-AVP-SS-2)被污染，系统错过目标车位，触发UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-SS-04",
+      "description": "【APA模式切换延迟】APA模式切换延迟(FB-AVP-SS-4)，导致系统未能及时启动车位搜索。候选车位确认置信度与搜索状态信念(PM-AVP-SS-3)被污染，系统错过最佳搜索时机，触发UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-SS-05",
+      "description": "【超声波丢失信息】侧向超声波传感器丢失信息(FB-AVP-SS-1)，导致系统未能准确识别车位边界。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统未能确认可用车位，触发UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-SS-06",
+      "description": "【环视摄像头故障】环视摄像头故障(FB-AVP-SS-2)，导致系统无法获取停车线和邻车轮廓信息。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统未能确认可用车位，触发UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-SS-07",
+      "description": "【轮速里程计数据不一致】轮速里程计数据与其他传感器数据不一致(FB-AVP-SS-3)，导致系统误判车辆与车位的相对位置。自车相对车位位置与已越过距离信念(PM-AVP-SS-2)被污染，系统错过目标车位，触发UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-SS-08",
+      "description": "【APA模式切换失败】APA模式切换失败(FB-AVP-SS-4)，导致系统未能启动车位搜索。候选车位确认置信度与搜索状态信念(PM-AVP-SS-3)被污染，系统未能确认可用车位，触发UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-SS-09",
+      "description": "【超声波数据延迟】侧向超声波数据传输延迟(FB-AVP-SS-1)，导致系统未能及时更新车位边界信息。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错过目标车位，触发UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-SS-10",
+      "description": "【环视摄像头数据延迟】环视摄像头数据传输延迟(FB-AVP-SS-2)，导致系统未能及时更新停车线和邻车轮廓信息。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错过目标车位，触发UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-SS-01",
+      "description": "【侧向超声波异常回波】侧向超声波传感器在检测过程中遇到异常回波(FB-AVP-SS-1)，导致车位几何与占用状态信念(PM-AVP-SS-1)被污染。系统错误地确认了一个危险区域为可用车位，违反了几何尺寸与可通行空间约束(CA-AVP-SS-2)，导致后续泊车进入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-SS-02",
+      "description": "【环视摄像头信息缺失】环视摄像头在检测过程中丢失关键停车线信息(FB-AVP-SS-2)，导致车位几何与占用状态信念(PM-AVP-SS-1)不完整。系统未能正确确认车位，导致无法完成泊车或任务中断。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-SS-03",
+      "description": "【轮速里程计误差】轮速里程计在检测过程中出现较大误差(FB-AVP-SS-3)，导致自车相对车位位置与已越过距离信念(PM-AVP-SS-2)不准确。系统错误地错过了目标车位或晚确认，影响泊车任务的顺利进行。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-SS-04",
+      "description": "【APA模式切换延迟】APA模式切换延迟导致系统未能及时接收到APA激活状态(FB-AVP-SS-4)，导致车位搜索时机不当，错过目标车位或晚确认。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-SS-05",
+      "description": "【超声波距离测量误差】侧向超声波传感器在检测过程中出现距离测量误差(FB-AVP-SS-1)，导致车位几何与占用状态信念(PM-AVP-SS-1)不准确。系统错误地确认了一个危险区域为可用车位，违反了几何尺寸与可通行空间约束(CA-AVP-SS-2)，导致后续泊车进入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-SS-06",
+      "description": "【环视摄像头遮挡】环视摄像头在检测过程中被遮挡(FB-AVP-SS-2)，导致车位几何与占用状态信念(PM-AVP-SS-1)不准确。系统未能正确确认车位，导致无法完成泊车或任务中断。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-SS-07",
+      "description": "【轮速里程计丢包】轮速里程计在检测过程中出现数据丢包(FB-AVP-SS-3)，导致自车相对车位位置与已越过距离信念(PM-AVP-SS-2)不准确。系统错误地错过了目标车位或晚确认，影响泊车任务的顺利进行。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-SS-08",
+      "description": "【HMI反馈延迟】HMI反馈延迟导致系统未能及时接收到确认信号(FB-AVP-SS-4)，导致车位搜索时机不当，错过目标车位或晚确认。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-SS-09",
+      "description": "【搜索过程提前终止】系统在搜索过程中因异常条件提前终止搜索(CA-AVP-SS-3)，导致车位选择结果失真，未能找到合适的车位。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-SS-10",
+      "description": "【确认置信度误判】系统在确认车位时因证据不一致或确认超时(CA-AVP-SS-3)，导致车位确认置信度与搜索状态信念(PM-AVP-SS-3)被误判，未能正确确认车位，导致无法完成泊车或任务中断。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-SS-01",
+      "description": "【侧向超声波异常回波】侧向超声波传感器检测到异常回波(FB-AVP-SS-1)，导致系统误判车位边界，车位几何与占用状态信念(PM-AVP-SS-1)被污染。系统错误确认或选择车位，导致后续泊车进入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-SS-02",
+      "description": "【环视摄像头信息缺失】环视摄像头因强光反射丢失部分停车线信息(FB-AVP-SS-2)，导致系统无法正确识别车位边界。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统应确认可用车位时未确认，导致无法完成泊车或任务中断。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-SS-03",
+      "description": "【轮速里程计误差】轮速里程计因路面湿滑产生较大误差(FB-AVP-SS-3)，导致系统误判车辆与候选车位的相对位置。自车相对车位位置与已越过距离信念(PM-AVP-SS-2)被污染，车位搜索或确认时机不当，导致错过目标车位或晚确认。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-SS-04",
+      "description": "【APA模式切换延迟】APA模式切换延迟导致系统未能及时接收到APA激活状态(FB-AVP-SS-4)，车位搜索启动时机不当。系统未能在合适时机启动搜索，导致车位选择结果失真。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-SS-05",
+      "description": "【超声波传感器丢失信息】侧向超声波传感器因遮挡丢失关键距离信息(FB-AVP-SS-1)，导致系统误判车位尺寸。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错误确认或选择车位，导致后续泊车进入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-SS-06",
+      "description": "【环视摄像头信息不一致】环视摄像头因角度问题提供不一致的停车线信息(FB-AVP-SS-2)，导致系统无法正确识别车位边界。车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统应确认可用车位时未确认，导致无法完成泊车或任务中断。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-SS-07",
+      "description": "【轮速里程计数据延迟】轮速里程计数据传输延迟导致系统未能及时更新车辆位置信息(FB-AVP-SS-3)，自车相对车位位置与已越过距离信念(PM-AVP-SS-2)被污染，车位搜索或确认时机不当，导致错过目标车位或晚确认。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-SS-08",
+      "description": "【APA模式反馈错误】APA模式反馈错误导致系统未能正确识别APA激活状态(FB-AVP-SS-4)，车位搜索启动时机不当。系统未能在合适时机启动搜索，导致车位选择结果失真。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-SS-09",
+      "description": "【超声波传感器故障】侧向超声波传感器故障导致系统无法获取关键距离信息(FB-AVP-SS-1)，车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统错误确认或选择车位，导致后续泊车进入危险区域。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-SS-10",
+      "description": "【环视摄像头遮挡】环视摄像头因遮挡丢失关键停车线信息(FB-AVP-SS-2)，车位几何与占用状态信念(PM-AVP-SS-1)被污染，系统应确认可用车位时未确认，导致无法完成泊车或任务中断。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,627 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_uca_generation",
+  "task_type": "UCA",
+  "action_key": "lateral_control",
+  "action_name_cn": "横向控制",
+  "action_name_en": "Lateral control",
+  "generation_method": "zero_shot",
+  "generation_method_label": "ZS",
+  "source_result_file": "avp_uca_zero_shot_lateral_control_20260406_000933.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 55,
+    "target_items_per_run": 10
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "parsed",
+      "schema_status": "invalid",
+      "generated_item_count": 11,
+      "target_item_count": 10,
+      "count_ok": false,
+      "constraint_ok": false
+    },
+    {
+      "iteration": 2,
+      "parse_status": "parsed",
+      "schema_status": "invalid",
+      "generated_item_count": 11,
+      "target_item_count": 10,
+      "count_ok": false,
+      "constraint_ok": false
+    },
+    {
+      "iteration": 3,
+      "parse_status": "parsed",
+      "schema_status": "invalid",
+      "generated_item_count": 11,
+      "target_item_count": 10,
+      "count_ok": false,
+      "constraint_ok": false
+    },
+    {
+      "iteration": 4,
+      "parse_status": "parsed",
+      "schema_status": "invalid",
+      "generated_item_count": 11,
+      "target_item_count": 10,
+      "count_ok": false,
+      "constraint_ok": false
+    },
+    {
+      "iteration": 5,
+      "parse_status": "parsed",
+      "schema_status": "invalid",
+      "generated_item_count": 11,
+      "target_item_count": 10,
+      "count_ok": false,
+      "constraint_ok": false
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统提供过度转向指令，导致车辆失控撞向障碍物",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统提供转向指令时计算错误，导致车辆偏离预定路径撞向其他车辆",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统提供转向指令时考虑不周，导致车辆越过停车边界",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统未能及时提供转向指令，导致车辆无法避开前方障碍物",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统未能提供必要的转向修正指令，导致车辆偏离预定路径",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统未能提供转向指令以调整车辆进入停车位的角度，导致车辆无法正确停入车位",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统过早提供转向指令，导致车辆提前偏离预定路径",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统延迟提供转向指令，导致车辆未能及时避开障碍物",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统在错误的时间点提供转向指令，导致车辆出现不必要的急停或急动",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统转向指令持续时间过短，导致车辆未能完全调整方向",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统转向指令持续时间过长，导致车辆过度转向并撞向障碍物",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统提供过度转向指令，导致车辆偏离预定路径并撞上障碍物",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统提供转向指令时计算错误，导致车辆驶出停车区域",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统提供转向指令时过于激进，导致车辆出现非预期运动",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统未能及时提供转向指令以避免前方障碍物",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统未能提供必要的转向指令以保持车辆在停车区域内",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统未能提供转向指令以纠正车辆偏移，导致车辆无法完成泊车任务",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统提前提供转向指令，导致车辆在不适当的位置转向",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统延迟提供转向指令，导致车辆错过最佳转向时机",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统在错误的时间提供转向指令，导致车辆出现非预期运动",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统转向指令持续时间过短，导致车辆未能完全进入停车位",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统转向指令持续时间过长，导致车辆越过停车边界",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统发出错误的转向指令，导致车辆偏离预定路径，撞上障碍物或行人",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统发出过度转向指令，导致车辆失控撞上其他车辆或障碍物",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统发出转向指令时，未考虑当前环境中的动态障碍物，导致碰撞",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统未能及时提供转向指令，导致车辆偏离预定路径，撞上障碍物或行人",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统未能提供必要的转向指令以避免碰撞，导致车辆与障碍物或行人相撞",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统未能提供转向指令以保持车辆在目标停车区域内，导致车辆越界",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统提前提供转向指令，导致车辆在不适当的时间改变方向，增加碰撞风险",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统延迟提供转向指令，导致车辆错过最佳转向时机，增加碰撞风险",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统在不适当的顺序下提供转向指令，导致车辆执行错误轨迹",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统过早停止转向指令，导致车辆未能完全进入停车位",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统持续提供转向指令时间过长，导致车辆超出预定停车区域",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统提供过度转向指令，导致车辆失控。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统提供转向指令时，未考虑周围障碍物，导致碰撞。",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统提供转向指令时，未及时调整速度，导致车辆越过停车边界。",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统未能提供必要的转向指令，导致车辆偏离预定路径。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统未能提供转向指令以避免障碍物，导致碰撞。",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统未能提供转向指令以保持车辆在停车区域内。",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统过早提供转向指令，导致车辆提前偏离预定路径。",
+      "linked_hazard_ids": [
+        "H-AVP-1",
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统过晚提供转向指令，导致车辆越过停车边界。",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统在错误的时间提供转向指令，导致车辆出现非预期运动。",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统转向指令持续时间过短，导致车辆未能完全进入停车位。",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统转向指令持续时间过长，导致车辆越过停车边界。",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统提供过度转向指令，导致车辆偏离预定路径并撞上障碍物",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统提供转向指令时计算错误，导致车辆越过停车边界",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统提供转向指令时过于激进，导致车辆出现非预期运动",
+      "linked_hazard_ids": [
+        "H-AVP-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统未能及时提供转向指令以避免前方障碍物",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统未能提供必要的转向指令以保持车辆在车道内",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "not_provided_causing_hazard",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统未能提供转向指令以调整车辆至安全位置",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统提前提供转向指令，导致车辆在不适当的位置转向",
+      "linked_hazard_ids": [
+        "H-AVP-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统延迟提供转向指令，导致车辆错过最佳转向时机",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "wrong_timing_or_order",
+      "item_index_in_category": 3,
+      "uca_id": null,
+      "description": "AVP系统在错误的时间提供转向指令，导致车辆无法完成自动泊车任务",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 1,
+      "uca_id": null,
+      "description": "AVP系统转向指令持续时间过短，导致车辆未能完全进入停车位",
+      "linked_hazard_ids": [
+        "H-AVP-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "category": "stopped_too_soon_or_applied_too_long",
+      "item_index_in_category": 2,
+      "uca_id": null,
+      "description": "AVP系统转向指令持续时间过长，导致车辆超出停车位边界",
+      "linked_hazard_ids": [
+        "H-AVP-2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,522 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_causal_scenario_generation",
+  "task_type": "causal_scenario",
+  "action_key": "emergency_brake",
+  "action_name_cn": "紧急制动",
+  "action_name_en": "Emergency braking",
+  "generation_method": "few_1_shot",
+  "generation_method_label": "FS-1",
+  "source_result_file": "scenario_few_1_shot_emergency_brake_20260407_111409.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 50,
+    "target_items_per_run": 10
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": 10,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-EB-01",
+      "description": "【障碍物感知误报】超声波传感器因环境噪声误报近距障碍物(FB-AVP-EB-1)，导致系统错误判断碰撞风险(PM-AVP-EB-1)。紧急制动指令(CA-AVP-EB-1)被不必要地触发，造成非预期急停(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-EB-02",
+      "description": "【障碍物感知漏报】视觉传感器因光照条件不佳漏报近距障碍物(FB-AVP-EB-1)，导致系统未能及时判断碰撞风险(PM-AVP-EB-1)。紧急制动指令(CA-AVP-EB-1)未被触发，导致潜在碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-EB-03",
+      "description": "【制动执行确认延迟】制动执行器ACK反馈(FB-AVP-EB-3)因通信延迟未及时到达，导致系统错误地认为制动未建立(PM-AVP-EB-3)。系统持续提供紧急制动指令(CA-AVP-EB-2)，导致过长制动(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-EB-04",
+      "description": "【制动执行失败】制动执行器故障未及时反馈(FB-AVP-EB-3)，导致系统错误地认为制动已建立(PM-AVP-EB-3)。系统未进入安全停靠/告警模式(CA-AVP-EB-3)，导致制动失效(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-EB-05",
+      "description": "【CAN通信丢包】CAN总线丢包(FB-AVP-EB-4)导致制动指令未及时传递至执行器，制动指令延迟执行。系统错误地认为制动已建立(PM-AVP-EB-3)，导致过晚制动(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-EB-06",
+      "description": "【轮速反馈异常】轮速传感器故障(FB-AVP-EB-2)导致系统错误估计车辆速度(PM-AVP-EB-2)。系统提前解除制动(CA-AVP-EB-2)，导致过早制动解除(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-EB-07",
+      "description": "【IMU反馈异常】IMU反馈异常(FB-AVP-EB-2)导致系统错误估计车辆减速度(PM-AVP-EB-2)。系统持续提供紧急制动指令(CA-AVP-EB-2)，导致过长制动(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-EB-08",
+      "description": "【制动压力反馈异常】制动压力传感器故障(FB-AVP-EB-3)导致系统错误估计制动力(PM-AVP-EB-3)。系统未进入安全停靠/告警模式(CA-AVP-EB-3)，导致制动失效(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-EB-09",
+      "description": "【障碍物距离误判】超声波传感器因干扰误判障碍物距离(FB-AVP-EB-1)，导致系统错误判断碰撞风险(PM-AVP-EB-1)。紧急制动指令(CA-AVP-EB-1)被不必要地触发，造成非预期急停(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-EB-10",
+      "description": "【制动解除时机不当】系统错误估计车辆速度(PM-AVP-EB-2)导致制动解除时机不当(CA-AVP-EB-2)。系统过早解除制动，导致过早制动解除(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-EB-01",
+      "description": "【障碍物感知误报】超声波传感器因环境噪声误报近距障碍物(FB-AVP-EB-1)，导致系统错误判断碰撞风险(PM-AVP-EB-1)。检测到即将碰撞时，系统不必要地提供紧急制动(CA-AVP-EB-1)，造成非预期急停(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-EB-02",
+      "description": "【障碍物感知漏报】视觉传感器在低光照条件下漏报近距障碍物(FB-AVP-EB-1)，导致系统未能及时判断碰撞风险(PM-AVP-EB-1)。系统应提供紧急制动时未提供(CA-AVP-EB-1)，导致碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-EB-03",
+      "description": "【制动执行确认延迟】制动执行器响应延迟，制动压力反馈(FB-AVP-EB-3)滞后，导致系统未能及时确认制动建立成功(PM-AVP-EB-3)。系统应保持制动状态时未保持(CA-AVP-EB-2)，导致次生风险(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-EB-04",
+      "description": "【制动执行器故障】制动执行器出现故障，制动压力反馈(FB-AVP-EB-3)异常，导致系统未能正确判断制动力建立成功(PM-AVP-EB-3)。系统应进入安全停靠/告警模式时未进入(CA-AVP-EB-3)，导致碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-EB-05",
+      "description": "【CAN通信延迟】CAN总线通信延迟(FB-AVP-EB-4)，导致制动指令传输滞后，系统未能及时触发紧急制动(CA-AVP-EB-1)。紧急制动触发时机不当，导致过晚制动(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-EB-06",
+      "description": "【轮速与减速度反馈异常】轮速与减速度传感器故障，反馈数据异常(FB-AVP-EB-2)，导致系统错误估计车辆速度与制动能力(PM-AVP-EB-2)。系统应保持制动状态时未保持(CA-AVP-EB-2)，导致次生风险(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-EB-07",
+      "description": "【制动指令执行失败】制动执行器未响应制动指令，制动压力反馈(FB-AVP-EB-3)显示未建立制动压力，导致系统未能正确判断制动力建立成功(PM-AVP-EB-3)。系统应进入安全停靠/告警模式时未进入(CA-AVP-EB-3)，导致碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-EB-08",
+      "description": "【制动解除时机不当】系统错误估计车辆速度与制动能力(PM-AVP-EB-2)，导致制动解除时机不当(CA-AVP-EB-2)。紧急制动解除或持续时间不当，导致次生风险(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-EB-09",
+      "description": "【制动指令执行确认滞后】制动执行器响应滞后，制动压力反馈(FB-AVP-EB-3)滞后，导致系统未能及时确认制动建立成功(PM-AVP-EB-3)。紧急制动触发时机不当，导致过早制动(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-EB-10",
+      "description": "【CAN通信丢包】CAN总线通信丢包(FB-AVP-EB-4)，导致制动指令传输中断，系统未能及时触发紧急制动(CA-AVP-EB-1)。紧急制动触发时机不当，导致过晚制动(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-EB-01",
+      "description": "【障碍物感知误报】超声波传感器因环境噪声误报近距障碍物(FB-AVP-EB-1)，导致AVP系统错误判断碰撞风险(PM-AVP-EB-1)。紧急制动指令(CA-AVP-EB-1)被不必要地触发，造成非预期急停(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-EB-02",
+      "description": "【障碍物感知漏报】视觉传感器因光照条件不佳漏报实际存在的障碍物(FB-AVP-EB-1)，导致AVP系统未能及时判断碰撞风险(PM-AVP-EB-1)。紧急制动指令(CA-AVP-EB-1)未被触发，导致潜在碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-EB-03",
+      "description": "【制动执行确认延迟】制动执行器响应延迟，制动压力反馈(FB-AVP-EB-3)延迟到达AVP系统，导致系统未能及时确认制动建立(PM-AVP-EB-3)。紧急制动指令(CA-AVP-EB-1)未被及时确认，导致潜在碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-EB-04",
+      "description": "【制动执行器故障】制动执行器出现故障，制动压力反馈(FB-AVP-EB-3)显示异常，AVP系统未能正确判断制动力建立情况(PM-AVP-EB-3)。紧急制动指令(CA-AVP-EB-1)未被确认，系统未进入安全停靠/告警模式(CA-AVP-EB-3)，导致潜在碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-EB-05",
+      "description": "【CAN通信延迟】CAN总线通信延迟(FB-AVP-EB-4)，导致制动指令传输延迟，制动执行器未能及时响应。AVP系统未能及时确认制动建立(PM-AVP-EB-3)，紧急制动指令(CA-AVP-EB-1)未被确认，导致潜在碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-EB-06",
+      "description": "【制动解除时机不当】AVP系统在风险解除前过早解除制动指令(CA-AVP-EB-2)，导致车辆未能完全停止，可能引发次生风险(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-EB-07",
+      "description": "【制动持续时间不当】AVP系统在车辆完全停止后过晚解除制动指令(CA-AVP-EB-2)，导致制动持续时间过长，影响停车效率(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-EB-08",
+      "description": "【制动触发时机不当】AVP系统在碰撞时间高于阈值时提前触发紧急制动指令(CA-AVP-EB-1)，导致不必要的急停(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-EB-09",
+      "description": "【制动触发时机不当】AVP系统在碰撞时间低于阈值时延迟触发紧急制动指令(CA-AVP-EB-1)，导致潜在碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-EB-10",
+      "description": "【制动解除时机不当】AVP系统在风险解除后过晚解除制动指令(CA-AVP-EB-2)，导致制动持续时间过长，影响停车效率(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-EB-01",
+      "description": "【障碍物感知误报】超声波传感器因环境噪声误报近距障碍物(FB-AVP-EB-1)，导致系统错误判断碰撞风险(PM-AVP-EB-1)。检测到即将碰撞时(CA-AVP-EB-1)，系统不必要地提供紧急制动，造成非预期急停(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-EB-02",
+      "description": "【障碍物感知漏报】视觉传感器因光照条件不佳漏报近距障碍物(FB-AVP-EB-1)，导致系统未能及时判断碰撞风险(PM-AVP-EB-1)。系统应提供紧急制动时(CA-AVP-EB-1)未提供，导致碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-EB-03",
+      "description": "【制动指令执行延迟】制动执行器因通信延迟(FB-AVP-EB-4)未及时响应紧急制动指令，导致制动触发时机过晚(CA-AVP-EB-1)。系统未能及时制动，导致碰撞风险(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-EB-04",
+      "description": "【制动指令执行失败】制动执行器因故障未建立预期制动力(FB-AVP-EB-3)，系统未能确认制动执行(CA-AVP-EB-3)。系统应提供紧急制动时未提供，导致碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-EB-05",
+      "description": "【制动解除时机不当】系统在风险解除前过早解除制动(CA-AVP-EB-2)，导致车辆未能完全停止。系统解除制动时机不当，导致次生风险(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-EB-06",
+      "description": "【制动持续时间不当】系统在车辆完全停止后仍持续制动(CA-AVP-EB-2)，导致制动持续时间过长。系统持续制动时间不当，导致次生风险(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-EB-07",
+      "description": "【自车速度估计误差】系统因IMU反馈误差(FB-AVP-EB-2)低估自车速度，导致系统错误估计可停止能力(PM-AVP-EB-2)。系统应提供紧急制动时未提供，导致碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-EB-08",
+      "description": "【制动压力反馈异常】制动压力传感器故障导致反馈异常(FB-AVP-EB-3)，系统未能确认制动执行(CA-AVP-EB-3)。系统应提供紧急制动时未提供，导致碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-EB-09",
+      "description": "【制动解除时机过早】系统因轮速反馈误差(FB-AVP-EB-2)过早判断车辆已停止，导致制动解除时机过早(CA-AVP-EB-2)。系统解除制动时机不当，导致次生风险(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-EB-10",
+      "description": "【制动持续时间过短】系统因CAN通信丢包(FB-AVP-EB-4)未能及时接收制动解除指令，导致制动持续时间过短(CA-AVP-EB-2)。系统持续制动时间不当，导致次生风险(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-EB-01",
+      "description": "【障碍物感知误报】超声波传感器因环境噪声误报近距障碍物(FB-AVP-EB-1)，导致系统错误判断碰撞风险(PM-AVP-EB-1)。检测到即将碰撞时(CA-AVP-EB-1)，系统不必要地提供紧急制动指令，造成非预期急停(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-EB-02",
+      "description": "【障碍物感知漏报】视觉传感器因光照条件不佳漏报实际存在的障碍物(FB-AVP-EB-1)，导致系统未能正确判断碰撞风险(PM-AVP-EB-1)。系统未能及时提供紧急制动指令(CA-AVP-EB-1)，导致碰撞风险(UCA-2)。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-EB-03",
+      "description": "【制动指令延迟】CAN总线通信延迟(FB-AVP-EB-4)导致制动指令传输延迟，系统未能及时触发紧急制动(CA-AVP-EB-1)。这导致紧急制动触发时机不当(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-EB-04",
+      "description": "【制动执行未确认】制动执行器故障导致制动压力反馈异常(FB-AVP-EB-3)，系统未能确认制动指令执行成功(PM-AVP-EB-3)。系统未能进入安全停靠/告警模式(CA-AVP-EB-3)，导致次生风险(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-EB-05",
+      "description": "【自车速度估计误差】IMU反馈轮速与实际不符(FB-AVP-EB-2)，导致系统错误估计自车速度(PM-AVP-EB-2)。系统未能正确判断是否需要紧急制动(CA-AVP-EB-1)，导致紧急制动触发时机不当(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-EB-06",
+      "description": "【制动解除过早】系统未能正确判断风险解除状态(FB-AVP-EB-2)，导致提前解除制动(CA-AVP-EB-2)。这导致紧急制动解除时机不当(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-EB-07",
+      "description": "【制动持续时间不当】系统未能正确估计剩余停车距离(PM-AVP-EB-2)，导致制动持续时间过长或过短(CA-AVP-EB-2)。这导致紧急制动持续时间不当(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-EB-08",
+      "description": "【制动执行器故障】制动执行器故障导致制动压力异常(FB-AVP-EB-3)，系统未能确认制动指令执行成功(PM-AVP-EB-3)。系统未能进入安全停靠/告警模式(CA-AVP-EB-3)，导致次生风险(UCA-4)。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-EB-09",
+      "description": "【障碍物距离误判】超声波传感器因干扰误判障碍物距离(FB-AVP-EB-1)，导致系统错误判断碰撞风险(PM-AVP-EB-1)。系统不必要地提供紧急制动指令(CA-AVP-EB-1)，造成非预期急停(UCA-1)。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-EB-10",
+      "description": "【制动指令丢失】CAN总线丢包(FB-AVP-EB-4)导致制动指令丢失，系统未能及时触发紧急制动(CA-AVP-EB-1)。这导致紧急制动触发时机不当(UCA-3)。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    }
+  ]
+}

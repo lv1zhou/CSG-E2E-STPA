@@ -1,0 +1,510 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded."
+  },
+  "public_file_role": "initial_candidate_generation_result",
+  "task_stage": "candidate_causal_scenario_generation",
+  "task_type": "causal_scenario",
+  "action_key": "emergency_brake",
+  "action_name_cn": "紧急制动",
+  "action_name_en": "Emergency braking",
+  "generation_method": "lora",
+  "generation_method_label": "SFT",
+  "source_result_file": "scenario_lora_emergency_brake_20260407_112138.json",
+  "generation_summary": {
+    "run_count": 5,
+    "total_generated_items": 48,
+    "target_items_per_run": null
+  },
+  "generation_runs": [
+    {
+      "iteration": 1,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 2,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 8,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 3,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 4,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    },
+    {
+      "iteration": 5,
+      "parse_status": "not_parsed",
+      "schema_status": "valid",
+      "generated_item_count": 10,
+      "target_item_count": null,
+      "count_ok": true,
+      "constraint_ok": true
+    }
+  ],
+  "candidate_items": [
+    {
+      "iteration": 1,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-EB-1",
+      "description": "【反馈导致过程模型错误】超声波传感器（FB-AVP-EB-1）因污损导致虚警，系统错误地建立了一个不存在的障碍物（PM-AVP-EB-1错误），触发了不必要的紧急制动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-EB-2",
+      "description": "【控制算法缺陷】系统在计算碰撞时间时，使用了一个不准确的障碍物相对速度（使CA-AVP-EB-1的“即将碰撞”触发阈值过低），导致过早触发不必要的紧急制动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-EB-3",
+      "description": "【反馈导致过程模型错误】轮速传感器（FB-AVP-EB-2）故障，系统错误地显示车辆处于停止状态，当实际车辆在坡道上被推后时，系统未检测到危险（PM-AVP-EB-2错误），未能提供紧急制动。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-EB-4",
+      "description": "【控制路径故障】系统正确发出了紧急制动指令，但制动助力器（受控过程的一部分）的电机因故障卡死，未能执行指令，导致系统对受控过程状态产生错误认知（违反 PM-AVP-EB-3），从而触发 UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-EB-5",
+      "description": "【反馈延迟】由于 CAN 总线（FB-AVP-EB-4）发生严重拥塞，障碍物距离信息（来自 FB-AVP-EB-1）的更新被显著延迟，系统基于过时的信息判断风险已解除，导致过早地解除了紧急制动，触发 UCA-4。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-EB-6",
+      "description": "【控制算法缺陷】系统在计算制动减速时，没有考虑到轮胎在湿滑路面上的抓地力下降（使 CA-AVP-EB-2 的“可停止能力”评估过高），导致紧急制动的制动力不足或持续时间过短，触发 UCA-3 或 UCA-4。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-EB-7",
+      "description": "【反馈处理错误】从制动踏板传感器（FB-AVP-EB-2 的一部分）获取的信号被错误地解释为来自其他传感器（如 IMU）。系统基于此错误信息，提供了与实际车辆状态不符的紧急制动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-EB-8",
+      "description": "【控制算法缺陷】系统在紧急制动后，其持续监控该障碍物位置的逻辑存在漏洞。当障碍物短暂移出传感器视野后再次出现时，系统未能重新检测并提供新的制动指令，导致 UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-EB-9",
+      "description": "【反馈导致过程模型错误】惯性测量单元（IMU）（FB-AVP-EB-2 的一部分）因冲击损坏，持续输出一个恒定的加速度值。系统基于此错误反馈，形成了一个错误的自车运动状态认知（PM-AVP-EB-2 错误），导致 UCA-1 或 UCA-2。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 1,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-EB-10",
+      "description": "【硬件故障】紧急制动决策模块本身因电源波动或静电放电而死机。它未能正确处理持续的碰撞风险，导致未能提供必要的紧急制动指令。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "超声波传感器(FB-AVP-EB-1)被泥水污损，导致其持续报告前方有障碍物。控制器的过程模型(PM-AVP-EB-1)基于此错误信息，触发了不必要的紧急制动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "控制器的软件算法(CA-AVP-EB-1)在计算碰撞时间(CT)时，由于一个分支条件错误，未能触发紧急制动。此时前方车辆急刹，导致系统未提供制动。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "车辆以高速在隧道中行驶，前向雷达(FB-AVP-EB-1)被隧道壁的多径效应干扰，导致其错误地报告前方有障碍物。控制器基于此错误反馈提供了不必要的紧急制动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "制动踏板的机械结构发生卡滞。当驾驶员手动踩下制动踏板时，踏板位置传感器(FB-AVP-EB-2)的反馈未及时更新，导致控制器错误地认为驾驶员正在制动，从而未触发自动紧急制动。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "在湿滑的路面上，轮速传感器(FB-AVP-EB-2)因打滑而上报了极低的车速。控制器的过程模型(PM-AVP-EB-2)基于此错误信息，错误地认为车辆已停止，从而提前终止了紧急制动指令。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "控制器与制动执行器之间的CAN总线(FB-AVP-EB-4)因物理损坏而断开连接。当系统发出紧急制动指令时，该指令从未到达执行器，导致车辆未制动。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "系统在自动代客泊车过程中，由于路径规划算法缺陷，提供了一个过于接近路障的停车轨迹。当车辆接近该位置时，系统基于正确感知提供了紧急制动，但此时已违反安全界限，导致UCA-1与UCA-3同时发生。使场景过于复杂或违背现实可能性。",
+      "linked_uca_ids": [
+        "UCA-1",
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 2,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "制动液压泵电机发生堵转，无法提供足够的制动力。当系统发出紧急制动指令时，制动压力传感器(FB-AVP-EB-3)上报压力不足，控制器(CA-AVP-EB-3)因此进入安全停靠模式，导致未提供有效制动。",
+      "linked_uca_ids": [
+        "UCA-2",
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-AVP-EB-1",
+      "description": "超声波传感器(FB-AVP-EB-1)受到停车场金属立柱干扰产生虚警；过程模型(PM-AVP-EB-1)错误地确认了碰撞风险；控制器算法(CA-AVP-EB-1)因此触发不必要的紧急制动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-AVP-EB-2",
+      "description": "真实障碍物存在且碰撞时间逼近阈值；但超声波传感器(FB-AVP-EB-1)因表面反光材质而漏检；控制器过程模型(PM-AVP-EB-1)错误地认为路径安全，导致未提供应触发的紧急制动。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-AVP-EB-3",
+      "description": "障碍物距离传感器(FB-AVP-EB-1)数据更新因通信延迟，导致碰撞时间计算(TTC)滞后；控制器算法(CA-AVP-EB-1)的决策触发点因而被延迟，构成触发时机不当。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-AVP-EB-4",
+      "description": "制动执行完成后，制动压力传感器(FB-AVP-EB-3)因线路短路而断电；控制器的过程模型(PM-AVP-EB-3)对“制动力建立成功”的认知被错误清除；从而违反CA-AVP-EB-2，导致制动被过早解除。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-AVP-EB-5",
+      "description": "系统基于过时的静态地图信息，对停车场内临时放置的锥桶产生错误认知；其过程模型(PM-AVP-EB-1)持续更新为“障碍物存在”状态，导致非预期的紧急制动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-AVP-EB-6",
+      "description": "车辆在湿滑路面上行驶时，制动决策算法(CA-AVP-EB-1)未对路面附着系数进行修正；基于错误的“剩余停车距离信念”(PM-AVP-EB-2)，提供了不足以使车辆停止的制动力。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-AVP-EB-7",
+      "description": "制动指令通过CAN总线(FB-AVP-EB-4)发送时，因网络拥塞而丢失；控制器已发出指令(CA-AVP-EB-1)，但受控过程未收到；控制器的过程模型(PM-AVP-EB-3)未能及时更新为“指令发送但未执行”。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-AVP-EB-8",
+      "description": "软件缺陷导致紧急制动任务的优先级被其他非关键任务抢占；当障碍物被检测到时，系统因处理延迟而违反CA-AVP-EB-1的实时性要求，触发过晚制动。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-AVP-EB-9",
+      "description": "制动液压泵硬件故障，无法提供有效制动力；尽管控制器收到了正确的风险信号并触发了指令；但由于执行器失效，未能使车辆减速或停车。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 3,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-AVP-EB-10",
+      "description": "控制器-AVP安全监控模块硬件卡死，无法处理任何反馈路径(FB-AVP-EB-1/2/3/4)的信息；其过程模型(PM-AVP-EB-1/2/3)被冻结在上一次的安全状态；当真实危险出现时，无法触发紧急制动。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-EB-1",
+      "description": "反馈路径(FB-AVP-EB-1)的超声波传感器因雨雪遮挡，错误地感知到前方有障碍物，使控制器对碰撞风险产生错误认知。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-EB-2",
+      "description": "控制器(AVP安全监控模块)的过程模型(PM-AVP-EB-2)错误地高估了制动能力，导致其计算的所需停止距离远小于实际值。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-EB-3",
+      "description": "制动执行器(EB-Brake)因液压系统故障无法响应指令，控制器的反馈模型(FB-AVP-EB-3)在收到执行失败的故障码后，其控制算法(CA-AVP-EB-3)未能正确处理；该场景违反了反馈导致控制器对受控过程状态产生错误认知或决策偏差。从而触发 UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-EB-4",
+      "description": "反馈路径(FB-AVP-EB-4)的CAN通信发生延迟，导致紧急制动指令在障碍物距离过近时才送达，使制动触发时机过晚。从而触发 UCA-3。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-EB-5",
+      "description": "控制器软件出现死锁或资源耗尽，导致即使收到有效的碰撞风险信号，也无法处理或发送制动指令。从而触发 UCA-2。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-EB-6",
+      "description": "反馈路径(FB-AVP-EB-1)的视觉系统因强光眩目，错误地将天空识别为障碍物，使控制器的过程模型(PM-AVP-EB-1)对障碍物存在产生错误认知。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-EB-7",
+      "description": "制动指令已发送，但制动管路因泄漏导致制动力严重不足。控制器的反馈模型(FB-AVP-EB-2)基于轮速判断车辆仍在移动，因此保持制动状态，导致制动持续时间过长。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-EB-8",
+      "description": "安全监控模块的软件逻辑存在缺陷，当系统收到紧急制动请求时，由于优先级设置不当，该请求被低优先级的任务阻塞，导致制动指令触发过晚。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-EB-9",
+      "description": "反馈路径(FB-AVP-EB-3)的制动压力传感器发生故障，持续输出一个正常的压力值。当实际制动力建立失败时，控制器的过程模型(PM-AVP-EB-3)基于错误反馈，错误地认为制动已成功，并提前释放了制动。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 4,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-EB-10",
+      "description": "控制器硬件发生随机硬件故障，其内部处理器寄存器被宇宙辐射翻转，导致一个随机的紧急制动指令被发送给制动系统，造成非预期急停。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 1,
+      "scenario_id": "CS-1",
+      "description": "控制器-AVP安全监控与制动决策模块的过程模型(PM-AVP-EB-1)错误：一个静态障碍物被错误分类为移动物体；或夜间/恶劣天气下视觉感知(FB-AVP-EB-1)故障，导致系统将路边积水反光误判为移动车辆；或超声波传感器(FB-AVP-EB-1)因停车桩表面材质特性产生虚警，使系统对障碍物位置或状态产生错误认知，从而不必要地提供紧急制动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 2,
+      "scenario_id": "CS-2",
+      "description": "控制器-AVP安全监控与制动决策模块的过程模型(PM-AVP-EB-2)不准确：系统基于低精度地图或陈旧的高精地图，对自身所在停车场的车道边界或立柱位置产生错误认知；或因IMU(FB-AVP-EB-2)校准偏差，导致对自车相对于边界的横向位置估计错误；或因轮速计(FB-AVP-EB-2)故障读数偏低，使系统高估了自车速度，从而在正常行驶时错误触发紧急制动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 3,
+      "scenario_id": "CS-3",
+      "description": "控制器-AVP-EB-1算法缺陷或软件卡死：当系统正确检测到碰撞风险时，因紧急制动触发算法(CA-AVP-EB-1)存在代码缺陷，导致其陷入死循环或无法生成正确的制动指令；或处理器因内存溢出而崩溃，从而使制动指令未能提供。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 4,
+      "scenario_id": "CS-4",
+      "description": "控制器-AVP安全监控与制动决策模块的过程模型(PM-AVP-EB-3)错误：系统发送了紧急制动指令，但因制动压力传感器(FB-AVP-EB-3)故障，始终反馈为0压力，使系统错误地相信制动已成功执行并解除；或制动卡钳因异物卡住而失效，但系统未收到相关故障码，导致其在风险持续存在的情况下错误地提供了“制动已解除”的指令。",
+      "linked_uca_ids": [
+        "UCA-4"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 5,
+      "scenario_id": "CS-5",
+      "description": "反馈路径(FB-AVP-EB-1)中断：近距障碍物感知传感器的供电线束因振动脱落，导致控制器-AVP安全监控与制动决策模块从未收到该障碍物存在的反馈；或通信总线(FB-AVP-EB-4)因电磁干扰导致该反馈数据包丢失，从而使系统未能在应触发制动时提供指令。",
+      "linked_uca_ids": [
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 6,
+      "scenario_id": "CS-6",
+      "description": "控制器-AVP-EB-2算法缺陷：系统在触发紧急制动后，因用于持续监控风险解除的算法(CA-AVP-EB-2)存在缺陷（例如仅检查障碍物距离而未考虑其运动状态），当障碍物移动离开时，系统未能及时检测到并错误地保持制动状态；或因处理器负载过高，导致风险解除判断算法处理延迟，使制动解除时机过晚。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 7,
+      "scenario_id": "CS-7",
+      "description": "反馈路径(FB-AVP-EB-4)问题：控制器-AVP安全监控与制动决策模块与制动执行器之间的CAN总线(FB-AVP-EB-4)因EMI导致通信抖动或延迟。当系统发出紧急制动指令时，该指令在总线上传输过程中发生延迟或丢包，导致制动力建立过晚或完全未收到指令，从而使系统因未收到执行ACK(FB-AVP-EB-3)而进入告警模式；或因总线带宽不足，导致紧急制动指令与其他非关键数据包发生冲突，造成指令被延迟或覆盖。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-2"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 8,
+      "scenario_id": "CS-8",
+      "description": "控制器-AVP安全监控与制动决策模块的过程模型(PM-AVP-EB-1)错误：系统基于过时或低精度的传感器数据（例如前一帧的图像数据）进行决策，而该帧数据中显示前方有障碍物。由于处理延迟或算法更新不及时，当车辆已经通过该障碍物位置时，系统仍基于旧数据的“障碍物存在”信念(PM-AVP-EB-1)触发了不必要的紧急制动。",
+      "linked_uca_ids": [
+        "UCA-1"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 9,
+      "scenario_id": "CS-9",
+      "description": "反馈路径(FB-AVP-EB-1)问题：一个动态障碍物（如行人）在车辆即将到达其位置时突然停下或改变方向。然而，传感器(FB-AVP-EB-1)的刷新率不足或数据处理延迟，导致其对障碍物运动状态的更新（从移动到停止）存在延迟。因此，当障碍物实际上已停止时，系统基于其“仍在移动”的过时认知(PM-AVP-EB-1)，导致制动触发过晚。或者，当障碍物停下时，系统因传感器(FB-AVP-EB-1)的点云数据处理算法缺陷，未能及时识别到其静止状态，因此未能触发制动。",
+      "linked_uca_ids": [
+        "UCA-3"
+      ]
+    },
+    {
+      "iteration": 5,
+      "item_index_in_run": 10,
+      "scenario_id": "CS-10",
+      "description": "反馈路径(FB-AVP-EB-2)问题：轮速传感器(FB-AVP-EB-2)因污垢或损坏而提供了一个极低的轮速读数，即使车辆正在高速行驶。这导致控制器-AVP安全监控与制动决策模块的过程模型(PM-AVP-EB-2)错误地认为车辆速度非常低。当系统检测到一个实际存在的碰撞风险时，基于这个错误的速度信念，其计算出的碰撞时间可能远高于真实情况，导致制动触发时机过晚或根本未触发。",
+      "linked_uca_ids": [
+        "UCA-3",
+        "UCA-2"
+      ]
+    }
+  ]
+}

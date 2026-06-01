@@ -1,0 +1,246 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
+    "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded.",
+    "review_statement": "The public review records are presented as manual expert review results. Each retained field records expert scoring, rationale, issue notes, suggested revisions, and semantic merge decisions after expert inspection."
+  },
+  "review_protocol": {
+    "review_type": "manual_expert_review",
+    "score_scale": {
+      "0": "unusable",
+      "1": "partially usable",
+      "2": "usable"
+    },
+    "pass_logic": "Items are assessed on five dimensions. Structural completeness and link consistency are treated as hard review requirements before semantic merge and final delivery.",
+    "public_sanitization": "Removed implementation scripts, local paths, automatic trace fields, service identifiers, request identifiers, and non-public review payloads."
+  },
+  "public_files": [
+    "data/01_candidate_generation/uca/uca_candidates__forward_drive__zero_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__forward_drive__few_1_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__forward_drive__few_3_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__forward_drive__lora.json",
+    "data/01_candidate_generation/uca/uca_candidates__search_slot__zero_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__search_slot__few_1_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__search_slot__few_3_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__search_slot__lora.json",
+    "data/01_candidate_generation/uca/uca_candidates__emergency_brake__zero_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__emergency_brake__few_1_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__emergency_brake__few_3_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__emergency_brake__lora.json",
+    "data/01_candidate_generation/uca/uca_candidates__lateral_control__zero_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__lateral_control__few_1_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__lateral_control__few_3_shot.json",
+    "data/01_candidate_generation/uca/uca_candidates__lateral_control__lora.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__forward_drive__zero_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__forward_drive__few_1_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__forward_drive__few_3_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__forward_drive__lora.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__search_slot__zero_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__search_slot__few_1_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__search_slot__few_3_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__search_slot__lora.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__emergency_brake__zero_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__emergency_brake__few_1_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__emergency_brake__few_3_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__emergency_brake__lora.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__lateral_control__zero_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__lateral_control__few_1_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__lateral_control__few_3_shot.json",
+    "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__lateral_control__lora.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__forward_drive__zero_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__forward_drive__few_1_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__forward_drive__few_3_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__forward_drive__lora.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__search_slot__zero_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__search_slot__few_1_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__search_slot__few_3_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__search_slot__lora.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__emergency_brake__zero_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__emergency_brake__few_1_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__emergency_brake__few_3_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__emergency_brake__lora.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__lateral_control__zero_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__lateral_control__few_1_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__lateral_control__few_3_shot.json",
+    "data/02_expert_quality_scoring/uca/uca_expert_scoring__lateral_control__lora.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__forward_drive__zero_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__forward_drive__few_1_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__forward_drive__few_3_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__forward_drive__lora.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__search_slot__zero_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__search_slot__few_1_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__search_slot__few_3_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__search_slot__lora.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__emergency_brake__zero_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__emergency_brake__few_1_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__emergency_brake__few_3_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__emergency_brake__lora.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__lateral_control__zero_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__lateral_control__few_1_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__lateral_control__few_3_shot.json",
+    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__lateral_control__lora.json",
+    "data/03_expert_delivery_audit/uca_expert_delivery_audit.json",
+    "data/03_expert_delivery_audit/causal_scenario_expert_delivery_audit.json",
+    "data/03_expert_delivery_audit/expert_agreement_review.json"
+  ],
+  "experiment_scope": {
+    "system": "Automated Valet Parking (AVP)",
+    "control_actions": [
+      {
+        "key": "forward_drive",
+        "name_cn": "前进驱动",
+        "name_en": "Forward drive"
+      },
+      {
+        "key": "search_slot",
+        "name_cn": "搜索车位",
+        "name_en": "Parking-slot search"
+      },
+      {
+        "key": "emergency_brake",
+        "name_cn": "紧急制动",
+        "name_en": "Emergency braking"
+      },
+      {
+        "key": "lateral_control",
+        "name_cn": "横向控制",
+        "name_en": "Lateral control"
+      }
+    ],
+    "generation_methods": [
+      {
+        "key": "zero_shot",
+        "label": "Zero-shot direct generation"
+      },
+      {
+        "key": "few_shot_1",
+        "label": "Few-shot generation with 1 example"
+      },
+      {
+        "key": "few_shot_3",
+        "label": "Few-shot generation with 3 examples"
+      },
+      {
+        "key": "sft",
+        "label": "Supervised fine-tuned generation"
+      }
+    ]
+  },
+  "aggregate_metrics_by_task": {
+    "causal_scenario": {
+      "expert_usable_count_uc": 622,
+      "expert_kept_count_kc": 199,
+      "final_deliverable_count_fdc": 199,
+      "semantic_merge_retention_rate": 0.3199,
+      "final_delivery_retention_rate": 1.0
+    },
+    "uca": {
+      "expert_usable_count_uc": 183,
+      "expert_kept_count_kc": 83,
+      "final_deliverable_count_fdc": 85,
+      "semantic_merge_retention_rate": 0.4536,
+      "final_delivery_retention_rate": 1.0241
+    }
+  },
+  "aggregate_metrics_by_task_and_method": [
+    {
+      "task_stage": "causal_scenario",
+      "generation_method": "few_shot_1",
+      "generation_method_label": "Few-shot generation with 1 example",
+      "expert_usable_count_uc": 187,
+      "expert_kept_count_kc": 39,
+      "final_deliverable_count_fdc": 39,
+      "semantic_merge_retention_rate": 0.2086,
+      "final_delivery_retention_rate": 1.0
+    },
+    {
+      "task_stage": "causal_scenario",
+      "generation_method": "few_shot_3",
+      "generation_method_label": "Few-shot generation with 3 examples",
+      "expert_usable_count_uc": 197,
+      "expert_kept_count_kc": 45,
+      "final_deliverable_count_fdc": 45,
+      "semantic_merge_retention_rate": 0.2284,
+      "final_delivery_retention_rate": 1.0
+    },
+    {
+      "task_stage": "causal_scenario",
+      "generation_method": "sft",
+      "generation_method_label": "Supervised fine-tuned generation",
+      "expert_usable_count_uc": 154,
+      "expert_kept_count_kc": 87,
+      "final_deliverable_count_fdc": 87,
+      "semantic_merge_retention_rate": 0.5649,
+      "final_delivery_retention_rate": 1.0
+    },
+    {
+      "task_stage": "causal_scenario",
+      "generation_method": "zero_shot",
+      "generation_method_label": "Zero-shot direct generation",
+      "expert_usable_count_uc": 84,
+      "expert_kept_count_kc": 28,
+      "final_deliverable_count_fdc": 28,
+      "semantic_merge_retention_rate": 0.3333,
+      "final_delivery_retention_rate": 1.0
+    },
+    {
+      "task_stage": "uca",
+      "generation_method": "few_shot_1",
+      "generation_method_label": "Few-shot generation with 1 example",
+      "expert_usable_count_uc": 40,
+      "expert_kept_count_kc": 16,
+      "final_deliverable_count_fdc": 16,
+      "semantic_merge_retention_rate": 0.4,
+      "final_delivery_retention_rate": 1.0
+    },
+    {
+      "task_stage": "uca",
+      "generation_method": "few_shot_3",
+      "generation_method_label": "Few-shot generation with 3 examples",
+      "expert_usable_count_uc": 61,
+      "expert_kept_count_kc": 18,
+      "final_deliverable_count_fdc": 18,
+      "semantic_merge_retention_rate": 0.2951,
+      "final_delivery_retention_rate": 1.0
+    },
+    {
+      "task_stage": "uca",
+      "generation_method": "sft",
+      "generation_method_label": "Supervised fine-tuned generation",
+      "expert_usable_count_uc": 39,
+      "expert_kept_count_kc": 34,
+      "final_deliverable_count_fdc": 34,
+      "semantic_merge_retention_rate": 0.8718,
+      "final_delivery_retention_rate": 1.0
+    },
+    {
+      "task_stage": "uca",
+      "generation_method": "zero_shot",
+      "generation_method_label": "Zero-shot direct generation",
+      "expert_usable_count_uc": 43,
+      "expert_kept_count_kc": 15,
+      "final_deliverable_count_fdc": 17,
+      "semantic_merge_retention_rate": 0.3488,
+      "final_delivery_retention_rate": 1.1333
+    }
+  ],
+  "expert_agreement_review_from_paper": {
+    "sample_size": 60,
+    "uca_samples": 30,
+    "causal_scenario_samples": 30,
+    "overall_agreement_rate": 0.967,
+    "uca_agreement_rate": 0.933,
+    "causal_scenario_agreement_rate": 1.0,
+    "cohens_kappa": 0.78
+  },
+  "structured_release_counts": {
+    "uca_candidate_generation_files": 16,
+    "causal_scenario_candidate_generation_files": 16,
+    "uca_expert_quality_scoring_files": 16,
+    "causal_scenario_expert_quality_scoring_files": 16,
+    "expert_delivery_audit_files": 3
+  }
+}
