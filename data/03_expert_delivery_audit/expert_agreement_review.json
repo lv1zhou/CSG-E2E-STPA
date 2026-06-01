@@ -2,9 +2,9 @@
   "paper_context": {
     "project": "CSG-E2E-STPA",
     "system": "Automated Valet Parking (AVP)",
-    "public_file_group": "manual_expert_delivery_audit",
+    "public_file_group": "manual_expert_review_results",
     "review_provenance": "manual_expert_review",
-    "public_release_scope": "Structured JSON result release for manual expert extraction, semantic merge, final delivery audit, and expert agreement review. Non-review execution artifacts and implementation materials are excluded."
+    "public_release_scope": "Structured JSON result release for manual expert inspection, scoring, semantic merge, final delivery audit, and expert agreement review. Non-review execution artifacts and implementation materials are excluded."
   },
   "public_file_role": "manual_expert_agreement_review_summary",
   "review_source": "manual_expert_review",
