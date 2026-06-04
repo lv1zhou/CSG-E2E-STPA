@@ -62,7 +62,7 @@ Note: `search_slot` is retained as the historical file/key label for traceabilit
 
 ## Release Scope
 
-This result release publishes structured JSON result records only. Implementation code is maintained in `CSG-code`; local environment metadata, platform/service identifiers, request identifiers, non-public execution logs, raw response payloads, raw traces, and expert identities are excluded from this dataset repository.
+This result release publishes structured JSON result records only. Implementation code is maintained in `CSG-code`; expert identities, local files, and non-public operational metadata are excluded from this dataset repository.
 
 The `02_quality_gate_scoring` files document the multidimensional quality-gate scoring stage described in the paper before system-level semantic consolidation. The `03_expert_delivery_audit` files document manual expert extraction, semantic merge review, final delivery audit, and expert agreement review. The public records retain item text, explicit links, scoring fields, rationales, issue notes, suggested revisions, semantic-merge decisions, final audit outcomes, and agreement statistics where applicable.
 

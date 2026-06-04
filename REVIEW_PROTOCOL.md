@@ -22,7 +22,7 @@ The manual expert audit evidence is reported in `data/03_expert_delivery_audit`.
 - semantic merge decisions and final delivery decisions;
 - expert agreement review summary, including agreement rate and Cohen's kappa.
 
-The public rationales are structured review summaries prepared for auditability. Their structured style should be read as a reporting format, not as independent proof that no tools were used anywhere in the broader workflow.
+The public rationales are structured review summaries prepared from manual review records for auditability.
 
 ## Expert Reviewer Profiles
 
@@ -39,10 +39,7 @@ The result release excludes:
 
 - expert personal identities;
 - local working files and local environment metadata;
-- platform or service identifiers;
-- request identifiers;
-- non-public execution logs;
-- raw traces and raw response payloads;
+- non-public operational metadata;
 - implementation scripts in this result dataset repository.
 
 Implementation code is maintained separately in `CSG-code`.
@@ -52,7 +49,7 @@ Implementation code is maintained separately in `CSG-code`.
 Use a bounded statement such as:
 
 ```text
-The public repository releases the original generated results, quality-gate scoring records, system-level semantic consolidation records, final expert delivery-audit records, and expert agreement review records in structured JSON format. Implementation code is maintained separately in the CSG-code repository. Non-public execution logs, platform identifiers, request identifiers, local files, raw traces, and expert identities are not included in the public result release.
+The public repository releases the original generated results, quality-gate scoring records, system-level semantic consolidation records, final expert delivery-audit records, and expert agreement review records in structured JSON format. Implementation code is maintained separately in the CSG-code repository. Expert identities, local files, and non-public operational metadata are not included in the public result release.
 ```
 
 Avoid claims that go beyond the evidence boundary of the public files.
