@@ -24,6 +24,15 @@ The manual expert audit evidence is reported in `data/03_expert_delivery_audit`.
 
 The public rationales are structured review summaries prepared for auditability. Their structured style should be read as a reporting format, not as independent proof that no tools were used anywhere in the broader workflow.
 
+## Expert Reviewer Profiles
+
+The public expert profiles are anonymized:
+
+- Expert A: PhD, 10 years of professional experience.
+- Expert B: Master's degree, 4 years of professional experience.
+
+Names, affiliations, and personal identifiers are not disclosed in the public release.
+
 ## Public Sanitization
 
 The result release excludes:
