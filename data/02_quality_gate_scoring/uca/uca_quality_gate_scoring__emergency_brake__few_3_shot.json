@@ -22,8 +22,7 @@
     "expert_usable_items_before_merge": 16,
     "expert_kept_items_after_semantic_merge": 4,
     "semantic_merge_retention_rate": 0.25,
-    "final_deliverable_items_after_expert_audit": 4,
-    "final_delivery_retention_rate": 1.0
+    "metric_scope_note": "This file reports quality-gate UC and semantic-merge KC/RR. Final delivery audit FDC is reported in data/03_expert_delivery_audit and paper-level summaries."
   },
   "quality_gate_item_reviews": [
     {

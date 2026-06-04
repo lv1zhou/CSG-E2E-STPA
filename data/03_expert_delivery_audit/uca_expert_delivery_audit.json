@@ -14,8 +14,10 @@
     "total_reviewed_items": 815,
     "expert_usable_items_before_merge": 183,
     "expert_kept_items_after_semantic_merge": 83,
-    "final_deliverable_items_after_expert_audit": 85,
-    "final_delivery_retention_rate": 1.0241
+    "final_deliverable_items_after_expert_audit": 74,
+    "final_delivery_retention_rate": 0.8916,
+    "semantic_merge_retention_rate": 0.4536,
+    "paper_alignment_note": "Paper-level UCA final delivery audit uses semantic-merge-kept UCA records as the denominator: 74 / 83 = 89.2%."
   },
   "experiment_audit_records": [
     {
@@ -28,9 +30,7 @@
       "total_reviewed_items": 55,
       "expert_usable_items_before_merge": 6,
       "expert_kept_items_after_semantic_merge": 2,
-      "final_deliverable_items_after_expert_audit": 2,
       "semantic_merge_retention_rate": 0.3333,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -66,7 +66,9 @@
           }
         ],
         "kept_count": 2
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -78,9 +80,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 9,
       "expert_kept_items_after_semantic_merge": 5,
-      "final_deliverable_items_after_expert_audit": 5,
       "semantic_merge_retention_rate": 0.5556,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -128,7 +128,9 @@
           }
         ],
         "kept_count": 5
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -140,9 +142,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 10,
       "expert_kept_items_after_semantic_merge": 6,
-      "final_deliverable_items_after_expert_audit": 6,
       "semantic_merge_retention_rate": 0.6,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -194,7 +194,9 @@
           }
         ],
         "kept_count": 6
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -206,9 +208,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 12,
       "expert_kept_items_after_semantic_merge": 10,
-      "final_deliverable_items_after_expert_audit": 10,
       "semantic_merge_retention_rate": 0.8333,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -266,7 +266,9 @@
           }
         ],
         "kept_count": 10
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -278,9 +280,7 @@
       "total_reviewed_items": 55,
       "expert_usable_items_before_merge": 14,
       "expert_kept_items_after_semantic_merge": 3,
-      "final_deliverable_items_after_expert_audit": 5,
       "semantic_merge_retention_rate": 0.2143,
-      "final_delivery_retention_rate": 1.6667,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -356,7 +356,9 @@
         ],
         "kept_count": 3
       },
-      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation."
+      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation.",
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -368,9 +370,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 13,
       "expert_kept_items_after_semantic_merge": 4,
-      "final_deliverable_items_after_expert_audit": 4,
       "semantic_merge_retention_rate": 0.3077,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -440,7 +440,9 @@
         ],
         "kept_count": 4
       },
-      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation."
+      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation.",
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -452,9 +454,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 14,
       "expert_kept_items_after_semantic_merge": 3,
-      "final_deliverable_items_after_expert_audit": 3,
       "semantic_merge_retention_rate": 0.2143,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -530,7 +530,9 @@
         ],
         "kept_count": 3
       },
-      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation."
+      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation.",
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -542,9 +544,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 3,
       "expert_kept_items_after_semantic_merge": 3,
-      "final_deliverable_items_after_expert_audit": 3,
       "semantic_merge_retention_rate": 1.0,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -564,7 +564,9 @@
         "merged_duplicate_items": [],
         "kept_count": 3
       },
-      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation."
+      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation.",
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -576,9 +578,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 15,
       "expert_kept_items_after_semantic_merge": 6,
-      "final_deliverable_items_after_expert_audit": 6,
       "semantic_merge_retention_rate": 0.4,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -655,7 +655,9 @@
           }
         ],
         "kept_count": 6
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -667,9 +669,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 4,
       "expert_kept_items_after_semantic_merge": 4,
-      "final_deliverable_items_after_expert_audit": 4,
       "semantic_merge_retention_rate": 1.0,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -692,7 +692,9 @@
         ],
         "merged_duplicate_items": [],
         "kept_count": 4
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -704,9 +706,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 16,
       "expert_kept_items_after_semantic_merge": 4,
-      "final_deliverable_items_after_expert_audit": 4,
       "semantic_merge_retention_rate": 0.25,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -790,7 +790,9 @@
           }
         ],
         "kept_count": 4
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -802,9 +804,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 10,
       "expert_kept_items_after_semantic_merge": 8,
-      "final_deliverable_items_after_expert_audit": 8,
       "semantic_merge_retention_rate": 0.8,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -854,7 +854,9 @@
           }
         ],
         "kept_count": 8
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -866,9 +868,7 @@
       "total_reviewed_items": 55,
       "expert_usable_items_before_merge": 8,
       "expert_kept_items_after_semantic_merge": 4,
-      "final_deliverable_items_after_expert_audit": 4,
       "semantic_merge_retention_rate": 0.5,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -912,7 +912,9 @@
           }
         ],
         "kept_count": 4
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -924,9 +926,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 14,
       "expert_kept_items_after_semantic_merge": 3,
-      "final_deliverable_items_after_expert_audit": 3,
       "semantic_merge_retention_rate": 0.2143,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -1001,7 +1001,9 @@
           }
         ],
         "kept_count": 3
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -1013,9 +1015,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 21,
       "expert_kept_items_after_semantic_merge": 5,
-      "final_deliverable_items_after_expert_audit": 5,
       "semantic_merge_retention_rate": 0.2381,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -1123,7 +1123,9 @@
           }
         ],
         "kept_count": 5
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     },
     {
       "task_name": "UCA identification",
@@ -1135,9 +1137,7 @@
       "total_reviewed_items": 50,
       "expert_usable_items_before_merge": 14,
       "expert_kept_items_after_semantic_merge": 13,
-      "final_deliverable_items_after_expert_audit": 13,
       "semantic_merge_retention_rate": 0.9286,
-      "final_delivery_retention_rate": 1.0,
       "expert_semantic_merge": {
         "review_source": "manual_expert_review",
         "retained_uca_items": [
@@ -1202,7 +1202,9 @@
           }
         ],
         "kept_count": 13
-      }
+      },
+      "final_delivery_metric_scope": "not_disaggregated_in_public_paper_summary",
+      "metric_scope_note": "This record reports UC, KC, and semantic-merge RR. Aggregate UCA FDC is reported in aggregate_counts."
     }
   ],
   "manual_review_declaration": {
@@ -1213,5 +1215,6 @@
       "local environment metadata",
       "non-review execution artifacts"
     ]
-  }
+  },
+  "metric_scope_note": "Per-action/method UC, KC, and RR are reported for the quality-gate and semantic-merge stages. Paper-level UCA FDC is an aggregate final delivery-audit count and should not be reconstructed by summing per-action/method local fields."
 }

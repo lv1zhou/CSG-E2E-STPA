@@ -143,9 +143,10 @@
     "uca": {
       "expert_usable_count_uc": 183,
       "expert_kept_count_kc": 83,
-      "final_deliverable_count_fdc": 85,
+      "final_deliverable_count_fdc": 74,
       "semantic_merge_retention_rate": 0.4536,
-      "final_delivery_retention_rate": 1.0241
+      "final_delivery_retention_rate": 0.8916,
+      "final_delivery_rate_percent_reported_in_paper": 89.2
     }
   },
   "aggregate_metrics_by_task_and_method": [
@@ -195,9 +196,8 @@
       "generation_method_label": "Few-shot generation with 1 example",
       "expert_usable_count_uc": 40,
       "expert_kept_count_kc": 16,
-      "final_deliverable_count_fdc": 16,
       "semantic_merge_retention_rate": 0.4,
-      "final_delivery_retention_rate": 1.0
+      "final_delivery_metric_scope": "aggregate_task_level_only"
     },
     {
       "task_stage": "uca",
@@ -205,9 +205,8 @@
       "generation_method_label": "Few-shot generation with 3 examples",
       "expert_usable_count_uc": 61,
       "expert_kept_count_kc": 18,
-      "final_deliverable_count_fdc": 18,
       "semantic_merge_retention_rate": 0.2951,
-      "final_delivery_retention_rate": 1.0
+      "final_delivery_metric_scope": "aggregate_task_level_only"
     },
     {
       "task_stage": "uca",
@@ -215,9 +214,8 @@
       "generation_method_label": "Supervised fine-tuned generation",
       "expert_usable_count_uc": 39,
       "expert_kept_count_kc": 34,
-      "final_deliverable_count_fdc": 34,
       "semantic_merge_retention_rate": 0.8718,
-      "final_delivery_retention_rate": 1.0
+      "final_delivery_metric_scope": "aggregate_task_level_only"
     },
     {
       "task_stage": "uca",
@@ -225,9 +223,8 @@
       "generation_method_label": "Zero-shot direct generation",
       "expert_usable_count_uc": 43,
       "expert_kept_count_kc": 15,
-      "final_deliverable_count_fdc": 17,
       "semantic_merge_retention_rate": 0.3488,
-      "final_delivery_retention_rate": 1.1333
+      "final_delivery_metric_scope": "aggregate_task_level_only"
     }
   ],
   "expert_agreement_review_from_paper": {
@@ -253,5 +250,19 @@
       "paper_facing_name_en": "parking-space confirmation",
       "note": "Original result filenames retain search_slot for traceability to the execution logs and source result files."
     }
+  },
+  "paper_level_final_delivery_alignment": {
+    "semantic_merge_kept_total": 282,
+    "semantic_merge_kept_uca": 83,
+    "semantic_merge_kept_causal_scenario": 199,
+    "final_deliverable_total": 273,
+    "final_deliverable_uca": 74,
+    "final_deliverable_causal_scenario": 199,
+    "overall_final_delivery_retention_rate": 0.9681,
+    "overall_final_delivery_rate_percent_reported_in_paper": 96.8,
+    "uca_final_delivery_retention_rate": 0.8916,
+    "uca_final_delivery_rate_percent_reported_in_paper": 89.2,
+    "causal_scenario_final_delivery_retention_rate": 1.0,
+    "metric_scope_note": "UC/KC/RR are disaggregated by task/method for quality-gate and semantic-merge analysis. FDC is reported at paper aggregate level after final delivery audit."
   }
 }

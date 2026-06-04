@@ -71,4 +71,6 @@ The `02_quality_gate_scoring` files document the multidimensional quality-gate s
 - **RR**: semantic-merge retention rate, calculated as KC / UC.
 - **FDC**: final deliverable count after final expert delivery audit.
 
-The paper reports 282 semantic-merge-kept STPA products, including 83 UCA records and 199 causal-scenario records. After final expert delivery audit, the overall final retention rate is 96.8%; causal-scenario retention is 100.0%. Expert agreement review on 60 sampled records reports 96.7% agreement and Cohen's kappa of 0.78.
+The paper reports 282 semantic-merge-kept STPA products, including 83 UCA records and 199 causal-scenario records. After final expert delivery audit, 273 records are retained for final delivery: 74 UCA records and 199 causal-scenario records. Therefore, the overall final retention rate is 273 / 282 = 96.8%; UCA final retention is 74 / 83 = 89.2%; causal-scenario retention is 199 / 199 = 100.0%. Expert agreement review on 60 sampled records reports 96.7% agreement and Cohen's kappa of 0.78.
+
+For UCA generation, the figure-level UC/KC/RR values are computed before final delivery audit: UC = 183, KC = 83, and RR = 83 / 183 = 45.36%. By method, SFT keeps 34 UCA records after semantic merge, while the second-best few-shot setting keeps 18; the improvement is (34 - 18) / 18 = 88.9%.
