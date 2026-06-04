@@ -1,0 +1,1937 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "system": "Automated Valet Parking (AVP)",
+    "public_file_group": "quality_gate_scoring_results",
+    "review_provenance": "quality_gate_scoring",
+    "public_release_scope": "Structured JSON result release for multidimensional quality-gate scoring. Implementation code is maintained in the separate CSG-code repository; local environment metadata, platform/service identifiers, request identifiers, non-public execution logs, raw response payloads, and raw traces are excluded.",
+    "related_code_repository": "https://github.com/lv1zhou/CSG-code"
+  },
+  "public_file_role": "quality_gate_scoring_result",
+  "task_stage": "uca",
+  "task_type": "UCA",
+  "task_name": "UCA identification",
+  "action_key": "search_slot",
+  "action_name_cn": "车位确认",
+  "action_name_en": "Parking-space confirmation",
+  "generation_method": "zero_shot",
+  "generation_method_label": "ZS",
+  "quality_gate_scoring_summary": {
+    "total_reviewed_items": 55,
+    "expert_scored_items": 55,
+    "expert_usable_items_before_merge": 14,
+    "expert_kept_items_after_semantic_merge": 3,
+    "semantic_merge_retention_rate": 0.2143,
+    "final_deliverable_items_after_expert_audit": 5,
+    "final_delivery_retention_rate": 1.6667
+  },
+  "quality_gate_item_reviews": [
+    {
+      "uca_id": "UCA@it1:provided_causing_hazard:1",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了超出停车区域边界的车位，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（选择车位）的不安全形式（选择了超出停车区域边界的车位），并直接导向 linked_hazard_ids 中的 H-AVP-2（车辆越出目标停车区域）。动作与后果之间逻辑连贯、无跳跃，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含边界关系（'超出停车区域边界'），但未包含生命周期表达（如'仍提供'、'过早'等）或过程相位表达（如'在...阶段'）。因此上下文属于边界条件型，但不符合 B1=2 所需的显式生命周期/相位要求。",
+          "B2": "核心错误直接落在当前控制动作 'search_slot' 的输出结果上：'选择了超出停车区域边界的车位'，属于对候选车位的错误确认/选择，是 result_output 类型的动作本体失败，而非感知或上游依赖问题。",
+          "B3": "unsafe form 体现了明确的 boundary_relation（'超出停车区域边界'），这是一种具有机制区分性的语义子型，而非仅靠对象替换或泛化触发。该表达清晰限定了动作失败的空间约束条件。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-2'，其描述为'车辆越出目标停车区域或停车边界'，与 description 中'导致车辆越出目标停车区域'完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "当前 description 已具备良好动作层表达，若需增强可审计性，可微调为：'AVP系统在确认候选车位时，选择了位于停车区域边界之外的车位，导致后续泊车过程中车辆越出目标区域。'"
+      }
+    },
+    {
+      "uca_id": "UCA@it1:provided_causing_hazard:2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了不适合当前车辆尺寸的车位，导致车辆无法完全进入车位。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作的不安全形式（选择了不适合当前车辆尺寸的车位），并指向一个具体后果（无法完全进入车位），该后果可由 linked_hazard_ids 中的 H-AVP-3（无法完成泊车任务或停留在不可接受位置）一致补足。但整体表述仍偏结果摘要，未体现动作执行过程中的机制性失败（如选择逻辑错误、确认过早等），因此仅得1分。",
+          "B1": "description 中无任何生命周期表达（如'仍'、'过早'等）或过程相位表达（如'在...阶段'），也无边界关系或结果条件绑定。上下文完全缺失，仅为静态结果陈述。",
+          "B2": "核心错误直接落在当前控制动作 'search_slot' 的输出本体上：'选择了不适合当前车辆尺寸的车位' 属于 result_output 的错误确认/错误选择，符合动作本体失败，而非感知或上游依赖。",
+          "B3": "unsafe form 能映射到 'provided wrong' family，但仅通过对象属性（'不适合当前车辆尺寸'）区分，缺乏机制子型（如 timing、phase、boundary 等）。属于 generic 对象替换式表达，未体现 discriminative 机制。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-3'，其描述 '车辆无法完成自动泊车任务，或停留在不安全/不可接受位置' 与 description 中 '无法完全进入车位' 高度一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "AVP系统在确认候选车位时选择了宽度或长度不足以容纳当前车辆的车位，导致泊车过程中无法完全进入目标位置。"
+      }
+    },
+    {
+      "uca_id": "UCA@it1:provided_causing_hazard:0",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了错误的车位，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作的不安全形式（选择了错误的车位），并指出了具体后果（与障碍物碰撞），但该表述更接近结果摘要句，缺乏对控制动作生命周期、相位或机制关系的刻画。虽然 linked_hazard_ids [H-AVP-1] 能一致补足后果，但 description 本身未体现 AVP 系统在 'search_slot' 动作中的过程性失败，仅陈述了最终错误决策及其后果，因此骨架成立但偏弱。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'等），也无过程相位（如'在...阶段'），亦无边界/结果条件绑定。纯为结果陈述，上下文完全缺失。",
+          "B2": "核心错误直接落在当前控制动作 'search_slot' 的输出本体上——'选择了错误的车位' 属于 result_output 类型的动作执行错误（提供了错误的候选结果），符合 B2=2 的标准。未依赖感知触发或上游条件，动作本体清晰。",
+          "B3": "unsafe form 为 '选择了错误的车位'，可归入 'provided wrong' family，但仅通过替换对象（'错误车位'）和后果（'障碍物'）实现，未体现 discriminative 机制子型（如 timing、phase、boundary 或 lifecycle 关系）。属于 generic 对象替换型表达。",
+          "B4": "linked_hazard_ids 为合法值 ['H-AVP-1']，且 description 中 '与障碍物发生碰撞' 与 H-AVP-1 '车辆与行人、车辆、障碍物或车位边界发生碰撞' 完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文",
+          "unsafe form 机制区分性不足",
+          "高度依赖模板化表达"
+        ],
+        "suggested_revision": "在搜索车位过程中，AVP系统确认了一个包含静态障碍物的无效车位作为目标，导致后续泊车路径与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it1:not_provided_causing_hazard:1",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到其他车辆，导致车辆与车辆发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（'未能检测到其他车辆'）并连接到碰撞后果，但核心问题落在感知层而非当前控制动作 'search_slot' 的输出本体上；linked_hazard_ids 能补足后果，但动作-后果链条依赖上游失败，需较多推断才能视为动作层 UCA。",
+          "B1": "description 中无任何生命周期表达（如'仍'、'过早'等）或过程相位表达（如'在...阶段'），也无边界/结果条件绑定，仅有模糊因果链，上下文完全缺失。",
+          "B2": "'未能检测到其他车辆' 是典型的感知/识别层失败，而非对 'search_slot' 动作本身的提供、终止、时序或内容错误；未体现当前控制动作的执行本体问题。",
+          "B3": "unsafe form 仅通过对象替换（'其他车辆'）和泛化失败（'未能检测到'）表达，属于 broad family 模板（not provided + object），缺乏机制子型如生命周期、相位或边界关系。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且描述的碰撞后果与该 hazard 完全一致，链接合理。"
+        },
+        "issues": [
+          "description focuses on perception failure rather than control action output",
+          "lacks explicit context or phase",
+          "relies on object-swap template"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统错误地确认了一个与其他车辆重叠的候选车位，导致后续泊车路径引发碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it1:not_provided_causing_hazard:2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到障碍物，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了‘未能检测到障碍物’导致碰撞，但‘未能检测到’属于感知层失败，而非当前控制动作‘search_slot’（搜索/确认车位）本身的不安全形式。虽然 linked_hazard_ids 正确指向 H-AVP-1，但动作与后果之间的连接依赖上游感知失败，未构成清晰的动作层 UCA 骨架，需较多推断才能关联到 search_slot 动作的缺失或错误。",
+          "B1": "description 中无任何生命周期表达（如‘过早’、‘未终止’）或过程相位表达（如‘在...阶段’），也无边界关系或结果条件；仅包含‘未能检测到’这一感知触发词汇，属于上游依赖，且无显式上下文。",
+          "B2": "核心错误落在‘未能检测到障碍物’，这是感知/识别层失败，而非 control_action ‘search_slot’（输出候选车位或确认车位）本身的执行、缺失、时序或内容错误。未体现该动作的生命周期或输出本体问题。",
+          "B3": "unsafe form 仅通过替换危险对象（‘障碍物’）表达，且依赖泛化感知触发（‘未能检测到’），缺乏机制子型（如 lifecycle_relation、phase_relation 等）。虽可归入 broad family ‘not provided’，但无区分性机制。",
+          "B4": "linked_hazard_ids 包含合法 ID ‘H-AVP-1’，且 description 中‘与障碍物发生碰撞’与该 hazard 描述‘车辆与行人、车辆、障碍物或车位边界发生碰撞’一致，无冲突。"
+        },
+        "issues": [
+          "description focuses on perception failure rather than control action output",
+          "lacks explicit context or phase",
+          "high template dependency with object swap only"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统未排除被障碍物占据的候选车位，导致后续泊车路径与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it1:not_provided_causing_hazard:0",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到行人，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（'未能检测到行人'）并连接到具体后果（碰撞），但核心问题落在感知层而非当前控制动作 'search_slot' 的输出本体上；linked_hazard_ids 能补足后果，但动作-后果链条依赖上游失败，需较多推断才能视为动作层 UCA。",
+          "B1": "description 中无任何生命周期表达（如'过早'、'仍'）或过程相位表达（如'在...阶段'），也无边界/结果条件绑定；仅陈述结果性事件，缺乏可审计上下文。",
+          "B2": "'未能检测到行人' 属于感知/识别层失败，而非对 'search_slot' 动作本身（如提供候选车位、确认车位）的生命周期、时序或执行错误；未体现当前控制动作的输出本体失效。",
+          "B3": "unsafe form 仅通过替换危险对象（'行人'）表达，属于 broad family 的对象替换模式；无生命周期、相位、边界或结果约束等机制子型，区分性弱。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且 description 中'车辆与行人发生碰撞'与该 hazard 描述完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description focuses on perception failure rather than control action output",
+          "lacks explicit context or phase",
+          "mechanism is generic object substitution"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统提供了包含行人的无效候选车位，导致后续泊车路径与行人发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it1:wrong_timing_or_order:1",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过晚地确认了候选车位，导致车辆在检测到障碍物后仍继续移动。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（确认候选车位）的不安全形式（过晚确认），并指出其导致车辆在检测到障碍物后仍继续移动，该后果可由 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹等）直接、一致地承接，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达“过晚地”，满足条件1；但同时包含感知触发词汇“检测到障碍物”，违反条件2，因此不能得2分。",
+          "B2": "核心错误落在当前控制动作‘确认候选车位’的时序上（过晚确认），属于 timing 错误，直接关联动作本体的执行时机，而非上游感知或规划失败。",
+          "B3": "unsafe form 使用了明确的生命周期关系词‘过晚’，体现了 discriminative 的机制子型，符合 lifecycle_relation 类别。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-4，且描述中‘车辆在检测到障碍物后仍继续移动’与 H-AVP-4 的‘非预期运动、错误轨迹或不必要的急停/急动’方向一致。"
+        },
+        "issues": [],
+        "suggested_revision": "AVP系统在应停止移动前过晚确认候选车位，导致车辆越过安全边界继续行驶。"
+      }
+    },
+    {
+      "uca_id": "UCA@it1:wrong_timing_or_order:2",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统在检测到行人后未能及时停止车位确认过程，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（搜索/确认车位）的不安全形式：'未能及时停止车位确认过程'，并直接关联到具体后果（与行人碰撞）。linked_hazard_ids [H-AVP-1, H-AVP-4] 与该后果一致，无需跳跃推断即可构成完整 UCA 骨架。",
+          "B1": "包含感知触发词汇'检测到行人'，违反 B1=2 的条件2；虽有'未能及时停止'隐含 timing 错误，但未使用显式生命周期动词（如'过晚停止'）或过程相位表达（如'在...阶段'），仅满足部分上下文要求。",
+          "B2": "核心错误落在'未能及时停止车位确认过程'，本可视为动作生命周期问题，但表述依赖上游感知触发'检测到行人后'，使动作本体被包裹在感知条件中，未清晰聚焦于 search_slot 动作自身的输出或终止行为。",
+          "B3": "'未能及时停止'属于 broad timing 表达，但未明确为'过晚停止'等 discriminative 生命周期关系；机制区分性主要来自对象替换（行人 vs 其他障碍物），缺乏 phase/boundary/lifecycle 的显式锚点。",
+          "B4": "linked_hazard_ids ['H-AVP-1', 'H-AVP-4'] 均在合法词表中，且与 description 中'车辆与行人发生碰撞'及隐含的'非预期运动'风险完全一致。"
+        },
+        "issues": [
+          "B1 扣分因含感知触发词'检测到'；B2/B3 因 timing 表达不够 discriminative 而未给满分"
+        ],
+        "suggested_revision": "AVP系统在应终止车位确认过程时过晚停止，导致车辆与行人发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it1:wrong_timing_or_order:0",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过早地确认了候选车位，导致车辆在未完全检测周围环境时开始移动。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（确认候选车位）的不安全形式（过早确认），并指出其直接后果（车辆在未完全检测周围环境时开始移动）。该后果与 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹等）一致且可直接承接，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过早地”，满足条件1；同时未使用任何感知触发（如“检测到”）或上游依赖词汇（如“未确认”），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作“确认候选车位”的执行本体上，表现为 timing 错误（过早确认），属于动作生命周期中的时序错误，而非依赖上游感知或规划失败。",
+          "B3": "unsafe form 使用了明确的机制子型“过早”，属于 discriminative 的 lifecycle_relation 表达，具有机制区分性，而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-4'，其描述（非预期运动、错误轨迹、急停急动）与 description 中‘未完全检测环境就开始移动’所隐含的风险方向高度一致。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:1",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统长时间未能确认车位，导致车辆长时间占用车道。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 1
+        },
+        "total_score": 7,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了'长时间未能确认车位'这一动作失败，并引出'车辆长时间占用车道'的后果，但该后果未在 linked_hazard_ids 中直接体现（H-AVP-4 描述的是非预期运动/错误轨迹/急停急动，与占用车道不完全一致），需一定推断才能建立连接，因此骨架成立但不够强。",
+          "B1": "包含'长时间'这一 duration 表达，属于生命周期相关词汇，满足条件1；但未出现明确的过程相位（如'在搜索阶段'）或边界关系绑定，且'未能确认车位'隐含上游决策/结果状态依赖（即'确认'是 search_slot 动作的输出结果），接近上游依赖表述，因此不能给2分。",
+          "B2": "'长时间未能确认车位'可理解为 search_slot 动作持续执行但未完成其结果输出（即未终止或过长执行），属于当前控制动作的生命周期错误（duration too long / not terminated），核心落在动作本体上，而非感知或规划层失败。",
+          "B3": "'长时间未能确认'体现了明确的 duration 错误（过长），属于 lifecycle_relation 子型，具有机制区分性，不是仅靠对象替换或泛化触发表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-4，但该 hazard 描述的是'非预期运动、错误轨迹或急停急动'，而 description 的风险是'长时间占用车道'，两者方向不完全一致——前者强调动态异常，后者强调静态阻塞，存在弱链接但无直接矛盾。"
+        },
+        "issues": [
+          "hazard link weak: '占用车道' not directly covered by H-AVP-4",
+          "context not explicit phase-bound"
+        ],
+        "suggested_revision": "AVP系统在搜索车位阶段持续执行搜索操作时间过长，未能及时终止或退出搜索状态，导致车辆长时间占用车道，增加周边交通干扰风险。"
+      }
+    },
+    {
+      "uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统过早停止车位搜索，导致车辆未能找到合适的车位。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '搜索车位' 的不安全形式：'过早停止车位搜索'，且 linked_hazard_ids 包含 H-AVP-3（车辆无法完成自动泊车任务或停留在不安全位置），二者逻辑一致、无跳跃，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早停止'，满足条件1；同时未出现任何感知触发（如'检测到'）或上游依赖词汇（如'未确认'），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "'过早停止车位搜索' 直接描述了当前控制动作 'search_slot' 的生命周期错误（timing/duration 错误），核心错误落在动作本体上，而非感知或规划层，符合 B2=2 标准。",
+          "B3": "'过早停止' 是典型的 discriminative 生命周期关系表达，体现了明确的机制子型（timing too soon in action lifecycle），具有机制区分性，非泛化模板或对象替换。",
+          "B4": "linked_hazard_ids 为合法 ID ['H-AVP-3']，且 H-AVP-3 描述 '车辆无法完成自动泊车任务或停留在不安全位置' 与 '未能找到合适车位' 的后果方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it2:provided_causing_hazard:1",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了超出停车区域边界的车位，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（选择车位）的不安全形式（选择了超出停车区域边界的车位），并直接导致 linked_hazard_ids 中 H-AVP-2 所述后果（车辆越出目标停车区域）。动作-后果链条完整，无需额外推断，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的边界关系（'超出停车区域边界'），但未包含生命周期表达（如'仍'、'过早'等）或过程相位表达（如'在...阶段'）。因此上下文属于边界条件型，但不符合 B1=2 的严格要求。无感知触发或上游依赖词汇，故不降为0分。",
+          "B2": "核心错误直接落在当前控制动作 'search_slot' 的输出结果上：'选择了超出...的车位' 属于对候选车位的错误确认/选择，是 result_output 类动作的本体失败，而非依赖上游感知或规划失败。符合动作忠实度2分标准。",
+          "B3": "'选择了超出停车区域边界的车位' 体现了明确的 boundary_relation（边界关系）机制子型，即动作输出违反了空间边界约束。这具有机制区分性，不是仅靠对象替换或泛化触发构成的 generic 表达。",
+          "B4": "linked_hazard_ids 为合法值 ['H-AVP-2']，且 description 中'车辆越出目标停车区域'与 H-AVP-2 描述完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it2:provided_causing_hazard:2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了不合适的车位，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（选择车位）的不安全形式（选择了不合适的车位），并指出后果（无法完成自动泊车任务），该后果与 linked_hazard_ids 中的 H-AVP-3 一致。但整体表述仍偏结果摘要，未体现动作执行过程中的具体失败机制（如错误确认、过早确认等），需一定推断才能视为完整 UCA 骨架。",
+          "B1": "description 中无任何显式上下文，既无生命周期表达（如“过早”、“仍”等），也无过程相位（如“在...阶段”），亦无边界/结果条件绑定。纯为结果性陈述，缺乏可审计上下文。",
+          "B2": "核心错误直接落在当前控制动作‘搜索车位/确认候选车位’的输出结果上——‘选择了不合适的车位’，属于对 result_output 的错误决策，符合动作本体失败，而非上游感知或规划层问题。",
+          "B3": "unsafe form ‘选择了不合适的车位’可归入 broad family ‘提供了错误的结果’，但未体现 discriminative 机制子型（如过早确认、错误评估标准、未验证边界等），仅通过对象属性（‘不合适’）泛化表达，缺乏机制区分性。",
+          "B4": "linked_hazard_ids 包含合法 ID ‘H-AVP-3’，其描述‘车辆无法完成自动泊车任务’与 description 后果完全一致，链接合理且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "AVP系统在确认候选车位时选择了不符合几何或安全约束的车位，导致后续无法完成泊车。"
+      }
+    },
+    {
+      "uca_id": "UCA@it2:provided_causing_hazard:0",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了错误的车位，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作的不安全形式（'选择了错误的车位'），并给出了具体后果（'与障碍物发生碰撞'），但该表述更接近结果摘要句，缺乏对动作生命周期、相位或机制关系的体现；虽 linked_hazard_ids [H-AVP-1] 能一致补足后果，但 description 本身未构成严格可用的动作层 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'等），也无过程相位（如'在...阶段'）；仅有结果性陈述，不符合 B1=1 或 2 的条件。",
+          "B2": "'选择了错误的车位' 直接对应当前控制动作 'search_slot / 确认候选车位' 的输出结果错误，属于 result_output 类型的动作本体失败，符合 '提供了错误的' 执行错误模式，未依赖感知触发或上游条件。",
+          "B3": "unsafe form 为 '选择了错误的车位'，可归入 'provided wrong' family，但仅通过对象（车位）和结果（导致碰撞）表达，未体现 discriminative 机制子型（如 timing、phase、boundary 等），属于 generic 对象替换型表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述 '车辆与...障碍物发生碰撞' 与 description 中 '与障碍物发生碰撞' 完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文，仅为结果摘要句",
+          "unsafe form 机制区分性不足，高度依赖模板族"
+        ],
+        "suggested_revision": "AVP系统在确认候选车位阶段选择了不符合几何约束或存在静态障碍物的车位，导致后续泊车路径中与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it2:not_provided_causing_hazard:1",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到其他车辆，导致车辆与车辆发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（'未能检测到其他车辆'）并连接到碰撞后果，但核心问题在于：'未能检测到'属于感知层失败，而非当前控制动作 'search_slot'（搜索/确认车位）本身的不安全形式。虽然 linked_hazard_ids 正确指向 H-AVP-1，但 description 未体现该控制动作如何以不安全方式发生，仅呈现为上游失败导致的后果摘要，需较多推断才能映射到动作层 UCA 骨架。",
+          "B1": "description 中无任何生命周期表达（如'仍'、'过早'等）或过程相位表达（如'在...阶段'）。同时包含感知触发词汇'未能检测到'，属于上游依赖表述，且无显式上下文绑定到动作执行过程。",
+          "B2": "'未能检测到其他车辆' 明确属于感知/识别层失败，而非对 'search_slot' 动作本体（如提供候选车位、确认车位有效性）的缺失、错误或时序问题。该描述未触及控制动作的输出、决策或生命周期，而是停留在上游输入缺失层面。",
+          "B3": "unsafe form 仅通过替换危险对象（'其他车辆'）表达，属于 broad family 的对象替换模式。缺乏生命周期、相位、边界或结果子型等机制区分性表达，仅能归入 generic 的 'not provided' 家族。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且 description 中的碰撞后果与该 hazard 描述一致，无冲突。"
+        },
+        "issues": [
+          "description focuses on upstream perception failure rather than control action unsafe form",
+          "lacks explicit context or phase binding",
+          "mechanism is generic object-based hazard instantiation"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统未正确排除被其他车辆占用的候选车位，导致后续泊车路径规划中与车辆发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it2:not_provided_causing_hazard:2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到障碍物，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（'未能检测到障碍物'）及其后果（碰撞），但核心问题落在感知层而非当前控制动作 'search_slot' 的输出本体上；linked_hazard_ids 能补足后果，但动作-后果连接偏弱，更像上游失败摘要。",
+          "B1": "description 中无任何生命周期表达（如'仍'、'过早'）或过程相位表达（如'在...阶段'），也无边界/结果条件绑定，上下文完全缺失。",
+          "B2": "'未能检测到障碍物' 是典型的感知/识别层失败，未体现 'search_slot' 动作本身的缺失、错误或时序问题；该动作属于 result_output（输出候选车位），但描述未触及结果确认或选择错误，而是归因于上游感知。",
+          "B3": "unsafe form 仅通过替换危险对象（'障碍物'）表达，且依赖泛化触发（隐含'应检测但未检测'），缺乏 lifecycle_relation、phase_relation 等机制子型，属于 broad family 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且 description 中的碰撞后果与该 hazard 描述完全一致。"
+        },
+        "issues": [
+          "description focuses on upstream perception failure rather than control action output",
+          "lacks explicit context or phase/lifecycle expression",
+          "mechanism is generic object-based hazard substitution"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统未正确确认候选车位内无障碍物，导致后续泊车路径规划基于错误信息，引发与障碍物碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it2:not_provided_causing_hazard:0",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到行人，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作失败（未能检测到行人）并连接到具体后果（碰撞），但‘未能检测到’属于感知层失败，未明确体现当前控制动作‘search_slot’本身的不安全形式。linked_hazard_ids 能补足后果，但动作-后果链条仍偏上游摘要，需较多推断才能映射到动作层 UCA 骨架。",
+          "B1": "description 中无任何生命周期表达（如‘过早’、‘仍’）或过程相位表达（如‘在...阶段’），也无边界/结果条件绑定；仅含‘未能检测到’这一感知触发词汇，属于上游依赖，且无显式上下文。",
+          "B2": "核心错误落在‘未能检测到行人’，这是感知/识别层失败，而非当前控制动作‘search_slot’（搜索/确认车位）的输出本体失败。未体现该动作的缺失、错误、时序或持续性问题，不符合动作本体忠实度要求。",
+          "B3": "unsafe form 仅通过替换危险对象（行人）表达，机制上依赖‘未能检测到’这一泛化感知触发，缺乏生命周期、相位、边界或结果子型等 discriminative 机制特征，属于 broad family 的 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述‘车辆与行人...发生碰撞’与 description 中‘导致车辆与行人发生碰撞’完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description focuses on perception failure rather than control action output",
+          "lacks explicit context or lifecycle relation",
+          "high template dependency with object substitution only"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统错误地确认了一个包含行人的区域为可用候选车位，导致后续泊车路径与行人发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it2:wrong_timing_or_order:1",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过晚地确认了候选车位，导致车辆错过了最佳泊车时机。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '确认候选车位' 的不安全形式（过晚确认），并指出其后果（错过最佳泊车时机）。该后果可由 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹等）直接、一致地承接，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过晚地'，满足条件1；且未使用任何感知触发或上游依赖词汇（如'检测到''未确认'等），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作 '确认候选车位' 的时序执行上（'过晚确认'），属于 timing 错误，是动作本体的生命周期问题，而非依赖上游条件或感知失败。",
+          "B3": "'过晚地确认' 明确体现了 lifecycle_relation 类型的机制子型（timing 错误中的延迟），具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-4'，其描述为'非预期运动、错误轨迹或不必要的急停/急动'，与'错过最佳泊车时机'可能导致车辆紧急调整、轨迹异常的风险方向一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it2:wrong_timing_or_order:2",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统在确认车位之前进行了不必要的移动，导致车辆出现非预期运动。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 提到 '在确认车位之前进行了不必要的移动'，暗示了动作时序错误，并链接到 H-AVP-4（非预期运动），构成部分可用骨架。但 '不必要的移动' 未明确是 search_slot 动作本身的输出错误还是其他子系统行为，动作本体与后果的连接仍偏弱，需一定推断。",
+          "B1": "'在确认车位之前' 是一个结果条件（即以另一动作的完成为参照），但未使用生命周期动词（如'过早'）或过程相位表达（如'在搜索阶段'）。同时，'确认车位' 属于上游依赖（search_slot 的后续动作），因此不符合 B1=2 的严格要求，仅得1分。",
+          "B2": "核心问题落在 '进行了不必要的移动'，但该移动是否属于 search_slot 动作的直接输出不明确。search_slot 语义上属于 result_output（输出候选车位），而 '移动' 更像是执行层 actuation。描述混淆了搜索决策与车辆运动，动作本体不够清晰，且依赖 '确认车位' 这一上游条件，故给1分。",
+          "B3": "unsafe form 使用了 '在...之前' 的时序结构，但未体现 discriminative 机制子型（如'过早提供候选车位'）。'不必要的移动' 是泛化表述，缺乏对动作生命周期、相位或结果约束的具体刻画，仅能归入 broad timing family，机制区分性不足。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-4'，其描述 '非预期运动、错误轨迹...' 与 description 中 '不必要的移动，导致车辆出现非预期运动' 一致，无冲突。"
+        },
+        "issues": [
+          "动作本体模糊：'移动' 不属于 search_slot 的直接输出",
+          "上下文依赖上游动作完成状态",
+          "机制表述偏泛化"
+        ],
+        "suggested_revision": "AVP系统在完成候选车位确认前，过早输出移动指令，导致车辆出现非预期运动。"
+      }
+    },
+    {
+      "uca_id": "UCA@it2:wrong_timing_or_order:0",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过早地确认了候选车位，导致车辆在不适当的时间开始泊车。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '确认候选车位' 的不安全形式（过早确认），并指出其后果（在不适当时间开始泊车）。该后果可直接与 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹等）一致衔接，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早地'，满足条件1；且未使用任何感知触发或上游依赖词汇（如'检测到'、'未确认'等），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "'过早地确认了候选车位' 直接描述了当前控制动作（search_slot / 确认候选车位）在 timing 上的本体失败，属于典型的时序错误（timing error），核心错误落在动作输出本身，而非上游感知或规划层。",
+          "B3": "'过早' 是典型的 discriminative 生命周期关系表达，体现了明确的机制子型（timing 错误中的提前执行），具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-4'，其描述为 '非预期运动、错误轨迹或不必要的急停/急动'，与 '过早确认车位导致在不适当时间开始泊车' 的风险方向高度一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it2:stopped_too_soon_or_applied_too_long:1",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统长时间搜索车位，导致车辆长时间占用道路资源。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 1
+        },
+        "total_score": 6,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了'长时间搜索车位'这一动作持续状态，并指出后果是'占用道路资源'，但该后果并未直接对应 linked_hazard_ids 中的 H-AVP-4（非预期运动/错误轨迹/急停急动）。虽然可勉强解释为'长时间低速徘徊'可能引发周边风险上升，但连接较弱、需较多推断，未构成清晰可用的动作层 UCA 骨架。",
+          "B1": "包含生命周期表达'长时间'（对应 duration wrong），满足条件1；未出现感知触发或上游依赖词汇，满足条件2。但根据规则，'长时间'属于 broad timing/duration 词语，若未结合更具体的过程相位或边界关系，仅给 B1=1。此处无相位或边界绑定，故不满足 B1=2 的强上下文要求。",
+          "B2": "'长时间搜索车位'直接描述了当前控制动作 'search_slot' 的执行持续时间过长，属于动作本体的 duration 错误（应适时终止而未终止），核心错误落在动作生命周期上，符合 B2=2 标准。",
+          "B3": "unsafe form 使用了'长时间'这一泛化时序词，虽可归入 'duration wrong' family，但未体现更具体的机制子型（如'在完成初步扫描后仍持续搜索'、'超过最大允许搜索周期仍未终止'等）。缺乏 phase_relation / boundary_relation / result_subtype 等 discriminative 元素，仅属 generic timing 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-4'，但 description 中的风险是'占用道路资源'，而 H-AVP-4 描述的是'非预期运动、错误轨迹或急停急动'。两者方向不完全一致：长时间搜索通常表现为低速、稳定但冗余的运动，未必构成'非预期'或'急动'。存在弱关联但非直接匹配，故给1分。"
+        },
+        "issues": [
+          "hazard link weak: '占用道路资源' ≠ '非预期运动/急动'",
+          "context lacks phase or boundary binding",
+          "mechanism is generic timing without discriminative relation"
+        ],
+        "suggested_revision": "AVP系统在完成初步车位扫描后仍未终止搜索动作，持续低速徘徊，导致车辆长时间占用行车道，增加被追尾或干扰其他交通参与者的风险。"
+      }
+    },
+    {
+      "uca_id": "UCA@it2:stopped_too_soon_or_applied_too_long:0",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统过早停止了车位搜索，导致车辆未能找到合适的车位。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '搜索车位' 的不安全形式：'过早停止了车位搜索'，且后果 '未能找到合适的车位' 可由 linked_hazard_ids 中的 H-AVP-3（车辆无法完成自动泊车任务）直接、一致地承接，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早停止'，满足条件1；同时未使用任何感知触发（如'检测到'）或上游依赖词汇（如'未确认'），满足条件2，因此 B1=2。",
+          "B2": "'过早停止了车位搜索' 直接描述了当前控制动作 'search_slot' 的生命周期错误（timing/duration 错误），核心错误落在动作本体上，而非感知或规划层，符合 B2=2 标准。",
+          "B3": "'过早停止' 是典型的生命周期关系表达，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达，因此 B3=2。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-3'，其描述 '车辆无法完成自动泊车任务' 与 description 中 '未能找到合适的车位' 在语义上一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it3:provided_causing_hazard:1",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了超出停车区域边界的车位，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（选择车位）的不安全形式（选择了超出停车区域边界的车位），并直接导向 linked_hazard_ids 中 H-AVP-2 所描述的后果（车辆越出目标停车区域）。动作-后果链条完整，无需额外推断，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含边界关系（'超出停车区域边界'），但未包含任何生命周期表达（如'仍'、'过早'等）或过程相位表达（如'在...阶段'）。因此不满足 B1=2 的双条件要求，仅因有边界条件而得 1 分。",
+          "B2": "核心错误直接落在当前控制动作 'search_slot' 的输出结果上：'选择了超出...的车位' 属于对候选车位的错误确认/选择，是 result_output 类动作的本体失败，而非依赖上游感知或规划失败。",
+          "B3": "'选择了超出停车区域边界的车位' 体现了明确的 boundary_relation（边界关系），即所选结果违反了空间约束条件，具有机制区分性，不属于仅靠对象替换的 generic 表达。",
+          "B4": "linked_hazard_ids 为合法值 ['H-AVP-2']，且 description 中的后果（车辆越出目标停车区域）与 H-AVP-2 的描述完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it3:provided_causing_hazard:2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了不合适的车位，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（选择车位）的不安全形式（选择了不合适的车位），并指向后果（无法完成泊车任务），该后果可由 linked_hazard_ids [H-AVP-3] 一致补足。但表述仍偏结果摘要，未体现动作执行过程中的机制性失败（如错误确认、过早选择等），需一定推断才能视为完整 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'过早'、'仍'），也无过程相位（如'在...阶段'），亦无边界/结果条件。纯为结果陈述，缺乏可审计上下文。",
+          "B2": "核心错误直接落在当前控制动作 'search_slot' 的输出本体上——'选择了不合适的车位' 属于对候选车位的错误确认/错误选择，符合 result_output 类动作的执行错误，未依赖感知触发或上游条件。",
+          "B3": "unsafe form '选择了不合适的车位' 可归入 provided/wrong family，但仅通过对象属性（'不合适'）表达，未体现 discriminative 机制子型（如过早确认、在边界外确认、未验证即确认等），属于 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-3'，其描述 '车辆无法完成自动泊车任务...' 与 description 后果完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description lacks explicit context",
+          "unsafe form is generic without mechanism distinction"
+        ],
+        "suggested_revision": "AVP系统在未充分验证车位尺寸或边界条件的情况下确认了候选车位，导致车辆无法完成自动泊车任务。"
+      }
+    },
+    {
+      "uca_id": "UCA@it3:provided_causing_hazard:0",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了错误的车位，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（选择车位）的不安全形式（选择了错误的车位），并给出了具体后果（与障碍物碰撞），且 linked_hazard_ids 包含 H-AVP-1，可一致补足。但整体仍偏结果摘要句，缺乏对动作生命周期、相位或机制关系的显式刻画，未构成严格可用的动作层 UCA 骨架。",
+          "B1": "description 中无任何生命周期表达（如“仍”、“过早”等）或过程相位表达（如“在...阶段”），也无边界/结果条件绑定，上下文完全缺失。",
+          "B2": "核心错误直接落在当前控制动作 'search_slot' 的输出本体上：'选择了错误的车位' 属于 result_output 的执行错误（提供了错误的结果），符合 B2=2 的标准。",
+          "B3": "'选择了错误的车位' 可归入 provided/wrong family，但 unsafe form 仅通过对象（车位→错误）和后果（碰撞）体现，缺乏 discriminative 机制子型（如 timing、phase、boundary 等），属于 generic 表达。",
+          "B4": "linked_hazard_ids 为合法 ID [\"H-AVP-1\"]，且 description 中的后果（与障碍物碰撞）与 H-AVP-1 描述完全一致。"
+        },
+        "issues": [],
+        "suggested_revision": "在搜索车位阶段，AVP系统确认了一个不符合安全边界的候选车位，导致后续泊车路径与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it3:not_provided_causing_hazard:1",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到其他车辆，导致车辆与车辆发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（'未能检测到其他车辆'）并连接到具体后果（碰撞），但核心问题落在感知层而非当前控制动作 'search_slot' 的输出本体上；linked_hazard_ids 能补足后果，但动作-后果链条依赖上游失败，需较多推断才能视为动作层 UCA。",
+          "B1": "description 中无任何生命周期表达（如'仍'、'过早'等）或过程相位表达（如'在...阶段'）；仅含结果性摘要，无显式可审计上下文。",
+          "B2": "核心错误是'未能检测到其他车辆'，属于感知/识别层失败，而非当前控制动作 'search_slot'（搜索/确认车位）的输出缺失、错误或时序问题；未体现动作本体的不安全形式。",
+          "B3": "unsafe form 仅通过对象替换（'其他车辆'）和泛化失败模式（'未能检测到'）表达，缺乏机制子型（如生命周期、相位、边界关系）；可归入 broad family 'not provided'，但无区分性。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且 description 中'车辆与车辆发生碰撞'与该 hazard 描述完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description focuses on perception failure rather than control action output",
+          "lacks explicit context or phase information",
+          "mechanism is generic object-based failure without discriminative relation"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统未将其他车辆识别为有效障碍物并排除其所在区域作为候选车位，导致后续路径规划中发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it3:not_provided_causing_hazard:2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到障碍物，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（'未能检测到障碍物'）及其后果（碰撞），但核心错误落在感知层而非当前控制动作 'search_slot' 的输出本体上；linked_hazard_ids 能补足后果，但动作-后果连接偏弱，需推断是否属于 search_slot 的责任范围。",
+          "B1": "description 中无任何生命周期表达（如'过早'、'未终止'）或过程相位表达（如'在...阶段'），也无边界/结果条件绑定，上下文完全缺失。",
+          "B2": "'未能检测到障碍物' 是典型的感知/识别失败，属于上游支撑层问题，未体现 'search_slot' 动作本身的输出缺失、错误或时序异常；该动作语义为 result_output（输出候选车位），而描述未触及结果确认或选择的失败。",
+          "B3": "unsafe form 仅通过对象替换（'障碍物'）表达，且依赖泛化触发（隐含'应检测但未检测'），缺乏 lifecycle_relation、phase_relation 等机制子型，属于 broad family 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且 description 中的碰撞后果与该 hazard 描述完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description focuses on perception failure rather than control action output",
+          "lacks explicit context or phase/lifecycle expression",
+          "high template dependency with object substitution only"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统未排除包含障碍物的候选车位，导致车辆后续与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it3:not_provided_causing_hazard:0",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到行人，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（'未能检测到行人'）并连接到具体后果（碰撞），但核心问题落在感知层而非当前控制动作 'search_slot' 的输出本体上；linked_hazard_ids 能补足后果，但动作-后果链条依赖上游失败，需较多推断才能视为动作层 UCA。",
+          "B1": "description 中无任何生命周期表达（如'仍'、'过早'）或过程相位表达（如'在...阶段'），也无边界/结果条件；上下文完全缺失。",
+          "B2": "'未能检测到行人' 是典型的感知/识别层失败，未体现 'search_slot' 动作本身的输出缺失、错误或时序问题；核心错误未落在当前控制动作的执行本体上。",
+          "B3": "unsafe form 仅通过替换危险对象（'行人'）表达，属于 broad family 的对象替换模式；缺乏生命周期、相位、边界或结果约束等机制子型，区分性弱。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且 description 中的碰撞后果与该 hazard 描述完全一致。"
+        },
+        "issues": [
+          "description focuses on perception failure rather than control action output",
+          "lacks explicit context or phase",
+          "mechanism is generic object substitution"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统未将行人所在区域排除为无效候选车位，导致后续规划路径与行人发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it3:wrong_timing_or_order:1",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过晚地确认了候选车位，导致车辆错过了最佳泊车时机。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '确认候选车位' 的不安全形式（'过晚地确认'），并指出其后果（'错过最佳泊车时机'）。该后果可由 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹等）直接、一致地承接，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过晚地'，满足条件1；且未使用任何感知触发或上游依赖词汇（如'检测到''未确认'等），满足条件2。因此符合 B1=2 的双重要求。",
+          "B2": "'过晚地确认了候选车位' 直接描述了当前控制动作（search_slot / 确认候选车位）在 timing 上的本体失败，属于典型的时序错误（timing error），核心错误落在动作输出本身，而非上游感知或规划层。",
+          "B3": "'过晚地' 是明确的生命周期关系表达，体现了 discriminative 的机制子型（timing 错误中的延迟），而非仅靠对象替换或泛化触发。这符合 B3=2 的标准。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-4'，其描述为 '非预期运动、错误轨迹或不必要的急停/急动'，与 '错过最佳泊车时机' 可能导致的后续不稳定行为（如急刹、路径重规划引发的突兀动作）方向一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it3:wrong_timing_or_order:2",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统在确认车位之前进行了不必要的移动，导致车辆出现非预期运动。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 提到“在确认车位之前进行了不必要的移动”，暗示了动作时序错误，并关联到非预期运动（H-AVP-4），但‘不必要的移动’未明确是否属于 search_slot 动作本体的输出或执行，更像是对行为结果的摘要，缺乏对动作不安全形式的清晰界定。linked_hazard_ids 能补足后果，但动作-后果链条仍偏弱。",
+          "B1": "包含过程相位表达“在确认车位之前”，属于结果条件（confirmation 作为 search_slot 的终点），但未使用生命周期动词（如“过早”、“仍”等）。同时，“确认车位”是当前动作 search_slot 的一部分（因 action_description 包含“确认候选车位”），因此不构成上游依赖，但上下文仍属 result_condition，未达 B1=2 所需的生命周期或强相位表达。",
+          "B2": "核心错误落在“在确认前进行移动”，但 search_slot 动作本身包含搜索与确认，而“不必要的移动”更可能属于执行层（如车辆控制）而非 search_slot 的直接输出。description 未明确说明是 search_slot 动作本身错误提供/过早提供车位信息，而是描述了系统行为（移动），存在 mixed_with_upstream 倾向，动作本体不够聚焦。",
+          "B3": "unsafe form 使用了“在...之前”这一时序结构，但未体现 discriminative 机制子型（如“过早确认”、“提前终止搜索”）。仅通过 broad timing 表达“之前”和对象“不必要的移动”组合，缺乏 lifecycle_relation 或 phase_relation 的明确锚点，机制区分性不足。",
+          "B4": "linked_hazard_ids 为合法值 [\"H-AVP-4\"]，且 description 中“非预期运动”与 H-AVP-4 “非预期运动、错误轨迹...”完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "AVP系统在完成候选车位确认前过早输出移动指令，导致车辆出现非预期运动。"
+      }
+    },
+    {
+      "uca_id": "UCA@it3:wrong_timing_or_order:0",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过早地确认了候选车位，导致车辆在不适当的时间开始泊车。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '确认候选车位' 的不安全形式（过早确认），并指出其后果是 '在不适当的时间开始泊车'，该后果可由 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹等）直接、一致地承接，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早地'，满足条件1；且未使用任何感知触发或上游依赖词汇（如'检测到''未确认'等），满足条件2，因此 B1=2。",
+          "B2": "核心错误落在当前控制动作 '确认候选车位' 的时序本体上（'过早确认'），属于 timing 错误，直接对应动作生命周期关系，未依赖上游条件或感知触发，符合 B2=2 标准。",
+          "B3": "'过早地确认'体现了明确的 lifecycle_relation 机制子型（timing 错误中的 '过早'），具有机制区分性，不是仅靠对象替换或泛化触发，因此 B3=2。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-4'，其描述为 '非预期运动、错误轨迹或不必要的急停/急动'，与 '过早确认导致不适当时间开始泊车' 的风险方向一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:1",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统长时间未能确认车位，导致车辆长时间停滞在不安全的位置。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了‘长时间未能确认车位’这一动作失败，并指出后果是‘车辆长时间停滞在不安全位置’，与 linked_hazard_ids 中的 H-AVP-3（无法完成泊车或停留在不安全位置）一致。但‘长时间未能确认’更偏向结果状态摘要，未清晰体现当前控制动作（search_slot）本身的不安全形式（如‘持续搜索而未终止’或‘过晚确认’），需一定推断才能还原为动作层 UCA 骨架。",
+          "B1": "包含‘长时间’这一 duration 表达，但未使用明确的生命周期动词（如‘仍提供’、‘未终止’）或过程相位（如‘在搜索阶段’）。同时，‘未能确认车位’隐含上游依赖（确认是 search_slot 的输出结果，但‘未能’暗示系统未完成该动作，而非动作本身以不安全形式发生），因此不符合 B1=2 的严格条件。",
+          "B2": "核心问题落在‘未能确认车位’，这属于当前控制动作（search_slot / 确认候选车位）的缺失或延迟，但表述为‘未能’而非动作本体的生命周期错误（如‘未终止搜索’或‘过晚提供确认’）。由于‘确认车位’是 result_output，理想表达应为‘过晚确认’或‘持续搜索而未输出确认’。当前描述更接近结果缺失，但未明确绑定到动作执行本体，故给1分。",
+          "B3": "‘长时间未能确认’可映射到 timing/duration 错误 family，但仅使用泛化词语‘长时间’，未体现 discriminative 机制子型（如‘过长’、‘过晚’、‘在...后仍未’）。缺乏 phase_relation、boundary_relation 或 lifecycle_relation 的显式锚点，仅靠对象（车位）和泛化时长构成，属于 generic 表达。",
+          "B4": "linked_hazard_ids 为合法值 [\"H-AVP-3\"]，且 H-AVP-3 描述‘车辆无法完成自动泊车任务，或停留在不安全/不可接受位置’与 description 中‘车辆长时间停滞在不安全的位置’高度一致，无冲突。"
+        },
+        "issues": [
+          "description 更像结果摘要而非动作层 UCA",
+          "缺少显式生命周期或相位表达",
+          "unsafe form 机制区分性不足"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统过晚终止搜索并确认候选车位，导致车辆在行车道或非停车区域长时间停滞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统过早停止了车位搜索，导致车辆未能找到合适的车位。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '搜索车位' 的不安全形式：'过早停止了车位搜索'，并指出后果是 '未能找到合适的车位'。该后果与 linked_hazard_ids 中的 H-AVP-3（车辆无法完成自动泊车任务，或停留在不安全/不可接受位置）直接、一致、非跳跃地对应，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早停止'，满足条件1；同时未出现任何感知触发（如'检测到'）或上游依赖词汇（如'未确认'），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "'过早停止了车位搜索' 直接描述了当前控制动作 'search_slot' 的生命周期错误（timing/duration 错误），核心错误落在动作本体上，而非感知或规划层。符合 B2=2 的判定标准。",
+          "B3": "'过早停止' 是典型的生命周期关系表达，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。因此 unsafe form 具备 discriminative 特征，应得 2 分。",
+          "B4": "linked_hazard_ids 为 ['H-AVP-3']，格式合法；H-AVP-3 描述 '车辆无法完成自动泊车任务，或停留在不安全/不可接受位置'，与 description 中 '未能找到合适的车位' 的后果方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it4:provided_causing_hazard:1",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了超出停车区域边界的车位，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（选择车位）的不安全形式（选择了超出停车区域边界的车位），并直接导向 linked_hazard_ids 中 H-AVP-2 所描述的后果（车辆越出目标停车区域）。动作-后果链条完整，无需额外推断，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的边界关系（'超出停车区域边界'），但缺乏生命周期表达（如'仍提供'、'过早'等）或过程相位表达（如'在...阶段'）。同时未包含感知触发或上游依赖词汇，因此满足 B1=1 的条件：有边界/结果条件但无生命周期或相位表达。",
+          "B2": "核心错误直接落在当前控制动作 'search_slot' 的输出本体上——即'选择了超出边界的车位'，属于 result_output 类型的动作执行错误（提供了错误的候选结果）。未依赖感知触发或上游条件，动作本体清晰。",
+          "B3": "unsafe form 体现了明确的 boundary_relation（'超出停车区域边界'），这是一种具有机制区分性的语义子型，而非仅通过对象替换或泛化触发表达。该表达足以区分于其他类型（如 timing 或 lifecycle 错误），符合 discriminative 标准。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-2'，其描述为'车辆越出目标停车区域或停车边界'，与 description 中'导致车辆越出目标停车区域'完全一致，方向明确且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it4:provided_causing_hazard:2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了不合适的车位，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（选择车位）的不安全形式（不合适），并连接到后果（无法完成泊车任务），但表述偏结果摘要，未体现动作执行过程中的具体失败机制（如错误确认、过早确认等），需依赖 linked_hazard_ids 补足后果。虽可构成骨架，但粒度偏粗，缺乏动作层细节。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'过早'、'仍'），也无过程相位（如'在...阶段'），亦无边界/结果条件绑定。纯为结果陈述，无审计所需上下文。",
+          "B2": "核心错误落在当前控制动作 'search_slot' 的输出本体上——'选择了不合适的车位'，属于 result_output 的错误决策/错误选择，直接对应动作本体失败，而非感知或上游依赖。符合 B2=2 的标准。",
+          "B3": "unsafe form 为'选择了不合适的车位'，仅通过对象属性（'不合适'）表达失败，未体现 discriminative 机制子型（如 timing、phase、boundary）。虽可归入 'provided wrong' family，但缺乏机制区分性，属 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-3'，其描述'车辆无法完成自动泊车任务...'与 description 后果完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文",
+          "unsafe form 机制区分性不足",
+          "高度依赖模板化表达"
+        ],
+        "suggested_revision": "AVP系统在确认候选车位阶段选择了尺寸不足或存在障碍物的车位，导致车辆无法完成自动泊车任务。"
+      }
+    },
+    {
+      "uca_id": "UCA@it4:provided_causing_hazard:0",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了错误的车位，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（选择车位）的不安全形式（选择了错误的车位），并直接导致了 linked_hazard_ids 中 H-AVP-1 所描述的碰撞后果，构成可用的动作层 UCA 骨架。",
+          "B1": "description 中没有任何显式上下文，既无生命周期表达（如'仍'、'过早'等），也无过程相位（如'在...阶段'），也没有边界或结果条件绑定。纯为结果导向的摘要句。",
+          "B2": "核心错误落在当前控制动作 'search_slot' 的输出本体上：'选择了错误的车位' 属于 result_output 类型的动作执行错误，符合 '提供了错误的' 这一执行错误模式。",
+          "B3": "unsafe form 仅通过对象替换（'错误的车位' → '障碍物'）体现风险，未包含生命周期、相位、边界或结果约束等机制子型，属于 broad family 表达，缺乏机制区分性。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，且 description 中'与障碍物发生碰撞'与该 hazard 描述完全一致。"
+        },
+        "issues": [],
+        "suggested_revision": "AVP系统在候选车位确认阶段选择了不符合几何或障碍物约束的车位，导致后续泊车路径中与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it4:not_provided_causing_hazard:1",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到其他车辆，导致车辆与车辆发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（'未能检测到其他车辆'）并连接到碰撞后果，但核心问题落在感知层而非当前控制动作 'search_slot' 的输出本体上。linked_hazard_ids 能补足后果，但动作-后果链条依赖上游失败，需较多推断才能视为动作层 UCA。",
+          "B1": "description 中无任何生命周期表达（如'仍'、'过早'）或过程相位表达（如'在...阶段'），也无边界/结果条件绑定，上下文完全缺失。",
+          "B2": "'未能检测到其他车辆' 是典型的感知/识别层失败，而非对 'search_slot' 动作本身（如未提供候选车位、错误确认车位）的执行或生命周期错误。该描述未触及动作输出本体。",
+          "B3": "unsafe form 仅通过替换危险对象（'其他车辆'）体现差异，属于 broad family 的对象替换模式，缺乏机制子型（如 timing、phase、boundary 等）。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且 description 中的'车辆与车辆发生碰撞'与该 hazard 描述完全一致。"
+        },
+        "issues": [
+          "description focuses on perception failure rather than control action output",
+          "lacks explicit context or phase/lifecycle expression",
+          "unsafe form is generic (object swap only)"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统未提供包含其他车辆存在的有效候选车位集合，导致后续路径规划引发车辆碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it4:not_provided_causing_hazard:2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到障碍物，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作失败（未能检测到障碍物）并连接到具体后果（碰撞），但‘未能检测到’属于感知层失败，而非当前控制动作‘search_slot’（搜索/确认车位）本身的不安全形式。虽然 linked_hazard_ids 能补足后果，但动作层骨架薄弱，更像上游失败摘要，需较多推断才能映射到动作本体。",
+          "B1": "description 中无任何生命周期表达（如‘过早’、‘未终止’）或过程相位表达（如‘在...阶段’）。仅包含结果性陈述，缺乏可审计上下文。",
+          "B2": "核心错误落在‘未能检测到障碍物’，这是感知/识别层失败，而非 control_action ‘search_slot’（输出候选车位或确认结果）的执行本体问题。未体现该动作的缺失、错误、时序或生命周期异常。",
+          "B3": "unsafe form 仅通过替换危险对象（‘障碍物’）表达，且依赖‘未能检测到’这一泛化感知触发，缺乏机制子型（如生命周期、相位、边界关系）。可归入 broad family ‘not provided’，但无区分性。",
+          "B4": "linked_hazard_ids 包含合法 ID ‘H-AVP-1’，其描述‘车辆与障碍物发生碰撞’与 description 后果完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description focuses on perception failure rather than control action output",
+          "lacks explicit context or lifecycle/phase expression",
+          "mechanism is generic object-based hazard substitution"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统错误地确认了一个包含障碍物的候选车位（即提供了无效车位结果），导致后续泊车路径与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it4:not_provided_causing_hazard:0",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到行人，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了‘未能检测到行人’导致碰撞，但‘未能检测到’属于感知层失败，而非当前控制动作‘search_slot’（搜索/确认车位）本身的不安全形式。虽然 linked_hazard_ids 正确指向 H-AVP-1，但动作与后果之间的连接依赖上游感知失败，未构成清晰的动作层 UCA 骨架，需较多推断才能关联到 search_slot 动作的缺失或错误。",
+          "B1": "description 中无任何生命周期表达（如‘过早’、‘仍’等）或过程相位表达（如‘在...阶段’）。仅包含结果性陈述，无显式上下文。",
+          "B2": "核心错误落在‘未能检测到行人’，这是典型的感知/识别层失败，而非 control_action ‘search_slot’（输出候选车位或确认结果）本身的生命周期、时序或执行错误。未体现动作本体的不安全形式。",
+          "B3": "unsafe form 仅通过替换危险对象（‘行人’）表达，属于 broad family 的对象替换模式，缺乏机制子型（如 lifecycle_relation、phase_relation 等）。虽可归入‘not provided’族，但无区分性。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且描述的后果‘车辆与行人发生碰撞’与该 hazard 完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 描述的是感知失败而非控制动作失败",
+          "缺少显式上下文",
+          "机制区分性弱"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统未排除包含行人的候选车位，导致后续泊车路径与行人发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it4:wrong_timing_or_order:1",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过晚地确认了候选车位，导致车辆错过了最佳泊车时机。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '确认候选车位' 的不安全形式（'过晚地确认'），且 linked_hazard_ids 引用了 H-AVP-4（非预期运动/错误轨迹等），二者逻辑一致：错过最佳泊车时机可能导致车辆急停、急动或轨迹异常，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过晚地'，满足条件1；且未使用任何感知触发（如'检测到'）或上游依赖词汇（如'未确认前'），满足条件2。因此上下文质量为高。",
+          "B2": "'过晚地确认了候选车位' 直接描述了当前控制动作（search_slot / 确认候选车位）在 timing 上的本体失败，属于典型的时序错误（timing error），核心错误落在动作输出本身，而非感知或规划层。",
+          "B3": "'过晚' 是明确的生命周期关系表达，体现了 discriminative 的 unsafe form，属于 timing 子型中的具体机制区分，而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 为合法 ID [H-AVP-4]，且 description 中 '错过最佳泊车时机' 可合理导致 '非预期运动、错误轨迹或急停'，与 H-AVP-4 描述一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it4:wrong_timing_or_order:2",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统在确认车位之前进行了不必要的移动，导致车辆出现非预期运动。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 提到“在确认车位之前进行了不必要的移动”，暗示了动作时序错误，并指向非预期运动这一后果，linked_hazard_ids（H-AVP-4）可一致补足后果。但‘不必要的移动’未明确是当前控制动作 search_slot 的输出本体失败，还是上游规划/执行层的失败，动作不安全形式不够清晰，需一定推断才能构成完整UCA骨架。",
+          "B1": "包含过程相位表达“在确认车位之前”，属于结果条件类上下文，但未使用生命周期动词（如‘过早’、‘仍’等），且‘确认车位’本身是当前动作的一部分（search_slot 包含确认候选车位），不构成上游依赖或感知触发，因此满足B1=1条件。但因缺乏显式生命周期或阶段动词，不满足B1=2。",
+          "B2": "核心问题落在‘进行了不必要的移动’，但该移动是否属于 search_slot 动作的直接输出不明确。search_slot 是结果输出型动作（输出候选车位），而‘移动’更偏向执行/轨迹层（属下游 actuation），因此错误可能不在当前动作本体，而是其下游使用。虽有时序关系（‘之前’），但动作忠实度不足，仅给1分。",
+          "B3": "unsafe form 使用了‘在...之前’这一时序结构，有一定机制区分性，但未使用 discriminative 词汇如‘过早’、‘过晚’等，也未体现生命周期、边界或结果子型关系。整体仍偏 broad timing 表达，缺乏明确机制核，仅能归为 generic timing family，故给1分。",
+          "B4": "linked_hazard_ids 为合法值 [\"H-AVP-4\"]，且 H-AVP-4 描述‘非预期运动、错误轨迹’与 description 中‘不必要的移动，导致车辆出现非预期运动’完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "动作本体模糊：'不必要的移动'不属于 search_slot（结果输出）的直接输出，可能混淆了控制动作层级",
+          "机制区分性不足：仅用'在...之前'，未使用'过早'等 discriminative 词汇"
+        ],
+        "suggested_revision": "AVP系统过早终止车位搜索并提前输出无效候选车位，导致车辆基于错误信息执行非预期移动。"
+      }
+    },
+    {
+      "uca_id": "UCA@it4:wrong_timing_or_order:0",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过早地确认了候选车位，导致车辆在不适当的时间开始泊车。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（确认候选车位）的不安全形式（过早确认），并指出其后果（在不适当时间开始泊车）。该后果可由 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹等）直接、一致地承接，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过早地”，满足条件1；且未使用任何感知触发或上游依赖词汇（如“检测到”、“未确认”等），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作“确认候选车位”的执行本体上，表现为 timing 错误（过早确认），属于动作生命周期中的时序错误，而非依赖上游条件或感知失败。",
+          "B3": "unsafe form 使用了明确的机制子型“过早”，属于 lifecycle_relation，具有机制区分性，不是仅靠对象替换或泛化触发表达的 generic 形式。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-4'，其描述为‘非预期运动、错误轨迹或不必要的急停/急动’，与 description 中‘在不适当时间开始泊车’所隐含的轨迹/时序风险方向一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it4:stopped_too_soon_or_applied_too_long:1",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统长时间未能确认车位，导致车辆长时间停滞在不安全的位置。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作未完成（长时间未能确认车位）导致车辆停滞在不安全位置，但‘长时间未能确认’更偏向任务失败摘要，而非明确表达当前控制动作‘search_slot’本身的不安全形式（如‘持续搜索而未终止’或‘过久提供搜索行为’）。linked_hazard_ids H-AVP-3 可部分补足后果，但动作层骨架仍偏弱。",
+          "B1": "包含‘长时间’这一 duration 表达，可视为弱生命周期线索，但未使用‘仍’、‘未终止’、‘过长’等标准生命周期动词；同时‘未能确认车位’隐含上游依赖（确认是 search_slot 的结果输出，但‘未能’暗示内部决策失败），不符合 B1=2 的严格条件。无感知触发词，故给1分。",
+          "B2": "核心错误落在当前控制动作‘search_slot’的执行持续性上：‘长时间未能确认’实质等价于‘search_slot 动作持续过久而未终止或完成’，属于动作本体的 duration 错误，符合 lifecycle-related action failure，应视为动作本体失败而非上游感知/规划失败。",
+          "B3": "unsafe form 使用‘长时间未能确认’，虽涉及时长，但未明确机制子型（如‘过长’、‘未终止’），而是以任务结果状态（未能确认）间接表达，缺乏 discriminative 的 lifecycle_relation 或 phase_relation 表达，仅能归入 broad timing/duration family，故为 generic。",
+          "B4": "linked_hazard_ids 为合法值 [H-AVP-3]，且 H-AVP-3 描述‘车辆无法完成自动泊车任务，或停留在不安全/不可接受位置’与 description 中‘车辆长时间停滞在不安全的位置’高度一致，无冲突。"
+        },
+        "issues": [
+          "description 更像任务失败摘要而非动作层 UCA",
+          "缺少显式生命周期动词如‘仍’或‘未终止’",
+          "unsafe form 依赖结果状态而非动作本体表达"
+        ],
+        "suggested_revision": "AVP系统在搜索车位过程中持续执行搜索动作过久而未终止，导致车辆长时间停滞在不安全位置。"
+      }
+    },
+    {
+      "uca_id": "UCA@it4:stopped_too_soon_or_applied_too_long:0",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统过早停止了车位搜索，导致车辆未能找到合适的车位。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '搜索车位' 的不安全形式：'过早停止了车位搜索'，并指出后果是'未能找到合适的车位'。该后果与 linked_hazard_ids 中的 H-AVP-3（车辆无法完成自动泊车任务，或停留在不安全/不可接受位置）直接、一致、非跳跃地对应，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早停止'，满足条件1；同时未出现任何感知触发（如'检测到'）或上游依赖词汇（如'未确认'），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "'过早停止了车位搜索' 直接描述了当前控制动作 'search_slot' 的生命周期错误（timing/duration 错误），属于动作本体的执行失败，而非依赖上游条件或感知层问题，因此给2分。",
+          "B3": "'过早停止' 是典型的生命周期关系表达，具有机制区分性，明确体现了 timing 错误的子类型，而非仅靠对象替换或泛化触发，因此语义族清晰且 discriminative。",
+          "B4": "linked_hazard_ids 为 ['H-AVP-3']，格式合法，且 H-AVP-3 描述的是'车辆无法完成自动泊车任务或停留在不安全位置'，与 description 中'未能找到合适的车位'在风险方向上完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it5:provided_causing_hazard:1",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了超出停车区域边界的车位，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（选择车位）的不安全形式（选择了超出停车区域边界的车位），并直接导向 linked_hazard_ids 中 H-AVP-2 所描述的后果（车辆越出目标停车区域）。动作-后果链条完整、非跳跃，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含边界关系（'超出停车区域边界'），但未包含任何生命周期表达（如'仍'、'过早'等）或过程相位表达（如'在...阶段'）。因此不符合 B1=2 的硬性要求，仅满足 B1=1 的边界/结果条件但无相位或生命周期表达。",
+          "B2": "核心错误直接落在当前控制动作 'search_slot' 的输出本体上：'选择了超出停车区域边界的车位' 属于对候选车位的错误确认/错误选择，是 result_output 类型动作的典型执行错误，而非依赖上游感知或规划失败。",
+          "B3": "'选择了超出停车区域边界的车位' 体现了明确的 boundary_relation（边界关系），即所选结果违反了空间约束。这种 unsafe form 具有机制区分性，不是仅靠对象替换或泛化触发构成的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域或停车边界' 与 description 中 '导致车辆越出目标停车区域' 完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it5:provided_causing_hazard:2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了不合适的车位，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（选择车位）的不安全形式（选择了不合适的车位），并指向后果（无法完成泊车任务），该后果可由 linked_hazard_ids 中的 H-AVP-3 一致补足。但整体表述仍偏结果摘要，未体现动作执行过程中的机制性失败（如错误确认、过早选择等），需一定推断才能还原为完整 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'等），也无过程相位（如'在...阶段'），亦无边界/结果条件绑定。纯为结果性陈述，缺乏可审计上下文。",
+          "B2": "核心错误直接落在当前控制动作 'search_slot' 的输出本体上——'选择了不合适的车位' 属于对候选车位的错误确认/错误选择，是 result_output 类动作的典型执行错误，未依赖感知触发或上游条件。",
+          "B3": "unsafe form '选择了不合适的车位' 可归入 provided/wrong family，但仅通过对象属性（'不合适'）表达，未体现 discriminative 机制子型（如过早确认、在边界内误判等）。属于 generic 级别，缺乏 phase/lifecycle/boundary 等关系锚点。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-3'，其描述 '车辆无法完成自动泊车任务...' 与 description 中 '导致车辆无法完成自动泊车任务' 完全一致，无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文，仅为结果摘要句",
+          "unsafe form 未体现机制区分性，依赖模板化表达"
+        ],
+        "suggested_revision": "AVP系统在候选车位评估阶段错误地确认了一个几何尺寸不足或存在障碍物的车位为有效目标，导致后续泊车流程失败。"
+      }
+    },
+    {
+      "uca_id": "UCA@it5:provided_causing_hazard:0",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统选择了错误的车位，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（选择车位）的不安全形式（错误选择），并给出了具体后果（与障碍物碰撞），linked_hazard_ids [H-AVP-1] 与之直接一致，构成基本可用骨架。但表述仍偏结果摘要，未体现动作生命周期、相位或机制细节，需一定推断才能确认这是 search_slot 动作本身的失败而非上游感知失败。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'过早'、'仍'），也无过程相位（如'在...阶段'），亦无边界/结果条件绑定。纯为结果性陈述，缺乏可审计上下文。",
+          "B2": "核心错误落在当前控制动作 'search_slot' 的输出本体上——'选择了错误的车位'，属于 result_output 类型的动作执行错误（提供了错误的结果），符合 B2=2 的标准。未依赖'检测到'等上游触发词，动作本体清晰。",
+          "B3": "unsafe form 为'选择了错误的车位'，可归入 provided/wrong family，但仅通过对象（车位→错误）和后果（碰撞）体现，缺乏 discriminative 机制子型（如 timing、phase、boundary 等关系）。属于 generic 对象替换型表达，未体现 lifecycle_relation 或 phase_relation 等区分性机制。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述'车辆与...障碍物发生碰撞'与 description 中'与障碍物发生碰撞'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "category 与语义族一致，但 description 缺乏显式上下文",
+          "表述偏结果摘要，机制区分性不足"
+        ],
+        "suggested_revision": "AVP系统在确认候选车位阶段选择了不符合几何约束或存在静态障碍物的车位，导致后续泊车过程中与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it5:not_provided_causing_hazard:1",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到其他车辆，导致车辆与车辆发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（未能检测到其他车辆）并连接到碰撞后果，但‘未能检测到’属于感知层失败，而非当前控制动作‘search_slot’本身的不安全形式。虽然 linked_hazard_ids 正确指向 H-AVP-1，但动作与后果之间的逻辑链依赖上游感知失败，未构成清晰的动作层 UCA 骨架。",
+          "B1": "description 中无任何生命周期表达（如‘仍’、‘过早’等）或过程相位表达（如‘在...阶段’），也无边界/结果条件绑定，上下文完全缺失。",
+          "B2": "核心错误落在‘未能检测到其他车辆’，这是感知/识别层失败，而非 control_action ‘search_slot’（搜索/确认车位）的输出本体问题。未体现该动作的提供、缺失、时序或执行错误，不符合动作忠实度要求。",
+          "B3": "unsafe form 仅通过替换危险对象（‘其他车辆’）表达，且依赖‘未能检测到’这一泛化感知触发，缺乏 lifecycle_relation、phase_relation 等机制子型，属于 broad family 的 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且描述的碰撞后果与该 hazard 定义一致，链接有效。"
+        },
+        "issues": [
+          "description 描述的是感知失败而非控制动作本体失败",
+          "缺少显式上下文（B1=0）",
+          "高度依赖模板化表达（template_dependency=high）"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统错误地确认了一个被其他车辆占用的车位为可用，导致后续泊车路径规划基于无效车位信息，引发碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it5:not_provided_causing_hazard:2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到障碍物，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（'未能检测到障碍物'）并连接到碰撞后果，但核心问题落在感知层而非当前控制动作 'search_slot' 的输出本体上；linked_hazard_ids 能补足后果，但动作-后果链条存在语义跳跃，需推断'未检测到障碍物'如何导致'搜索车位'动作不安全。",
+          "B1": "description 中无任何生命周期表达（如'过早'、'仍'）或过程相位表达（如'在...阶段'），也无边界/结果条件绑定；仅含模糊触发'未能检测到障碍物'，属于上游感知失败，不符合显式上下文要求。",
+          "B2": "核心错误是'未能检测到障碍物'，属于感知/识别层失败，而非对'search_slot'动作本身的提供、终止、时序或内容错误；该动作语义为 result_output（输出候选车位），但描述未体现其输出缺失、错误或时机问题，而是归因于上游输入缺失。",
+          "B3": "unsafe form 仅通过替换危险对象（'障碍物'）表达，且依赖泛化感知触发（'未能检测到'），未体现 lifecycle_relation、phase_relation 等机制子型；可归入 broad family 'not provided due to missed detection'，但缺乏动作层机制区分性。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且 description 中'与障碍物发生碰撞'与该 hazard 描述完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description focuses on upstream perception failure rather than control action output",
+          "lacks explicit context (phase/lifecycle)",
+          "mechanism is generic object-based trigger"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统未排除含障碍物的候选车位，导致确认了一个不安全的停车位置，进而引发碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it5:not_provided_causing_hazard:0",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能检测到行人，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 4,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作缺失（'未能检测到行人'）并连接到具体后果（碰撞），但核心问题落在感知层而非当前控制动作 'search_slot' 的输出本体上；linked_hazard_ids 能补足后果，但动作-后果链条依赖上游失败，需较多推断才能视为动作层 UCA。",
+          "B1": "description 中无任何生命周期表达（如'过早'、'仍'）或过程相位表达（如'在...阶段'），也无边界/结果条件绑定；仅含模糊触发'未能检测到'，属于上游依赖词汇，且无显式上下文。",
+          "B2": "'未能检测到行人' 是典型的感知/识别层失败，未体现 'search_slot' 动作本身的输出缺失、错误或时序问题；该动作语义为 result_output（输出候选车位），而描述未触及车位确认/选择的执行本体。",
+          "B3": "unsafe form 仅通过替换危险对象（'行人'）表达，属于 broad family 的对象替换模式；无生命周期、相位、边界或结果约束等机制子型，区分性弱。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，且 description 中'车辆与行人发生碰撞'与该 hazard 描述完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description focuses on perception failure rather than control action output",
+          "lacks explicit context or phase binding",
+          "mechanism is generic object substitution"
+        ],
+        "suggested_revision": "在搜索车位阶段，AVP系统未排除包含行人的候选车位，导致后续泊车路径与行人发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA@it5:wrong_timing_or_order:1",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过晚地确认了候选车位，导致车辆错过了最佳泊车时机。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '确认候选车位' 的不安全形式（过晚确认），并指出其后果（错过最佳泊车时机）。该后果可由 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹、急停急动）合理承接，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过晚地'，满足条件1；且未使用任何感知触发或上游依赖词汇（如'检测到''未确认'等），满足条件2。因此上下文质量为高。",
+          "B2": "核心错误直接落在当前控制动作 '确认候选车位' 的时序执行上（过晚确认），属于 timing 错误，符合动作本体失败，而非感知或上游规划层问题。",
+          "B3": "'过晚地确认'体现了明确的生命周期关系（timing 错误），具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-4'，且描述的后果（错过泊车时机可能导致车辆非预期运动或急停）与该 hazard 描述一致。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it5:wrong_timing_or_order:2",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统在确认车位之前进行了不必要的移动，导致车辆出现非预期运动。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 提到 '在确认车位之前进行了不必要的移动'，暗示了动作时序错误，并链接到 H-AVP-4（非预期运动），构成部分可用骨架。但 '不必要的移动' 并未明确是 search_slot 动作本身的输出错误，还是其他执行层动作（如底盘控制）的错误，动作本体模糊，需较多推断才能与当前 control_action 对齐。",
+          "B1": "'在确认车位之前' 是一个结果条件（前置条件未满足），但未使用生命周期动词（如'过早'）或过程相位表达（如'在搜索阶段'）。同时，'确认车位' 属于上游依赖（search_slot 的目标是确认候选车位，但此处将'确认'作为前提），因此不符合 B1=2 的严格要求，仅得 1 分。",
+          "B2": "核心错误描述为 '进行了不必要的移动'，但当前 control_action 是 '搜索车位/确认候选车位'，属于 result_output（输出候选结果），而非直接控制车辆移动（actuation_output）。'不必要的移动' 更像是执行层动作（如转向/油门控制）的错误，而非 search_slot 本身的输出错误。因此动作本体不清晰，偏向 mixed_with_upstream。",
+          "B3": "unsafe form 使用了 '在...之前' 的 broad timing 表达，但未体现 discriminative 机制子型（如'过早确认'、'提前终止搜索'）。'不必要的移动' 是后果性描述，而非对 search_slot 动作本身的 unsafe form（如'错误确认无效车位'）。机制区分性弱，仅能归入 generic timing family。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-4'，且 description 中 '非预期运动' 与 H-AVP-4 的 '非预期运动、错误轨迹...' 完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "动作本体与 control_action 不一致：search_slot 是结果输出，但 description 描述的是车辆移动（执行动作）",
+          "上下文为结果条件而非生命周期/相位表达",
+          "unsafe form 偏向后果摘要，缺乏对 search_slot 动作本身的错误形式刻画"
+        ],
+        "suggested_revision": "AVP系统在搜索车位阶段过早确认了一个无效候选车位，导致后续执行非预期移动。"
+      }
+    },
+    {
+      "uca_id": "UCA@it5:wrong_timing_or_order:0",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过早地确认了候选车位，导致车辆在不适当的时间开始泊车。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '确认候选车位' 的不安全形式（过早确认），并指出其后果（在不适当时间开始泊车）。该后果可直接与 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹等）一致衔接，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早地'，满足条件1；且未使用任何感知触发或上游依赖词汇（如'检测到''未确认'等），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作 '确认候选车位' 的时序本体上（'过早确认'），属于 timing 错误，且未依赖上游条件或感知触发，完全聚焦于动作输出本身的生命周期问题。",
+          "B3": "'过早' 是典型的 discriminative 生命周期关系表达，体现了明确的机制子型（timing 错误中的 phase/lifecycle 错位），而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-4'，其描述为'非预期运动、错误轨迹或不必要的急停/急动'，与 description 中'在不适当时间开始泊车'所隐含的轨迹/时机风险高度一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA@it5:stopped_too_soon_or_applied_too_long:1",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统长时间搜索车位，导致车辆长时间占用道路资源。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 1
+        },
+        "total_score": 6,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了'长时间搜索车位'这一动作持续状态，并指出后果是'占用道路资源'，但该后果并未直接对应 linked_hazard_ids 中的 H-AVP-4（非预期运动/错误轨迹/急停急动）。虽然可勉强解释为'长时间低速徘徊'可能引发周边风险上升，但连接较弱、需额外推断，未构成清晰可用的动作层 UCA 骨架。",
+          "B1": "包含'长时间'这一 duration 表达，属于生命周期相关词汇，满足条件1；未出现感知触发或上游依赖词汇，满足条件2的部分要求。但'长时间'缺乏明确相位绑定（如'在完成搜索后仍持续'）或边界关系（如'达到最大搜索时间后仍未终止'），仅属泛化 timing/duration 描述，因此不满足 B1=2 的强上下文标准。",
+          "B2": "'长时间搜索车位'直接描述了当前控制动作 'search_slot' 的执行持续时间过长，属于动作本体的 duration 错误（应适时终止而未终止），核心错误落在动作生命周期上，符合 B2=2 标准。",
+          "B3": "unsafe form 使用了'长时间'这一 broad timing 表达，但未体现更具体的机制子型（如'超过最大允许搜索时间后仍未停止'、'在确认无车位后仍持续搜索'等）。仅靠 duration 词而无相位、边界或结果约束绑定，机制区分性不足，属于 generic timing 表达，故给1分。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-4，但该 hazard 描述的是'非预期运动、错误轨迹或急停急动'，而 description 中的风险是'长时间占用道路资源'，二者语义不直接匹配。虽可间接关联（如长时间徘徊导致其他车辆避让风险），但链接较弱，无明显冲突，故给1分。"
+        },
+        "issues": [
+          "hazard link weak",
+          "context not explicit enough",
+          "mechanism generic"
+        ],
+        "suggested_revision": "AVP系统在完成初步车位扫描后仍未终止搜索动作，持续低速徘徊，导致车辆长时间占用行车道，增加与其他交通参与者冲突的风险。"
+      }
+    },
+    {
+      "uca_id": "UCA@it5:stopped_too_soon_or_applied_too_long:0",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统过早停止了车位搜索，导致车辆未能找到合适的车位。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 '搜索车位' 的不安全形式：'过早停止了车位搜索'，且后果 '未能找到合适的车位' 可由 linked_hazard_ids 中的 H-AVP-3（车辆无法完成自动泊车任务，或停留在不安全/不可接受位置）直接、一致地补足，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早停止'，满足条件1；同时未使用任何感知触发（如'检测到'）或上游依赖词汇（如'未确认'），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "'过早停止了车位搜索' 直接描述了当前控制动作 'search_slot' 的生命周期错误（timing/duration 错误），核心错误落在动作本体上，而非感知或规划层，符合 B2=2 标准。",
+          "B3": "'过早停止' 是典型的生命周期关系表达，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达，因此语义族清晰，给2分。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-3'，其描述 '车辆无法完成自动泊车任务，或停留在不安全/不可接受位置' 与 description 中 '未能找到合适的车位' 的后果方向一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    }
+  ],
+  "system_level_semantic_merge": {
+    "review_source": "quality_gate_scoring",
+    "retained_uca_items": [
+      {
+        "uca_id": "UCA@it1:wrong_timing_or_order:0",
+        "summary": "过早确认车位致非预期运动"
+      },
+      {
+        "uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+        "summary": "过早停止搜索致泊车失败"
+      },
+      {
+        "uca_id": "UCA@it2:wrong_timing_or_order:1",
+        "summary": "过晚确认车位错过泊车时机"
+      }
+    ],
+    "merged_duplicate_items": [
+      {
+        "removed_uca_id": "UCA@it2:wrong_timing_or_order:0",
+        "kept_uca_id": "UCA@it1:wrong_timing_or_order:0",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA@it2:stopped_too_soon_or_applied_too_long:0",
+        "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA@it3:wrong_timing_or_order:1",
+        "kept_uca_id": "UCA@it2:wrong_timing_or_order:1",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA@it3:wrong_timing_or_order:0",
+        "kept_uca_id": "UCA@it1:wrong_timing_or_order:0",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA@it3:stopped_too_soon_or_applied_too_long:0",
+        "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA@it4:wrong_timing_or_order:1",
+        "kept_uca_id": "UCA@it2:wrong_timing_or_order:1",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA@it4:wrong_timing_or_order:0",
+        "kept_uca_id": "UCA@it1:wrong_timing_or_order:0",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA@it4:stopped_too_soon_or_applied_too_long:0",
+        "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA@it5:wrong_timing_or_order:1",
+        "kept_uca_id": "UCA@it2:wrong_timing_or_order:1",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA@it5:wrong_timing_or_order:0",
+        "kept_uca_id": "UCA@it1:wrong_timing_or_order:0",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA@it5:stopped_too_soon_or_applied_too_long:0",
+        "kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0",
+        "reason": "semantic_equivalent"
+      }
+    ],
+    "kept_count": 3
+  },
+  "review_statement": "The records in this file document structured multidimensional quality-gate scoring used to screen generated candidates before system-level semantic merge. Final manual expert delivery-audit and agreement records are published separately in data/03_expert_delivery_audit.",
+  "quality_gate_declaration": {
+    "review_source": "quality_gate_scoring",
+    "paper_section_alignment": "The paper describes this stage as multidimensional quality gating before semantic consolidation.",
+    "manual_expert_audit_location": "data/03_expert_delivery_audit",
+    "excluded_public_fields": [
+      "implementation materials",
+      "local environment metadata",
+      "platform/service identifiers",
+      "request identifiers",
+      "non-public execution logs"
+    ]
+  },
+  "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation."
+}

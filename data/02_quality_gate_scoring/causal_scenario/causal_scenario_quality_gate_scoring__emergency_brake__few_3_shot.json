@@ -1,0 +1,1640 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "system": "Automated Valet Parking (AVP)",
+    "public_file_group": "quality_gate_scoring_results",
+    "review_provenance": "quality_gate_scoring",
+    "public_release_scope": "Structured JSON result release for multidimensional quality-gate scoring. Implementation code is maintained in the separate CSG-code repository; local environment metadata, platform/service identifiers, request identifiers, non-public execution logs, raw response payloads, and raw traces are excluded.",
+    "related_code_repository": "https://github.com/lv1zhou/CSG-code"
+  },
+  "public_file_role": "quality_gate_scoring_result",
+  "task_stage": "causal_scenario",
+  "task_type": "causal_scenario",
+  "task_name": "Causal scenario reasoning",
+  "action_key": "emergency_brake",
+  "action_name_cn": "紧急制动",
+  "action_name_en": "Emergency braking",
+  "generation_method": "few_3_shot",
+  "generation_method_label": "FS-3",
+  "quality_gate_scoring_summary": {
+    "total_reviewed_items": 50,
+    "expert_scored_items": 50,
+    "expert_usable_items_before_merge": 49,
+    "expert_kept_items_after_semantic_merge": 9,
+    "semantic_merge_retention_rate": 0.1837,
+    "final_deliverable_items_after_expert_audit": 9,
+    "final_delivery_retention_rate": 1.0
+  },
+  "quality_gate_item_reviews": [
+    {
+      "scenario_id": "CS-AVP-EB-05",
+      "reviewed_causal_scenario": {
+        "description": "【CAN通信延迟导致制动过晚】CAN总线延迟(FB-AVP-EB-4)导致制动指令传输延迟，系统未能及时触发紧急制动(CA-AVP-EB-1)，导致碰撞。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和清晰描述",
+          "B1": "明确CAN总线延迟为上下文",
+          "B2": "链条：CAN延迟→制动指令延迟→未及时制动→碰撞",
+          "B3": "锚定FB-AVP-EB-4与CA-AVP-EB-1，作用清晰",
+          "B4": "UCA-2与漏触发紧急制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-01",
+      "reviewed_causal_scenario": {
+        "description": "【误检障碍物导致不必要的紧急制动】超声波传感器在停车场密集柱子环境中误检为障碍物，近距障碍物感知反馈(FB-AVP-EB-1)错误报告高风险。系统基于此错误信息触发紧急制动(CA-AVP-EB-1)，导致非预期急停。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确超声波传感器与停车场柱子环境",
+          "B2": "误检→错误反馈→错误触发制动→非预期急停",
+          "B3": "锚定FB-AVP-EB-1并说明其导致CA-AVP-EB-1误触发",
+          "B4": "UCA-1与非预期急停完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-06",
+      "reviewed_causal_scenario": {
+        "description": "【制动执行器故障导致任务异常】制动执行ACK反馈(FB-AVP-EB-3)显示制动执行器故障，系统未能进入安全停靠/告警模式(CA-AVP-EB-3)，导致任务异常。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确制动执行ACK反馈（FB-AVP-EB-3）",
+          "B2": "链条：执行器故障→未进安全模式→任务异常",
+          "B3": "锚定FB-AVP-EB-3与CA-AVP-EB-3，作用清晰",
+          "B4": "UCA-2（应制动未处理）、UCA-4（解除不当）合理"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-04",
+      "reviewed_causal_scenario": {
+        "description": "【制动执行未确认导致任务异常】制动压力反馈(FB-AVP-EB-3)显示制动执行未确认，系统未能进入安全停靠/告警模式(CA-AVP-EB-3)，导致任务异常。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA，描述有因果",
+          "B1": "明确制动压力反馈(FB-AVP-EB-3)",
+          "B2": "链条：FB未确认→未进安全模式→任务异常",
+          "B3": "锚定FB-AVP-EB-3与CA-AVP-EB-3，作用清晰",
+          "B4": "UCA-2（漏触发）和UCA-4（持续不当）合理"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-02",
+      "reviewed_causal_scenario": {
+        "description": "【感知延迟导致制动过晚】超声波传感器在快速接近障碍物时感知延迟，近距障碍物感知反馈(FB-AVP-EB-1)未能及时更新。系统基于过时信息未能及时触发紧急制动(CA-AVP-EB-1)，导致碰撞。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确超声波传感器与快速接近障碍物场景",
+          "B2": "感知延迟→反馈滞后→未触发制动→碰撞，链条清晰",
+          "B3": "锚定FB-AVP-EB-1并说明其导致CA-AVP-EB-1失效",
+          "B4": "UCA-2与漏触发紧急制动完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-03",
+      "reviewed_causal_scenario": {
+        "description": "【误判风险解除导致过早制动解除】系统基于错误的障碍物距离与相对速度风险信念(PM-AVP-EB-1)误判风险解除，提前解除紧急制动(CA-AVP-EB-2)，导致次生风险。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到障碍物距离与相对速度，但未说明具体传感器或反馈类型",
+          "B2": "链条清晰：PM错误→提前解除制动→次生风险",
+          "B3": "明确锚定PM-AVP-EB-1和CA-AVP-EB-2，作用清晰",
+          "B4": "UCA-4与‘过早解除制动导致次生风险’一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-08",
+      "reviewed_causal_scenario": {
+        "description": "【误检障碍物导致不必要的紧急制动】视觉传感器在停车场密集柱子环境中误检为障碍物，近距障碍物感知反馈(FB-AVP-EB-1)错误报告高风险。系统基于此错误信息触发紧急制动(CA-AVP-EB-1)，导致非预期急停。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果、UCA",
+          "B1": "明确视觉传感器与柱子环境",
+          "B2": "误检→错误反馈→错误制动→UCA-1",
+          "B3": "锚定FB-AVP-EB-1并说明其作用",
+          "B4": "准确链接UCA-1"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-07",
+      "reviewed_causal_scenario": {
+        "description": "【误判停车距离导致过早制动解除】系统基于错误的自车速度与制动能力信念(PM-AVP-EB-2)误判停车距离足够，提前解除紧急制动(CA-AVP-EB-2)，导致次生风险。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "提及自车速度与制动能力，但未指明具体传感器或通信路径",
+          "B2": "链条清晰：PM错误→提前解除制动→次生风险",
+          "B3": "明确锚定PM-AVP-EB-2和CA-AVP-EB-2，作用清晰",
+          "B4": "UCA-4与提前解除制动导致次生风险一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-09",
+      "reviewed_causal_scenario": {
+        "description": "【误判风险解除导致过早制动解除】系统基于错误的障碍物距离与相对速度风险信念(PM-AVP-EB-1)误判风险解除，提前解除紧急制动(CA-AVP-EB-2)，导致次生风险。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到障碍物距离与相对速度，但未指明传感器类型或通信路径",
+          "B2": "链条清晰：PM错误→提前解除制动→次生风险",
+          "B3": "明确锚定PM-AVP-EB-1和CA-AVP-EB-2，作用清晰",
+          "B4": "UCA-4与过早解除制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-02__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【感知延迟导致制动过晚】超声波传感器在检测到移动障碍物时出现延迟，近距障碍物感知反馈(FB-AVP-EB-1)未能及时更新。障碍物距离与相对速度风险信念(PM-AVP-EB-1)未能及时反映真实风险，系统未能及时触发紧急制动指令。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确超声波传感器与移动障碍物",
+          "B2": "覆盖(a)(b)(c)(e)四层因果",
+          "B3": "锚定FB-AVP-EB-1与PM-AVP-EB-1",
+          "B4": "UCA-2与漏制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-10",
+      "reviewed_causal_scenario": {
+        "description": "【制动执行未确认导致任务异常】制动压力反馈(FB-AVP-EB-3)显示制动执行未确认，系统未能进入安全停靠/告警模式(CA-AVP-EB-3)，导致任务异常。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，UCA有效，含触发、因果与结果",
+          "B1": "明确制动压力反馈(FB-AVP-EB-3)",
+          "B2": "链条：FB缺失→未进安全模式→任务异常",
+          "B3": "锚定FB-AVP-EB-3和CA-AVP-EB-3，作用清晰",
+          "B4": "UCA-2（漏制动）和UCA-4（解除不当）合理"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-01__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【误检障碍物导致不必要的紧急制动】超声波传感器在停车场内误检到静态障碍物（如柱子），近距障碍物感知反馈(FB-AVP-EB-1)错误地报告了潜在碰撞风险。障碍物距离与相对速度风险信念(PM-AVP-EB-1)被污染，系统触发不必要的紧急制动指令。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确超声波误检柱子，上下文具体",
+          "B2": "含(a)误检→(b)PM污染→(c)错误触发→(d)不必要制动→(e)UCA-1",
+          "B3": "锚定FB-AVP-EB-1与PM-AVP-EB-1，作用清晰",
+          "B4": "linked_uca_ids有效且与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-03__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【传感器误报导致过早制动】超声波传感器在检测到地面纹理变化时误报为障碍物，近距障碍物感知反馈(FB-AVP-EB-1)错误地报告了潜在碰撞风险。障碍物距离与相对速度风险信念(PM-AVP-EB-1)被污染，系统过早触发紧急制动指令。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "明确超声波传感器与地面纹理",
+          "B2": "覆盖(a)(b)(c)(d)(e)多层因果",
+          "B3": "锚定FB-AVP-EB-1和PM-AVP-EB-1",
+          "B4": "UCA-3与过早制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-04__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【制动执行未确认导致持续制动】制动压力传感器故障，制动压力与执行ACK反馈(FB-AVP-EB-3)未能确认制动指令执行成功。制动指令已执行且制动力建立成功的信念(PM-AVP-EB-3)被污染，系统持续制动直至车辆完全停止。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "明确制动压力传感器与ACK反馈",
+          "B2": "覆盖(a)(b)(c)(d)(e)五层因果",
+          "B3": "锚定FB-AVP-EB-3与PM-AVP-EB-3",
+          "B4": "UCA-4与持续制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-05__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【CAN通信延迟导致制动过晚】CAN总线通信延迟导致制动指令传输延迟，制动压力与执行ACK反馈(FB-AVP-EB-3)未能及时确认制动指令执行。障碍物距离与相对速度风险信念(PM-AVP-EB-1)未能及时反映真实风险，系统过晚触发紧急制动指令。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA-3，描述有上下文+因果+UCA",
+          "B1": "明确CAN通信延迟、制动ACK反馈等具体通道",
+          "B2": "链条：CAN延迟→FB未确认→PM信念滞后→制动过晚→UCA-3",
+          "B3": "锚定FB-AVP-EB-3和PM-AVP-EB-1，作用清晰",
+          "B4": "UCA-3与‘制动过晚’完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-08__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【感知延迟导致制动过晚】视觉传感器在检测到移动障碍物时出现延迟，近距障碍物感知反馈(FB-AVP-EB-1)未能及时更新。障碍物距离与相对速度风险信念(PM-AVP-EB-1)未能及时反映真实风险，系统未能及时触发紧急制动指令。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确视觉传感器延迟、近距障碍物感知",
+          "B2": "链条清晰：感知延迟→风险信念错误→漏触发制动",
+          "B3": "锚定FB-AVP-EB-1与PM-AVP-EB-1，作用明确",
+          "B4": "UCA-2与漏触发制动完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-06__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【制动执行器故障导致制动失败】制动执行器故障，制动压力与执行ACK反馈(FB-AVP-EB-3)未能确认制动指令执行成功。制动指令已执行且制动力建立成功的信念(PM-AVP-EB-3)被污染，系统未能及时触发紧急制动指令。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确制动执行器故障及FB-AVP-EB-3",
+          "B2": "链条覆盖(a)(b)(c)(d)(e)",
+          "B3": "锚定FB-AVP-EB-3与PM-AVP-EB-3并解释作用",
+          "B4": "UCA-2与漏触发一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-07__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【误检障碍物导致不必要的紧急制动】视觉传感器在停车场内误检到静态障碍物（如柱子），近距障碍物感知反馈(FB-AVP-EB-1)错误地报告了潜在碰撞风险。障碍物距离与相对速度风险信念(PM-AVP-EB-1)被污染，系统触发不必要的紧急制动指令。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确视觉传感器与停车场静态障碍物",
+          "B2": "覆盖(a)(b)(c)(d)(e)五层因果链",
+          "B3": "锚定FB-AVP-EB-1与PM-AVP-EB-1并解释作用",
+          "B4": "UCA-1与误制动完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-09__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【传感器误报导致过早制动】视觉传感器在检测到地面纹理变化时误报为障碍物，近距障碍物感知反馈(FB-AVP-EB-1)错误地报告了潜在碰撞风险。障碍物距离与相对速度风险信念(PM-AVP-EB-1)被污染，系统过早触发紧急制动指令。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确视觉传感器与地面纹理变化",
+          "B2": "覆盖(a)(b)(c)(d)(e)五层因果",
+          "B3": "锚定FB-AVP-EB-1和PM-AVP-EB-1",
+          "B4": "UCA-3与过早制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-10__dup2",
+      "reviewed_causal_scenario": {
+        "description": "【制动执行未确认导致持续制动】制动压力传感器故障，制动压力与执行ACK反馈(FB-AVP-EB-3)未能确认制动指令执行成功。制动指令已执行且制动力建立成功的信念(PM-AVP-EB-3)被污染，系统持续制动直至车辆完全停止。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA链接",
+          "B1": "明确制动压力传感器故障及FB-AVP-EB-3",
+          "B2": "覆盖(a)(b)(c)(d)(e)五层因果链",
+          "B3": "锚定FB-AVP-EB-3与PM-AVP-EB-3并解释作用",
+          "B4": "UCA-4与持续制动导致次生风险一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-01__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【误检障碍物导致不必要的紧急制动】超声波传感器在停车场密集柱子环境中产生误检，近距障碍物感知反馈(FB-AVP-EB-1)错误报告前方有障碍物。障碍物距离与相对速度风险信念(PM-AVP-EB-1)被污染，系统触发不必要的紧急制动。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "明确超声波在密集柱子环境误检",
+          "B2": "环境→FB误报→PM污染→误制动→UCA-1",
+          "B3": "锚定FB-AVP-EB-1与PM-AVP-EB-1并解释作用",
+          "B4": "linked_uca_ids正确且与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-02__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【感知延迟导致制动过晚】超声波传感器在快速移动的行人附近产生延迟反馈，近距障碍物感知反馈(FB-AVP-EB-1)延迟报告障碍物。障碍物距离与相对速度风险信念(PM-AVP-EB-1)未能及时更新，系统未能及时触发紧急制动。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确超声波传感器与行人场景",
+          "B2": "覆盖(a)(b)(c)(e)四层因果",
+          "B3": "锚定FB-AVP-EB-1与PM-AVP-EB-1",
+          "B4": "UCA-2与漏制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-04__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【制动执行未确认导致任务异常】制动压力反馈(FB-AVP-EB-3)因传感器故障未返回有效数据，制动指令已执行且制动力建立成功的信念(PM-AVP-EB-3)被污染。系统未能进入安全停靠/告警模式，导致任务异常。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和完整描述",
+          "B1": "明确指出制动压力反馈(FB-AVP-EB-3)和传感器故障",
+          "B2": "链条清晰：传感器故障→PM污染→未进安全模式→任务异常",
+          "B3": "锚定FB-AVP-EB-3与PM-AVP-EB-3，解释其作用",
+          "B4": "UCA-2/UCA-4与漏触发/持续不当一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-03__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【误判风险解除导致过早解除制动】系统在制动过程中，由于CAN总线延迟(FB-AVP-EB-4)，未能及时接收到障碍物移除的反馈。风险解除逻辑(CA-AVP-EB-2)误判风险解除，过早解除制动。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确CAN总线延迟作为上下文",
+          "B2": "链条：CAN延迟→未收反馈→误判风险解除→过早制动解除",
+          "B3": "锚定FB-AVP-EB-4与CA-AVP-EB-2，作用清晰",
+          "B4": "UCA-4匹配‘制动解除不当’"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-05__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【制动指令执行失败导致碰撞】制动执行器故障导致制动压力反馈(FB-AVP-EB-3)异常，制动指令已执行且制动力建立成功的信念(PM-AVP-EB-3)被污染。系统未能及时触发紧急制动，导致碰撞。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "提到制动执行器故障但未说明具体类型或上下文",
+          "B2": "链条清晰：执行故障→反馈异常→信念污染→漏制动→碰撞",
+          "B3": "明确锚定FB-AVP-EB-3与PM-AVP-EB-3并解释作用",
+          "B4": "UCA-2与漏制动致碰撞一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-06__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【CAN通信丢包导致制动过晚】CAN总线丢包(FB-AVP-EB-4)导致轮速和减速度反馈(FB-AVP-EB-2)延迟，自车速度与制动能力信念(PM-AVP-EB-2)未能及时更新。系统未能及时触发紧急制动。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确CAN丢包、轮速反馈延迟等具体上下文",
+          "B2": "链条覆盖(a)(b)(c)(d)(e)五层",
+          "B3": "锚定FB-AVP-EB-4/FB-AVP-EB-2/PM-AVP-EB-2且作用清晰",
+          "B4": "UCA-2与漏触发逻辑一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-07__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【误检障碍物导致过早制动】超声波传感器在停车场密集柱子环境中产生误检，近距障碍物感知反馈(FB-AVP-EB-1)错误报告前方有障碍物。障碍物距离与相对速度风险信念(PM-AVP-EB-1)被污染，系统过早触发紧急制动。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确超声波传感器与停车场柱子环境",
+          "B2": "误检→PM污染→过早制动，链条清晰",
+          "B3": "锚定FB-AVP-EB-1和PM-AVP-EB-1并解释作用",
+          "B4": "UCA-3（时机不当）与过早制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-08__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【误判风险解除导致过晚解除制动】系统在制动过程中，由于CAN总线延迟(FB-AVP-EB-4)，未能及时接收到障碍物移除的反馈。风险解除逻辑(CA-AVP-EB-2)误判风险解除，过晚解除制动。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确CAN总线延迟作为上下文",
+          "B2": "链条清晰：CAN延迟→未收移除反馈→误判风险未解除→过晚制动",
+          "B3": "锚定FB-AVP-EB-4与CA-AVP-EB-2，解释其作用",
+          "B4": "UCA-4与‘过晚解除制动’一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-09__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【制动执行未确认导致任务异常】制动压力反馈(FB-AVP-EB-3)因传感器故障未返回有效数据，制动指令已执行且制动力建立成功的信念(PM-AVP-EB-3)被污染。系统未能进入安全停靠/告警模式，导致任务异常。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果链和UCA",
+          "B1": "明确制动压力反馈(FB-AVP-EB-3)和传感器故障",
+          "B2": "链条：传感器故障→PM污染→未进安全模式→任务异常",
+          "B3": "锚定FB-AVP-EB-3与PM-AVP-EB-3，作用清晰",
+          "B4": "UCA-2（漏制动）和UCA-4（持续不当）均合理"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-10__dup3",
+      "reviewed_causal_scenario": {
+        "description": "【制动指令执行失败导致碰撞】制动执行器故障导致制动压力反馈(FB-AVP-EB-3)异常，制动指令已执行且制动力建立成功的信念(PM-AVP-EB-3)被污染。系统未能及时触发紧急制动，导致碰撞。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确制动执行器故障与FB-AVP-EB-3",
+          "B2": "链条覆盖(a)(b)(c)(d)(e)五层",
+          "B3": "锚定FB-AVP-EB-3与PM-AVP-EB-3并解释作用",
+          "B4": "UCA-2与漏触发紧急制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-01__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【误检障碍物导致不必要的紧急制动】超声波传感器在停车场密集柱子环境中产生误检，近距障碍物感知反馈(FB-AVP-EB-1)错误报告前方有障碍物。系统基于此错误信息触发紧急制动(CA-AVP-EB-1)，导致非预期急停。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果、UCA",
+          "B1": "明确超声波在密集柱子环境误检",
+          "B2": "环境→误检→错误制动→UCA-1，链条完整",
+          "B3": "锚定FB-AVP-EB-1并说明其导致错误决策",
+          "B4": "linked_uca_ids正确且与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-03__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【误判风险解除导致过早解除制动】系统基于错误的近距障碍物感知反馈(FB-AVP-EB-1)误判风险解除，提前解除紧急制动(CA-AVP-EB-2)，导致车辆在障碍物附近重新加速。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和清晰描述",
+          "B1": "明确提及近距障碍物感知反馈类型",
+          "B2": "链条覆盖(a)(b)(c)(d)(e)五层",
+          "B3": "锚定FB-AVP-EB-1并说明其误判作用",
+          "B4": "UCA-4与过早解除制动完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-02__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【感知延迟导致制动过晚】超声波传感器在快速移动的行人附近产生延迟反馈，近距障碍物感知反馈(FB-AVP-EB-1)延迟报告障碍物接近。系统未能及时触发紧急制动(CA-AVP-EB-1)，导致碰撞风险。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA，描述有上下文+因果+UCA",
+          "B1": "明确超声波传感器和快速移动行人场景",
+          "B2": "链条：感知延迟→未及时制动→碰撞风险（覆盖a,b,c,e）",
+          "B3": "锚定FB-AVP-EB-1并说明其延迟导致CA-AVP-EB-1未触发",
+          "B4": "UCA-2与漏触发紧急制动完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-04__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【传感器故障导致制动未执行】制动压力反馈(FB-AVP-EB-3)显示制动执行器故障，但系统未能正确处理该故障，未进入安全停靠/告警模式(CA-AVP-EB-3)，导致制动未执行。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确制动执行器故障与反馈类型",
+          "B2": "链条：FB故障→未进安全模式→制动未执行→UCA-2",
+          "B3": "锚定FB-AVP-EB-3和CA-AVP-EB-3，作用清晰",
+          "B4": "UCA-2与漏制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-05__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【CAN通信延迟导致制动过晚】CAN总线延迟(FB-AVP-EB-4)导致制动指令传输延迟，系统未能及时触发紧急制动(CA-AVP-EB-1)，导致碰撞风险。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和清晰描述",
+          "B1": "明确CAN总线延迟为上下文",
+          "B2": "链条：CAN延迟→制动指令延迟→未及时制动→UCA-2",
+          "B3": "锚定FB-AVP-EB-4与CA-AVP-EB-1，作用清晰",
+          "B4": "UCA-2与漏触发一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-06__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【误判车辆停止导致过早解除制动】轮速与减速度反馈(FB-AVP-EB-2)错误报告车辆已停止，系统提前解除紧急制动(CA-AVP-EB-2)，导致车辆在障碍物附近重新加速。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确轮速与减速度反馈错误",
+          "B2": "含触发(FB错误)→决策(提前解除)→行为(重新加速)→UCA",
+          "B3": "锚定FB-AVP-EB-2并说明其导致CA-AVP-EB-2误执行",
+          "B4": "UCA-4与过早解除制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-07__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【误判障碍物距离导致过早制动】超声波传感器在停车场密集柱子环境中产生误检，近距障碍物感知反馈(FB-AVP-EB-1)错误报告前方障碍物距离较近。系统基于此错误信息提前触发紧急制动(CA-AVP-EB-1)，导致过早制动。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果、UCA",
+          "B1": "明确超声波+停车场柱子环境",
+          "B2": "误检→错误反馈→过早制动→UCA-3",
+          "B3": "锚定FB-AVP-EB-1并说明其作用",
+          "B4": "UCA-3与过早制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-09__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【误判制动力建立成功导致过早解除制动】制动压力反馈(FB-AVP-EB-3)错误报告制动力建立成功，系统提前解除紧急制动(CA-AVP-EB-2)，导致车辆在障碍物附近重新加速。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，UCA有效，描述含因果",
+          "B1": "明确制动压力反馈错误",
+          "B2": "反馈错误→误判→提前解除→风险",
+          "B3": "锚定FB-AVP-EB-3与CA-AVP-EB-2",
+          "B4": "UCA-4匹配过早解除制动"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-10__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【误判障碍物类型导致不必要的紧急制动】视觉传感器在停车场密集柱子环境中产生误检，近距障碍物感知反馈(FB-AVP-EB-1)错误报告前方有障碍物。系统基于此错误信息触发紧急制动(CA-AVP-EB-1)，导致非预期急停。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，UCA有效，描述含触发、因果和结果",
+          "B1": "明确视觉传感器与停车场柱子环境",
+          "B2": "误检→错误反馈→错误触发制动→非预期急停",
+          "B3": "锚定FB-AVP-EB-1并说明其导致CA-AVP-EB-1误触发",
+          "B4": "UCA-1与非预期急停完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-08__dup4",
+      "reviewed_causal_scenario": {
+        "description": "【误判车辆速度导致制动过晚】IMU反馈(FB-AVP-EB-2)错误报告车辆速度较高，系统未能及时触发紧急制动(CA-AVP-EB-1)，导致碰撞风险。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确IMU反馈错误，具体可检验",
+          "B2": "链条清晰：IMU错误→未触发制动→碰撞风险",
+          "B3": "锚定FB-AVP-EB-2与CA-AVP-EB-1，作用明确",
+          "B4": "UCA-2与漏触发逻辑一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-01__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【误检障碍物导致不必要的紧急制动】超声波传感器在停车场内误检到静态障碍物（如柱子），近距障碍物感知反馈(FB-AVP-EB-1)错误地报告了潜在碰撞风险。系统基于此错误信息触发紧急制动(CA-AVP-EB-1)，导致非预期急停。",
+        "linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "明确超声波误检柱子",
+          "B2": "环境→反馈错误→误触发制动→UCA-1",
+          "B3": "锚定FB-AVP-EB-1并说明其作用",
+          "B4": "准确链接UCA-1"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-02__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【感知延迟导致制动不足】超声波传感器在检测到移动障碍物时出现延迟，近距障碍物感知反馈(FB-AVP-EB-1)未能及时更新。系统未能及时触发紧急制动(CA-AVP-EB-1)，导致碰撞风险未解除。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果链和UCA",
+          "B1": "明确超声波传感器与移动障碍物",
+          "B2": "含(a)感知延迟→(b)反馈未更新→(c)未触发制动→(e)UCA-2",
+          "B3": "锚定FB-AVP-EB-1并说明其失效影响CA-AVP-EB-1",
+          "B4": "linked_uca_ids正确且与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-03__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【误判碰撞时间导致过早制动】系统基于错误的障碍物距离与相对速度风险信念(PM-AVP-EB-1)，误判碰撞时间为低于阈值，紧急制动触发时机不当(CA-AVP-EB-1)，导致过早制动。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到障碍物距离与相对速度，但未指明传感器类型或阈值",
+          "B2": "链条清晰：PM错误→误判碰撞时间→过早制动→UCA-3",
+          "B3": "明确锚定PM-AVP-EB-1并解释其导致CA-AVP-EB-1误触发",
+          "B4": "linked_uca_ids为[UCA-3]，与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-05__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【制动执行未确认导致任务异常】制动压力反馈(FB-AVP-EB-3)显示制动执行未确认，系统未能进入安全停靠/告警模式(CA-AVP-EB-3)，导致任务异常。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确提及制动压力反馈(FB-AVP-EB-3)",
+          "B2": "链条清晰：FB异常→未进安全模式→任务异常",
+          "B3": "锚定FB-AVP-EB-3与CA-AVP-EB-3，作用明确",
+          "B4": "UCA-2/4与漏触发及持续不当一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-07__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【误判自车速度导致制动不足】系统基于错误的自车速度信念(PM-AVP-EB-2)，误判车辆速度较高，未能及时触发紧急制动(CA-AVP-EB-1)，导致碰撞风险未解除。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到自车速度但未说明来源（如轮速/CAN）",
+          "B2": "链条清晰：错误信念→漏触发→风险未解除",
+          "B3": "明确锚定PM-AVP-EB-2与CA-AVP-EB-1",
+          "B4": "UCA-2与漏制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-06__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【CAN通信延迟导致制动延迟】CAN总线延迟(FB-AVP-EB-4)导致制动指令传输延迟，系统未能及时触发紧急制动(CA-AVP-EB-1)，导致过晚制动。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，UCA有效，描述含因果",
+          "B1": "明确CAN总线延迟，具体可检验",
+          "B2": "含(a)通信延迟→(c)未及时触发→(d)过晚制动→(e)UCA-3",
+          "B3": "锚定FB-AVP-EB-4与CA-AVP-EB-1，作用清晰",
+          "B4": "UCA-3与‘过晚制动’完全一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-04__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【制动解除过早导致次生风险】系统基于错误的风险解除判断，过早解除制动(CA-AVP-EB-2)，导致车辆在未完全停止前重新开始移动，引发次生风险。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，UCA有效，含触发、机制与UCA",
+          "B1": "提到‘错误风险解除判断’但未指明具体反馈源",
+          "B2": "链条清晰：错误判断→过早解除→车辆移动→次生风险",
+          "B3": "引用CA-AVP-EB-2但未说明PM/FB如何导致错误判断",
+          "B4": "UCA-4明确对应制动解除不当"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "补充具体反馈源（如FB-AVP-EB-1/3）及PM错误信念机制"
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-08__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【制动压力异常导致任务异常】制动压力反馈(FB-AVP-EB-3)显示制动压力异常，系统未能进入安全停靠/告警模式(CA-AVP-EB-3)，导致任务异常。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "明确制动压力反馈异常",
+          "B2": "FB异常→未进安全模式→任务异常",
+          "B3": "锚定FB-AVP-EB-3与CA-AVP-EB-3",
+          "B4": "UCA-2/4与漏触发/持续不当一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-09__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【误判剩余停车距离导致过早制动】系统基于错误的剩余停车距离信念(PM-AVP-EB-2)，误判停车距离不足，紧急制动触发时机不当(CA-AVP-EB-1)，导致过早制动。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果机制和UCA",
+          "B1": "提到剩余停车距离但未说明具体来源",
+          "B2": "链条清晰：PM错误→CA误触发→UCA-3",
+          "B3": "明确锚定PM-AVP-EB-2与CA-AVP-EB-1",
+          "B4": "UCA-3与过早制动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-AVP-EB-10__dup5",
+      "reviewed_causal_scenario": {
+        "description": "【制动执行ACK丢失导致任务异常】制动执行ACK反馈(FB-AVP-EB-3)丢失，系统未能确认制动指令执行成功，未能进入安全停靠/告警模式(CA-AVP-EB-3)，导致任务异常。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA和完整描述",
+          "B1": "明确提到制动执行ACK丢失（FB-AVP-EB-3）",
+          "B2": "链条清晰：ACK丢失→未确认执行→未进安全模式→任务异常",
+          "B3": "锚定FB-AVP-EB-3与CA-AVP-EB-3，作用明确",
+          "B4": "UCA-2/UCA-4与漏触发/持续不当一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    }
+  ],
+  "system_level_semantic_merge": {
+    "review_source": "quality_gate_scoring",
+    "retained_causal_scenario_items": [
+      {
+        "scenario_id": "CS-AVP-EB-01",
+        "summary": "超声波误检障碍物致急停",
+        "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1|key=误检障碍",
+        "merged_linked_uca_ids": [
+          "UCA-1"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-EB-02",
+        "summary": "感知延迟致制动过晚碰撞",
+        "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1,PM-AVP-FD-1|key=感知延迟",
+        "merged_linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-EB-03",
+        "summary": "误判风险解除致过早解刹",
+        "mechanism_signature": "process_model|anchors=PM-AVP-FD-1|key=误判解除",
+        "merged_linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-EB-04__dup2",
+        "summary": "制动ACK丢失致持续制动",
+        "mechanism_signature": "actuator|anchors=FB-AVP-FD-3,PM-AVP-FD-3|key=执行未确认",
+        "merged_linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-EB-05",
+        "summary": "CAN延迟致制动过晚碰撞",
+        "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=CAN延迟",
+        "merged_linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-EB-07",
+        "summary": "误判停车距致过早解刹",
+        "mechanism_signature": "process_model|anchors=PM-AVP-FD-2|key=误判距离",
+        "merged_linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-EB-08__dup2",
+        "summary": "视觉感知延迟致制动过晚",
+        "mechanism_signature": "camera|anchors=FB-AVP-FD-1,PM-AVP-FD-1|key=视觉延迟",
+        "merged_linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-EB-09__dup5",
+        "summary": "误判剩余距离致过早制动",
+        "mechanism_signature": "process_model|anchors=PM-AVP-FD-2|key=误判余距",
+        "merged_linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      {
+        "scenario_id": "CS-AVP-EB-10__dup5",
+        "summary": "制动ACK丢失致任务异常",
+        "mechanism_signature": "actuator|anchors=FB-AVP-FD-3|key=ACK丢失",
+        "merged_linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      }
+    ],
+    "merged_duplicate_items": [
+      {
+        "removed_scenario_id": "CS-AVP-EB-09__dup2",
+        "kept_scenario_id": "CS-AVP-EB-09__dup5",
+        "reason": "context_inclusion"
+      }
+    ],
+    "kept_count": 9
+  },
+  "review_statement": "The records in this file document structured multidimensional quality-gate scoring used to screen generated candidates before system-level semantic merge. Final manual expert delivery-audit and agreement records are published separately in data/03_expert_delivery_audit.",
+  "quality_gate_declaration": {
+    "review_source": "quality_gate_scoring",
+    "paper_section_alignment": "The paper describes this stage as multidimensional quality gating before semantic consolidation.",
+    "manual_expert_audit_location": "data/03_expert_delivery_audit",
+    "excluded_public_fields": [
+      "implementation materials",
+      "local environment metadata",
+      "platform/service identifiers",
+      "request identifiers",
+      "non-public execution logs"
+    ]
+  }
+}

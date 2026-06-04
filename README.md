@@ -8,7 +8,17 @@ Chinese title: 控制结构引导的自动驾驶SOTIF端到端危害识别：大
 
 English title: Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method
 
-The study uses Automated Valet Parking (AVP) as the experimental system and evaluates four representative control actions: forward drive, parking-slot search, emergency braking, and lateral control.
+The study uses Automated Valet Parking (AVP) as the experimental system and evaluates four representative control actions: forward drive, parking-space confirmation, emergency braking, and lateral control.
+
+## Repository Roles
+
+This repository is the **result dataset repository**. It publishes structured JSON records for candidate generation, quality-gate scoring, semantic merge, final delivery audit, and expert agreement review.
+
+The implementation/code archive is maintained separately at:
+
+```text
+https://github.com/lv1zhou/CSG-code
+```
 
 ## Directory Layout
 
@@ -16,9 +26,10 @@ The study uses Automated Valet Parking (AVP) as the experimental system and eval
 - `data/00_summary/summary_metrics.json`: compact experiment-level UC/KC/FDC metrics and expert agreement results.
 - `data/01_candidate_generation/uca/`: 16 initial UCA candidate-generation JSON files, split by action and method.
 - `data/01_candidate_generation/causal_scenario/`: 16 initial causal-scenario candidate-generation JSON files, split by action and method.
-- `data/02_expert_quality_scoring/uca/`: 16 manual expert UCA scoring JSON files, split by action and method.
-- `data/02_expert_quality_scoring/causal_scenario/`: 16 manual expert causal-scenario scoring JSON files, split by action and method.
-- `data/03_expert_delivery_audit/`: final manual expert extraction, semantic merge, final delivery audit, and expert agreement summaries.
+- `data/02_quality_gate_scoring/uca/`: 16 UCA quality-gate scoring JSON files, split by action and method.
+- `data/02_quality_gate_scoring/causal_scenario/`: 16 causal-scenario quality-gate scoring JSON files, split by action and method.
+- `data/03_expert_delivery_audit/`: manual expert extraction, semantic merge review, final delivery audit, and expert agreement summaries.
+- `REVIEW_PROTOCOL.md`: public protocol note for quality-gate records and manual expert audit records.
 
 ## File Naming
 
@@ -27,8 +38,8 @@ Each split result file is named with task, action, and method:
 ```text
 uca_candidates__{action_key}__{method}.json
 causal_scenario_candidates__{action_key}__{method}.json
-uca_expert_scoring__{action_key}__{method}.json
-causal_scenario_expert_scoring__{action_key}__{method}.json
+uca_quality_gate_scoring__{action_key}__{method}.json
+causal_scenario_quality_gate_scoring__{action_key}__{method}.json
 ```
 
 Methods use:
@@ -41,19 +52,21 @@ Methods use:
 Actions use:
 
 - `forward_drive`: 前进驱动
-- `search_slot`: 搜索车位
+- `search_slot`: 车位确认
 - `emergency_brake`: 紧急制动
 - `lateral_control`: 横向控制
 
+Note: `search_slot` is retained as the historical file/key label for traceability to the original execution outputs. The paper-facing control action name is **车位确认 / parking-space confirmation**.
+
 ## Release Scope
 
-This public release intentionally contains JSON result files only. Implementation scripts, local environment metadata, service identifiers, request identifiers, model debug payloads, raw response payloads, and source-code files are excluded.
+This result release publishes structured JSON result records only. Implementation code is maintained in `CSG-code`; local environment metadata, platform/service identifiers, request identifiers, non-public execution logs, raw response payloads, raw traces, and expert identities are excluded from this dataset repository.
 
-The review records are presented as **manual expert review results**. Each scoring file keeps externally readable evidence for auditing the published results: reviewed item text, explicit links, expert scores, expert rationales, expert issue notes, suggested revisions, and expert semantic-merge decisions.
+The `02_quality_gate_scoring` files document the multidimensional quality-gate scoring stage described in the paper before system-level semantic consolidation. The `03_expert_delivery_audit` files document manual expert extraction, semantic merge review, final delivery audit, and expert agreement review. The public records retain item text, explicit links, scoring fields, rationales, issue notes, suggested revisions, semantic-merge decisions, final audit outcomes, and agreement statistics where applicable.
 
 ## Metrics
 
-- **UC**: usable count after expert quality review.
+- **UC**: usable count after quality review.
 - **KC**: kept count after system-level semantic merge.
 - **RR**: semantic-merge retention rate, calculated as KC / UC.
 - **FDC**: final deliverable count after final expert delivery audit.

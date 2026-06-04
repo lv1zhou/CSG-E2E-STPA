@@ -1,0 +1,1675 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "system": "Automated Valet Parking (AVP)",
+    "public_file_group": "quality_gate_scoring_results",
+    "review_provenance": "quality_gate_scoring",
+    "public_release_scope": "Structured JSON result release for multidimensional quality-gate scoring. Implementation code is maintained in the separate CSG-code repository; local environment metadata, platform/service identifiers, request identifiers, non-public execution logs, raw response payloads, and raw traces are excluded.",
+    "related_code_repository": "https://github.com/lv1zhou/CSG-code"
+  },
+  "public_file_role": "quality_gate_scoring_result",
+  "task_stage": "uca",
+  "task_type": "UCA",
+  "task_name": "UCA identification",
+  "action_key": "emergency_brake",
+  "action_name_cn": "紧急制动",
+  "action_name_en": "Emergency braking",
+  "generation_method": "few_1_shot",
+  "generation_method_label": "FS-1",
+  "quality_gate_scoring_summary": {
+    "total_reviewed_items": 50,
+    "expert_scored_items": 50,
+    "expert_usable_items_before_merge": 4,
+    "expert_kept_items_after_semantic_merge": 4,
+    "semantic_merge_retention_rate": 1.0,
+    "final_deliverable_items_after_expert_audit": 4,
+    "final_delivery_retention_rate": 1.0
+  },
+  "quality_gate_item_reviews": [
+    {
+      "uca_id": "UCA-1",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "在没有检测到实际威胁的情况下，AVP系统提供了紧急制动指令，导致车辆突然停止，可能引起周围车辆或行人的反应不及。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供紧急制动指令）的不安全形式（在没有实际威胁时提供），并给出了可理解的后果（车辆突然停止，引起周围反应不及）。该后果与 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹、不必要的急停）直接一致，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含了 broad trigger '在没有检测到实际威胁的情况下'，属于感知触发类上下文（使用了'检测到'的否定形式），违反 B1=2 的条件2；同时缺乏生命周期表达（如'过早'、'仍'）或过程相位表达（如'在泊车阶段'），仅有结果条件式上下文，因此只能给1分。",
+          "B2": "核心错误直接落在当前控制动作本体上：'提供了紧急制动指令'这一 actuation_output 在不应提供时被提供，属于典型的'provided when should not'生命周期错误。虽然上下文含感知触发，但动作本体清晰，符合 B2=2 标准。",
+          "B3": "unsafe form 能映射到 'provided when should not' 这一 broad UCA family，但未体现 discriminative 机制子型（如'过早'、'在XX阶段'、'达到XX后仍'等）。仅通过'没有检测到威胁'这一泛化条件区分，属于 generic 表达，缺乏机制区分性。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-4'，其描述为'非预期运动、错误轨迹或不必要的急停/急动'，与 description 中'车辆突然停止'及'引起反应不及'的风险方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "将上下文从感知触发改为显式过程相位或生命周期状态，例如：'在低速泊车巡航阶段，AVP系统提供了紧急制动指令，尽管车辆前方无障碍物且轨迹安全'，以增强可审计性，同时保留动作本体失败的核心。"
+      }
+    },
+    {
+      "uca_id": "UCA-3",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统未能提供紧急制动指令，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），且后果 '车辆与障碍物发生碰撞' 与 linked_hazard_ids ['H-AVP-1'] 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "上下文包含感知触发词汇 '当检测到前方有障碍物时'，违反 B1=2 的条件2；虽有触发条件，但无生命周期表达（如'过晚'）或过程相位表达（如'在泊车阶段'），仅属 broad trigger，故给1分。",
+          "B2": "核心错误直接落在当前控制动作本体上：'未能提供紧急制动指令' 属于典型的 '应提供而未提供' 缺失错误，符合 actuation_output 类型动作的 unsafe form，不依赖上游失败。",
+          "B3": "unsafe form '未能提供' 可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如'过晚提供'、'在倒车阶段未提供'等）；仅通过对象 '障碍物' 替换表达风险，缺乏 phase/lifecycle/boundary 等关系锚点，故为 generic。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述 '车辆与行人、车辆、障碍物或车位边界发生碰撞' 与 description 中 '与障碍物发生碰撞' 完全一致，无冲突。"
+        },
+        "issues": [
+          "category 与语义一致，无实质问题",
+          "description 依赖 broad trigger，上下文可审计性受限",
+          "机制区分性不足，易与其他 not-provided UCA 归并"
+        ],
+        "suggested_revision": "在泊车路径规划执行阶段，AVP系统过晚提供紧急制动指令，导致无法避免与前方静态障碍物的碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-4",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到车辆即将越出目标停车区域时，AVP系统未能提供紧急制动指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），且后果 '车辆越出目标停车区域' 与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "上下文包含感知触发词汇 '当检测到车辆即将越出目标停车区域时'，违反 B1=2 的条件2；虽有边界关系（'即将越出目标停车区域'），但缺乏生命周期表达（如'过晚'）或过程相位表达（如'在泊车阶段'），因此只能给1分。",
+          "B2": "核心错误直接落在当前控制动作本体上：'未能提供紧急制动指令' 属于典型的缺失错误（应提供而未提供），符合 actuation_output 类型动作的 unsafe form，不依赖上游失败。",
+          "B3": "unsafe form 为 '未能提供'，属于 broad family 'not provided'，但未体现机制子型（如'过晚提供'、'在越界临界点未提供'等）；仅通过危险对象（越出区域）和泛化触发（检测到）表达，缺乏 discriminative 机制区分性。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域...' 与 description 后果完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "将感知触发转化为可审计的边界或相位上下文，例如：'在车辆接近停车区域边界且横向偏移率超过安全阈值时，AVP系统未提供紧急制动指令，导致车辆越出目标停车区域。' 或更符合 STPA 偏好的：'在自动泊车过程中，当车辆轨迹预测将在1秒内越出目标停车区域边界时，AVP系统未提供紧急制动指令。'"
+      }
+    },
+    {
+      "uca_id": "UCA-2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统未能提供紧急制动指令，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），并给出了具体后果（'与行人发生碰撞'），该后果可由 linked_hazard_ids ['H-AVP-1'] 直接、一致地补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含感知触发词汇 '当检测到前方有行人时'，违反 B1=2 的条件2；虽有上下文（检测到行人），但属于 broad trigger 类型，且无生命周期表达（如'过晚'）或过程相位表达（如'在泊车阶段'），因此仅得1分。",
+          "B2": "'未能提供紧急制动指令' 直接对应当前控制动作的缺失错误（应提供而未提供），属于动作本体的生命周期失败，核心错误落在 actuation_output 本身，而非上游感知或规划层，符合 B2=2 标准。",
+          "B3": "unsafe form 为 '未能提供'，可归入 'not provided' family，但仅通过危险对象 '行人' 进行实例化，缺乏机制子型（如'过晚提供'体现 timing relation，或'在倒车阶段未提供'体现 phase relation）。因此属于 generic 表达，得1分。",
+          "B4": "linked_hazard_ids 为合法 ID ['H-AVP-1']，其描述 '车辆与行人...发生碰撞' 与 description 中 '与行人发生碰撞' 完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "uses_perception_trigger_in_context",
+          "lacks_lifecycle_or_phase_expression",
+          "mechanism_is_generic_object_swap"
+        ],
+        "suggested_revision": "在泊车过程中接近行人区域时，AVP系统过晚提供紧急制动指令，导致无法避免与行人碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-6",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统过晚提供紧急制动指令，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过晚提供），并直接关联到具体后果（与障碍物碰撞）。该后果可由 linked_hazard_ids [H-AVP-1] 直接、一致地补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达“过晚”，满足条件1；但同时包含感知触发词汇“检测到前方有障碍物”，违反条件2。因此 B1 最高只能得1分。",
+          "B2": "核心错误明确落在当前控制动作的时序本体上（“过晚提供紧急制动指令”），属于典型的 timing 错误，直接对应 actuation_output 的生命周期关系，未依赖上游失败。",
+          "B3": "unsafe form 使用了明确的机制子型“过晚”，属于 discriminative 的 lifecycle_relation 表达，具有机制区分性，而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-1，且其描述‘车辆与障碍物发生碰撞’与 description 中的后果完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为状态或相位条件，例如：‘在车辆接近静止障碍物且距离小于安全阈值的过程中，AVP系统过晚提供紧急制动指令，导致碰撞。’但当前版本已满足动作层UCA基本要求，无需强制修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-7",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到车辆即将越出目标停车区域时，AVP系统过晚提供紧急制动指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过晚提供），并直接关联到具体后果（车辆越出目标停车区域），该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达“过晚”，满足条件1；但同时包含感知触发词汇“当检测到...时”，违反条件2，因此不能得2分。仅有 broad trigger（检测到即将越界）而无过程相位或强边界绑定，上下文质量为中等。",
+          "B2": "核心错误明确落在当前控制动作的时序本体上——“过晚提供紧急制动指令”，属于典型的 timing 错误，直接对应 actuation_output 的生命周期关系，未依赖上游失败。",
+          "B3": "unsafe form 使用了明确的机制子型“过晚”，属于 discriminative 的 lifecycle_relation 表达，具有机制区分性，而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 引用合法 ID 'H-AVP-2'，其描述‘车辆越出目标停车区域’与 description 中的后果完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为状态或边界条件，例如：‘在车辆已越过停车区域边界前的临界阶段，AVP系统过晚提供紧急制动指令，导致无法阻止越界。’但当前表述已足够构成有效UCA，无需强制修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-5",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统过晚提供紧急制动指令，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过晚提供），并直接关联到具体后果（与行人碰撞），该后果可由 linked_hazard_ids [H-AVP-1] 直接、一致地补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达“过晚”，满足条件1；但同时包含感知触发词汇“检测到前方有行人”，违反条件2，因此不能得2分。",
+          "B2": "核心错误明确落在当前控制动作的时序执行上（“过晚提供紧急制动指令”），属于典型的 timing 错误，直接作用于动作本体，而非上游感知或规划失败。",
+          "B3": "unsafe form 使用了明确的生命周期关系词“过晚”，体现了 discriminative 的机制子型，而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-1，且其描述‘车辆与行人...发生碰撞’与 description 中‘导致车辆与行人发生碰撞’完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为可观测状态或过程相位，例如：‘在行人位于车辆前方制动距离内时，AVP系统过晚提供紧急制动指令，导致碰撞。’但当前表述已构成有效UCA，非必须修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-9",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统过早停止提供紧急制动指令，导致车辆未能及时停车，与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过早停止提供），并直接说明了后果（未能及时停车，与障碍物发生碰撞）。该后果与 linked_hazard_ids 中的 H-AVP-1（碰撞）一致且可直接补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达“过早停止”，满足条件1；但同时包含感知触发词汇“当检测到前方有障碍物时”，违反条件2。因此 B1 最高只能得1分。",
+          "B2": "核心错误明确落在当前控制动作的生命周期上——“过早停止提供紧急制动指令”，属于 timing/duration 错误，直接对应动作本体的不安全形式，而非上游感知或规划失败。",
+          "B3": "unsafe form 使用了“过早停止”这一明确的生命周期关系表达，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述为‘车辆与行人、车辆、障碍物或车位边界发生碰撞’，与 description 中‘与障碍物发生碰撞’完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为状态或相位条件，例如：‘在车辆接近静止前的减速阶段，AVP系统过早停止提供紧急制动指令，导致未能及时停车而与前方障碍物发生碰撞。’但当前版本已满足基本 UCA 要求，非必须修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-10",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到车辆即将越出目标停车区域时，AVP系统过早停止提供紧急制动指令，导致车辆未能及时停车，越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式：'过早停止提供'，并说明了后果：'车辆未能及时停车，越出目标停车区域'。该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早停止'，满足条件1；但同时包含感知触发词汇 '当检测到车辆即将越出目标停车区域时'，违反条件2。因此 B1 最高只能得1分。",
+          "B2": "'过早停止提供紧急制动指令' 直接描述了当前控制动作（emergency_brake）的生命周期错误（timing/duration 错误），核心错误落在动作本体上，而非上游感知或规划失败。",
+          "B3": "unsafe form '过早停止提供' 属于明确的生命周期关系机制子型，具有区分性，不是仅靠对象替换或泛化触发表达的 generic family。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域...' 与 description 中的后果完全一致，无冲突。"
+        },
+        "issues": [
+          "B1 扣分原因：包含感知触发词 '检测到'，尽管有生命周期表达，仍限制上下文质量为1分"
+        ],
+        "suggested_revision": "将感知触发转化为过程相位或状态边界表达，例如：'在车辆接近停车区域边界但尚未完成泊车的过程中，AVP系统过早停止提供紧急制动指令，导致车辆越出目标停车区域。'"
+      }
+    },
+    {
+      "uca_id": "UCA-8",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统过早停止提供紧急制动指令，导致车辆未能及时停车，与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过早停止提供），并直接关联到具体后果（与行人发生碰撞）。该后果可由 linked_hazard_ids 中的 H-AVP-1 直接、一致地补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达“过早停止”，满足条件1；但同时包含感知触发词汇“当检测到前方有行人时”，违反条件2，因此不能得2分。",
+          "B2": "核心错误明确落在当前控制动作的生命周期上（“过早停止提供紧急制动指令”），属于 timing/duration 错误，直接对应动作本体失败，而非上游感知或规划层问题。",
+          "B3": "unsafe form 使用了明确的生命周期关系词“过早停止”，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述‘车辆与行人...发生碰撞’与 description 中‘与行人发生碰撞’完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "B1 扣分原因：包含感知触发词‘检测到’，虽有生命周期表达但仍限制上下文可审计性"
+        ],
+        "suggested_revision": "将感知触发转化为状态或相位上下文，例如：‘在车辆接近行人且尚未完成减速至安全速度前，AVP系统过早停止提供紧急制动指令，导致与行人发生碰撞。’"
+      }
+    },
+    {
+      "uca_id": "UCA-2__dup2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "在车辆接近目标停车位时，AVP系统提供了紧急制动指令，导致车辆停在不适当的位置，增加了碰撞的风险。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了'提供了紧急制动指令'这一动作，并指出其导致'停在不适当位置'和'增加碰撞风险'，但未明确说明该动作的不安全形式（如过早、过晚、错误触发等），仅呈现为后果摘要。linked_hazard_ids [H-AVP-1, H-AVP-3] 可部分补足后果，但动作与危险之间的机制连接仍偏弱，需额外推断。",
+          "B1": "包含过程相位表达'在车辆接近目标停车位时'，满足相位条件；但未使用任何生命周期动词（如'仍'、'过早'等）。同时不含感知触发或上游依赖词汇，因此可得1分。但因缺乏生命周期表达，不满足B1=2的双重要求。",
+          "B2": "核心错误落在'提供了紧急制动指令'上，属于当前控制动作本体，但未说明该提供行为在生命周期上的具体问题（如是否过早、错误触发、不应提供而提供等），仅描述为'导致停在不适当位置'，动作本体的不安全形式不够清晰，偏向结果导向而非动作机制。",
+          "B3": "unsafe form 仅体现为'提供了紧急制动指令'在特定场景下引发不良后果，但未体现 discriminative 机制子型（如过早、过晚、边界后仍提供等）。虽有相位上下文，但缺乏 lifecycle_relation / boundary_relation 等明确关系锚点，更接近 broad family 表达，仅通过场景对象（目标停车位）实现有限区分。",
+          "B4": "linked_hazard_ids ['H-AVP-1', 'H-AVP-3'] 均为合法ID，且与 description 中'停在不适当位置'（对应H-AVP-3）和'增加碰撞风险'（对应H-AVP-1）一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在车辆接近目标停车位且无障碍物或碰撞风险时，AVP系统错误地提供了紧急制动指令，导致车辆停在车道中央或未完成泊车，造成后续碰撞风险或任务失败。"
+      }
+    },
+    {
+      "uca_id": "UCA-1__dup2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "在没有检测到实际威胁的情况下，AVP系统提供了紧急制动指令，导致车辆突然停止，可能引起后方车辆追尾。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供紧急制动指令）的不安全形式（在没有实际威胁时提供），并给出了具体后果（车辆突然停止，可能引起后方追尾）。该后果可由 linked_hazard_ids H-AVP-1（碰撞）和 H-AVP-4（非预期运动/急停）直接、一致地承接，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含上下文“在没有检测到实际威胁的情况下”，属于感知触发类表达（‘检测到’），违反 B1=2 的条件2；同时缺乏生命周期动词（如‘仍’、‘过早’）或过程相位表达（如‘在...阶段’），仅有 broad trigger，因此只能得1分。",
+          "B2": "核心错误直接落在当前控制动作本体上：系统‘提供了’紧急制动指令，而该指令在无威胁情境下是不应提供的。这属于动作执行错误（提供了不应提供的指令），符合 actuation_output 类型下的 provided_when_not_required，动作本体清晰，未依赖上游失败。",
+          "B3": "unsafe form 表达为‘在没有检测到实际威胁的情况下提供’，其机制区分性较弱，主要依赖感知触发条件（‘未检测到威胁’）而非动作生命周期、相位或边界关系。虽能归入 provided family，但缺乏 discriminative 机制子型（如过早、过晚、仍提供等），仅通过触发条件对象（‘实际威胁’）定义场景，属于 generic 表达。",
+          "B4": "linked_hazard_ids [\"H-AVP-1\", \"H-AVP-4\"] 均为合法 ID，且与 description 中‘车辆突然停止’‘引起追尾’‘非预期急停’的风险方向一致：H-AVP-1 覆盖追尾碰撞，H-AVP-4 覆盖非预期急停导致的周边风险，链接合理。"
+        },
+        "issues": [],
+        "suggested_revision": "将感知触发上下文转化为显式过程状态或动作生命周期表达，例如：‘在泊车过程中且周围无障碍物时，AVP系统仍提供紧急制动指令’ 或 ‘在完成障碍物扫描且确认路径安全后，AVP系统错误地持续提供紧急制动指令’。避免使用‘检测到’等上游感知词汇，转而绑定动作状态或过程相位。"
+      }
+    },
+    {
+      "uca_id": "UCA-4__dup2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当车辆即将超出目标停车区域时，AVP系统未能提供紧急制动指令，导致车辆越出停车边界。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），且后果 '车辆越出停车边界' 与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含边界关系 '当车辆即将超出目标停车区域时'，但未使用生命周期动词（如'过晚'、'仍'）或过程相位表达（如'在泊车阶段'），仅满足 broad trigger + boundary condition，不符合 B1=2 的双条件要求。",
+          "B2": "'未能提供紧急制动指令' 直接对应当前控制动作的缺失错误（应提供而未提供），属于动作本体的生命周期失败，未依赖感知触发或上游条件。",
+          "B3": "unsafe form 为 '未能提供'，可归入 'not provided' family，但未体现 discriminative 机制子型（如'过晚提供'、'在越界临界点未提供'），仅通过上下文对象（停车边界）限定，机制区分性不足。",
+          "B4": "linked_hazard_ids 引用合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域...' 与 description 后果完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在车辆接近停车边界临界点时，AVP系统未及时提供紧急制动指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-3__dup2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统未能提供紧急制动指令，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），并直接指出了后果（'导致车辆与障碍物发生碰撞'），该后果与 linked_hazard_ids 中的 H-AVP-1 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "上下文包含感知触发词汇 '当检测到前方有障碍物时'，属于上游依赖/感知触发类表达；虽隐含了边界关系（前方障碍物存在），但缺乏生命周期表达（如'过晚'、'未终止'）或过程相位表达（如'在泊车过程中'），因此仅满足 B1=1 条件。",
+          "B2": "核心错误明确落在当前控制动作本体上：'未能提供紧急制动指令' 属于典型的缺失型动作失败（应提供而未提供），直接对应 actuation_output 的生命周期缺失，未混入感知或规划层失败。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如'过晚提供'、'在倒车阶段未提供'）；仅通过对象 '障碍物' 替换表达风险场景，缺乏 phase/lifecycle/boundary 等关系锚点，故为 generic。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述 '车辆与行人、车辆、障碍物或车位边界发生碰撞' 与 description 中 '与障碍物发生碰撞' 完全一致，无冲突。"
+        },
+        "issues": [
+          "category 与语义一致，但 description 依赖 broad trigger，机制区分性不足",
+          "上下文含感知触发词，限制 B1 得分"
+        ],
+        "suggested_revision": "在 AVP 系统已确认障碍物存在且需紧急制动的条件下，系统未发出紧急制动指令，导致与障碍物碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-6__dup2",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当车辆接近目标停车位时，AVP系统过早提供紧急制动指令，导致车辆停在不适当的位置，增加了碰撞的风险。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过早提供），并说明了后果（停在不适当位置、增加碰撞风险）。linked_hazard_ids [H-AVP-1, H-AVP-3] 与该后果直接一致，无需跳跃推断，已构成可用的动作层 UCA 骨架。",
+          "B1": "包含明确的生命周期表达“过早”，满足条件1；未使用任何感知触发或上游依赖词汇（如“检测到”“未确认”等），满足条件2。上下文为“当车辆接近目标停车位时”，虽为 broad trigger，但因已有“过早”这一生命周期动词，整体仍满足 B1=2 的双重要求。",
+          "B2": "核心错误直接落在当前控制动作的时序本体上——“过早提供紧急制动指令”，属于典型的 timing 错误（应稍晚提供），完全符合 actuation_output 类动作的生命周期失败模式，未依赖上游条件或感知触发。",
+          "B3": "unsafe form 使用了“过早”这一明确的生命周期关系词，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达，能清晰归入 timing/duration 子型。",
+          "B4": "linked_hazard_ids [\"H-AVP-1\", \"H-AVP-3\"] 均在合法词表中，且与 description 中‘停在不适当位置’（对应 H-AVP-3）和‘增加碰撞风险’（对应 H-AVP-1）完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-7__dup2",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当车辆接近目标停车位时，AVP系统在错误的时间点提供紧急制动指令，导致车辆偏离预定路径，增加了碰撞的风险。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供紧急制动指令）在错误时间点发生，构成不安全形式；后果（偏离路径、增加碰撞风险）可由 linked_hazard_ids H-AVP-1 和 H-AVP-3 直接、一致地补足，已形成可用的动作层 UCA 骨架。",
+          "B1": "包含过程相位表达“当车辆接近目标停车位时”，但未使用生命周期动词（如“过早”“过晚”）或明确相位阶段（如“在倒车阶段”）；该上下文属于 broad trigger 或边界关系，未满足 B1=2 所需的生命周期/相位表达强条件。",
+          "B2": "核心错误直接落在当前控制动作“提供紧急制动指令”的时序上（“在错误的时间点提供”），属于 timing 错误，符合 actuation_output 的生命周期关系，动作本体清晰，未依赖上游感知或确认条件。",
+          "B3": "unsafe form 使用了泛化 timing 表达“错误的时间点”，但未具体说明是“过早”“过晚”或其他 discriminative 机制子型；虽可归入 wrong timing family，但缺乏机制区分性，仅属 generic timing 描述。",
+          "B4": "linked_hazard_ids [\"H-AVP-1\", \"H-AVP-3\"] 均为合法 ID，且与 description 中“偏离预定路径”“增加碰撞风险”高度一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "将‘错误的时间点’具体化为具有机制区分性的表达，例如‘过早提供紧急制动指令’或‘在无需制动时仍提供紧急制动’，以增强可审计性和语义族清晰度。"
+      }
+    },
+    {
+      "uca_id": "UCA-5__dup2",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统过晚提供紧急制动指令，导致车辆未能及时停车，增加了碰撞的风险。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'过晚提供'），并指出其后果（'未能及时停车，增加了碰撞的风险'），该后果可由 linked_hazard_ids ['H-AVP-1'] 直接、一致地补足，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达 '过晚'，满足条件1；但同时包含感知触发词汇 '当检测到前方有障碍物时'，违反条件2，因此 B1 最高只能得1分。",
+          "B2": "'过晚提供紧急制动指令' 直接描述了当前控制动作的 timing 错误，属于动作本体的生命周期问题，未落入感知或规划层失败，符合 actuation_output 的 timing 错误特征。",
+          "B3": "'过晚提供' 是明确的生命周期关系表达，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'（碰撞风险），与 description 中 '增加了碰撞的风险' 完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为状态或相位绑定，例如：'在车辆接近静止障碍物且距离小于安全阈值的过程中，AVP系统过晚提供紧急制动指令，导致未能及时停车，增加了碰撞风险。'（注意：此处仅为示例，实际建议避免引入数值阈值；更优改写如：'在车辆即将与前方障碍物发生碰撞的临界阶段，AVP系统过晚提供紧急制动指令……'）"
+      }
+    },
+    {
+      "uca_id": "UCA-9__dup2",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当车辆接近目标停车位时，AVP系统过早停止提供紧急制动指令，导致车辆未能完全停下，增加了碰撞的风险。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式：'过早停止提供'，即在应继续提供制动时提前终止。危险后果（碰撞风险、未完全停下）虽未详述细节，但可由 linked_hazard_ids H-AVP-1（碰撞）和 H-AVP-3（停留在不安全位置）直接、一致地补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "满足 B1=2 的两个条件：1) 包含明确的生命周期表达 '过早停止'，属于动作生命周期关系；2) 无任何感知触发（如'检测到'）或上游依赖词汇（如'未确认'）。上下文 '当车辆接近目标停车位时' 属于过程相位表达（泊车末期），与生命周期动词结合，形成可审计上下文。",
+          "B2": "核心错误直接落在当前控制动作（提供紧急制动指令）的生命周期上：'过早停止提供' 是典型的 timing/duration 错误，属于动作本体失败，而非感知或规划层问题。符合 actuation_output 类型动作的生命周期失效模式。",
+          "B3": "'过早停止' 是明确的生命周期关系表达，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。它指明了动作终止时机与所需持续时间之间的不匹配，属于 discriminative unsafe form。",
+          "B4": "linked_hazard_ids [\"H-AVP-1\", \"H-AVP-3\"] 均为合法 ID，且与 description 中'未能完全停下'和'增加碰撞风险'高度一致：H-AVP-1 对应碰撞，H-AVP-3 对应未完成泊车/停在不安全位置，逻辑连贯无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-10__dup2",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当车辆接近目标停车位时，AVP系统持续提供紧急制动指令时间过长，导致车辆过度减速或停止，增加了碰撞的风险。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（持续提供时间过长），并指出其后果（车辆过度减速或停止，增加碰撞风险）。linked_hazard_ids [H-AVP-1, H-AVP-3] 与该后果直接一致：H-AVP-1 覆盖碰撞风险，H-AVP-3 覆盖停留在不安全位置。因此已构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“持续...时间过长”，满足条件1；同时上下文为“当车辆接近目标停车位时”，属于过程相位表达（泊车末期阶段），且不含任何感知触发（如“检测到”）或上游依赖词汇（如“未确认”），满足条件2。因此 B1=2。",
+          "B2": "核心错误直接落在当前控制动作（提供紧急制动指令）的执行本体上，具体表现为 duration 错误（“持续...时间过长”），属于典型的生命周期错误（应适时终止但未终止），完全符合 actuation_output 类动作的 unsafe form 表达。",
+          "B3": "unsafe form 使用了“持续...时间过长”这一明确的生命周期关系表达，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。它体现了动作在时间维度上的不当延续，属于 discriminative 的语义族。",
+          "B4": "linked_hazard_ids [\"H-AVP-1\", \"H-AVP-3\"] 均为合法 ID，且与 description 中“增加碰撞风险”和“导致车辆过度减速或停止”高度一致：H-AVP-1 对应碰撞，H-AVP-3 对应无法完成任务或停在不安全位置。无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-8__dup2",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统过早停止提供紧急制动指令，导致车辆未能完全停下，增加了碰撞的风险。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式：'过早停止提供'，即在应持续提供时提前终止。危险后果 '车辆未能完全停下，增加了碰撞的风险' 与 linked_hazard_ids ['H-AVP-1']（碰撞）直接一致，构成完整可用的 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早停止'，满足条件1；但同时包含感知触发词汇 '当检测到前方有障碍物时'，违反条件2。根据规则，只要存在感知触发，即使有生命周期表达，B1 最高只能给1分。",
+          "B2": "'过早停止提供紧急制动指令' 直接描述了当前控制动作（actuation_output 类型）的生命周期错误（timing/duration 错误），核心错误落在动作本体上，而非上游感知或规划层。尽管有 '检测到' 触发语，但主干错误仍是动作终止时机不当，符合 B2=2 标准。",
+          "B3": "'过早停止' 是典型的 discriminative 生命周期关系表达，体现了明确的机制子型（timing too early in action lifecycle），具有机制区分性，不应视为 generic 对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述 '车辆与行人、车辆、障碍物...发生碰撞' 与 description 中 '未能完全停下，增加了碰撞的风险' 完全一致，无冲突。"
+        },
+        "issues": [
+          "B1受限于感知触发词'检测到'，无法达到2分"
+        ],
+        "suggested_revision": "在泊车过程中接近障碍物时，AVP系统过早停止提供紧急制动指令，导致车辆未能完全停下，增加了与障碍物碰撞的风险。"
+      }
+    },
+    {
+      "uca_id": "UCA-1__dup3",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "在没有检测到实际威胁的情况下，AVP系统提供了紧急制动指令，导致车辆突然停止，可能引起周围车辆或行人的反应不及。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供紧急制动指令）的不安全形式：在无实际威胁时提供，导致车辆突然停止。后果虽未详述具体 hazard，但 linked_hazard_ids 引用了 H-AVP-4（非预期运动/急停导致风险上升），与‘突然停止’直接一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 中无任何生命周期表达（如‘仍’、‘过早’等）或过程相位表达（如‘在...阶段’）。上下文仅为‘在没有检测到实际威胁的情况下’，属于感知触发类表述（含‘检测到’），且无相位/生命周期绑定，因此不符合 B1=2 或 B1=1 的强条件；因完全缺乏显式可审计上下文（仅有 broad trigger），给 0 分。",
+          "B2": "核心错误直接落在当前控制动作本体上：‘提供了紧急制动指令’这一 actuation_output 在不应提供时被提供。虽然上下文含‘检测到’，但动作失败本身是‘错误提供’，属于执行错误（提供了不该提供的指令），符合 B2=2 的‘执行错误’情形。",
+          "B3": "unsafe form 为‘在没有检测到实际威胁的情况下提供’，本质是基于感知条件的对象/场景替换（无威胁 vs 有威胁），未体现 lifecycle_relation、phase_relation 等机制子型。虽可归入 provided family，但缺乏 discriminative 机制描述，仅靠触发条件区分，故给 1 分。",
+          "B4": "linked_hazard_ids 为合法 ID [H-AVP-4]，其描述‘非预期运动、错误轨迹或不必要的急停/急动’与 description 中‘车辆突然停止’高度一致，方向匹配，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "将上下文从感知触发转为可审计的过程状态或边界关系，例如：‘在泊车路径已确认安全且无障碍物的巡航阶段，AVP系统仍提供了紧急制动指令，导致车辆非预期急停。’这样既保留动作本体错误，又引入 phase_relation 和 lifecycle_relation（‘仍’），提升可审计性。"
+      }
+    },
+    {
+      "uca_id": "UCA-3__dup3",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统未能提供紧急制动指令，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），且后果 '车辆与障碍物发生碰撞' 与 linked_hazard_ids 中的 H-AVP-1 直接一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "上下文包含感知触发词汇 '当检测到前方有障碍物时'，违反 B1=2 的条件；虽有边界对象（障碍物），但无生命周期表达（如'过晚'）或过程相位表达（如'在泊车阶段'），因此仅得1分。",
+          "B2": "'未能提供紧急制动指令' 直接对应当前控制动作的缺失错误（应提供而未提供），属于动作本体的生命周期失败，符合 actuation_output 类型的典型 unsafe form，不依赖上游失败。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如'过晚提供'、'在倒车阶段未提供'等）；仅通过对象 '障碍物' 替换表达，缺乏 phase/lifecycle/boundary 等关系锚点，故为 generic。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述 '车辆与行人、车辆、障碍物或车位边界发生碰撞' 与 description 中 '与障碍物发生碰撞' 完全一致，无冲突。"
+        },
+        "issues": [
+          "使用感知触发 '检测到' 作为上下文，降低可审计性",
+          "unsafe form 缺乏机制区分性，仅依赖对象替换",
+          "高度依赖通用模板表达"
+        ],
+        "suggested_revision": "在泊车路径规划执行阶段，AVP系统过晚提供紧急制动指令，导致无法避免与前方静态障碍物的碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-4__dup3",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到车辆即将越出目标停车区域时，AVP系统未能提供紧急制动指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），且后果 '车辆越出目标停车区域' 与 linked_hazard_ids ['H-AVP-2'] 完全一致，构成完整可用的 UCA 骨架。",
+          "B1": "上下文包含感知触发词 '当检测到车辆即将越出目标停车区域时'，违反 B1=2 的条件2；虽有边界关系（'越出目标停车区域'），但无生命周期表达或过程相位表达，因此仅得1分。",
+          "B2": "核心错误直接落在当前控制动作本体上：'未能提供紧急制动指令' 属于典型的缺失型动作失败（应提供而未提供），符合 actuation_output 类型下的 not provided 错误，不依赖上游条件作为主因。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如过晚、在某阶段未提供等），仅通过场景对象（越界）区分，缺乏 lifecycle/phase/boundary relation 的具体机制表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域或停车边界，造成财产损失' 与 description 后果完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "将感知触发转化为可审计的边界状态上下文，例如：'在车辆位置已接近或越过目标停车区域边界的临界状态下，AVP系统未提供紧急制动指令，导致车辆越出目标停车区域。'"
+      }
+    },
+    {
+      "uca_id": "UCA-2__dup3",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统未能提供紧急制动指令，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），且后果 '车辆与行人发生碰撞' 与 linked_hazard_ids 中的 H-AVP-1 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "上下文包含感知触发词汇 '当检测到前方有行人时'，违反 B1=2 的条件2；虽有场景设定，但无生命周期表达（如'过晚'）或过程相位表达（如'在泊车阶段'），因此仅得1分。",
+          "B2": "核心错误直接落在当前控制动作本体上：'未能提供紧急制动指令' 属于典型的 '应提供而未提供' 缺失错误，符合 actuation_output 类动作的生命周期缺失情形，不依赖上游失败。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如'过晚提供'、'在倒车阶段未提供'等）；仅通过危险对象 '行人' 区分，属于 generic 表达。",
+          "B4": "linked_hazard_ids 引用合法 ID 'H-AVP-1'，且 description 中的后果 '车辆与行人发生碰撞' 与该 hazard 描述完全一致，无冲突。"
+        },
+        "issues": [
+          "B1 扣分因使用感知触发词 '检测到'，不符合强上下文要求",
+          "B3 扣分因缺乏机制区分性，仅靠对象替换区分"
+        ],
+        "suggested_revision": "在 AVP 系统应执行紧急制动的场景下（例如车辆接近静止行人且距离小于安全阈值时），系统未能发出紧急制动指令，导致与行人发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-6__dup3",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统过晚提供紧急制动指令，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'过晚提供'），并直接指出后果（'导致车辆与障碍物发生碰撞'），该后果与 linked_hazard_ids 中的 H-AVP-1 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达 '过晚'，满足条件1；但同时包含感知触发词汇 '当检测到前方有障碍物时'，违反条件2，因此不能得2分。根据规则，含感知触发即使有生命周期词也只能给1分。",
+          "B2": "'过晚提供紧急制动指令' 直接描述了当前控制动作（emergency_brake）在 timing 上的本体失败，属于典型的生命周期/时序错误，核心错误落在动作输出本身，而非上游感知或规划层。",
+          "B3": "'过晚提供' 是明确的 lifecycle_relation 机制子型，具有区分性，不属于仅靠对象替换（如换'行人'为'障碍物'）的 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述 '车辆与...障碍物发生碰撞' 与 description 中的后果完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升可审计性，可将感知触发转化为状态或相位上下文，例如：'在车辆接近静止障碍物且相对距离小于安全阈值的过程中，AVP系统过晚提供紧急制动指令，导致碰撞。' 但当前版本已满足基本 UCA 要求，无需强制修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-7__dup3",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到车辆即将越出目标停车区域时，AVP系统过晚提供紧急制动指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过晚提供），并直接关联到具体后果（车辆越出目标停车区域），该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达“过晚”，满足条件1；但同时包含感知触发词汇“当检测到...时”，违反条件2，因此不能得2分。仅有 broad trigger（检测到即将越界）而无过程相位或强边界绑定，上下文质量为中等。",
+          "B2": "核心错误明确落在当前控制动作的时序本体上——“过晚提供紧急制动指令”，属于典型的 timing 错误，直接对应 actuation_output 的生命周期关系，未依赖上游失败。",
+          "B3": "unsafe form 使用了明确的机制子型“过晚”，属于 discriminative 的 lifecycle_relation 表达，具有机制区分性，而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 引用合法 ID 'H-AVP-2'，其描述‘车辆越出目标停车区域’与 description 中的后果完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为状态或边界条件，例如：‘在车辆已越过停车区域边界前的临界阶段，AVP系统过晚提供紧急制动指令，导致无法阻止越界。’但当前版本已满足基本 UCA 要求，无需强制修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-5__dup3",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统过晚提供紧急制动指令，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'过晚提供'），并直接指出后果（'导致车辆与行人发生碰撞'），该后果与 linked_hazard_ids 中的 H-AVP-1 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过晚提供'，满足条件1；但同时包含感知触发词汇 '当检测到前方有行人时'，违反条件2，因此 B1 最高只能得1分。",
+          "B2": "'过晚提供紧急制动指令' 直接描述了当前控制动作（emergency_brake）在 timing 上的本体失败，属于典型的生命周期/时序错误，未依赖上游条件或感知失败本身，核心错误落在动作输出时机上。",
+          "B3": "'过晚提供' 是典型的 discriminative 生命周期关系表达，具有机制区分性，不属于仅靠对象替换（如将'行人'换成'障碍物'）的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述 '车辆与行人、车辆、障碍物或车位边界发生碰撞' 与 description 中 '车辆与行人发生碰撞' 完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为状态或相位条件，例如：'在行人位于车辆前方且距离小于安全阈值时，AVP系统过晚提供紧急制动指令，导致碰撞。' 但当前版本已满足动作层UCA基本要求，无需强制修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-9__dup3",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统过早停止提供紧急制动指令，导致车辆未能及时停车，与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式：'过早停止提供'，并直接说明了后果（与障碍物发生碰撞）。该后果可由 linked_hazard_ids 中的 H-AVP-1 直接、一致地补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达 '过早停止'，满足条件1；但同时包含感知触发词汇 '当检测到前方有障碍物时'，违反条件2。因此 B1 最高只能得1分。",
+          "B2": "'过早停止提供紧急制动指令' 的核心错误直接落在当前控制动作（emergency_brake）的生命周期上，属于 timing/duration 错误，符合 actuation_output 类型动作的本体失败，不依赖上游条件。",
+          "B3": "unsafe form '过早停止提供' 明确体现了生命周期关系（lifecycle_relation），具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述 '车辆与...障碍物发生碰撞' 与 description 中的后果完全一致，无冲突。"
+        },
+        "issues": [
+          "B1 因包含感知触发词 '检测到' 而无法得2分",
+          "category 名称 'stopped_too_soon_or_applied_too_long' 与 '过早停止提供' 语义基本一致，但命名略显冗余"
+        ],
+        "suggested_revision": "将上下文从感知触发改为过程相位或状态绑定，例如：'在应持续执行紧急制动的阶段，AVP系统过早停止提供紧急制动指令，导致车辆未能及时停车，与障碍物发生碰撞。'"
+      }
+    },
+    {
+      "uca_id": "UCA-10__dup3",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到车辆即将越出目标停车区域时，AVP系统过早停止提供紧急制动指令，导致车辆未能及时停车，越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式：'过早停止提供'，并直接说明了后果：'导致车辆未能及时停车，越出目标停车区域'。该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整、可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早停止'，满足条件1；但同时包含感知触发词汇 '当检测到车辆即将越出目标停车区域时'，违反条件2。因此 B1 最高只能得1分。",
+          "B2": "核心错误明确落在当前控制动作的生命周期上：'过早停止提供紧急制动指令'，属于典型的 timing/duration 错误（过早终止），直接对应动作本体失败，而非上游感知或规划层问题。",
+          "B3": "'过早停止' 是典型的 discriminative 生命周期关系表达，体现了明确的机制子型（timing 错误中的过早终止），具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-2'，其描述为'车辆越出目标停车区域'，与 description 中'越出目标停车区域'的后果完全一致，无冲突。"
+        },
+        "issues": [
+          "B1 扣分原因：包含感知触发词 '检测到'，尽管有生命周期表达，仍限制上下文质量为1分"
+        ],
+        "suggested_revision": "将感知触发转化为可审计的状态或边界条件，例如：'在车辆接近目标停车区域边界且尚未完全停稳的过程中，AVP系统过早停止提供紧急制动指令，导致车辆因惯性越出目标停车区域。'"
+      }
+    },
+    {
+      "uca_id": "UCA-8__dup3",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统过早停止提供紧急制动指令，导致车辆未能及时停车，与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（'过早停止提供'），并直接关联到具体后果（与行人发生碰撞），该后果可由 linked_hazard_ids 中的 H-AVP-1 直接、一致地补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达 '过早停止'，满足条件1；但同时包含感知触发词汇 '当检测到前方有行人时'，违反条件2，因此 B1 最高只能得1分。",
+          "B2": "'过早停止提供紧急制动指令' 直接描述了当前控制动作（emergency_brake）在生命周期上的 timing 错误，属于动作本体的执行失败，而非上游感知或规划层问题。",
+          "B3": "'过早停止' 是典型的 lifecycle_relation 表达，具有明确的机制区分性，不属于仅靠对象替换（如'行人'vs'车辆'）的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述 '车辆与行人...发生碰撞' 与 description 中 '与行人发生碰撞' 完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为状态或相位条件，例如：'在车辆接近行人且距离小于安全阈值时，AVP系统过早停止提供紧急制动指令...'。但当前表述已满足动作层UCA要求，非必须修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-1__dup4",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "在没有检测到实际威胁的情况下，AVP系统提供了紧急制动指令，导致车辆突然停止，可能引起周围车辆或行人的反应迟缓。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供紧急制动指令）的不安全形式（在没有实际威胁时提供），并给出了可理解的后果（车辆突然停止，可能引起周围反应迟缓）。该后果与 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹或不必要的急停/急动）直接一致，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含了 broad trigger '在没有检测到实际威胁的情况下'，属于感知触发类上下文，违反 B1=2 的条件2；同时未包含生命周期表达（如'仍'、'过早'）或过程相位表达（如'在...阶段'），因此只能给1分。",
+          "B2": "核心错误明确落在当前控制动作本体上：'提供了紧急制动指令'这一 actuation_output 在不应提供时被提供，属于典型的 provided-but-should-not 形式，符合动作生命周期中的错误提供，不依赖上游失败。",
+          "B3": "unsafe form 表达为'在没有检测到实际威胁的情况下提供'，本质上是通过否定感知条件来界定上下文，缺乏 discriminative 的机制子型（如过早/过晚/仍等）。虽然能归入 provided family，但仅靠对象/条件替换（有无威胁）表达，机制区分性不足。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-4，且 description 中'车辆突然停止'和'不必要的急停'与 H-AVP-4 的'非预期运动、错误轨迹或不必要的急停/急动'高度一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "将上下文从感知触发转为可审计的过程状态，例如：'在泊车路径已确认安全且无障碍物动态侵入的稳定巡航阶段，AVP系统仍提供了紧急制动指令，导致不必要的急停。'"
+      }
+    },
+    {
+      "uca_id": "UCA-3__dup4",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统未能提供紧急制动指令，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），且后果 '车辆与障碍物发生碰撞' 与 linked_hazard_ids 中的 H-AVP-1 直接一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "上下文包含感知触发词汇 '当检测到前方有障碍物时'，属于上游依赖表述；虽隐含了边界关系（前方有障碍物），但缺乏生命周期表达（如'过晚'）或过程相位表达（如'在泊车过程中'），因此不符合 B1=2 的严格条件。",
+          "B2": "'未能提供紧急制动指令' 直接对应当前控制动作的缺失错误（应提供而未提供），属于动作本体的生命周期失败，未落入感知或规划层，符合 B2=2 标准。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但仅通过对象 '障碍物' 替换体现差异，缺乏机制子型（如'过晚提供'、'在倒车阶段未提供'等 discriminative 表达），因此为 generic 级别。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述 '车辆与行人、车辆、障碍物或车位边界发生碰撞' 与 description 中 '与障碍物发生碰撞' 完全一致，无冲突。"
+        },
+        "issues": [
+          "使用了感知触发 '检测到'，削弱了上下文的可审计性",
+          "unsafe form 缺乏机制区分性，仅依赖对象替换",
+          "高度依赖模板化表达，语义粒度偏粗"
+        ],
+        "suggested_revision": "在泊车路径上存在静态障碍物且车辆即将进入碰撞距离时，AVP系统未提供紧急制动指令，导致与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-4__dup4",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到车辆即将越出目标停车区域时，AVP系统未能提供紧急制动指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），且后果 '车辆越出目标停车区域' 与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "上下文包含感知触发词汇 '当检测到车辆即将越出目标停车区域时'，违反 B1=2 的条件2；虽有边界关系（'越出目标停车区域'），但无生命周期表达（如'过晚'）或过程相位表达（如'在泊车过程中'），因此仅得1分。",
+          "B2": "'未能提供紧急制动指令' 直接对应当前控制动作的缺失错误（应提供而未提供），属于动作本体的生命周期失败，未落入感知或规划层，符合 B2=2 标准。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如'过晚提供'、'在越界临界点未提供'等），仅依赖对象（越界场景）和泛化触发（'检测到'），缺乏 phase/boundary/lifecycle 的具体关系表达，故为 generic，得1分。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域...' 与 description 后果完全一致，无冲突。"
+        },
+        "issues": [
+          "contains_perception_trigger_in_context",
+          "lacks_lifecycle_or_phase_expression"
+        ],
+        "suggested_revision": "在车辆接近或跨越目标停车区域边界的临界阶段，AVP系统未能及时提供紧急制动指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-2__dup4",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统未能提供紧急制动指令，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），并给出了具体后果（'与行人发生碰撞'），该后果可由 linked_hazard_ids ['H-AVP-1'] 直接、一致地补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含感知触发词汇 '当检测到前方有行人时'，违反 B1=2 的条件2；虽有上下文（检测到行人），但属于 broad trigger，且无生命周期或过程相位表达，故只能给1分。",
+          "B2": "'未能提供紧急制动指令' 直接落在当前控制动作的缺失错误上（应提供而未提供），属于动作本体的生命周期失败，符合 actuation_output 类型下的 'not provided' 形式，不依赖上游条件作为核心错误。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但仅通过危险对象（行人）进行区分，缺乏机制子型如 timing、phase、boundary 等 discriminative 表达，因此为 generic 级别。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述 '车辆与行人...发生碰撞' 与 description 中 '与行人发生碰撞' 完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在泊车过程中接近行人区域时，AVP系统未能及时提供紧急制动指令，导致车辆与行人发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-6__dup4",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统过晚提供紧急制动指令，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过晚提供），并直接关联到具体后果（与障碍物碰撞），该后果可由 linked_hazard_ids [H-AVP-1] 一致补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "包含生命周期表达“过晚”，满足条件1；但同时使用了感知触发词“检测到前方有障碍物”，违反条件2，因此不能得2分。上下文属于 broad_trigger + lifecycle_relation 混合，但因含感知触发，仅给1分。",
+          "B2": "核心错误明确落在当前控制动作的时序本体上（“过晚提供紧急制动指令”），属于典型的 timing 错误，直接对应 actuation_output 的生命周期关系，未依赖上游失败。",
+          "B3": "unsafe form 使用了明确的机制子型“过晚”，属于 discriminative 的 lifecycle_relation 表达，具有机制区分性，而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 为合法值 [H-AVP-1]，且 description 中的后果“与障碍物发生碰撞”与 H-AVP-1 “车辆与行人、车辆、障碍物或车位边界发生碰撞”完全一致。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为状态或相位条件，例如：‘在车辆接近静止障碍物且距离小于安全阈值时，AVP系统过晚提供紧急制动指令，导致碰撞。’但当前描述已满足动作层UCA要求，非必须修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-7__dup4",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到车辆即将越出目标停车区域时，AVP系统过晚提供紧急制动指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过晚提供），并直接关联到具体后果（车辆越出目标停车区域），该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达“过晚”，满足条件1；但同时包含感知触发词汇“当检测到车辆即将越出目标停车区域时”，违反条件2，因此不能得2分。",
+          "B2": "核心错误明确落在当前控制动作的时序执行上（“过晚提供紧急制动指令”），属于典型的 timing 错误，直接对应动作本体的生命周期关系，未依赖上游失败。",
+          "B3": "unsafe form 使用了明确的生命周期关系词“过晚”，体现了 discriminative 的机制子型，而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-2，且其描述‘车辆越出目标停车区域’与 description 中的后果完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为状态或边界条件，例如：‘在车辆已越过停车区域边界前的制动窗口期内，AVP系统过晚提供紧急制动指令，导致车辆越出目标停车区域。’但当前表述已满足基本 UCA 要求，非必须修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-5__dup4",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统过晚提供紧急制动指令，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过晚提供），并直接关联到具体后果（与行人碰撞），该后果可由 linked_hazard_ids [H-AVP-1] 一致补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "包含生命周期表达“过晚”，满足条件1；但同时包含感知触发词汇“检测到前方有行人”，违反条件2，因此不能得2分。",
+          "B2": "核心错误明确落在当前控制动作的时序执行上（“过晚提供紧急制动指令”），属于典型的 timing 错误，直接对应动作本体的生命周期关系，未依赖上游失败。",
+          "B3": "unsafe form 使用了明确的生命周期关系词“过晚”，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述‘车辆与行人...发生碰撞’与 description 中‘导致车辆与行人发生碰撞’完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性，可将感知触发转化为可观测状态或过程相位，例如：‘在行人位于车辆前方且距离小于安全阈值的泊车阶段，AVP系统过晚提供紧急制动指令，导致碰撞。’但当前表述已满足基本UCA要求，非必须修改。"
+      }
+    },
+    {
+      "uca_id": "UCA-9__dup4",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统过早停止提供紧急制动指令，导致车辆未能及时停车，与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（'过早停止提供'），并直接说明了后果（'未能及时停车，与障碍物发生碰撞'），该后果与 linked_hazard_ids 中的 H-AVP-1 一致且无需跳跃推断，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达 '过早停止'，满足条件1；但同时包含感知触发词汇 '当检测到前方有障碍物时'，违反条件2，因此 B1 最高只能得1分。",
+          "B2": "'过早停止提供紧急制动指令' 直接描述了当前控制动作（emergency_brake）在生命周期上的 timing 错误，属于动作本体的执行失败，而非上游感知或规划层问题。",
+          "B3": "'过早停止' 是典型的 lifecycle_relation 表达，具有明确的机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述 '车辆与...障碍物发生碰撞' 与 description 中的后果完全一致。"
+        },
+        "issues": [
+          "B1受限于感知触发词'检测到'，无法达到强上下文标准"
+        ],
+        "suggested_revision": "将感知触发转化为过程相位或状态绑定，例如：'在车辆接近障碍物但尚未完成减速的过程中，AVP系统过早停止提供紧急制动指令，导致与障碍物发生碰撞。'"
+      }
+    },
+    {
+      "uca_id": "UCA-10__dup4",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到车辆即将越出目标停车区域时，AVP系统过早停止提供紧急制动指令，导致车辆未能及时停车，越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式：'过早停止提供'，并说明了后果：'车辆未能及时停车，越出目标停车区域'。该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达 '过早停止'，满足条件1；但同时包含感知触发词汇 '当检测到车辆即将越出目标停车区域时'，违反条件2。因此 B1 最高只能得1分。",
+          "B2": "'过早停止提供紧急制动指令' 直接描述了当前控制动作（emergency_brake）的生命周期错误（timing/duration 错误），核心错误落在动作本体上，而非上游感知或规划失败。",
+          "B3": "unsafe form '过早停止提供' 属于明确的生命周期关系机制子型，具有区分性，不是仅靠对象替换或泛化触发表达的 generic 形式。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域...' 与 description 后果完全一致，无冲突。"
+        },
+        "issues": [
+          "B1 扣分原因：包含感知触发词 '检测到'，尽管有生命周期表达，仍限制为1分"
+        ],
+        "suggested_revision": "移除感知触发依赖，改用过程相位或状态边界表达，例如：'在车辆接近停车区域边界但尚未完全停止的过程中，AVP系统过早停止提供紧急制动指令，导致车辆越出目标停车区域。'"
+      }
+    },
+    {
+      "uca_id": "UCA-8__dup4",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统过早停止提供紧急制动指令，导致车辆未能及时停车，与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（'过早停止提供'），并直接关联到具体后果（与行人发生碰撞）。该后果可由 linked_hazard_ids 中的 H-AVP-1 直接、一致地补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达 '过早停止'，满足条件1；但同时包含感知触发词汇 '当检测到前方有行人时'，违反条件2。根据规则，只要存在感知触发或上游依赖词汇，即使有生命周期表达，B1 最高只能得1分。",
+          "B2": "核心错误明确落在当前控制动作的生命周期上：'过早停止提供紧急制动指令' 属于 timing/duration 错误（应持续提供而过早终止），直接对应动作本体失败，而非感知或规划层问题。",
+          "B3": "'过早停止' 是典型的生命周期关系表达，具有机制区分性，不属于仅靠对象替换（如'行人'vs'车辆'）或泛化触发的 generic 表达，因此语义族清晰且 discriminative。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述为'车辆与行人...发生碰撞'，与 description 中'与行人发生碰撞'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "B1受限于感知触发词'检测到'，无法得2分",
+          "category名称'stopped_too_soon_or_applied_too_long'与'too_soon'部分一致，但未完全匹配语义（此处是停止过早，非应用过长）"
+        ],
+        "suggested_revision": "将上下文从感知触发改为过程相位或状态绑定，例如：'在车辆接近行人且距离小于安全阈值的过程中，AVP系统过早停止提供紧急制动指令，导致未能及时停车并与行人发生碰撞。'（注意：避免引入数值阈值，此处仅为示意相位表达）"
+      }
+    },
+    {
+      "uca_id": "UCA-2__dup5",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "在车辆接近目标停车位时，AVP系统提供了紧急制动指令，导致车辆停在不适当的位置，无法完成泊车。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了 AVP 系统在特定情境下提供了紧急制动指令，导致车辆停在不适当位置、无法完成泊车。动作的不安全形式（‘提供了紧急制动’）是明确的，且后果可由 linked_hazard_ids [H-AVP-3] 一致补足。但整体表述仍偏结果摘要，缺乏对动作生命周期或机制关系的显式刻画，需一定推断才能构成完整 UCA 骨架。",
+          "B1": "包含过程相位表达‘在车辆接近目标停车位时’，满足相位条件；未使用感知触发或上游依赖词汇。但该相位描述属于 broad trigger（仅说明时机，未绑定动作状态或边界），未体现生命周期动词（如‘过早’、‘仍’等），因此不符合 B1=2 的强上下文要求。",
+          "B2": "核心错误直接落在当前控制动作‘提供紧急制动指令’的执行本体上：在不应提供时提供了该指令，导致任务失败。虽未用‘过早’等词，但‘在接近车位时提供紧急制动’隐含 timing 错误（应缓刹或继续泊车而非急停），属于动作本体的时序不当，符合 actuation_output 的生命周期/时序错误范畴。",
+          "B3": "unsafe form 能映射到 ‘provided at wrong time’ family，但仅通过场景对象（‘接近目标停车位’）和结果（‘停在不适当位置’）间接体现 timing，未使用 discriminative 机制词如‘过早’、‘在...阶段仍’等。缺乏明确的 lifecycle_relation 或 phase_relation 表达，机制区分性不足，属于 generic timing 表述。",
+          "B4": "linked_hazard_ids 为合法值 [H-AVP-3]，且 description 中‘无法完成泊车’与 H-AVP-3‘车辆无法完成自动泊车任务，或停留在不安全/不可接受位置’完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在车辆接近目标停车位、即将完成泊入时，AVP系统过早提供了紧急制动指令，导致车辆停在车道中央或车位外等不安全位置，无法完成泊车。"
+      }
+    },
+    {
+      "uca_id": "UCA-1__dup5",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "在没有检测到实际威胁的情况下，AVP系统提供了紧急制动指令，导致车辆突然停止，可能引起周围车辆或行人的反应不当。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供紧急制动指令）的不安全形式（在没有实际威胁时提供），并给出了可理解的后果（车辆突然停止，引发周围反应不当）。该后果与 linked_hazard_ids 中的 H-AVP-4（非预期运动、错误轨迹或不必要的急停/急动）直接一致，构成可用的动作层 UCA 骨架。",
+          "B1": "description 中未包含任何生命周期表达（如“仍”、“过早”等）或过程相位表达（如“在...阶段”）。上下文仅为“在没有检测到实际威胁的情况下”，属于感知触发类表述（含‘检测到’），且无相位或生命周期绑定，因此不符合 B1=2 或 B1=1 的强条件；由于完全缺乏显式可审计上下文（仅有 broad trigger），给 0 分。",
+          "B2": "核心错误落在‘提供了紧急制动指令’这一动作输出上，属于动作本体。但其不安全形式依赖于上游感知条件（‘在没有检测到实际威胁的情况下’），即以感知失败为前提来定义动作错误，而非直接描述动作自身的生命周期或执行属性（如过早、过晚、持续等）。因此动作本体虽存在，但被上游触发主导，给 1 分。",
+          "B3": "unsafe form 可归入 'provided when not needed' 这一 broad UCA family，但仅通过感知条件（‘没有检测到实际威胁’）和对象（紧急制动）组合表达，未体现 discriminative 机制子型（如 lifecycle_relation、phase_relation 等）。缺乏 timing/duration/phase/boundary 的具体关系，仅靠对象+泛化触发，属 generic 表达，给 1 分。",
+          "B4": "linked_hazard_ids 为合法值 [\"H-AVP-4\"]，且 description 中‘车辆突然停止，可能引起周围车辆或行人的反应不当’与 H-AVP-4‘非预期运动、错误轨迹或不必要的急停/急动，导致周边风险上升’高度一致，无冲突。"
+        },
+        "issues": [
+          "上下文依赖感知触发（'检测到'），不符合 STPA 推荐的控制动作层上下文表达",
+          "unsafe form 缺乏机制区分性，偏向模板化表达",
+          "未体现动作生命周期或过程相位关系"
+        ],
+        "suggested_revision": "在泊车执行阶段，AVP系统在无碰撞风险条件下仍发出紧急制动指令，导致车辆非预期急停。"
+      }
+    },
+    {
+      "uca_id": "UCA-4__dup5",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统未能提供紧急制动指令，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），且后果 '车辆与障碍物发生碰撞' 与 linked_hazard_ids 中的 H-AVP-1 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "上下文包含感知触发词汇 '当检测到前方有障碍物时'，属于上游依赖/感知触发类表达；虽隐含了边界关系（前方障碍物存在），但缺乏生命周期动词（如'过晚'、'未终止'）或过程相位表达（如'在泊车阶段'），因此仅满足 B1=1 条件。",
+          "B2": "'未能提供紧急制动指令' 直接对应当前控制动作 emergency_brake 的缺失错误（应提供而未提供），属于动作本体的生命周期失败，未落入感知或规划层，符合 B2=2 标准。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如'过晚提供'、'在倒车阶段未提供'等）。仅通过对象 '障碍物' 替换表达风险场景，缺乏 phase/lifecycle/boundary 等关系锚点，故为 generic。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述 '车辆与行人、车辆、障碍物或车位边界发生碰撞' 与 description 中 '与障碍物发生碰撞' 完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在泊车过程中前方出现障碍物时，AVP系统未及时提供紧急制动指令，导致车辆与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-5__dup5",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当车辆接近目标停车位边界时，AVP系统未能提供紧急制动指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），且后果 '车辆越出目标停车区域' 与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "上下文为 '当车辆接近目标停车位边界时'，属于边界关系表达，但未包含生命周期动词（如'过晚'、'仍'）或过程相位（如'在泊车阶段'），因此不满足 B1=2 的双条件；同时不含感知触发或上游依赖词汇，故给1分。",
+          "B2": "'未能提供紧急制动指令' 直接对应当前控制动作的缺失错误（应提供而未提供），属于动作本体的生命周期失败，符合 actuation_output 类型下的典型 unsafe form，未依赖上游条件。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但未体现机制子型（如'过晚提供'、'在越界前未提供'等 discriminative timing/boundary 关系），仅通过场景对象（停车位边界）限定，区分性有限，故为 generic 级别。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域' 与 description 后果完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在车辆接近目标停车位边界时，AVP系统未及时提供紧急制动指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-3__dup5",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统未能提供紧急制动指令，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作 'AVP系统提供紧急制动指令' 的不安全形式（'未能提供'），并给出了具体后果（'与行人发生碰撞'），该后果可由 linked_hazard_ids ['H-AVP-1'] 直接、一致地补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含感知触发词汇 '当检测到前方有行人时'，违反 B1=2 的条件2；虽有上下文（检测到行人），但属于 broad trigger，且无生命周期表达（如'过晚'）或过程相位表达（如'在泊车阶段'），因此仅得1分。",
+          "B2": "'未能提供紧急制动指令' 直接落在当前控制动作的缺失错误上（应提供而未提供），属于动作本体的生命周期失败，符合 actuation_output 类型下的 'not provided' 形式，不依赖上游条件作为核心错误。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但仅通过危险对象 '行人' 进行实例化，缺乏机制子型（如'过晚提供'体现 timing，或'在倒车阶段未提供'体现 phase）。因此语义族清晰但机制区分性不足，得1分。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述 '车辆与行人...发生碰撞' 与 description 中 '与行人发生碰撞' 完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "将感知触发转化为可审计的过程上下文，例如：'在AVP系统已进入低速泊车接近阶段且前方出现静止/移动行人时，系统未提供紧急制动指令，导致碰撞风险。' 注意避免引入数值阈值，但应明确动作所处的系统运行相位或状态边界。"
+      }
+    },
+    {
+      "uca_id": "UCA-7__dup5",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统过晚提供紧急制动指令，导致车辆与障碍物发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过晚提供），并直接关联到具体后果（与障碍物碰撞）。该后果与 linked_hazard_ids 中的 H-AVP-1 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达“过晚”，满足条件1；但同时包含感知触发词汇“检测到前方有障碍物”，违反条件2，因此不能得2分。上下文属于 broad_trigger + lifecycle_relation 混合，按规则只能给1分。",
+          "B2": "核心错误明确落在当前控制动作的时序本体上（“过晚提供紧急制动指令”），属于典型的 timing 错误，直接对应 actuation_output 的生命周期关系，未依赖上游失败。",
+          "B3": "unsafe form 使用了明确的机制子型“过晚”，属于 discriminative 的 lifecycle_relation 表达，具有机制区分性，而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述‘车辆与障碍物发生碰撞’与 description 中的后果完全一致，无冲突。"
+        },
+        "issues": [
+          "contains_perception_trigger_in_context"
+        ],
+        "suggested_revision": "在泊车过程中接近静止障碍物时，AVP系统过晚提供紧急制动指令，导致车辆与障碍物发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-8__dup5",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当车辆接近目标停车位边界时，AVP系统过晚提供紧急制动指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过晚提供），并直接关联到具体后果（车辆越出目标停车区域），该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "包含明确的生命周期表达“过晚提供”，满足条件1；上下文为“当车辆接近目标停车位边界时”，属于边界关系而非感知触发或上游依赖，未使用“检测到”“未确认”等禁用词汇，满足条件2。",
+          "B2": "核心错误直接落在当前控制动作的时序执行本体上（“过晚提供紧急制动指令”），属于典型的 timing 错误，完全符合 actuation_output 类型动作的生命周期失败模式。",
+          "B3": "unsafe form 使用了明确的机制子型“过晚”，体现了 lifecycle_relation，具有机制区分性，不是仅靠对象替换或泛化触发表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述‘车辆越出目标停车区域’与 description 中的后果完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-6__dup5",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统过晚提供紧急制动指令，导致车辆与行人发生碰撞。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式（过晚提供），并直接关联到具体后果（与行人碰撞），该后果可由 linked_hazard_ids [H-AVP-1] 一致补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "包含生命周期表达“过晚”，满足条件1；但同时包含感知触发词汇“检测到前方有行人”，违反条件2，因此不能得2分。",
+          "B2": "核心错误明确落在当前控制动作的时序本体上（“过晚提供紧急制动指令”），属于典型的 timing 错误，符合 actuation_output 的生命周期关系，未依赖上游失败。",
+          "B3": "unsafe form 使用了明确的生命周期关系词“过晚”，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述‘车辆与行人...发生碰撞’与 description 中‘导致车辆与行人发生碰撞’完全一致。"
+        },
+        "issues": [
+          "B1 扣分因使用感知触发词 '检测到'，虽有生命周期词但仍限制上下文质量"
+        ],
+        "suggested_revision": "将感知触发转化为可观测状态或过程相位，例如：‘在行人位于车辆前方制动距离内时，AVP系统过晚提供紧急制动指令，导致车辆与行人发生碰撞。’ 或 ‘在自动泊车过程中，当车辆接近静止障碍物（如行人）时，AVP系统过晚提供紧急制动指令……’。避免直接使用‘检测到’等内部感知动词，以提升上下文可审计性。"
+      }
+    },
+    {
+      "uca_id": "UCA-10__dup5",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到前方有障碍物时，AVP系统过早停止提供紧急制动指令，导致车辆未能完全避让障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式：'过早停止提供'，即在应持续提供时提前终止。危险后果（未能完全避让障碍物）虽未详述细节，但可由 linked_hazard_ids 中的 H-AVP-1（碰撞）直接、一致地补足，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达 '过早停止'，满足条件1；但同时包含感知触发词汇 '当检测到前方有障碍物时'，违反条件2。根据规则，只要存在感知触发或上游依赖词汇，即使有生命周期表达，B1 最高只能给1分。",
+          "B2": "'过早停止提供紧急制动指令' 直接描述了当前控制动作（emergency_brake）的生命周期错误（timing/duration 错误），核心落在动作本体的终止时机上，而非感知或规划层失败。符合 actuation_output 的生命周期错误判定标准。",
+          "B3": "'过早停止' 是明确的生命周期关系表达，属于 discriminative 的 unsafe form，体现了动作终止时机与所需持续时间之间的机制差异，具有机制区分性。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述为'车辆与障碍物发生碰撞'，与 description 中'未能完全避让障碍物'的后果方向完全一致，无冲突。"
+        },
+        "issues": [
+          "B1受限于感知触发词'检测到'，无法达到2分"
+        ],
+        "suggested_revision": "将感知触发替换为过程相位或状态绑定表达，例如：'在紧急制动应持续期间，AVP系统过早停止提供紧急制动指令，导致车辆未能完全避让障碍物。'"
+      }
+    },
+    {
+      "uca_id": "UCA-9__dup5",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "当检测到前方有行人时，AVP系统过早停止提供紧急制动指令，导致车辆未能完全避让行人。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（紧急制动指令）的不安全形式：'过早停止提供'，即在应持续提供时提前终止。危险后果（未能完全避让行人导致碰撞）虽未完整写出，但可由 linked_hazard_ids [H-AVP-1] 直接、一致地补足，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达 '过早停止'，满足条件1；但同时包含感知触发词汇 '当检测到前方有行人时'，违反条件2。根据规则，只要存在感知触发词汇，即使有生命周期表达，B1 最高只能给1分。",
+          "B2": "'过早停止提供紧急制动指令' 的核心错误直接落在当前控制动作（emergency_brake）的生命周期上，属于 timing/duration 错误中的 '过早停止'，符合 actuation_output 类型动作的典型不安全形式，动作本体清晰。",
+          "B3": "unsafe form '过早停止提供' 体现了明确的生命周期关系（lifecycle_relation），具有机制区分性，不属于仅靠对象替换（如'行人'vs'车辆'）或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 为合法值 [H-AVP-1]，且 H-AVP-1 描述 '车辆与行人...发生碰撞' 与 description 中 '未能完全避让行人' 的风险方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "为提升上下文可审计性并符合 B1=2 要求，建议将感知触发转化为过程相位或状态绑定，例如：'在紧急制动已启动但车辆尚未完全停止前，AVP系统过早停止提供紧急制动指令，导致未能完全避让前方行人。'"
+      }
+    }
+  ],
+  "system_level_semantic_merge": {
+    "review_source": "quality_gate_scoring",
+    "retained_uca_items": [
+      {
+        "uca_id": "UCA-6__dup2",
+        "summary": "过早制动致停位不当"
+      },
+      {
+        "uca_id": "UCA-9__dup2",
+        "summary": "过早停止制动致未停稳"
+      },
+      {
+        "uca_id": "UCA-10__dup2",
+        "summary": "制动过长致过度减速"
+      },
+      {
+        "uca_id": "UCA-8__dup5",
+        "summary": "过晚制动致越界"
+      }
+    ],
+    "merged_duplicate_items": [],
+    "kept_count": 4
+  },
+  "review_statement": "The records in this file document structured multidimensional quality-gate scoring used to screen generated candidates before system-level semantic merge. Final manual expert delivery-audit and agreement records are published separately in data/03_expert_delivery_audit.",
+  "quality_gate_declaration": {
+    "review_source": "quality_gate_scoring",
+    "paper_section_alignment": "The paper describes this stage as multidimensional quality gating before semantic consolidation.",
+    "manual_expert_audit_location": "data/03_expert_delivery_audit",
+    "excluded_public_fields": [
+      "implementation materials",
+      "local environment metadata",
+      "platform/service identifiers",
+      "request identifiers",
+      "non-public execution logs"
+    ]
+  }
+}

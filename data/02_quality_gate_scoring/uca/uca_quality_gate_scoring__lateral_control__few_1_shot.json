@@ -1,0 +1,1768 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "system": "Automated Valet Parking (AVP)",
+    "public_file_group": "quality_gate_scoring_results",
+    "review_provenance": "quality_gate_scoring",
+    "public_release_scope": "Structured JSON result release for multidimensional quality-gate scoring. Implementation code is maintained in the separate CSG-code repository; local environment metadata, platform/service identifiers, request identifiers, non-public execution logs, raw response payloads, and raw traces are excluded.",
+    "related_code_repository": "https://github.com/lv1zhou/CSG-code"
+  },
+  "public_file_role": "quality_gate_scoring_result",
+  "task_stage": "uca",
+  "task_type": "UCA",
+  "task_name": "UCA identification",
+  "action_key": "lateral_control",
+  "action_name_cn": "横向控制",
+  "action_name_en": "Lateral control",
+  "generation_method": "few_1_shot",
+  "generation_method_label": "FS-1",
+  "quality_gate_scoring_summary": {
+    "total_reviewed_items": 50,
+    "expert_scored_items": 50,
+    "expert_usable_items_before_merge": 14,
+    "expert_kept_items_after_semantic_merge": 3,
+    "semantic_merge_retention_rate": 0.2143,
+    "final_deliverable_items_after_expert_audit": 3,
+    "final_delivery_retention_rate": 1.0
+  },
+  "quality_gate_item_reviews": [
+    {
+      "uca_id": "UCA-2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（越出目标停车区域）的关联，且 linked_hazard_ids [H-AVP-2] 与后果一致，构成基本可用骨架。但描述更像结果摘要句，未体现动作的不安全形式（如过强、持续、错误方向等），缺乏机制细节，需依赖 hazard 补足因果链，因此仅给1分。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'），也无过程相位（如'在泊车阶段'），亦无边界/结果条件绑定。仅为简单因果陈述，不符合 B1=1 或 2 的任一条件。",
+          "B2": "核心错误落在当前控制动作（提供转向指令）上，而非感知或规划层，符合动作本体。但未说明动作如何不安全（如方向错误、幅度过大、持续过久等），仅隐含'提供了导致越界的指令'，动作本体不够清晰，故给1分。",
+          "B3": "unsafe form 仅通过对象替换（'越出目标停车区域'）体现，属于 broad family 'provided causing hazard' 的泛化表达，缺乏 discriminative 机制子型（如 lifecycle、phase、boundary relation）。虽可归入 provided 类，但无机制区分性。",
+          "B4": "linked_hazard_ids 为合法值 [H-AVP-2]，且 description 中'车辆越出目标停车区域'与 H-AVP-2 描述完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "AVP系统在接近或达到停车边界时仍提供向外的转向指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-3",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（无法完成泊车任务）的关联，但未说明动作的不安全形式（如错误、过早、持续等），仅呈现为结果摘要。linked_hazard_ids 可补足后果，但动作层骨架仍偏弱，需较多推断才能视为完整 UCA。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'），也无过程相位（如'在...阶段'），亦无边界/结果条件。纯为结果陈述，缺乏可审计上下文。",
+          "B2": "核心错误落在'提供转向指令'这一动作上，属于当前控制动作范畴，但未明确是执行错误（如错误指令）、时序错误还是缺失错误，仅笼统说'导致无法完成任务'，动作本体不够清晰，偏向结果归因而非动作失效模式。",
+          "B3": "unsafe form 仅体现为 broad family 'provided causing hazard'，通过对象替换（将后果换为'H-AVP-3'）实现，缺乏机制子型（如生命周期、相位、边界关系）。虽可归入 provided 类，但无区分性。",
+          "B4": "linked_hazard_ids 引用合法 ID 'H-AVP-3'，且 description 中'无法完成自动泊车任务'与该 hazard 描述完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏动作不安全形式的具体机制",
+          "无显式上下文",
+          "高度依赖模板结构"
+        ],
+        "suggested_revision": "AVP系统在泊车过程中提供错误的转向指令，导致车辆无法对准车位或偏离预期轨迹，从而无法完成自动泊车任务。"
+      }
+    },
+    {
+      "uca_id": "UCA-4",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆出现非预期运动。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（非预期运动）的关联，但未明确说明不安全形式（如错误指令、过量指令、持续指令等），仅给出结果摘要式表达。linked_hazard_ids [H-AVP-4] 可一致补足后果，但动作层 unsafe form 不够清晰，需一定推断。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'等），也无过程相位（如'在...阶段'），亦无边界/结果条件。纯为动作-结果直连句，缺乏可审计上下文。",
+          "B2": "核心落在控制动作输出（提供转向指令）上，属于 actuation_output 类型，未涉及感知或规划失败。但未明确动作本体如何出错（是错误指令？过度指令？持续指令？），仅说'导致非预期运动'，动作本体不够具体，故给1分。",
+          "B3": "unsafe form 仅通过后果（非预期运动）间接体现，未展示机制子型（如生命周期、相位、边界关系）。虽可归入 'provided' family，但缺乏 discriminative 机制描述，仅靠对象/结果替换，属 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-4'，其描述为'车辆出现非预期运动、错误轨迹或不必要的急停/急动'，与 description 中'非预期运动'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文",
+          "unsafe form 过于摘要化",
+          "机制区分性不足",
+          "高度依赖模板表达"
+        ],
+        "suggested_revision": "AVP系统在泊车过程中持续提供转向指令，导致车辆出现非预期横向运动。"
+      }
+    },
+    {
+      "uca_id": "UCA-1",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆偏离预定路径，撞上障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（撞上障碍物）的连接，但未明确说明‘不安全形式’——即转向指令如何错误（如方向错误、过度、持续等），仅以‘导致偏离路径’作为中间结果，整体更像一个因果摘要句，而非体现动作本体失败机制的UCA。linked_hazard_ids [H-AVP-1] 可补足后果，但动作层骨架仍偏弱。",
+          "B1": "description 中无任何生命周期表达（如‘仍’、‘过早’等）或过程相位表达（如‘在泊车阶段’）。也无边界关系、结果条件等显式上下文。仅有结果链‘导致...撞上’，属于无显式上下文。",
+          "B2": "核心错误落在‘提供转向指令’这一动作上，属于当前控制动作范畴，但未说明动作本体如何失败（如错误方向、过度转向等），仅通过后果反推动作有问题。未使用感知触发词，但动作本体描述模糊，故给1分。",
+          "B3": "unsafe form 仅体现为‘导致偏离路径’，缺乏机制子型（如生命周期、相位、边界关系等）。危险对象为‘障碍物’，但未结合 discriminative 机制（如‘在靠近障碍物时仍右转’），仅靠对象替换和泛化因果链，属 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法ID 'H-AVP-1'（碰撞风险），与 description 中‘撞上障碍物’完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文（B1=0）",
+          "unsafe form 机制区分性不足，依赖对象替换（B3=1）",
+          "动作层骨架偏摘要，未清晰表达不安全形式（A=1）"
+        ],
+        "suggested_revision": "AVP系统在倒车泊车阶段提供了过度的右转指令，导致车辆向右偏离预定路径并撞上右侧障碍物。"
+      }
+    },
+    {
+      "uca_id": "UCA-6",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的缺失（'未能提供'），并直接关联到具体后果（'车辆越出目标停车区域'），该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成可用的动作层 UCA 骨架。",
+          "B1": "description 中没有任何显式上下文：既无生命周期表达（如'过早'、'未终止'），也无过程相位（如'在泊车阶段'），也无边界/结果条件。仅陈述了动作缺失与后果的因果关系，缺乏可审计的触发或状态上下文。",
+          "B2": "'未能提供转向指令' 直接对应 lateral_control 动作的缺失错误（应提供而未提供），属于控制动作本体的生命周期失败，未依赖感知或上游条件，符合 actuation_output 类型的动作本体错误。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但未体现机制子型（如相位、边界、生命周期细节）。仅通过动作缺失+后果对象（越出区域）表达，缺乏 discriminative 机制区分性，属于 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域或停车边界' 与 description 中的后果完全一致，链接准确无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文，仅为动作缺失与后果的摘要句",
+          "unsafe form 未体现机制子型，依赖模板化表达"
+        ],
+        "suggested_revision": "在泊车路径跟踪阶段，AVP系统未能提供横向控制指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-7",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失形式，并链接到 H-AVP-3（无法完成泊车任务），构成基本动作-后果链。但描述更像结果摘要句，未体现动作生命周期、相位或边界关系，仅靠 hazard 补足后果，动作层骨架较弱。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'过早'、'未终止'），也无过程相位（如'在泊车阶段'），亦无边界或结果条件。纯为无上下文的动作缺失陈述。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作 lateral_control 的缺失（应提供而未提供），属于动作本体的生命周期错误（未提供），未依赖感知触发或上游条件，符合 actuation_output 类型的缺失失败。",
+          "B3": "unsafe form 为'未能提供'，可归入 broad family 'not provided'，但未体现机制子型（如过晚、过早、在某相位未提供等），仅通过动作对象（转向指令）和后果（无法完成任务）定义，缺乏 discriminative 机制特征。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-3'，其描述'车辆无法完成自动泊车任务'与 description 中'导致车辆无法完成自动泊车任务'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文，仅为摘要式表达",
+          "unsafe form 未体现机制区分性，依赖模板化表述"
+        ],
+        "suggested_revision": "在自动泊车执行阶段，AVP系统未能提供转向指令，导致车辆停滞在非安全位置或无法完成泊车。"
+      }
+    },
+    {
+      "uca_id": "UCA-5",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令导致车辆无法避开障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失形式，并通过 linked_hazard_ids[H-AVP-1] 可补足后果（碰撞障碍物），构成弱但可用的UCA骨架。但描述偏结果摘要（'导致车辆无法避开障碍物'）而非过程性表达，缺乏对动作生命周期或上下文的刻画，需一定推断才能确认其为动作层失效。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'未提供'虽隐含缺失，但未绑定相位或时机），也无过程相位（如'在泊车过程中'）、边界关系或结果条件。仅陈述动作缺失与后果，上下文完全缺失。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作'lateral_control'的缺失（应提供而未提供），属于动作本体的生命周期错误（not provided），未依赖感知触发或上游条件，核心错误落在执行输出本身。",
+          "B3": "unsafe form '未能提供'可归入 broad family 'not provided'，但未体现机制子型：无相位（如'在接近障碍物时未提供'）、无边界关系（如'到达障碍物前仍未提供'）、无生命周期细化（如'过晚提供'）。仅通过对象'障碍物'替换表达风险，属 generic 级别。",
+          "B4": "linked_hazard_ids 包含合法ID 'H-AVP-1'（碰撞障碍物），与 description 中'无法避开障碍物'后果方向一致，无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文，仅为后果导向的摘要句",
+          "unsafe form 未体现机制区分性，依赖对象替换表达风险",
+          "高度依赖模板化表达（'未能...导致...'结构）"
+        ],
+        "suggested_revision": "在检测到前方障碍物且需紧急避让时，AVP系统未能及时提供横向控制指令。"
+      }
+    },
+    {
+      "uca_id": "UCA-9",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过晚提供转向指令导致车辆无法避开障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过晚提供），并直接关联到无法避开障碍物这一后果；linked_hazard_ids 中的 H-AVP-1（碰撞）与该后果一致且可直接补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过晚提供”，满足条件1；未使用任何感知触发（如“检测到”）或上游依赖词汇（如“未确认”），满足条件2。因此上下文质量为强显式。",
+          "B2": "核心错误直接落在当前控制动作（lateral_control：提供转向指令）的时序执行本体上，“过晚提供”属于典型的 timing 错误，符合 actuation_output 的生命周期关系，动作本体清晰。",
+          "B3": "unsafe form “过晚提供”体现了明确的生命周期关系机制子型（timing wrong in action delivery），具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述‘车辆与障碍物发生碰撞’与 description 中‘无法避开障碍物’的后果方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-8",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过早提供转向指令导致车辆偏离预定路径。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过早提供），并直接导致车辆偏离预定路径；该后果可由 linked_hazard_ids H-AVP-1 和 H-AVP-2 一致、非跳跃地补足（偏离路径可能导致碰撞或越界），已构成可用的动作层 UCA 骨架。",
+          "B1": "包含明确的生命周期表达“过早”，满足条件1；且未使用任何感知触发（如“检测到”）或上游依赖词汇（如“未确认”），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作（提供转向指令）的时序执行本体上，“过早提供”属于典型的 timing 错误，是 actuation_output 生命周期中的 discriminative 失败模式，未依赖上游条件或感知触发。",
+          "B3": "unsafe form “过早提供”体现了明确的 lifecycle_relation 机制子型（timing 错误），具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids [\"H-AVP-1\", \"H-AVP-2\"] 均为合法 ID，且与 description 中“车辆偏离预定路径”所隐含的碰撞或越界风险方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-10",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统过早停止提供转向指令导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式：'过早停止提供'，且 linked_hazard_ids 引用了 H-AVP-3（无法完成泊车任务），后果方向一致、无需跳跃推断，已构成可用的动作层 UCA 骨架。",
+          "B1": "包含明确的生命周期表达 '过早停止'，满足条件1；未出现任何感知触发或上游依赖词汇，满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "'过早停止提供转向指令' 直接描述了 lateral_control 动作本体的 timing/duration 错误，属于动作生命周期层面的失效，未依赖上游条件或感知触发，完全聚焦于控制动作输出本身。",
+          "B3": "'过早停止' 是典型的 discriminative 生命周期关系表达，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-3'，其描述为'车辆无法完成自动泊车任务'，与 description 中'导致车辆无法完成自动泊车任务'完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-2__dup2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（越出目标停车区域）的关联，且 linked_hazard_ids 一致地补足了具体危害（H-AVP-2）。但描述更像一个结果摘要句，未体现动作的不安全形式（如过早、过晚、持续等），缺乏机制性表达，需依赖 hazard 才能构成完整 UCA 骨架，因此给1分。",
+          "B1": "description 中无任何生命周期表达（如'仍'、'未终止'、'过早'等）或过程相位表达（如'在...阶段'），也无边界/结果条件绑定。上下文完全缺失，仅陈述结果，故 B1=0。",
+          "B2": "核心错误落在'提供转向指令'这一动作上，属于当前控制动作本体，而非感知或规划层失败。但未说明该动作如何不安全（如错误方向、持续过久等），仅说'导致越界'，动作本体不够清晰，故给1分。",
+          "B3": "unsafe form 仅通过对象替换（'越出目标停车区域'）表达，属于 broad family 'provided causing hazard' 的模板化实例，缺乏机制子型（如生命周期、相位、边界关系等），因此为 generic，给1分。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述'车辆越出目标停车区域...'与 description 中'越出目标停车区域'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文和机制区分性，仅为 hazard 的直接转述",
+          "未体现动作的不安全形式（如 timing/duration/lifecycle 错误）",
+          "高度依赖 broad template，语义粒度不足"
+        ],
+        "suggested_revision": "AVP系统在车辆已到达目标车位边界后仍持续提供转向指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-3__dup2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（无法完成泊车任务）的关联，但未说明该动作以何种不安全形式发生（如错误、过早、持续等），仅呈现为结果摘要句。linked_hazard_ids 能一致补足后果，但动作层 unsafe form 不明确，需较多推断才能构成完整 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'），也无过程相位（如'在...阶段'），亦无边界/结果条件。纯为无上下文的动作-后果连接。",
+          "B2": "描述提及'提供转向指令'，与目标动作 lateral_control 一致，但未说明动作本体如何失败（如错误值、时序问题、持续性等）。仅暗示'提供'导致失败，但未明确是提供本身错误还是其他属性异常，动作本体不够清晰，偏向结果归因而非动作失效模式。",
+          "B3": "unsafe form 仅体现为'提供...导致...'的 broad family 模板，缺乏机制子型（如生命周期、相位、边界关系）。虽可归入 'provided' 类，但未通过 discriminative 机制（如过早、错误值、持续等）区分，仅靠对象（泊车任务失败）替换，属 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-3'，其描述'车辆无法完成自动泊车任务...'与 description 中'导致车辆无法完成自动泊车任务'完全一致，无冲突。"
+        },
+        "issues": [
+          "description lacks explicit unsafe form of control action",
+          "no contextual trigger or phase specified",
+          "reads like a hazard consequence summary rather than a UCA"
+        ],
+        "suggested_revision": "AVP系统在泊车路径已不可行时仍提供转向指令，导致车辆无法完成自动泊车任务。"
+      }
+    },
+    {
+      "uca_id": "UCA-4__dup2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆出现非预期运动。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（非预期运动）的关联，但未明确说明动作的不安全形式（如错误、过早、持续等），仅以结果摘要方式呈现。linked_hazard_ids [H-AVP-4] 可补足后果，但动作层 unsafe form 不够清晰，需额外推断。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'），也无过程相位（如'在泊车阶段'），亦无边界/结果条件。纯为结果导向句，缺乏可审计上下文。",
+          "B2": "核心错误落在'提供转向指令'这一动作输出上，属于 actuation_output 的执行结果（导致非预期运动），但未明确是错误指令、过量指令还是时机错误，动作本体不够具体；未出现感知触发词，故不给0分。",
+          "B3": "unsafe form 仅体现为 broad family 'provided causing hazard'，通过替换后果对象（非预期运动）表达，但缺乏机制子型（如 timing、phase、boundary 等关系）。属于 generic 对象替换型表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-4'，其描述'车辆出现非预期运动...'与 description 中'导致车辆出现非预期运动'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description is result-summary like",
+          "lacks explicit context",
+          "mechanism not discriminative"
+        ],
+        "suggested_revision": "AVP系统在泊车过程中提供错误的转向指令，导致车辆出现非预期运动。"
+      }
+    },
+    {
+      "uca_id": "UCA-1__dup2",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆偏离预定路径，撞上障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（撞上障碍物）的连接，但未明确说明该动作是以何种不安全形式发生（如错误指令、过量、持续等），仅呈现为结果摘要句。linked_hazard_ids [H-AVP-1] 可补足后果，但动作层 unsafe form 不够清晰，需额外推断。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'），也无过程相位（如'在泊车阶段'），亦无边界/结果条件。仅为孤立的动作-后果陈述，缺乏可审计上下文。",
+          "B2": "核心错误落在控制动作输出（提供转向指令）上，属于 actuation_output 的执行错误（隐含'提供了错误的转向指令'），但未明确表达动作本体失败的具体形式（如'错误'、'过大'、'反向'），仅通过后果反推，故给1分。",
+          "B3": "unsafe form 仅通过对象替换（'障碍物'）体现，未展示机制子型（如 timing、phase、boundary 等）。虽可归入 'provided' family，但缺乏 discriminative 机制特征，属于 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述'车辆与...障碍物发生碰撞'与 description 中'撞上障碍物'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文，仅为后果摘要",
+          "unsafe form 未体现机制区分性，依赖对象替换",
+          "动作失败形式模糊，未明确是错误指令、过量还是方向错误"
+        ],
+        "suggested_revision": "AVP系统在泊车过程中提供过度或错误的转向指令，导致车辆横向偏离预定路径并撞上障碍物。"
+      }
+    },
+    {
+      "uca_id": "UCA-6__dup2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的缺失（'未能提供'），并直接导致了具体后果（'车辆越出目标停车区域'），该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 中没有任何显式上下文：既无生命周期表达（如'过早'、'未终止'等），也无过程相位（如'在...阶段'），也无边界/结果条件。仅陈述了动作缺失与后果，缺乏可审计的上下文绑定。",
+          "B2": "'未能提供转向指令' 直接对应 lateral_control 动作本体的缺失错误（应提供而未提供），属于典型的动作生命周期中的 'not provided' 形式，未依赖感知或上游条件，核心错误落在当前控制动作输出上。",
+          "B3": "unsafe form 是 '未能提供'，可归入 broad family 'not provided'，但未体现任何机制子型（如相位、边界、生命周期细节）。仅通过对象（'转向指令'）和后果（'越出区域'）限定，缺乏 discriminative 机制表达，属于 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域或停车边界' 与 description 中 '车辆越出目标停车区域' 完全一致，无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文（B1=0）",
+          "unsafe form 为 generic 模板式表达（B3=1）",
+          "高度依赖 broad family 模板（template_dependency=high）"
+        ],
+        "suggested_revision": "在泊车过程中，AVP系统未能提供横向控制指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-7__dup2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失形式，并链接到 H-AVP-3（无法完成泊车任务），构成基本动作-后果链。但表述偏结果摘要，未体现动作生命周期、相位或边界关系，仅靠 hazard 补足后果，骨架成立但较弱。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'过早'、'未终止'），也无过程相位（如'在泊车阶段'），亦无边界/结果条件。纯为动作缺失+后果的陈述句，上下文完全缺失。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作 lateral_control 的缺失（应提供而未提供），属于动作本体的生命周期错误（未提供），未依赖感知或上游条件，符合 actuation_output 的缺失类失败。",
+          "B3": "unsafe form 为'未能提供'，可归入 broad family 'not provided'，但未体现机制子型（如'过晚提供'、'在倒车阶段未提供'等）。仅通过动作缺失+后果对象（泊车任务）定义，缺乏 discriminative 机制特征，属 generic 表达。",
+          "B4": "linked_hazard_ids 为合法值 [\"H-AVP-3\"]，且 H-AVP-3 描述'车辆无法完成自动泊车任务'与 description 中'导致车辆无法完成自动泊车任务'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文（B1=0）",
+          "unsafe form 为 generic 模板表达（B3=1）",
+          "高度依赖 broad family 模板（template_dependency=high）"
+        ],
+        "suggested_revision": "在自动泊车执行阶段，AVP系统未能提供转向指令，导致车辆无法完成泊车任务。"
+      }
+    },
+    {
+      "uca_id": "UCA-5__dup2",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆无法避开障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失形式，并指出后果'导致车辆无法避开障碍物'，与 linked_hazard_ids 中的 H-AVP-1（碰撞）方向一致。但'无法避开障碍物'仍偏结果摘要，未明确体现动作缺失如何在特定上下文中引发危险，需一定推断才能构成完整 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'未提供'虽隐含缺失，但未绑定动作状态或时机），也无过程相位（如'在泊车过程中'）、边界关系或结果条件。纯为动作缺失+后果摘要，不符合 B1=1 或 2 的任一条件。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作 lateral_control 的缺失（应提供而未提供），属于动作本体的生命周期错误（缺失型），未依赖感知触发或上游条件，符合 B2=2 标准。",
+          "B3": "unsafe form 为'未能提供'，可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如'过晚提供'、'在倒车阶段未提供'、'达到障碍物前仍未提供'等）。仅通过对象'障碍物'替换表达风险，缺乏 phase/lifecycle/boundary 等关系锚点，故为 generic。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述'车辆与...障碍物发生碰撞'与 description 中'无法避开障碍物'逻辑一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在泊车过程中接近障碍物时，AVP系统未能提供必要的转向指令，导致车辆无法避开障碍物而发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-9__dup2",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过晚提供转向指令，导致车辆无法避开障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过晚提供），并直接关联到无法避开障碍物这一后果；linked_hazard_ids 中的 H-AVP-1（碰撞）与该后果一致且可直接补足，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过晚提供”，满足条件1；未出现任何感知触发或上游依赖词汇（如“检测到”“未确认”等），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作（lateral_control：提供转向指令）的时序执行本体上，“过晚提供”属于典型的 timing 错误，完全符合 actuation_output 类型动作的生命周期失败模式，未依赖上游条件。",
+          "B3": "unsafe form “过晚提供”体现了明确的 lifecycle_relation 机制子型，具有区分性，不属于仅靠对象替换（如“障碍物”）或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述为‘车辆与行人、车辆、障碍物或车位边界发生碰撞’，与 description 中‘无法避开障碍物’导致的碰撞风险方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-8__dup2",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过早提供转向指令，导致车辆偏离预定路径。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过早提供），并直接说明了后果（导致车辆偏离预定路径）。该后果可由 linked_hazard_ids [H-AVP-1, H-AVP-2] 一致补足（偏离路径可能导致碰撞或越界），构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过早”，满足条件1；且未使用任何感知触发或上游依赖词汇（如“检测到”、“未确认”等），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作（提供转向指令）的时序执行上（“过早提供”），属于典型的 timing 错误，完全聚焦于动作本体的生命周期，而非感知或规划层失败。",
+          "B3": "unsafe form “过早提供”体现了明确的生命周期关系（timing 子型），具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids [\"H-AVP-1\", \"H-AVP-2\"] 均为合法 ID，且与 description 中“车辆偏离预定路径”可能导致的碰撞（H-AVP-1）或越出停车区域（H-AVP-2）高度一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-10__dup2",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统转向指令持续时间过短，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（转向指令）的不安全形式（持续时间过短），并直接关联到无法完成自动泊车任务这一后果；linked_hazard_ids 中的 H-AVP-3 正好一致地补足了该后果，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含生命周期表达“持续时间过短”，满足条件1；但未提供任何过程相位（如“在泊车阶段”）或边界/状态上下文，仅有 bare timing 表达，因此不满足 B1=2 所需的显式可审计上下文（如相位或边界绑定）。无感知触发或上游依赖词汇，故不降为0分。",
+          "B2": "核心错误明确落在当前控制动作（横向控制指令）的执行本体上，具体表现为 duration 错误（“持续时间过短”），属于典型的生命周期类动作失败，符合 actuation_output 的 timing/duration 错误定义。",
+          "B3": "unsafe form 使用了“持续时间过短”这一明确的生命周期关系表达，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-3，其描述“车辆无法完成自动泊车任务”与 description 中的后果完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在自动泊车过程中，AVP系统提供的转向指令持续时间过短，导致车辆无法完成自动泊车任务。"
+      }
+    },
+    {
+      "uca_id": "UCA-2__dup3",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（越出目标停车区域）的关联，且 linked_hazard_ids 一致地补足了具体危害（H-AVP-2）。但描述更像一个结果摘要句，未体现动作的不安全形式（如过量、持续、错误方向等），缺乏对‘如何导致’的机制性说明，因此仅构成弱动作层骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如‘仍’、‘过早’），也无过程相位（如‘在泊车阶段’），亦无边界/结果条件绑定。仅为静态因果陈述，不符合 B1=1 或 2 的任一条件。",
+          "B2": "核心错误落在‘提供转向指令’这一动作输出上，属于当前控制动作本体，而非感知或规划失败。但由于未说明动作的不安全形式（如方向错误、幅度过大、持续过久等），仅隐含‘提供了不该提供的指令’，动作本体不够清晰，故给1分。",
+          "B3": "unsafe form 仅通过对象替换（‘越出目标停车区域’）表达，属于 broad UCA family（provided causing hazard）的泛化实例，缺乏 discriminative 机制子型（如 lifecycle、phase、boundary 等关系）。未体现 timing/duration 或执行偏差的具体机制。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述‘车辆越出目标停车区域’与 description 中的后果完全一致，无冲突。"
+        },
+        "issues": [
+          "description is result-summary-like",
+          "lacks explicit unsafe form",
+          "no contextual anchor",
+          "high template dependency"
+        ],
+        "suggested_revision": "AVP系统在车辆已到达目标停车边界后仍提供转向指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-3__dup3",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了控制动作（提供转向指令）与后果（无法完成泊车任务）的关联，但未说明动作的不安全形式（如错误、过早、持续等），仅呈现为结果摘要句。linked_hazard_ids 能一致补足后果，但动作层骨架仍偏弱，需较多推断才能视为完整 UCA。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'），也无过程相位（如'在...阶段'），亦无边界/结果条件。纯为无上下文的动作-后果连接。",
+          "B2": "核心错误落在'提供转向指令'这一动作上，属于当前控制动作范畴，但未明确是执行错误（如错误指令）、时序错误还是缺失错误，仅笼统说'导致无法完成任务'，动作本体不够清晰，偏向结果归因而非动作失效模式。",
+          "B3": "unsafe form 仅体现为 broad family 'provided causing hazard'，通过对象替换（将后果换为'H-AVP-3'）表达，缺乏机制子型（如生命周期、相位、边界关系）。虽可归入 provided 类，但无 discriminative 机制特征。",
+          "B4": "linked_hazard_ids 引用合法 ID 'H-AVP-3'，且 description 中'无法完成自动泊车任务'与该 hazard 描述完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description is result-summary style",
+          "lacks explicit context",
+          "unsafe form not discriminative"
+        ],
+        "suggested_revision": "AVP系统在泊车过程中提供不准确的转向指令，导致车辆无法对准车位或偏离预期轨迹，从而无法完成自动泊车任务。"
+      }
+    },
+    {
+      "uca_id": "UCA-4__dup3",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆出现非预期运动。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（非预期运动）的关联，但未明确说明不安全形式（如错误指令、过量、持续等），仅靠 linked_hazard_ids（H-AVP-4）可补足后果方向，但动作失败机制仍偏摘要，需一定推断才能构成完整 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'等），也无过程相位（如'在...阶段'），亦无边界/结果条件。纯为动作-结果摘要句。",
+          "B2": "核心错误落在当前控制动作本体上：'提供转向指令导致非预期运动'，隐含指令内容或执行本身有误（如错误转向角、错误方向），属于 actuation_output 的执行错误，未依赖感知触发或上游条件。",
+          "B3": "unsafe form 仅表现为 broad family 表达（'导致非预期运动'），缺乏机制子型区分（如过早、过量、错误方向等），仅通过结果对象（非预期运动）体现风险，属于 generic 级别。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-4'，其描述'车辆出现非预期运动...'与 description 中'导致车辆出现非预期运动'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文",
+          "unsafe form 机制区分性不足",
+          "高度依赖模板化表达"
+        ],
+        "suggested_revision": "AVP系统在泊车过程中提供错误方向或过量的转向指令，导致车辆出现非预期横向运动。"
+      }
+    },
+    {
+      "uca_id": "UCA-1__dup3",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令导致车辆偏离预定路径，撞上障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（撞上障碍物）的连接，但未明确说明该动作是以何种不安全形式发生（如错误指令、过量、持续等），仅呈现为结果摘要句。linked_hazard_ids 可补足后果，但动作层 unsafe form 不够清晰，需一定推断才能构成完整 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'等），也无过程相位（如'在...阶段'），亦无边界/结果条件。纯为后果导向的摘要句，缺乏可审计上下文。",
+          "B2": "核心错误落在'提供转向指令'这一动作输出上，属于当前控制动作本体，而非上游感知或规划失败。但未说明是错误指令、过度指令还是其他执行问题，动作本体不够具体；因无生命周期或执行错误关键词，仅能给1分。",
+          "B3": "unsafe form 仅通过对象替换（'障碍物'）体现，未展示机制子型（如 timing、phase、boundary 等）。虽可归入 'provided' family，但缺乏 discriminative 机制特征，属于 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述'车辆与...障碍物发生碰撞'与 description 中'撞上障碍物'完全一致，链接准确无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "AVP系统在自动泊车过程中提供了过度或错误的转向指令，导致车辆横向偏离预定路径并撞上障碍物。"
+      }
+    },
+    {
+      "uca_id": "UCA-6__dup3",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的缺失（'未能提供'），并直接关联到具体后果（'车辆越出目标停车区域'），该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 中没有任何显式上下文：既无生命周期表达（如'过早'、'未终止'等），也无过程相位（如'在泊车阶段'），亦无边界/结果条件绑定。仅陈述了动作缺失与后果，缺乏可审计的上下文。",
+          "B2": "'未能提供转向指令' 直接对应当前控制动作 lateral_control 的缺失错误（应提供而未提供），属于动作本体的生命周期失败，未依赖感知触发或上游条件，符合 actuation_output 类型的动作忠实度要求。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但未体现任何机制子型（如相位、边界、时序关系）。仅通过对象（转向指令）和后果（越界）定义，缺乏 discriminative 机制特征，属于 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域或停车边界' 与 description 中 '导致车辆越出目标停车区域' 完全一致，无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文（B1=0）",
+          "unsafe form 机制区分性不足（B3=1）",
+          "高度依赖模板化表达（template_dependency=high）"
+        ],
+        "suggested_revision": "在自动泊车进入横向调整阶段时，AVP系统未能提供转向指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-7__dup3",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失，且 linked_hazard_ids 指向 H-AVP-3（无法完成泊车任务），后果方向一致。但描述更像结果摘要句（'导致车辆无法完成自动泊车任务'），未体现动作发生的具体上下文或机制特征，需依赖 hazard 补足后果，动作层骨架较弱。",
+          "B1": "description 中无任何生命周期表达（如'过早'、'未终止'）或过程相位表达（如'在...阶段'），也无边界/结果条件绑定。上下文完全缺失，仅为泛化失败陈述。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作 lateral_control 的缺失（应提供而未提供），属于动作本体的生命周期错误（not provided），未引入感知触发或上游依赖，符合 actuation_output 类型的动作失败。",
+          "B3": "unsafe form 为'未能提供'，可归入 broad UCA family 'not provided'，但未体现 discriminative 机制子型（如'在倒车阶段未提供'、'过早停止提供'等）。仅通过动作缺失与后果连接，缺乏 phase/lifecycle/boundary 等关系锚点，机制区分性不足。",
+          "B4": "linked_hazard_ids 为合法值 ['H-AVP-3']，且 H-AVP-3 描述'车辆无法完成自动泊车任务'与 description 后果完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文，仅为摘要句",
+          "机制表达偏模板化，未体现相位或边界关系"
+        ],
+        "suggested_revision": "AVP系统在倒车泊车阶段未能提供转向指令，导致车辆无法完成自动泊车任务。"
+      }
+    },
+    {
+      "uca_id": "UCA-5__dup3",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆无法避开障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失形式，并指出后果'导致车辆无法避开障碍物'，与 linked_hazard_ids 中的 H-AVP-1（碰撞）方向一致。但'无法避开障碍物'仍偏结果摘要，未明确体现该缺失发生在何种控制上下文或阶段，需依赖 hazard 补足后果，因此骨架成立但不够完整。",
+          "B1": "description 中无任何生命周期表达（如'未提供'虽隐含缺失，但未绑定相位或持续性）或过程相位表达（如'在泊车过程中'）。也无边界、状态或结果条件绑定。上下文完全缺失。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作 lateral_control 的缺失（应提供而未提供），属于动作本体的生命周期错误（not provided），未引入感知触发或上游依赖词汇，核心错误落在动作输出本身。",
+          "B3": "unsafe form '未能提供'可归入 broad family 'not provided'，但未体现机制子型：无相位（如'在接近障碍物时未提供'）、无边界关系（如'到达障碍物前仍未提供'）、无生命周期细化（如'过晚提供'或'持续缺失'）。仅通过对象'障碍物'替换表达风险，缺乏 discriminative 机制。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述为'车辆与...障碍物发生碰撞'，与 description 中'无法避开障碍物'逻辑一致，无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文（B1=0）",
+          "unsafe form 机制区分性不足（B3=1）",
+          "表述偏结果摘要，非严格动作层UCA（A=1）"
+        ],
+        "suggested_revision": "AVP系统在泊车过程中接近静态障碍物时未能提供必要的横向控制指令，导致车辆无法及时调整轨迹以避开障碍物。"
+      }
+    },
+    {
+      "uca_id": "UCA-9__dup3",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过晚提供转向指令，导致车辆无法避开障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过晚提供），并直接关联到具体后果（无法避开障碍物）。该后果与 linked_hazard_ids 中的 H-AVP-1（碰撞）一致且非跳跃，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过晚提供”，满足条件1；同时未使用任何感知触发或上游依赖词汇（如“检测到”“未确认”等），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作（lateral_control：提供转向指令）的时序执行本体上——“过晚提供”属于典型的 timing 错误，是动作生命周期关系的一种，完全聚焦于动作输出本身，而非上游感知或规划失败。",
+          "B3": "unsafe form “过晚提供”体现了明确的 lifecycle_relation 机制子型，具有区分性，不属于仅靠对象替换（如“障碍物”）或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述为‘车辆与障碍物发生碰撞’，与 description 中‘无法避开障碍物’导致的碰撞风险方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-8__dup3",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过早提供转向指令，导致车辆偏离预定路径。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过早提供），并指出其直接后果（车辆偏离预定路径）。该后果可由 linked_hazard_ids [H-AVP-1, H-AVP-2] 直接、一致地补足（偏离路径可能导致碰撞或越界），构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过早”，满足条件1；且未出现任何感知触发或上游依赖词汇（如“检测到”“未确认”等），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作（提供横向控制指令）的时序本体上——“过早提供”属于典型的 timing 错误，是 actuation_output 生命周期中的 discriminative 失败模式，未依赖上游条件或感知触发。",
+          "B3": "unsafe form “过早提供”体现了明确的 lifecycle_relation 机制子型，具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids [\"H-AVP-1\", \"H-AVP-2\"] 均为合法 ID，且与 description 中“车辆偏离预定路径”所导向的碰撞或越界风险高度一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-10__dup3",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统转向指令持续时间过短，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（转向指令）的不安全形式（持续时间过短），并直接关联到无法完成泊车任务这一后果；该后果与 linked_hazard_ids 中的 H-AVP-3 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“持续时间过短”，满足条件1；且未使用任何感知触发或上游依赖词汇，满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误落在当前控制动作（横向控制指令）的执行本体上，具体为 duration 错误（过短），属于典型的生命周期类动作失败，完全符合 actuation_output 类型下的 timing/duration 错误定义。",
+          "B3": "unsafe form 使用了明确的机制子型“持续时间过短”，属于 discriminative 的 lifecycle_relation 表达，具有机制区分性，而非仅靠对象替换或泛化触发。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-3，其描述‘车辆无法完成自动泊车任务’与 description 中的后果完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-2__dup4",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令，导致车辆偏离预定路径，撞上其他车辆。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（撞上其他车辆）的连接，但未明确说明该动作的不安全形式（如错误指令、过量指令、持续指令等），仅呈现为结果摘要句。linked_hazard_ids [H-AVP-1] 可一致补足后果，但动作层 unsafe form 不够清晰，需额外推断。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'），也无过程相位（如'在泊车阶段'），亦无边界/结果条件。仅为孤立的动作-后果陈述，缺乏可审计上下文。",
+          "B2": "核心错误落在控制动作输出（提供转向指令）上，属于 actuation_output 的执行错误，但未明确是'错误指令'还是'不当时机指令'。因缺乏生命周期或执行细节词汇，动作本体不够清晰，仅能视为相关但非明确动作层失败。",
+          "B3": "unsafe form 仅通过对象替换（'其他车辆'）体现，未包含 discriminative 机制子型（如过早、仍、在...阶段）。虽可归入 'provided' family，但缺乏 timing/duration/phase/boundary 等区分性表达，属 generic 水平。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述'车辆与...其他车辆发生碰撞'与 description 中'撞上其他车辆'完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "AVP系统在泊车过程中提供过度或错误的转向指令，导致车辆横向偏离预定路径并撞上邻近车辆。"
+      }
+    },
+    {
+      "uca_id": "UCA-3__dup4",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令，导致车辆偏离预定路径，撞上障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（撞上障碍物）的因果链，但未明确说明该动作是以何种不安全形式发生的（如错误指令、持续提供、过早终止等），仅呈现为结果摘要句。linked_hazard_ids [H-AVP-1] 可一致补足后果，但动作层 unsafe form 不够清晰，需较多推断才能构成完整 UCA 骨架。",
+          "B1": "description 中无任何生命周期表达（如'仍'、'过早'等）或过程相位表达（如'在...阶段'）。也无边界关系、结果条件或状态绑定等显式上下文，仅为泛化因果陈述。",
+          "B2": "核心错误落在'提供转向指令'这一动作上，属于当前控制动作本体，但未说明是何种执行失败（如错误值、持续提供、缺失等），仅暗示'导致偏离路径'，动作本体不够具体。未出现感知触发或上游依赖词汇，故不给0分，但也不满足2分要求。",
+          "B3": "unsafe form 仅通过对象替换（'障碍物'）和泛化因果（'导致偏离...撞上'）表达，缺乏机制子型（如生命周期、相位、边界关系等）。可归入 broad 'provided causing hazard' family，但无 discriminative 机制特征。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'（碰撞风险），与 description 中'撞上障碍物'完全一致，方向匹配且无冲突。"
+        },
+        "issues": [
+          "description is result-summary-like",
+          "lacks explicit unsafe form of control action",
+          "no contextual anchor for auditability"
+        ],
+        "suggested_revision": "在泊车路径跟踪阶段，AVP系统提供了错误的转向指令，导致车辆向障碍物方向偏移并发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-4__dup4",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令，导致车辆偏离预定路径，超出停车边界。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（超出停车边界）的关联，但未明确说明动作的不安全形式（如错误、过量、持续等），仅呈现为结果摘要句。linked_hazard_ids [H-AVP-2] 能一致补足后果，但动作层 unsafe form 不够清晰，需一定推断才能构成完整 UCA 骨架。",
+          "B1": "description 中无任何生命周期表达（如'仍'、'过早'等）或过程相位表达（如'在...阶段'），也无边界/结果条件绑定。上下文完全缺失，仅为结果陈述。",
+          "B2": "核心错误落在横向控制指令导致偏离路径，属于当前动作输出范畴，但未明确是执行错误（如错误指令）、时序错误还是持续错误。缺乏动作本体的具体 unsafe form，仅隐含'提供了不当转向指令'，故给1分。",
+          "B3": "unsafe form 仅体现为'导致车辆偏离预定路径，超出停车边界'，属于 broad family 表达（provided causing hazard），通过对象（停车边界）和结果（超出）替换实现，但无 lifecycle_relation、phase_relation 或 boundary_relation 等机制子型，区分性不足。",
+          "B4": "linked_hazard_ids 为合法值 [H-AVP-2]，且 H-AVP-2 描述'车辆越出目标停车区域或停车边界'与 description 中'超出停车边界'完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "AVP系统在泊车过程中持续提供转向指令，即使车辆已接近或达到停车边界，导致车辆越出目标区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-1__dup4",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令，导致车辆偏离预定路径，撞上行人。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（撞上行人）的连接，但未明确说明该动作是以何种不安全形式发生（如错误方向、过量、持续等），仅呈现为结果摘要句。linked_hazard_ids 可补足后果类型（H-AVP-1），但动作层 unsafe form 不够清晰，需额外推断。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'等），也无过程相位（如'在...阶段'），亦无边界/结果条件。纯为后果导向的陈述，缺乏可审计上下文。",
+          "B2": "核心错误落在横向控制指令的输出上（'提供转向指令'导致偏离路径），属于动作本体范畴，而非感知或规划失败。但未说明指令本身的错误性质（如错误方向、幅度过大等），仅通过后果反推，动作本体不够具体。",
+          "B3": "unsafe form 仅体现为对象替换（'撞上行人' vs 其他障碍物），未体现机制子型（如生命周期、相位、边界关系等）。虽可归入 'provided' family，但缺乏 discriminative 机制特征。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述'车辆与行人...发生碰撞'与 description 中'撞上行人'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文",
+          "unsafe form 仅通过对象替换体现",
+          "动作错误性质未明确"
+        ],
+        "suggested_revision": "AVP系统在泊车过程中提供错误方向的转向指令，导致车辆偏离预定路径并撞上行人。"
+      }
+    },
+    {
+      "uca_id": "UCA-6__dup4",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆无法避开其他车辆。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失形式，并指出后果是'无法避开其他车辆'，可与 linked_hazard_ids H-AVP-1（碰撞）一致衔接。但'无法避开其他车辆'仍偏结果摘要，未明确体现动作缺失如何在特定上下文中导致危险，需一定推断才能构成完整 UCA 骨架。",
+          "B1": "description 中无任何生命周期表达（如'未提供'虽隐含缺失，但未绑定相位或时机）或过程相位表达（如'在泊车过程中'）。也无边界、状态或结果条件等显式上下文。纯为动作缺失+后果摘要，缺乏可审计上下文。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作 lateral_control 的缺失（应提供而未提供），属于动作本体的生命周期错误（not provided），未依赖感知触发或上游条件，核心错误落在动作输出本身。",
+          "B3": "unsafe form '未能提供'可归入 broad family 'not provided'，但未体现机制子型（如'过晚提供'、'在倒车阶段未提供'、'达到障碍物前仍未提供'等）。仅通过替换危险对象（'其他车辆'）表达，缺乏 discriminative 机制特征。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述为'车辆与行人、车辆、障碍物...发生碰撞'，与 description 中'无法避开其他车辆'导致碰撞的风险方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在泊车路径规划执行阶段，AVP系统未能提供必要的转向指令以避开前方静止车辆，导致潜在碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-7__dup4",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆无法避开障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失形式，并指出后果是'无法避开障碍物'，与 linked_hazard_ids 中的 H-AVP-1（碰撞）方向一致。但'无法避开障碍物'仍偏结果摘要，未明确体现该缺失发生在何种操作上下文（如泊车过程中、接近障碍物时等），需一定推断才能构成完整 UCA 骨架，故给1分。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'未提供'虽隐含缺失，但未绑定'应提供而未提供'的时机），也无过程相位（如'在泊车阶段'）、边界关系或结果条件。纯为动作缺失+后果摘要，不符合 B1=1 或 2 的条件。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作 lateral_control 的缺失（not provided），属于动作本体的生命周期错误（应提供而未提供），未依赖感知触发或上游条件，核心错误落在执行输出本身，符合 B2=2。",
+          "B3": "unsafe form 为'未能提供'，可归入 broad family 'not provided'，但未体现机制子型（如'在需要时未提供'、'过晚提供'、'在倒车阶段未提供'等）。仅通过对象'障碍物'具体化，属 generic 对象替换，缺乏 discriminative 机制区分性，故给1分。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述为'车辆与...障碍物发生碰撞'，与 description 中'无法避开障碍物'导致碰撞的风险方向完全一致，无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文，仅为动作缺失+后果摘要",
+          "unsafe form 依赖对象替换，机制区分性不足",
+          "高度依赖模板化表达（'未能...导致...'）"
+        ],
+        "suggested_revision": "在泊车路径规划已确认需避让静态障碍物的场景下，AVP系统未提供必要的横向控制指令，导致车辆无法绕行而发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-5__dup4",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆无法避开行人。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失形式，并指出了后果'导致车辆无法避开行人'，与 linked_hazard_ids 中的 H-AVP-1（碰撞）方向一致。但该句更像一个结果摘要或标题式表达，未体现动作发生的具体上下文或机制关系，仅靠 hazard 可补足后果，但动作-后果链条仍偏弱，需一定推断才能构成完整 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'未提供'虽隐含缺失，但未绑定到特定时机或状态），也无过程相位（如'在泊车过程中'）、边界关系或结果条件。整句缺乏可审计的上下文锚点。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作 lateral_control 的缺失（应提供而未提供），属于动作本体的生命周期错误（not provided），未依赖感知触发或上游条件，核心错误落在执行输出层。",
+          "B3": "unsafe form '未能提供'可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如'过晚提供'、'在倒车阶段未提供'等）。仅通过替换危险对象（'行人'）区分场景，缺乏 phase/lifecycle/boundary 等关系表达，机制区分性不足。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述为'车辆与行人...发生碰撞'，与 description 中'无法避开行人'导致碰撞的风险方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在检测到前方有行人且需避让时，AVP系统未能提供横向控制指令，导致车辆无法避开行人而发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-9__dup4",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过晚提供转向指令，导致车辆未能及时避开障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过晚提供），并直接关联到具体后果（未能及时避开障碍物）。该后果与 linked_hazard_ids 中的 H-AVP-1（碰撞）一致且非跳跃，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过晚提供”，满足条件1；同时未使用任何感知触发或上游依赖词汇（如“检测到”“未确认”等），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作（lateral_control）的执行本体上：“过晚提供转向指令”属于典型的 timing 错误，是动作生命周期中的时序问题，而非依赖上游感知或规划失败。",
+          "B3": "unsafe form 使用了“过晚”这一明确的生命周期关系词，体现了 discriminative 的机制子型，而非仅靠对象替换或泛化触发。这属于 timing-based lifecycle_relation，具有机制区分性。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-1'，其描述为‘车辆与障碍物发生碰撞’，与 description 中‘未能及时避开障碍物’导致的风险方向完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-8__dup4",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过早提供转向指令，导致车辆提前偏离预定路径，撞上行人。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过早提供），并直接给出了具体后果（撞上行人），该后果与 linked_hazard_ids 中的 H-AVP-1（碰撞）一致且非跳跃，已构成可用的动作层 UCA 骨架。",
+          "B1": "包含明确的生命周期表达“过早”，满足条件1；未出现任何感知触发或上游依赖词汇（如“检测到”“未确认”等），满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作（提供转向指令）的时序执行本体上，“过早提供”属于典型的 timing 错误，是 lateral_control 动作生命周期中的不安全形式，未依赖上游条件或感知触发。",
+          "B3": "unsafe form “过早提供”体现了明确的 lifecycle_relation 机制子型（timing 错误），具有机制区分性，而非仅靠对象替换（如“行人”）或泛化触发表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述为‘车辆与行人...发生碰撞’，与 description 中‘撞上行人’完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-10__dup4",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统过早停止提供转向指令，导致车辆未能完全进入停车位。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式：'过早停止提供'，且后果'车辆未能完全进入停车位'可由 linked_hazard_ids 中的 H-AVP-3（无法完成泊车任务或停留在不可接受位置）直接、一致地补足，构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达'过早停止'，满足条件1；同时未出现任何感知触发或上游依赖词汇（如'检测到''未确认'等），满足条件2。因此上下文质量为高。",
+          "B2": "'过早停止提供转向指令'直接描述了当前控制动作（lateral_control）在生命周期上的执行错误（timing/duration 错误），核心错误落在动作本体上，而非感知或规划层。",
+          "B3": "'过早停止'属于明确的生命周期关系机制子型，具有机制区分性，不是仅靠对象替换或泛化触发表达的 generic 形式。",
+          "B4": "linked_hazard_ids 引用了合法 ID 'H-AVP-3'，其描述'车辆无法完成自动泊车任务，或停留在不安全/不可接受位置'与 description 中'未能完全进入停车位'高度一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-2__dup5",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（越出目标停车区域）的连接，但未说明该动作是以何种不安全形式发生的（如过量、持续、错误方向等），仅呈现为结果摘要句。linked_hazard_ids [H-AVP-2] 能一致补足后果，但动作层 unsafe form 不够明确，需额外推断。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'），也无过程相位（如'在泊车阶段'），亦无边界/结果条件绑定。仅为静态因果陈述，缺乏可审计上下文。",
+          "B2": "核心错误落在横向控制动作上（'提供转向指令'导致越界），属于动作本体范畴，而非感知或规划失败。但未明确是执行错误（如错误指令）还是生命周期错误（如应停未停），动作本体不够清晰，故给1分。",
+          "B3": "unsafe form 仅通过对象替换（'越出目标停车区域'）体现，属于 broad family 'provided causing hazard' 的泛化表达，缺乏机制子型（如过早、过量、持续等）。虽能映射到 provided 类，但无 discriminative 机制特征。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述'车辆越出目标停车区域或停车边界'与 description 中'导致车辆越出目标停车区域'完全一致，无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文（B1=0）",
+          "unsafe form 仅为对象替换，机制区分性不足（B3=1）",
+          "动作不安全形式未明确，偏向后果摘要（A=1）"
+        ],
+        "suggested_revision": "在完成泊车前，AVP系统持续提供转向指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-3__dup5",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（无法完成泊车任务）的连接，但未说明该动作是以何种不安全形式发生（如错误、过早、持续等），仅呈现为结果摘要句。linked_hazard_ids 能一致补足后果，但动作层 unsafe form 不明确，需较多推断才能构成完整 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'），也无过程相位（如'在...阶段'），亦无边界/结果条件。纯为无上下文的动作-后果陈述。",
+          "B2": "核心错误落在'提供转向指令'这一动作上，属于当前控制动作本体，但未说明是缺失、错误、时序问题还是持续问题。虽未引入感知触发或上游依赖，但动作本体的失败模式模糊，仅可视为弱动作层表达。",
+          "B3": "unsafe form 仅体现为 broad family 'provided causing hazard'，通过对象替换（'无法完成任务'作为后果）表达，缺乏机制子型（如 lifecycle、phase、boundary 等关系）。语义族可识别但无区分性。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-3'，其描述'车辆无法完成自动泊车任务...'与 description 中的后果完全一致，链接准确无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "AVP系统在泊车过程中持续提供不适当的转向指令，导致车辆无法完成自动泊车任务。"
+      }
+    },
+    {
+      "uca_id": "UCA-4__dup5",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令，导致车辆出现非预期运动。",
+        "linked_hazard_ids": [
+          "H-AVP-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（非预期运动）的关联，但未明确说明该动作是以何种不安全形式发生的（如错误指令、持续提供、过早提供等），仅呈现为结果摘要句。linked_hazard_ids 能一致补足后果（H-AVP-4），但动作层 unsafe form 不够清晰，需额外推断。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'仍'、'过早'），也无过程相位（如'在泊车阶段'），亦无边界/结果条件。纯为动作+后果的扁平陈述。",
+          "B2": "核心错误落在控制动作输出（提供转向指令）上，属于 actuation_output 的执行层面，但未明确是何种执行失败（如错误值、持续提供等）。虽未引入感知触发或上游依赖，但动作本体的 unsafe 形式模糊，仅可视为弱动作层表达。",
+          "B3": "unsafe form 仅体现为 broad family 'provided causing hazard'，通过替换危险对象（非预期运动）表达，缺乏机制子型（如 timing、phase、boundary 等关系）。无法区分于其他 provided 类 UCA。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-4'，其描述'车辆出现非预期运动...'与 description 中'导致车辆出现非预期运动'完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description is result-summary-like",
+          "lacks explicit unsafe form",
+          "no contextual anchor",
+          "high template dependency"
+        ],
+        "suggested_revision": "AVP系统在泊车过程中持续提供转向指令，导致车辆出现非预期运动。"
+      }
+    },
+    {
+      "uca_id": "UCA-1__dup5",
+      "category": "provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统提供转向指令，导致车辆偏离预定路径，撞上障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 5,
+        "label": "不合理不可用",
+        "rationales": {
+          "A": "description 表达了动作（提供转向指令）与后果（撞上障碍物）的连接，但未明确说明动作的不安全形式（如错误、过量、持续等），仅暗示‘导致偏离路径’，需依赖 linked_hazard_ids 补足危险类型。整体更接近结果摘要而非完整动作层UCA骨架。",
+          "B1": "description 中无任何生命周期表达（如‘仍’、‘过早’）或过程相位表达（如‘在泊车阶段’），也无边界/结果条件绑定，上下文完全缺失。",
+          "B2": "核心错误落在‘提供转向指令’这一动作上，但未说明是错误指令、过量指令还是时机错误，仅通过后果反推动作失败。未出现感知触发词，但动作本体的不安全形式不够清晰，故给1分。",
+          "B3": "unsafe form 仅体现为‘导致偏离路径’，属于 broad family 表达（provided + hazard object swap），缺乏机制子型（如timing、phase、boundary等）。仅靠替换障碍物对象，不具备区分性。",
+          "B4": "linked_hazard_ids 包含合法ID 'H-AVP-1'，且 description 中‘撞上障碍物’与该hazard‘车辆与障碍物发生碰撞’完全一致，链接强且无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在自动泊车路径跟踪阶段，AVP系统提供了过度的转向指令，导致车辆横向偏离预定轨迹并撞上静态障碍物。"
+      }
+    },
+    {
+      "uca_id": "UCA-6__dup5",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆越出目标停车区域。",
+        "linked_hazard_ids": [
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的缺失（'未能提供'），并直接导致具体后果（'车辆越出目标停车区域'），该后果与 linked_hazard_ids 中的 H-AVP-2 完全一致，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'过早'、'未终止'等），也无过程相位（如'在...阶段'），亦无边界/结果条件。仅陈述动作缺失与后果，缺乏可审计的触发或状态上下文。",
+          "B2": "'未能提供转向指令' 直接对应当前控制动作 lateral_control 的缺失错误（应提供而未提供），属于动作本体的生命周期失败，未依赖感知或上游条件，符合 actuation_output 类型的动作忠实度要求。",
+          "B3": "unsafe form 为 '未能提供'，可归入 broad family 'not provided'，但未体现机制子型（如相位、边界、生命周期细节）。仅通过对象（'转向指令'）和后果（'越出区域'）限定，缺乏 discriminative 机制关系，属于 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-2'，其描述 '车辆越出目标停车区域...' 与 description 中的后果完全一致，链接准确无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在泊车过程中接近车位边界时，AVP系统未能提供必要的转向指令，导致车辆越出目标停车区域。"
+      }
+    },
+    {
+      "uca_id": "UCA-7__dup5",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失，且 linked_hazard_ids 指向 H-AVP-3（无法完成泊车任务），逻辑一致。但描述更像结果摘要句（'导致车辆无法完成...'），未体现动作生命周期、相位或边界关系，缺乏过程性表达，需依赖 hazard 补足后果，因此仅得1分。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'过早'、'未终止'），也无过程相位（如'在泊车阶段'），亦无边界/结果条件。纯为动作缺失+后果的平铺直叙，故 B1=0。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作 lateral_control 的缺失（应提供而未提供），属于动作本体的生命周期错误（未提供），未涉及感知触发或上游依赖，符合 B2=2 标准。",
+          "B3": "unsafe form 为'未能提供'，可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如'在倒车阶段未提供'、'过早停止提供'等）。仅通过动作缺失+后果对象构成 generic 表达，故得1分。",
+          "B4": "linked_hazard_ids 为合法值 ['H-AVP-3']，且 description 中'无法完成自动泊车任务'与 H-AVP-3 描述完全一致，链接强且无冲突。"
+        },
+        "issues": [
+          "description 缺乏显式上下文（B1=0）",
+          "unsafe form 为 generic 模板表达（B3=1）",
+          "高度依赖 broad family 模板（template_dependency=high）"
+        ],
+        "suggested_revision": "在自动泊车执行阶段，AVP系统未能提供横向控制指令，导致车辆停滞在非目标位置。"
+      }
+    },
+    {
+      "uca_id": "UCA-5__dup5",
+      "category": "not_provided_causing_hazard",
+      "reviewed_uca": {
+        "description": "AVP系统未能提供转向指令，导致车辆无法避开障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 1,
+          "B1": 0,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 6,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "description 表达了'未能提供转向指令'这一动作缺失形式，并指出后果'导致车辆无法避开障碍物'，与 linked_hazard_ids 中的 H-AVP-1（碰撞）方向一致。但'无法避开障碍物'仍偏结果摘要，未明确体现该缺失发生在何种操作上下文或阶段，需一定推断才能构成完整 UCA 骨架。",
+          "B1": "description 中无任何显式上下文：既无生命周期表达（如'未提供'虽隐含缺失，但未绑定到特定时机），也无过程相位（如'在泊车过程中'）、边界关系或结果条件。纯为动作缺失+后果摘要，不符合 B1=1 或 2 的任一条件。",
+          "B2": "'未能提供转向指令'直接对应当前控制动作 lateral_control 的缺失（应提供而未提供），属于动作本体的生命周期错误（not provided），未依赖感知触发或上游条件，符合 B2=2 标准。",
+          "B3": "unsafe form 为'未能提供'，可归入 broad family 'not provided'，但未体现 discriminative 机制子型（如'在倒车阶段未提供'、'过晚提供'、'达到边界后仍未提供'等）。仅通过对象'障碍物'具体化，属 generic 表达。",
+          "B4": "linked_hazard_ids 包含合法 ID 'H-AVP-1'，其描述'车辆与...障碍物发生碰撞'与 description 中'无法避开障碍物'逻辑一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": "在泊车路径规划已确认需避让静态障碍物的阶段，AVP系统未能提供必要的转向指令，导致车辆无法避开障碍物而发生碰撞。"
+      }
+    },
+    {
+      "uca_id": "UCA-9__dup5",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过晚提供转向指令，导致车辆无法避开障碍物。",
+        "linked_hazard_ids": [
+          "H-AVP-1"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过晚提供），并直接关联到无法避开障碍物这一后果；linked_hazard_ids 中的 H-AVP-1（与障碍物碰撞）可直接、一致地补足危险后果，构成完整可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过晚提供”，满足条件1；且未使用任何感知触发（如“检测到”）或上游依赖词汇（如“未确认”），满足条件2。因此上下文质量为高。",
+          "B2": "核心错误直接落在当前控制动作（lateral_control）的执行本体上——‘过晚提供转向指令’属于典型的 timing 错误，是动作生命周期中的时序失效，完全符合 actuation_output 类型动作的不安全形式。",
+          "B3": "unsafe form ‘过晚提供’体现了明确的 lifecycle_relation 机制子型，具有区分性，不属于仅靠对象替换（如换‘行人’或‘车辆’）的 generic 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-1，其描述‘车辆与障碍物发生碰撞’与 description 中‘无法避开障碍物’逻辑一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-8__dup5",
+      "category": "wrong_timing_or_order",
+      "reviewed_uca": {
+        "description": "AVP系统过早提供转向指令，导致车辆偏离预定路径。",
+        "linked_hazard_ids": [
+          "H-AVP-1",
+          "H-AVP-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过早提供），并直接说明了后果（导致车辆偏离预定路径）。该后果可由 linked_hazard_ids [H-AVP-1, H-AVP-2] 一致补足（偏离路径可能导致碰撞或越界），构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过早”，满足条件1；且未使用任何感知触发或上游依赖词汇，满足条件2。因此符合 B1=2 的严格标准。",
+          "B2": "核心错误直接落在当前控制动作（提供转向指令）的时序执行本体上（“过早提供”），属于 timing 错误，完全聚焦于动作输出本身，无上游依赖。",
+          "B3": "unsafe form “过早提供”体现了明确的生命周期关系（timing 子型），具有机制区分性，不属于仅靠对象替换或泛化触发的 generic 表达。",
+          "B4": "linked_hazard_ids [\"H-AVP-1\", \"H-AVP-2\"] 均为合法 ID，且与 description 中“偏离预定路径”可能导致的碰撞或越界后果方向一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "uca_id": "UCA-10__dup5",
+      "category": "stopped_too_soon_or_applied_too_long",
+      "reviewed_uca": {
+        "description": "AVP系统过早停止提供转向指令，导致车辆无法完成自动泊车任务。",
+        "linked_hazard_ids": [
+          "H-AVP-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "description 明确表达了当前控制动作（提供转向指令）的不安全形式（过早停止），且 linked_hazard_ids [H-AVP-3] 直接、一致地补足了后果（无法完成自动泊车任务或停留在不安全位置），构成可用的动作层 UCA 骨架。",
+          "B1": "description 包含明确的生命周期表达“过早停止”，满足条件1；且未包含任何感知触发或上游依赖词汇，满足条件2。",
+          "B2": "核心错误直接落在当前控制动作（提供转向指令）的生命周期上（过早停止），属于 timing/duration 错误，符合 actuation_output 的动作本体失败。",
+          "B3": "unsafe form 使用了“过早”这一明确的生命周期关系词，具有机制区分性，属于 discriminative 表达。",
+          "B4": "linked_hazard_ids 引用了合法 ID H-AVP-3，且其描述‘车辆无法完成自动泊车任务’与 description 中‘导致车辆无法完成自动泊车任务’完全一致，无冲突。"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    }
+  ],
+  "system_level_semantic_merge": {
+    "review_source": "quality_gate_scoring",
+    "retained_uca_items": [
+      {
+        "uca_id": "UCA-9__dup4",
+        "summary": "过晚转向致无法及时避障"
+      },
+      {
+        "uca_id": "UCA-8__dup4",
+        "summary": "过早转向致提前偏离路径撞人"
+      },
+      {
+        "uca_id": "UCA-10__dup4",
+        "summary": "过早停转致未完全入位"
+      }
+    ],
+    "merged_duplicate_items": [
+      {
+        "removed_uca_id": "UCA-9",
+        "kept_uca_id": "UCA-9__dup4",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA-9__dup2",
+        "kept_uca_id": "UCA-9__dup4",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA-9__dup3",
+        "kept_uca_id": "UCA-9__dup4",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA-9__dup5",
+        "kept_uca_id": "UCA-9__dup4",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA-8",
+        "kept_uca_id": "UCA-8__dup4",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA-8__dup2",
+        "kept_uca_id": "UCA-8__dup4",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA-8__dup3",
+        "kept_uca_id": "UCA-8__dup4",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA-8__dup5",
+        "kept_uca_id": "UCA-8__dup4",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA-10",
+        "kept_uca_id": "UCA-10__dup4",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA-10__dup3",
+        "kept_uca_id": "UCA-10__dup4",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_uca_id": "UCA-10__dup5",
+        "kept_uca_id": "UCA-10__dup4",
+        "reason": "semantic_equivalent"
+      }
+    ],
+    "kept_count": 3
+  },
+  "review_statement": "The records in this file document structured multidimensional quality-gate scoring used to screen generated candidates before system-level semantic merge. Final manual expert delivery-audit and agreement records are published separately in data/03_expert_delivery_audit.",
+  "quality_gate_declaration": {
+    "review_source": "quality_gate_scoring",
+    "paper_section_alignment": "The paper describes this stage as multidimensional quality gating before semantic consolidation.",
+    "manual_expert_audit_location": "data/03_expert_delivery_audit",
+    "excluded_public_fields": [
+      "implementation materials",
+      "local environment metadata",
+      "platform/service identifiers",
+      "request identifiers",
+      "non-public execution logs"
+    ]
+  }
+}

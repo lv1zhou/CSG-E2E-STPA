@@ -1,0 +1,1768 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "system": "Automated Valet Parking (AVP)",
+    "public_file_group": "quality_gate_scoring_results",
+    "review_provenance": "quality_gate_scoring",
+    "public_release_scope": "Structured JSON result release for multidimensional quality-gate scoring. Implementation code is maintained in the separate CSG-code repository; local environment metadata, platform/service identifiers, request identifiers, non-public execution logs, raw response payloads, and raw traces are excluded.",
+    "related_code_repository": "https://github.com/lv1zhou/CSG-code"
+  },
+  "public_file_role": "quality_gate_scoring_result",
+  "task_stage": "causal_scenario",
+  "task_type": "causal_scenario",
+  "task_name": "Causal scenario reasoning",
+  "action_key": "forward_drive",
+  "action_name_cn": "前进驱动",
+  "action_name_en": "Forward drive",
+  "generation_method": "zero_shot",
+  "generation_method_label": "ZS",
+  "quality_gate_scoring_summary": {
+    "total_reviewed_items": 50,
+    "expert_scored_items": 50,
+    "expert_usable_items_before_merge": 21,
+    "expert_kept_items_after_semantic_merge": 6,
+    "semantic_merge_retention_rate": 0.2857,
+    "final_deliverable_items_after_expert_audit": 6,
+    "final_delivery_retention_rate": 1.0
+  },
+  "quality_gate_item_reviews": [
+    {
+      "scenario_id": "CS-3",
+      "reviewed_causal_scenario": {
+        "description": "车辆底层状态反馈延迟，导致控制器未能及时停止前进驱动指令，造成非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "提到'底层状态反馈延迟'但未指明具体通道",
+          "B2": "链条清晰：反馈延迟→未及时停止→非预期运动→UCA-4",
+          "B3": "提及反馈延迟但未锚定具体FB或CA/PM",
+          "B4": "UCA-4与描述一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确底层反馈类型（如CAN回读/FB-AVP-FD-2）并关联CA/PM"
+      }
+    },
+    {
+      "scenario_id": "CS-4",
+      "reviewed_causal_scenario": {
+        "description": "执行确认超时，但控制器未能检测到此问题，继续发出前进驱动指令，导致执行失败或风险上升。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA链接",
+          "B1": "提到执行确认超时，但未指明具体FB通道",
+          "B2": "链条清晰：超时→未检测→继续发指令→风险",
+          "B3": "提及执行确认但未锚定具体FB或CA/PM",
+          "B4": "UCA-2/3/4均与指令持续/时机/缺失相关"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确执行确认对应FB-AVP-FD-3，并关联CA-AVP-FD-3"
+      }
+    },
+    {
+      "scenario_id": "CS-2",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头视频流受干扰，导致控制器误判路径状态，发出不适当的前进驱动指令，造成越界或财产损失。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "明确环视摄像头视频流干扰",
+          "B2": "干扰→误判路径→错误指令→越界/UCA-2",
+          "B3": "锚定环视摄像头（FB-AVP-FD-4相关），影响PM-AVP-FD-2",
+          "B4": "UCA-2与越界/财产损失一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-1",
+      "reviewed_causal_scenario": {
+        "description": "超声波雷达传感器数据异常丢失，导致控制器误判前方无障碍物，发出前进驱动指令，造成碰撞或驶入危险区域。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "明确超声波雷达数据异常丢失",
+          "B2": "链条：传感器丢失→误判无障碍→发指令→碰撞",
+          "B3": "锚定FB-AVP-FD-1（超声波）并影响PM-AVP-FD-1",
+          "B4": "UCA-1/2与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-6",
+      "reviewed_causal_scenario": {
+        "description": "路径通信丢包，导致控制器未能接收到最新的路径信息，发出错误的前进驱动指令，造成越界或财产损失。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA，描述有上下文+因果+UCA",
+          "B1": "明确‘路径通信丢包’，属FB-AVP-FD-4具体通道",
+          "B2": "链条：(a)路径丢包→(b)未获新路径→(c)错误发指令→(d)越界/损失→(e)UCA-2/3",
+          "B3": "锚定上位机路径通信（FB-AVP-FD-4），导致PM-AVP-FD-2信念错误",
+          "B4": "UCA-2（越界）和UCA-3（应提供未提供）均合理"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-5",
+      "reviewed_causal_scenario": {
+        "description": "车辆接近目标终点时，控制器未能及时停止前进驱动指令，导致车辆越界或停在不可接受位置。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "提到‘接近目标终点’但未指明具体反馈或阈值",
+          "B2": "链条清晰：接近终点→未停指令→越界/UCA",
+          "B3": "未锚定具体FB/PM/CA，仅隐含停止逻辑",
+          "B4": "UCA-2/4与越界/时机不当一致"
+        },
+        "issues": [
+          "上下文不够具体",
+          "缺乏FB/PM/CA具体锚点"
+        ],
+        "suggested_revision": "明确使用FB-AVP-FD-2（CAN回读）或CA-AVP-FD-2（边界停止逻辑）作为依据"
+      }
+    },
+    {
+      "scenario_id": "CS-1__dup2",
+      "reviewed_causal_scenario": {
+        "description": "超声波雷达传感器数据异常丢失，导致控制器误判前方无障碍物，从而不安全地提供前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA链接",
+          "B1": "明确超声波雷达数据异常丢失",
+          "B2": "链条：传感器丢失→误判无障碍→错误提供驱动→UCA-1/2",
+          "B3": "锚定FB-AVP-FD-1（超声波）并说明其导致PM错误信念",
+          "B4": "UCA-1/2与不安全/越界前进一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-2__dup2",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头视频流受干扰，导致控制器误判车辆位置，从而在不适当的时间提供前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "明确环视摄像头视频流干扰",
+          "B2": "干扰→误判位置→错误提供指令→UCA",
+          "B3": "锚定环视摄像头（FB），影响PM-AVP-FD-1",
+          "B4": "UCA-1/4与过早/不当驱动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-8",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确判断车辆档位状态，导致前进驱动指令发出后车辆无法移动，造成无法完成泊车。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA-3，描述有上下文+因果+结果",
+          "B1": "提到‘档位状态’但未指明具体反馈源（如CAN回读）",
+          "B2": "仅‘误判档位→不移动→UCA-3’，缺中间环节如FB/PM错误",
+          "B3": "提及档位但未锚定FB-AVP-FD-2或PM/CA，解释不足",
+          "B4": "UCA-3与‘应提供未提供’一致"
+        },
+        "issues": [
+          "B2因果链不完整",
+          "B3未锚定具体FB/PM/CA"
+        ],
+        "suggested_revision": "明确档位状态来自CAN回读(FB-AVP-FD-2)，并说明因回读延迟/错误导致PM-AVP-FD-2信念错误，进而违反CA-AVP-FD-1"
+      }
+    },
+    {
+      "scenario_id": "CS-9",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确处理执行器状态回读，导致前进驱动指令执行失败，造成无法完成泊车或停留在不可接受位置。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，描述含因果和UCA",
+          "B1": "提到'执行器状态回读'但未指明具体FB类型",
+          "B2": "链条清晰：回读失败→指令执行失败→泊车失败/UCA",
+          "B3": "提及回读但未锚定具体FB或CA/PM",
+          "B4": "UCA-2/3/4均与未提供/错误时机/越界相关"
+        },
+        "issues": [
+          "B1不足2",
+          "B3未锚定具体控制回路要素"
+        ],
+        "suggested_revision": "明确回读来源（如FB-AVP-FD-2/CAN回读）并关联CA/PM"
+      }
+    },
+    {
+      "scenario_id": "CS-7",
+      "reviewed_causal_scenario": {
+        "description": "控制器误判车辆位置，导致前进驱动指令发出时机不当，造成非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和基本因果描述",
+          "B1": "提到‘误判位置’但未指明具体传感器或反馈源",
+          "B2": "含(a)位置误判→(c)指令时机错→(d/e)非预期运动/UCA",
+          "B3": "提及位置误判但未锚定具体PM/FB（如FB-AVP-FD-1/PM-AVP-FD-1）",
+          "B4": "UCA-1/UCA-4与‘非预期运动/风险上升’一致"
+        },
+        "issues": [
+          "B1不足：未明确位置误判来源（如超声波/CAN/定位模块）",
+          "B3弱锚定：未关联具体PM或FB条目"
+        ],
+        "suggested_revision": "明确位置误判源于哪类反馈（如FB-AVP-FD-1超声波异常）及对应PM（如PM-AVP-FD-1）"
+      }
+    },
+    {
+      "scenario_id": "CS-10",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确处理通信时延，导致前进驱动指令发出时机不当，造成非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA-4，描述有因果结构",
+          "B1": "提到'通信时延'但未指明具体通道（如上位机路径通信）",
+          "B2": "链条清晰：通信时延→指令时机不当→非预期运动→UCA-4",
+          "B3": "提及通信时延但未锚定FB-AVP-FD-4或具体回路环节",
+          "B4": "UCA-4明确对应'时机不当导致风险上升'"
+        },
+        "issues": [
+          "B1不足：未明确通信类型",
+          "B3不足：未锚定具体FB/CA/PM"
+        ],
+        "suggested_revision": "明确'上位机路径通信时延（FB-AVP-FD-4）导致PM-AVP-FD-2错误，违反CA-AVP-FD-1'"
+      }
+    },
+    {
+      "scenario_id": "CS-5__dup2",
+      "reviewed_causal_scenario": {
+        "description": "路径通信丢包，导致控制器未能接收到最新的路径信息，从而在不适当的位置提供前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "明确‘路径通信丢包’为上位机路径通信问题",
+          "B2": "链条：丢包→未获新路径→错误提供驱动→UCA-2/3",
+          "B3": "锚定FB-AVP-FD-4（上位机路径通信）并影响PM/CA",
+          "B4": "UCA-2/3与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-4__dup2",
+      "reviewed_causal_scenario": {
+        "description": "执行确认超时，但控制器未能及时停止前进驱动指令，导致非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca有效，描述含触发+因果+UCA",
+          "B1": "明确‘执行确认超时’，属具体FB-AVP-FD-3场景",
+          "B2": "链条：(a)执行确认超时→(c)未停指令→(d)持续驱动→(e)UCA-2/4",
+          "B3": "锚定FB-AVP-FD-3（执行确认），解释其失效致CA-AVP-FD-3未触发",
+          "B4": "UCA-2/4均与非预期运动/越界风险一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-3__dup2",
+      "reviewed_causal_scenario": {
+        "description": "车辆底层状态反馈延迟，导致控制器未能及时停止前进驱动指令，造成越界或财产损失。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA链接和基本因果描述",
+          "B1": "提到'底层状态反馈延迟'但未指明具体通道",
+          "B2": "含触发(反馈延迟)→决策(未及时停止)→行为(越界/损失)",
+          "B3": "提及反馈延迟但未锚定具体FB或PM/CA",
+          "B4": "UCA-2/UCA-4与越界/时机不当一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确反馈类型（如CAN回读/FB-AVP-FD-2）及如何影响CA-AVP-FD-2"
+      }
+    },
+    {
+      "scenario_id": "CS-8__dup2",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确处理执行器状态回读，导致前进驱动指令执行失败但未被检测到，造成车辆无法完成泊车。",
+        "linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA，描述有因果",
+          "B1": "提到执行器回读但未指明具体FB类型",
+          "B2": "链条清晰：回读失败→未检测→不发指令→UCA-3/4",
+          "B3": "提及执行器回读但未锚定FB-AVP-FD-2/3或PM",
+          "B4": "UCA-3/4与‘未提供驱动’和‘时机错误’一致"
+        },
+        "issues": [
+          "B1<2",
+          "B3<2",
+          "总分<9"
+        ],
+        "suggested_revision": "明确执行器回读对应FB-AVP-FD-2/3，并说明如何导致PM错误或CA失效"
+      }
+    },
+    {
+      "scenario_id": "CS-7__dup2",
+      "reviewed_causal_scenario": {
+        "description": "控制器误判车辆位置，导致在不应提供前进驱动的情况下提供指令，造成车辆停留在不可接受位置。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "提到位置误判但未指明具体传感器或反馈源",
+          "B2": "链条清晰：误判位置→错误提供指令→导致UCA-3",
+          "B3": "提及位置误判但未锚定具体PM/FB/CA编号或通道",
+          "B4": "UCA-3与描述一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确位置误判来源（如FB-AVP-FD-1超声波或FB-AVP-FD-2轮速回读），并关联PM-AVP-FD-1。"
+      }
+    },
+    {
+      "scenario_id": "CS-6__dup2",
+      "reviewed_causal_scenario": {
+        "description": "车辆接近目标终点时，控制器未能及时停止前进驱动指令，导致车辆越界或碰撞。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，description含上下文+因果+UCA",
+          "B1": "提到“接近目标终点”但未指明具体反馈或阈值来源",
+          "B2": "链条清晰：接近终点→未停指令→越界/碰撞（覆盖a,c,d,e）",
+          "B3": "未锚定具体FB/PM/CA，仅泛称“未能及时停止”",
+          "B4": "UCA-1/2/4均与越界/碰撞/时机不当一致"
+        },
+        "issues": [
+          "B1<2",
+          "B3<2",
+          "total_score<9"
+        ],
+        "suggested_revision": "明确触发条件（如CAN回读延迟/FB-AVP-FD-2）及对应CA/PM失效机制"
+      }
+    },
+    {
+      "scenario_id": "CS-9__dup2",
+      "reviewed_causal_scenario": {
+        "description": "通信时延导致控制器未能及时接收车辆状态反馈，从而在不适当的时间提供前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA链接",
+          "B1": "提到通信时延但未指明具体通道",
+          "B2": "链条清晰：时延→反馈缺失→错误指令→UCA",
+          "B3": "提及通信时延但未锚定具体FB/CA/PM",
+          "B4": "UCA-2/4与描述一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确通信类型（如上位机路径通信/FB-AVP-FD-4）及时延阈值"
+      }
+    },
+    {
+      "scenario_id": "CS-10__dup2",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确处理路径通信的序列号和时间戳，导致前进驱动指令在不适当的时间提供，造成非预期运动。",
+        "linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，UCA有效，描述含因果",
+          "B1": "明确提到路径通信的序列号和时间戳",
+          "B2": "链条清晰：通信异常→错误指令→非预期运动→UCA-4",
+          "B3": "锚定FB-AVP-FD-4（上位机路径通信）并说明其作用",
+          "B4": "UCA-3/4与场景逻辑一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-1__dup3",
+      "reviewed_causal_scenario": {
+        "description": "超声波雷达传感器数据异常丢失，导致控制器误判前方无障碍物，从而不安全地提供前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果、UCA",
+          "B1": "明确超声波雷达数据异常丢失",
+          "B2": "链条：传感器丢失→误判无障碍→错误发指令→UCA",
+          "B3": "锚定FB-AVP-FD-1（超声波）及PM-AVP-FD-1信念错误",
+          "B4": "UCA-1/2与不安全前进驱动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-2__dup3",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头视频流受干扰，导致控制器误判车辆位置，从而不安全地提供前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA链接",
+          "B1": "明确环视摄像头视频流受干扰",
+          "B2": "干扰→误判位置→不安全提供指令，链条清晰",
+          "B3": "锚定环视摄像头（属FB），影响PM-AVP-FD-1位置信念",
+          "B4": "UCA-1/2/4均与不安全/越界/时机错误一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-3__dup3",
+      "reviewed_causal_scenario": {
+        "description": "车辆底层状态反馈延迟，导致控制器未能及时停止前进驱动指令，造成越界或财产损失。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA链接和基本因果描述",
+          "B1": "提到'底层状态反馈延迟'但未指明具体通道",
+          "B2": "有清晰链条：反馈延迟→未及时停止→越界/损失",
+          "B3": "提及反馈延迟但未锚定具体FB或PM/CA",
+          "B4": "UCA-2/UCA-4与越界/时机不当一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确是CAN回读/FB-AVP-FD-2延迟，并关联CA-AVP-FD-2"
+      }
+    },
+    {
+      "scenario_id": "CS-4__dup3",
+      "reviewed_causal_scenario": {
+        "description": "执行确认超时，但控制器未能及时停止前进驱动指令，导致非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "提到执行确认超时，但未指明具体反馈通道",
+          "B2": "链条清晰：超时→未停指令→非预期运动→UCA",
+          "B3": "提及执行确认超时，但未锚定FB/CA编号或具体通道",
+          "B4": "UCA-2/UCA-4与描述一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确执行确认来源（如FB-AVP-FD-3）并关联CA-AVP-FD-3"
+      }
+    },
+    {
+      "scenario_id": "CS-5__dup3",
+      "reviewed_causal_scenario": {
+        "description": "路径通信丢包，导致控制器未能接收到最新的路径信息，从而未能提供必要的前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "明确‘路径通信丢包’为上位机路径通信",
+          "B2": "链条：丢包→未收新路径→未发指令→UCA-3",
+          "B3": "锚定FB-AVP-FD-4（上位机路径通信丢包）",
+          "B4": "UCA-3与‘未提供前进驱动’一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-6__dup3",
+      "reviewed_causal_scenario": {
+        "description": "车辆接近目标终点时，控制器未能及时停止前进驱动指令，导致车辆超出预定位置。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和基本因果描述",
+          "B1": "提到“接近目标终点”，但未指明具体反馈或状态来源",
+          "B2": "有清晰链条：接近终点→未停指令→越界，覆盖(a)(c)(d)(e)",
+          "B3": "未锚定具体FB/PM/CA，仅泛称“控制器未能及时停止”",
+          "B4": "UCA-1/2/4均与越界/非预期运动一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确触发条件来源（如FB-AVP-FD-2轮速回读延迟）及对应CA/PM失效机制"
+      }
+    },
+    {
+      "scenario_id": "CS-9__dup3",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确处理车辆CAN轮速、偏航、转角与档位回读，导致前进驱动指令的持续时间不当，造成非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确提到CAN轮速、偏航、转角与档位回读",
+          "B2": "链条清晰：反馈异常→指令持续不当→非预期运动/UCA",
+          "B3": "锚定FB-AVP-FD-2（CAN回读），解释其影响决策",
+          "B4": "UCA-2/4与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-10__dup3",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确处理上位机路径通信的序列号、时间戳、丢包与延迟状态，导致前进驱动指令的时机不当，造成非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "明确提到上位机路径通信的序列号、时间戳、丢包与延迟",
+          "B2": "链条清晰：通信异常→指令时机错误→非预期运动/UCA-4",
+          "B3": "锚定FB-AVP-FD-4，说明其影响指令时机",
+          "B4": "UCA-3/4均与未提供或时机不当的前进驱动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-8__dup3",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确处理执行器状态回读，导致前进驱动指令的持续时间不当，造成非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA链接和基本因果描述",
+          "B1": "提到‘执行器状态回读’但未指明具体FB类型",
+          "B2": "链条清晰：回读异常→指令持续不当→非预期运动→UCA-4/UCA-2",
+          "B3": "提及回读但未锚定具体FB或CA/PM",
+          "B4": "UCA-2/UCA-4与描述一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确回读来源（如FB-AVP-FD-2/CAN回读）并关联CA/PM"
+      }
+    },
+    {
+      "scenario_id": "CS-7__dup3",
+      "reviewed_causal_scenario": {
+        "description": "控制器误判车辆位置，导致前进驱动指令的时机不当，造成非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和基本因果",
+          "B1": "提到位置误判但未指明具体传感器或反馈源",
+          "B2": "有清晰链条：位置误判→指令时机错→非预期运动→UCA",
+          "B3": "提及位置误判但未锚定具体PM/FB（如超声波/CAN）",
+          "B4": "UCA-1/UCA-4与描述一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确位置误判来源（如FB-AVP-FD-1超声波或FB-AVP-FD-2 CAN回读），并关联PM-AVP-FD-1。"
+      }
+    },
+    {
+      "scenario_id": "CS-1__dup4",
+      "reviewed_causal_scenario": {
+        "description": "超声波雷达传感器数据异常丢失，导致控制器误判前方无障碍物，从而不安全地提供前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA链接",
+          "B1": "明确指出超声波雷达数据异常丢失",
+          "B2": "链条：传感器丢失→误判无障碍→错误提供驱动→UCA-1/2",
+          "B3": "锚定FB-AVP-FD-1（超声波）并说明其导致PM错误信念",
+          "B4": "UCA-1/2与不安全前进驱动一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-2__dup4",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头视频流传输延迟，导致控制器未能及时获取周围环境变化，从而在不适当的时间提供前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，UCA有效，描述含触发+因果+UCA",
+          "B1": "明确环视摄像头视频流延迟",
+          "B2": "延迟→未及时感知→错误时机发指令→UCA-1/4",
+          "B3": "锚定环视摄像头（FB-AVP-FD-4相关），影响PM环境信念",
+          "B4": "UCA-1/4与‘不适当时间提供前进’一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-5__dup4",
+      "reviewed_causal_scenario": {
+        "description": "路径通信的序列号、时间戳、丢包与延迟状态导致路径信息不完整或过时，控制器据此提供错误的前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA链接",
+          "B1": "明确上位机路径通信的序列号/时间戳/丢包/延迟",
+          "B2": "链条：通信异常→路径过时→错误指令→UCA-2/3",
+          "B3": "锚定FB-AVP-FD-4，说明其导致PM错误和CA误判",
+          "B4": "UCA-2（越界）和UCA-3（未提供驱动）均合理"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-4__dup4",
+      "reviewed_causal_scenario": {
+        "description": "执行确认超时或回读不一致，但控制算法未能及时停止前进驱动，导致车辆继续前进至危险区域。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和因果描述",
+          "B1": "提到执行确认超时/回读不一致，但未指明具体FB通道",
+          "B2": "链条清晰：反馈异常→未停指令→继续前进→危险区域",
+          "B3": "提及回读/确认问题，但未锚定具体FB或CA/PM",
+          "B4": "UCA-2/3/4均与不停止前进驱动相关"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确引用FB-AVP-FD-3及CA-AVP-FD-3，说明ACK/故障码如何导致决策失效"
+      }
+    },
+    {
+      "scenario_id": "CS-3__dup4",
+      "reviewed_causal_scenario": {
+        "description": "车辆底层状态反馈中的轮速、偏航、转角与档位回读存在延迟或丢包，导致控制器未能准确判断车辆状态，从而提供不当的前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA列表和因果描述",
+          "B1": "明确提到CAN回读延迟/丢包，具体可检验",
+          "B2": "链条清晰：反馈异常→状态误判→错误指令→多UCA",
+          "B3": "锚定FB-AVP-FD-2（CAN回读），解释其导致状态误判",
+          "B4": "UCA-2/3/4均与指令不当/缺失/时序错误一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-6__dup4",
+      "reviewed_causal_scenario": {
+        "description": "控制器错误地认为路径是最新且完整的，但实际上路径已发生变化，导致提供不适当的前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 9,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA链接",
+          "B1": "提到路径变化但未说明具体来源（如上位机通信）",
+          "B2": "路径信念错误→错误指令→导致UCA-2/3，链条清晰",
+          "B3": "锚定PM-AVP-FD-2（路径信念），与描述一致",
+          "B4": "UCA-2/3均与路径错误导致的越界/未驱动相符"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-7__dup4",
+      "reviewed_causal_scenario": {
+        "description": "控制器错误地认为前进指令会产生期望位移，但由于执行器故障，实际位移与预期不符，导致车辆越界或停在不可接受的位置。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA，描述有因果结构",
+          "B1": "提到执行器故障但未指明具体FB通道",
+          "B2": "链条清晰：PM错误→执行不符→越界/停错位",
+          "B3": "提及PM错误信念但未锚定具体PM/FB编号或通道",
+          "B4": "UCA-2/3/4均与越界、停错、时序问题一致"
+        },
+        "issues": [
+          "B1<2",
+          "B3<2",
+          "total_score<9"
+        ],
+        "suggested_revision": "明确执行器故障对应的具体FB（如FB-AVP-FD-3）及PM-AVP-FD-3的错误信念机制"
+      }
+    },
+    {
+      "scenario_id": "CS-1__dup5",
+      "reviewed_causal_scenario": {
+        "description": "超声波雷达传感器数据异常丢失，导致控制器误判前方无障碍物，发出前进驱动指令，造成碰撞或驶入危险区域。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "明确超声波雷达数据异常丢失",
+          "B2": "链条：传感器丢失→误判无障碍→发指令→碰撞",
+          "B3": "锚定FB-AVP-FD-1（超声波）导致PM错误信念",
+          "B4": "UCA-1/2与碰撞/越界一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-8__dup4",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确判断车辆位置与障碍物距离，导致在不安全的情况下提供前进驱动指令。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，UCA有效，描述含因果",
+          "B1": "提到位置与障碍物，但未指明传感器类型或状态",
+          "B2": "仅‘误判→不安全驱动’，缺中间环节",
+          "B3": "隐含PM-AVP-FD-1错误，但未锚定具体FB/CA",
+          "B4": "UCA-1/2/4均与不安全前进驱动一致"
+        },
+        "issues": [
+          "因果链不完整",
+          "上下文不够具体",
+          "缺乏FB/CA/PM显式锚定"
+        ],
+        "suggested_revision": "明确因超声波丢失（FB-AVP-FD-1）导致PM-AVP-FD-1错误，进而违反CA-AVP-FD-1，触发UCA-1。"
+      }
+    },
+    {
+      "scenario_id": "CS-2__dup5",
+      "reviewed_causal_scenario": {
+        "description": "环视摄像头视频流受干扰，导致控制器误判路径状态，发出不适当的前进驱动指令，造成越界或财产损失。",
+        "linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段齐全，含有效UCA，描述有基本结构",
+          "B1": "明确指出环视摄像头视频流受干扰",
+          "B2": "环视干扰→误判路径→错误指令→越界/损失，链条完整",
+          "B3": "锚定环视摄像头（属FB），导致PM-AVP-FD-2路径信念错误",
+          "B4": "UCA-2与越界/财产损失一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-10__dup4",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确处理执行确认与通信状态，导致前进驱动指令未能按预期执行，车辆停留在不可接受的位置。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 1,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 7,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，UCA有效，描述含因果",
+          "B1": "提到执行确认与通信状态，但未指明具体通道",
+          "B2": "有因果但缺中间环节（如PM/CA如何出错）",
+          "B3": "提及执行确认和通信，但未锚定具体FB/CA/PM",
+          "B4": "UCA-2/3/4均与未执行/时机错误一致"
+        },
+        "issues": [
+          "B2因果链不完整",
+          "B3缺乏具体锚点"
+        ],
+        "suggested_revision": "明确是哪类反馈（如FB-AVP-FD-3/FB-AVP-FD-4）失真，导致PM/CA错误决策"
+      }
+    },
+    {
+      "scenario_id": "CS-9__dup4",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能及时停止前进驱动指令，导致车辆越过目标终点或边界阈值，造成越界或财产损失。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，UCA有效，描述含因果",
+          "B1": "提到边界/终点但未指明具体反馈源",
+          "B2": "含触发(越界趋势)→决策(未停指令)→行为(越界)→UCA",
+          "B3": "未锚定具体FB/PM/CA，仅泛称控制失效",
+          "B4": "UCA-1/2/4均与越界/非预期运动一致"
+        },
+        "issues": [
+          "B1<2",
+          "B3<2",
+          "total_score<9"
+        ],
+        "suggested_revision": "明确如超声波丢失或CAN回读延迟等具体FB失效，及其如何导致PM错误和CA未停指令。"
+      }
+    },
+    {
+      "scenario_id": "CS-4__dup5",
+      "reviewed_causal_scenario": {
+        "description": "执行确认超时，但控制器未能检测到此问题，继续发出前进驱动指令，导致执行失败或风险上升。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，linked_uca_ids有效，描述含因果",
+          "B1": "提到'执行确认超时'但未指明具体FB通道",
+          "B2": "链条清晰：超时→未检测→继续发指令→风险",
+          "B3": "提及执行确认但未锚定FB-AVP-FD-3或具体ACK机制",
+          "B4": "UCA-2/3/4均与指令持续/时机/缺失相关"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确执行确认对应FB-AVP-FD-3，并说明ACK丢失如何导致PM错误信念"
+      }
+    },
+    {
+      "scenario_id": "CS-6__dup5",
+      "reviewed_causal_scenario": {
+        "description": "路径通信丢包，导致控制器接收到不完整或过时的路径信息，发出不适当的前进驱动指令，造成越界或财产损失。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 2,
+          "B2": 2,
+          "B3": 2,
+          "B4": 2
+        },
+        "total_score": 10,
+        "label": "合理可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "明确‘路径通信丢包’为上位机路径通信问题",
+          "B2": "链条：丢包→路径信息错误→错误指令→越界/UCA",
+          "B3": "锚定FB-AVP-FD-4（上位机路径通信丢包）导致PM-AVP-FD-2错误",
+          "B4": "UCA-2/3与描述一致"
+        },
+        "issues": [],
+        "suggested_revision": ""
+      }
+    },
+    {
+      "scenario_id": "CS-5__dup5",
+      "reviewed_causal_scenario": {
+        "description": "车辆接近目标终点时，控制器未能及时停止前进驱动指令，导致车辆越界或停在不可接受位置。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段齐全，含触发、因果和UCA",
+          "B1": "提到'接近目标终点'但未指明具体反馈或阈值",
+          "B2": "含上下文→决策失误→行为→UCA完整链",
+          "B3": "未锚定具体FB/PM/CA，仅泛称控制器",
+          "B4": "UCA-2/UCA-4与越界/时机不当一致"
+        },
+        "issues": [
+          "B1不足2",
+          "B3不足2",
+          "总分<9"
+        ],
+        "suggested_revision": "明确使用FB-AVP-FD-2(CAN回读)或CA-AVP-FD-2(边界停止逻辑)等具体锚点"
+      }
+    },
+    {
+      "scenario_id": "CS-3__dup5",
+      "reviewed_causal_scenario": {
+        "description": "车辆底层状态反馈延迟，导致控制器未能及时停止前进驱动指令，造成非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA-4，描述有上下文+因果+结果",
+          "B1": "提到'底层状态反馈延迟'但未指明具体FB类型",
+          "B2": "链条清晰：反馈延迟→未及时停止→非预期运动→UCA-4",
+          "B3": "提及反馈延迟但未锚定具体FB或CA/PM",
+          "B4": "UCA-4明确对应时机/持续时间不当"
+        },
+        "issues": [
+          "B1<2",
+          "B3<2",
+          "total_score<9"
+        ],
+        "suggested_revision": "明确‘底层状态反馈’为CAN回读(FB-AVP-FD-2)或ACK(FB-AVP-FD-3)，并关联CA-AVP-FD-2。"
+      }
+    },
+    {
+      "scenario_id": "CS-7__dup5",
+      "reviewed_causal_scenario": {
+        "description": "控制器误判车辆位置，认为前方可通行，但实际上存在障碍物，发出前进驱动指令，造成碰撞或驶入危险区域。",
+        "linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA和基本因果",
+          "B1": "提到位置误判但未指明具体传感器或反馈源",
+          "B2": "含上下文→PM错误→决策→UCA链条",
+          "B3": "提及位置误判但未锚定具体FB/PM编号或通道",
+          "B4": "UCA-1/2与碰撞/越界后果一致"
+        },
+        "issues": [
+          "B1<2",
+          "B3<2",
+          "total_score<9"
+        ],
+        "suggested_revision": "明确位置误判源于哪类反馈（如超声波/FB-AVP-FD-1）或PM（如PM-AVP-FD-1），并说明如何导致错误决策。"
+      }
+    },
+    {
+      "scenario_id": "CS-8__dup5",
+      "reviewed_causal_scenario": {
+        "description": "控制器误判路径状态，认为车辆应继续前进，但实际上已到达目标位置，发出不适当的前进驱动指令，造成越界或财产损失。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含触发、因果和UCA",
+          "B1": "提到路径状态误判但未指明具体来源",
+          "B2": "含上下文→PM错误→错误指令→UCA链条",
+          "B3": "提及路径状态误判，隐含PM-AVP-FD-2但未明示",
+          "B4": "UCA-2/3与越界/未停一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定不明确"
+        ],
+        "suggested_revision": "明确路径状态误判源于上位机通信(FB-AVP-FD-4)或PM-AVP-FD-2信念错误"
+      }
+    },
+    {
+      "scenario_id": "CS-10__dup5",
+      "reviewed_causal_scenario": {
+        "description": "控制器未能正确处理通信时延，导致前进驱动指令发出时机不当，造成非预期运动或风险上升。",
+        "linked_uca_ids": [
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，含有效UCA-4，描述有因果结构",
+          "B1": "提到通信时延但未指明具体通道",
+          "B2": "含触发(通信时延)→决策错误→行为异常→UCA-4链条",
+          "B3": "提及通信时延但未锚定具体FB/PM/CA",
+          "B4": "UCA-4与描述完全一致"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确通信时延来源（如FB-AVP-FD-4上位机路径通信）并关联PM/CA"
+      }
+    },
+    {
+      "scenario_id": "CS-9__dup5",
+      "reviewed_causal_scenario": {
+        "description": "执行器状态回读不一致，但控制器未能检测到此问题，继续发出前进驱动指令，导致执行失败或风险上升。",
+        "linked_uca_ids": [
+          "UCA-2",
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      "expert_review": {
+        "review_source": "quality_gate_scoring",
+        "scores": {
+          "A": 2,
+          "B1": 1,
+          "B2": 2,
+          "B3": 1,
+          "B4": 2
+        },
+        "total_score": 8,
+        "label": "合理不可用",
+        "rationales": {
+          "A": "字段完整，linked_uca_ids有效，description含因果",
+          "B1": "提到执行器回读不一致，但未指明具体反馈通道",
+          "B2": "链条清晰：回读异常→未检测→继续发指令→风险/UCA",
+          "B3": "提及回读不一致，但未锚定具体FB或PM/CA",
+          "B4": "UCA-2/3/4均与指令误发/漏停及时机相关"
+        },
+        "issues": [
+          "B1不足",
+          "B3锚定弱"
+        ],
+        "suggested_revision": "明确回读来源（如CAN轮速/FB-AVP-FD-2）及如何导致PM错误或CA失效"
+      }
+    }
+  ],
+  "system_level_semantic_merge": {
+    "review_source": "quality_gate_scoring",
+    "retained_causal_scenario_items": [
+      {
+        "scenario_id": "CS-1",
+        "summary": "超声波数据丢失致误判前方无障碍",
+        "mechanism_signature": "ultrasonic|anchors=FB-AVP-FD-1|key=超声丢失",
+        "merged_linked_uca_ids": [
+          "UCA-1",
+          "UCA-2"
+        ]
+      },
+      {
+        "scenario_id": "CS-2",
+        "summary": "环视摄像头干扰致路径误判",
+        "mechanism_signature": "camera|anchors=none|key=视觉干扰",
+        "merged_linked_uca_ids": [
+          "UCA-2"
+        ]
+      },
+      {
+        "scenario_id": "CS-6",
+        "summary": "路径通信丢包致指令错误或缺失",
+        "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4|key=路径丢包",
+        "merged_linked_uca_ids": [
+          "UCA-2",
+          "UCA-3"
+        ]
+      },
+      {
+        "scenario_id": "CS-4__dup2",
+        "summary": "执行确认超时未停驱致非预期运动",
+        "mechanism_signature": "actuator|anchors=CA-AVP-FD-3,FB-AVP-FD-3|key=确认超时",
+        "merged_linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      },
+      {
+        "scenario_id": "CS-10__dup3",
+        "summary": "路径通信状态处理错误致时机不当",
+        "mechanism_signature": "upstream_comm|anchors=FB-AVP-FD-4|key=时序错乱",
+        "merged_linked_uca_ids": [
+          "UCA-3",
+          "UCA-4"
+        ]
+      },
+      {
+        "scenario_id": "CS-9__dup3",
+        "summary": "CAN回读异常致驱动持续时间不当",
+        "mechanism_signature": "can_comm|anchors=FB-AVP-FD-2|key=CAN异常",
+        "merged_linked_uca_ids": [
+          "UCA-2",
+          "UCA-4"
+        ]
+      }
+    ],
+    "merged_duplicate_items": [
+      {
+        "removed_scenario_id": "CS-5__dup3",
+        "kept_scenario_id": "CS-6",
+        "reason": "context_inclusion"
+      },
+      {
+        "removed_scenario_id": "CS-3__dup4",
+        "kept_scenario_id": "CS-9__dup3",
+        "reason": "semantic_equivalent"
+      },
+      {
+        "removed_scenario_id": "CS-6__dup5",
+        "kept_scenario_id": "CS-6",
+        "reason": "same_text_diff_uca_merge"
+      }
+    ],
+    "kept_count": 6
+  },
+  "review_statement": "The records in this file document structured multidimensional quality-gate scoring used to screen generated candidates before system-level semantic merge. Final manual expert delivery-audit and agreement records are published separately in data/03_expert_delivery_audit.",
+  "quality_gate_declaration": {
+    "review_source": "quality_gate_scoring",
+    "paper_section_alignment": "The paper describes this stage as multidimensional quality gating before semantic consolidation.",
+    "manual_expert_audit_location": "data/03_expert_delivery_audit",
+    "excluded_public_fields": [
+      "implementation materials",
+      "local environment metadata",
+      "platform/service identifiers",
+      "request identifiers",
+      "non-public execution logs"
+    ]
+  }
+}

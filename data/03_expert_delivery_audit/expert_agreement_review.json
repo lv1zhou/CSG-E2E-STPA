@@ -4,7 +4,8 @@
     "system": "Automated Valet Parking (AVP)",
     "public_file_group": "manual_expert_review_results",
     "review_provenance": "manual_expert_review",
-    "public_release_scope": "Structured JSON result release for manual expert inspection, scoring, semantic merge, final delivery audit, and expert agreement review. Non-review execution artifacts and implementation materials are excluded."
+    "public_release_scope": "Structured JSON result release for manual expert extraction, semantic merge review, final delivery audit, and expert agreement review. Expert identities, local files, platform/service identifiers, request identifiers, non-public execution logs, and raw traces are excluded.",
+    "related_code_repository": "https://github.com/lv1zhou/CSG-code"
   },
   "public_file_role": "manual_expert_agreement_review_summary",
   "review_source": "manual_expert_review",

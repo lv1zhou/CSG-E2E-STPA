@@ -4,7 +4,8 @@
     "system": "Automated Valet Parking (AVP)",
     "public_file_group": "manual_expert_review_results",
     "review_provenance": "manual_expert_review",
-    "public_release_scope": "Structured JSON result release for manual expert inspection, scoring, semantic merge, final delivery audit, and expert agreement review. Non-review execution artifacts and implementation materials are excluded."
+    "public_release_scope": "Structured JSON result release for manual expert extraction, semantic merge review, final delivery audit, and expert agreement review. Expert identities, local files, platform/service identifiers, request identifiers, non-public execution logs, and raw traces are excluded.",
+    "related_code_repository": "https://github.com/lv1zhou/CSG-code"
   },
   "public_file_role": "manual_expert_delivery_audit_and_extraction_result",
   "task_type": "UCA",
@@ -270,8 +271,8 @@
     {
       "task_name": "UCA identification",
       "action_key": "search_slot",
-      "action_name_cn": "搜索车位",
-      "action_name_en": "Parking-slot search",
+      "action_name_cn": "车位确认",
+      "action_name_en": "Parking-space confirmation",
       "generation_method": "zero_shot",
       "generation_method_label": "ZS",
       "total_reviewed_items": 55,
@@ -354,13 +355,14 @@
           }
         ],
         "kept_count": 3
-      }
+      },
+      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation."
     },
     {
       "task_name": "UCA identification",
       "action_key": "search_slot",
-      "action_name_cn": "搜索车位",
-      "action_name_en": "Parking-slot search",
+      "action_name_cn": "车位确认",
+      "action_name_en": "Parking-space confirmation",
       "generation_method": "few_1_shot",
       "generation_method_label": "FS-1",
       "total_reviewed_items": 50,
@@ -437,13 +439,14 @@
           }
         ],
         "kept_count": 4
-      }
+      },
+      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation."
     },
     {
       "task_name": "UCA identification",
       "action_key": "search_slot",
-      "action_name_cn": "搜索车位",
-      "action_name_en": "Parking-slot search",
+      "action_name_cn": "车位确认",
+      "action_name_en": "Parking-space confirmation",
       "generation_method": "few_3_shot",
       "generation_method_label": "FS-3",
       "total_reviewed_items": 50,
@@ -526,13 +529,14 @@
           }
         ],
         "kept_count": 3
-      }
+      },
+      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation."
     },
     {
       "task_name": "UCA identification",
       "action_key": "search_slot",
-      "action_name_cn": "搜索车位",
-      "action_name_en": "Parking-slot search",
+      "action_name_cn": "车位确认",
+      "action_name_en": "Parking-space confirmation",
       "generation_method": "lora",
       "generation_method_label": "SFT",
       "total_reviewed_items": 50,
@@ -559,7 +563,8 @@
         ],
         "merged_duplicate_items": [],
         "kept_count": 3
-      }
+      },
+      "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation."
     },
     {
       "task_name": "UCA identification",

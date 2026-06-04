@@ -4,18 +4,21 @@
     "chinese_title": "控制结构引导的自动驾驶SOTIF端到端危害识别：大模型STPA方法",
     "english_title": "Control-Structure-Guided End-to-End Hazard Identification for Autonomous Driving SOTIF: An LLM-STPA Method",
     "system": "Automated Valet Parking (AVP)",
-    "public_release_scope": "Structured JSON result release. Source code, local environment metadata, service identifiers, request identifiers, model debug payloads, and raw execution traces are excluded.",
-    "review_statement": "The public review records are presented as manual expert review results. Each retained field records expert scoring, rationale, issue notes, suggested revisions, and semantic merge decisions after expert inspection."
+    "public_release_scope": "This repository publishes structured JSON result records for CSG-E2E-STPA. Implementation code is maintained in the separate CSG-code repository; local environment metadata, platform/service identifiers, request identifiers, non-public execution logs, raw response payloads, and raw traces are excluded.",
+    "review_statement": "Public review records retain expert scoring, rationale, issue notes, suggested revisions, semantic-merge decisions, final delivery audit, and expert agreement review where applicable.",
+    "related_code_repository": "https://github.com/lv1zhou/CSG-code"
   },
   "review_protocol": {
-    "review_type": "manual_expert_review",
+    "review_type": "quality_gate_scoring_plus_manual_expert_delivery_audit",
     "score_scale": {
       "0": "unusable",
       "1": "partially usable",
       "2": "usable"
     },
     "pass_logic": "Items are assessed on five dimensions. Structural completeness and link consistency are treated as hard review requirements before semantic merge and final delivery.",
-    "public_sanitization": "Removed implementation scripts, local paths, automatic trace fields, service identifiers, request identifiers, and non-public review payloads."
+    "public_sanitization": "Implementation scripts, local paths, platform/service identifiers, request identifiers, non-public execution logs, raw traces, and expert identities are not included in this result release.",
+    "manual_expert_audit_location": "data/03_expert_delivery_audit",
+    "protocol_file": "REVIEW_PROTOCOL.md"
   },
   "public_files": [
     "data/01_candidate_generation/uca/uca_candidates__forward_drive__zero_shot.json",
@@ -50,38 +53,38 @@
     "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__lateral_control__few_1_shot.json",
     "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__lateral_control__few_3_shot.json",
     "data/01_candidate_generation/causal_scenario/causal_scenario_candidates__lateral_control__lora.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__forward_drive__zero_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__forward_drive__few_1_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__forward_drive__few_3_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__forward_drive__lora.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__search_slot__zero_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__search_slot__few_1_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__search_slot__few_3_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__search_slot__lora.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__emergency_brake__zero_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__emergency_brake__few_1_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__emergency_brake__few_3_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__emergency_brake__lora.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__lateral_control__zero_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__lateral_control__few_1_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__lateral_control__few_3_shot.json",
-    "data/02_expert_quality_scoring/uca/uca_expert_scoring__lateral_control__lora.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__forward_drive__zero_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__forward_drive__few_1_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__forward_drive__few_3_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__forward_drive__lora.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__search_slot__zero_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__search_slot__few_1_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__search_slot__few_3_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__search_slot__lora.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__emergency_brake__zero_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__emergency_brake__few_1_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__emergency_brake__few_3_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__emergency_brake__lora.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__lateral_control__zero_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__lateral_control__few_1_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__lateral_control__few_3_shot.json",
-    "data/02_expert_quality_scoring/causal_scenario/causal_scenario_expert_scoring__lateral_control__lora.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__forward_drive__zero_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__forward_drive__few_1_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__forward_drive__few_3_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__forward_drive__lora.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__search_slot__zero_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__search_slot__few_1_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__search_slot__few_3_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__search_slot__lora.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__emergency_brake__zero_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__emergency_brake__few_1_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__emergency_brake__few_3_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__emergency_brake__lora.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__lateral_control__zero_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__lateral_control__few_1_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__lateral_control__few_3_shot.json",
+    "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__lateral_control__lora.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__forward_drive__zero_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__forward_drive__few_1_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__forward_drive__few_3_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__forward_drive__lora.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__search_slot__zero_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__search_slot__few_1_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__search_slot__few_3_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__search_slot__lora.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__emergency_brake__zero_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__emergency_brake__few_1_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__emergency_brake__few_3_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__emergency_brake__lora.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__lateral_control__zero_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__lateral_control__few_1_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__lateral_control__few_3_shot.json",
+    "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__lateral_control__lora.json",
     "data/03_expert_delivery_audit/uca_expert_delivery_audit.json",
     "data/03_expert_delivery_audit/causal_scenario_expert_delivery_audit.json",
     "data/03_expert_delivery_audit/expert_agreement_review.json"
@@ -96,8 +99,8 @@
       },
       {
         "key": "search_slot",
-        "name_cn": "搜索车位",
-        "name_en": "Parking-slot search"
+        "name_cn": "车位确认",
+        "name_en": "Parking-space confirmation"
       },
       {
         "key": "emergency_brake",
@@ -239,8 +242,16 @@
   "structured_release_counts": {
     "uca_candidate_generation_files": 16,
     "causal_scenario_candidate_generation_files": 16,
-    "uca_expert_quality_scoring_files": 16,
-    "causal_scenario_expert_quality_scoring_files": 16,
-    "expert_delivery_audit_files": 3
+    "expert_delivery_audit_files": 3,
+    "uca_quality_gate_scoring_files": 16,
+    "causal_scenario_quality_gate_scoring_files": 16
+  },
+  "action_key_aliases": {
+    "search_slot": {
+      "paper_facing_action_key": "slot_confirmation",
+      "paper_facing_name_cn": "车位确认",
+      "paper_facing_name_en": "parking-space confirmation",
+      "note": "Original result filenames retain search_slot for traceability to the execution logs and source result files."
+    }
   }
 }
