@@ -1932,47 +1932,5 @@
       "non-public execution logs"
     ]
   },
-  "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation.",
-  "paper_local_duplicate_diagnostic": {
-    "task_stage": "uca",
-    "action_key": "search_slot",
-    "paper_action_name_cn": "车位确认",
-    "paper_action_name_en": "parking-space confirmation",
-    "generation_method": "zero_shot",
-    "source_quality_gate_file": "data/02_quality_gate_scoring/uca/uca_quality_gate_scoring__search_slot__zero_shot.json",
-    "quality_gate_pass_items": 14,
-    "exact_description_variant_count_after_local_review": 5,
-    "exact_description_variant_retention_rate": 0.3571,
-    "exact_description_variant_retention_rate_percent_reported_in_paper": 35.7,
-    "semantic_independent_risk_form_count_after_system_merge": 3,
-    "semantic_independent_risk_form_retention_rate": 0.2143,
-    "semantic_merge_metric_scope_note": "The paper paragraph reports a local duplicate-diagnosis rate based on exact description variants (5 / 14 = 35.7%). Figure-level KC/RR and aggregate UCA totals use system-level semantic merge, where the same 14 quality-gate-pass items collapse to 3 independent risk forms (3 / 14 = 21.4%).",
-    "exact_description_variant_counts": [
-      {
-        "description": "AVP系统过早地确认了候选车位，导致车辆在未完全检测周围环境时开始移动。",
-        "count": 1,
-        "semantic_group_kept_uca_id": "UCA@it1:wrong_timing_or_order:0"
-      },
-      {
-        "description": "AVP系统过早地确认了候选车位，导致车辆在不适当的时间开始泊车。",
-        "count": 4,
-        "semantic_group_kept_uca_id": "UCA@it1:wrong_timing_or_order:0"
-      },
-      {
-        "description": "AVP系统过早停止车位搜索，导致车辆未能找到合适的车位。",
-        "count": 1,
-        "semantic_group_kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0"
-      },
-      {
-        "description": "AVP系统过早停止了车位搜索，导致车辆未能找到合适的车位。",
-        "count": 4,
-        "semantic_group_kept_uca_id": "UCA@it1:stopped_too_soon_or_applied_too_long:0"
-      },
-      {
-        "description": "AVP系统过晚地确认了候选车位，导致车辆错过了最佳泊车时机。",
-        "count": 4,
-        "semantic_group_kept_uca_id": "UCA@it2:wrong_timing_or_order:1"
-      }
-    ]
-  }
+  "action_key_note": "The retained action_key search_slot is a historical file/key label; the paper-facing control action is vehicle parking-space confirmation."
 }

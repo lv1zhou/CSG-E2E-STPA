@@ -13,6 +13,8 @@
     "sample_size": 60,
     "uca_samples": 30,
     "causal_scenario_samples": 30,
+    "agreement_count": 58,
+    "disagreement_count": 2,
     "overall_agreement_rate": 0.967,
     "uca_agreement_rate": 0.933,
     "causal_scenario_agreement_rate": 1.0,
