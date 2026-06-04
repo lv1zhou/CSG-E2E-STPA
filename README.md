@@ -10,6 +10,8 @@ English title: Control-Structure-Guided End-to-End Hazard Identification for Aut
 
 The study uses Automated Valet Parking (AVP) as the experimental system and evaluates four representative control actions: forward drive, parking-space confirmation, emergency braking, and lateral control.
 
+The paper reports a 2020-2024 STPA literature review over 252 papers from CNKI and Google Scholar. After manual screening, the structured training set contains 199 UCA-generation samples and 153 causal-scenario-generation samples. The SFT setting uses Qwen2.5-32B with LoRA; shared reported settings are batch size 16, 3 epochs, linear scheduler, warmup ratio 0.05, weight decay 0.01, LoRA scale 16, and LoRA dropout 0.1.
+
 ## Repository Roles
 
 This repository is the **result dataset repository**. It publishes structured JSON records for candidate generation, quality-gate scoring, semantic merge, final delivery audit, and expert agreement review.
@@ -74,3 +76,5 @@ The `02_quality_gate_scoring` files document the multidimensional quality-gate s
 The paper reports 282 semantic-merge-kept STPA products, including 83 UCA records and 199 causal-scenario records. After final expert delivery audit, 273 records are retained for final delivery: 74 UCA records and 199 causal-scenario records. Therefore, the overall final retention rate is 273 / 282 = 96.8%; UCA final retention is 74 / 83 = 89.2%; causal-scenario retention is 199 / 199 = 100.0%. Expert agreement review on 60 sampled records reports 96.7% agreement and Cohen's kappa of 0.78.
 
 For UCA generation, the figure-level UC/KC/RR values are computed before final delivery audit: UC = 183, KC = 83, and RR = 83 / 183 = 45.36%. By method, SFT keeps 34 UCA records after semantic merge, while the second-best few-shot setting keeps 18; the improvement is (34 - 18) / 18 = 88.9%.
+
+Local duplicate note for the paper paragraph on `search_slot` zero-shot UCA: 14 UCA items pass the quality gate. A local exact-description review finds 5 description variants, so the paragraph-level duplicate-diagnosis rate is 5 / 14 = 35.7%. The figure-level KC/RR metric uses stricter system-level semantic merge, where those same 14 items collapse to 3 independent risk forms, i.e. 3 / 14 = 21.4%. This is why the split JSON reports KC = 3 while the paper paragraph discusses the 35.7% local duplicate case.
