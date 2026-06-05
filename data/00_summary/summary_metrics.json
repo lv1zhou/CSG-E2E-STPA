@@ -87,7 +87,8 @@
     "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__lateral_control__lora.json",
     "data/03_expert_delivery_audit/uca_expert_delivery_audit.json",
     "data/03_expert_delivery_audit/causal_scenario_expert_delivery_audit.json",
-    "data/03_expert_delivery_audit/expert_agreement_review.json"
+    "data/03_expert_delivery_audit/expert_agreement_review.json",
+    "data/03_expert_delivery_audit/expert_agreement_sample_records.json"
   ],
   "experiment_scope": {
     "system": "Automated Valet Parking (AVP)",
@@ -236,12 +237,13 @@
     "overall_agreement_rate": 0.967,
     "uca_agreement_rate": 0.933,
     "causal_scenario_agreement_rate": 1.0,
-    "cohens_kappa": 0.78
+    "cohens_kappa": 0.78,
+    "sample_records_file": "data/03_expert_delivery_audit/expert_agreement_sample_records.json"
   },
   "structured_release_counts": {
     "uca_candidate_generation_files": 16,
     "causal_scenario_candidate_generation_files": 16,
-    "expert_delivery_audit_files": 3,
+    "expert_delivery_audit_files": 4,
     "uca_quality_gate_scoring_files": 16,
     "causal_scenario_quality_gate_scoring_files": 16
   },

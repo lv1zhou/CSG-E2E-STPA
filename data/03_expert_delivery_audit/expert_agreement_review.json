@@ -45,5 +45,7 @@
       "identity_disclosure": "anonymous_public_profile"
     }
   ],
-  "expert_reviewer_profile_note": "Reviewer identities, affiliations, and personal identifiers are not disclosed. The public profile records only education level and professional experience years provided for the manual expert agreement review."
+  "expert_reviewer_profile_note": "Reviewer identities, affiliations, and personal identifiers are not disclosed. The public profile records only education level and professional experience years provided for the manual expert agreement review.",
+  "sample_records_file": "data/03_expert_delivery_audit/expert_agreement_sample_records.json",
+  "sample_records_note": "The companion file provides the anonymized 60 sampled item-level decisions used to support the agreement summary."
 }

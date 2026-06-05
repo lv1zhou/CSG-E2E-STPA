@@ -1,0 +1,1044 @@
+{
+  "paper_context": {
+    "project": "CSG-E2E-STPA",
+    "system": "Automated Valet Parking (AVP)",
+    "public_release_scope": "Anonymized structured JSON record for manual expert agreement review samples. Expert identities, local files, implementation materials, and non-public operational metadata are excluded."
+  },
+  "public_file_role": "manual_expert_agreement_sample_records",
+  "review_task": "Two independent expert reviewers judged whether each sampled STPA item should be retained as a final deliverable result.",
+  "review_decision_set": [
+    "retain",
+    "do_not_retain"
+  ],
+  "sampling_design": {
+    "sample_size": 60,
+    "uca_samples": 30,
+    "causal_scenario_samples": 30,
+    "sampling_note": "Samples cover the two STPA product types, four AVP control actions, retained items, and semantic-boundary items used for consistency checking."
+  },
+  "expert_reviewer_profiles": [
+    {
+      "reviewer_id": "Expert A",
+      "education_level": "PhD",
+      "professional_experience_years": 10,
+      "identity_disclosure": "anonymous_public_profile"
+    },
+    {
+      "reviewer_id": "Expert B",
+      "education_level": "Master's degree",
+      "professional_experience_years": 4,
+      "identity_disclosure": "anonymous_public_profile"
+    }
+  ],
+  "agreement_summary": {
+    "sample_size": 60,
+    "uca_samples": 30,
+    "causal_scenario_samples": 30,
+    "agreement_count": 58,
+    "disagreement_count": 2,
+    "overall_agreement_rate": 0.967,
+    "uca_agreement_rate": 0.933,
+    "causal_scenario_agreement_rate": 1.0,
+    "cohens_kappa": 0.78
+  },
+  "disagreement_records": [
+    {
+      "sample_id": "U29",
+      "stage": "uca",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "接近终点时前进驱动控制不足导致停位偏差",
+      "linked_object": "H-AVP-2/H-AVP-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "do_not_retain",
+      "agreement": false,
+      "review_focus": "分歧：是否构成独立UCA或与边界控制重复",
+      "sample_locator_code": "B-UCA-FD-01"
+    },
+    {
+      "sample_id": "U30",
+      "stage": "uca",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "转向修正不足导致车辆靠近车位边界",
+      "linked_object": "H-AVP-1/H-AVP-2",
+      "expert_a_decision": "do_not_retain",
+      "expert_b_decision": "retain",
+      "agreement": false,
+      "review_focus": "分歧：是否作为横向控制独立风险形式保留",
+      "sample_locator_code": "B-UCA-LC-04"
+    }
+  ],
+  "sample_records": [
+    {
+      "sample_id": "U01",
+      "stage": "uca",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "倒车阶段错误提供前进驱动",
+      "linked_object": "H-AVP-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "相位关系明确，危害链接合理",
+      "sample_locator_code": "M-UCA-FD-01"
+    },
+    {
+      "sample_id": "U02",
+      "stage": "uca",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "泊车完成前过早停止前进驱动",
+      "linked_object": "H-AVP-3/H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "动作生命周期错误清楚",
+      "sample_locator_code": "M-UCA-FD-02"
+    },
+    {
+      "sample_id": "U03",
+      "stage": "uca",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "倒车/侧方泊车中前进驱动时机错误",
+      "linked_object": "H-AVP-1/H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "时机错误与控制行为一致",
+      "sample_locator_code": "M-UCA-FD-03"
+    },
+    {
+      "sample_id": "U04",
+      "stage": "uca",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "倒车过程中误发前进驱动",
+      "linked_object": "H-AVP-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "机制独立且危害直接",
+      "sample_locator_code": "M-UCA-FD-04"
+    },
+    {
+      "sample_id": "U05",
+      "stage": "uca",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "车辆已停仍提供前进驱动",
+      "linked_object": "H-AVP-2/H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "持续时间错误明确",
+      "sample_locator_code": "M-UCA-FD-05"
+    },
+    {
+      "sample_id": "U06",
+      "stage": "uca",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "需转向时过晚提供前进驱动",
+      "linked_object": "H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "时序偏差具备独立性",
+      "sample_locator_code": "M-UCA-FD-06"
+    },
+    {
+      "sample_id": "U07",
+      "stage": "uca",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "需减速时过早提供前进驱动",
+      "linked_object": "H-AVP-1/H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "控制时机和风险方向明确",
+      "sample_locator_code": "M-UCA-FD-07"
+    },
+    {
+      "sample_id": "U08",
+      "stage": "uca",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "需停车时过晚停止前进驱动",
+      "linked_object": "H-AVP-2/H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "终止时机错误清楚",
+      "sample_locator_code": "M-UCA-FD-08"
+    },
+    {
+      "sample_id": "U09",
+      "stage": "uca",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "过早确认候选车位致任务失败",
+      "linked_object": "H-AVP-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "确认时机错误明确",
+      "sample_locator_code": "M-UCA-SS-01"
+    },
+    {
+      "sample_id": "U10",
+      "stage": "uca",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "动态障碍下过早确认车位致碰撞",
+      "linked_object": "H-AVP-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "动态障碍条件下的错误确认明确",
+      "sample_locator_code": "M-UCA-SS-02"
+    },
+    {
+      "sample_id": "U11",
+      "stage": "uca",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "倒车前过早确认车位致路径受限",
+      "linked_object": "H-AVP-2/H-AVP-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "控制行为与后续路径风险有关联",
+      "sample_locator_code": "M-UCA-SS-03"
+    },
+    {
+      "sample_id": "U12",
+      "stage": "uca",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "确认尺寸过小的候选车位",
+      "linked_object": "H-AVP-1/H-AVP-2",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "虽表述偏结果，但可归为错误确认",
+      "sample_locator_code": "B-UCA-SS-01"
+    },
+    {
+      "sample_id": "U13",
+      "stage": "uca",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "未确认有效车位导致任务无法完成",
+      "linked_object": "H-AVP-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "未提供类结果输出清楚",
+      "sample_locator_code": "B-UCA-SS-02"
+    },
+    {
+      "sample_id": "U14",
+      "stage": "uca",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "确认车位边界不完整导致越界",
+      "linked_object": "H-AVP-2",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "边界约束与危害一致",
+      "sample_locator_code": "B-UCA-SS-03"
+    },
+    {
+      "sample_id": "U15",
+      "stage": "uca",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "车位状态变化后仍保持原确认结果",
+      "linked_object": "H-AVP-1/H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "状态更新不足导致确认错误",
+      "sample_locator_code": "B-UCA-SS-04"
+    },
+    {
+      "sample_id": "U16",
+      "stage": "uca",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "障碍物进入安全距离时未触发紧急制动",
+      "linked_object": "H-AVP-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "未提供类UCA清楚",
+      "sample_locator_code": "M-UCA-EB-01"
+    },
+    {
+      "sample_id": "U17",
+      "stage": "uca",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "无危险目标时误触发紧急制动",
+      "linked_object": "H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "不必要急停风险明确",
+      "sample_locator_code": "M-UCA-EB-02"
+    },
+    {
+      "sample_id": "U18",
+      "stage": "uca",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "紧急制动触发过晚导致碰撞风险",
+      "linked_object": "H-AVP-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "时机错误与危害直接",
+      "sample_locator_code": "M-UCA-EB-03"
+    },
+    {
+      "sample_id": "U19",
+      "stage": "uca",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "紧急制动持续过长导致车辆停留在不可接受位置",
+      "linked_object": "H-AVP-3/H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "持续时间错误可解释",
+      "sample_locator_code": "M-UCA-EB-04"
+    },
+    {
+      "sample_id": "U20",
+      "stage": "uca",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "风险解除后未及时释放制动",
+      "linked_object": "H-AVP-3/H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "终止条件错误明确",
+      "sample_locator_code": "B-UCA-EB-01"
+    },
+    {
+      "sample_id": "U21",
+      "stage": "uca",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "低速贴近边界时制动力过大导致非预期急停",
+      "linked_object": "H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "动作强度与风险相关",
+      "sample_locator_code": "B-UCA-EB-02"
+    },
+    {
+      "sample_id": "U22",
+      "stage": "uca",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "车辆倒车阶段错误施加前向紧急制动策略",
+      "linked_object": "H-AVP-1/H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "相位/策略错配具有独立性",
+      "sample_locator_code": "B-UCA-EB-03"
+    },
+    {
+      "sample_id": "U23",
+      "stage": "uca",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "应进入降级等待时继续释放制动",
+      "linked_object": "H-AVP-1/H-AVP-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "控制模式切换错误明确",
+      "sample_locator_code": "B-UCA-EB-04"
+    },
+    {
+      "sample_id": "U24",
+      "stage": "uca",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "横向控制被不安全地提供导致擦碰边界或障碍物",
+      "linked_object": "H-AVP-1/H-AVP-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "动作对象与危害直接",
+      "sample_locator_code": "M-UCA-LC-01"
+    },
+    {
+      "sample_id": "U25",
+      "stage": "uca",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "系统横向控制异常导致车辆偏离路径",
+      "linked_object": "H-AVP-2/H-AVP-4",
+      "expert_a_decision": "do_not_retain",
+      "expert_b_decision": "do_not_retain",
+      "agreement": true,
+      "review_focus": "表述过泛，缺少独立控制语义边界",
+      "sample_locator_code": "B-UCA-LC-01"
+    },
+    {
+      "sample_id": "U26",
+      "stage": "uca",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "未及时调整横向轨迹导致泊车效果不好",
+      "linked_object": "H-AVP-3",
+      "expert_a_decision": "do_not_retain",
+      "expert_b_decision": "do_not_retain",
+      "agreement": true,
+      "review_focus": "工程语义偏弱，危害链接不够直接",
+      "sample_locator_code": "B-UCA-LC-02"
+    },
+    {
+      "sample_id": "U27",
+      "stage": "uca",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "横向控制不稳定导致车辆不安全",
+      "linked_object": "H-AVP-4",
+      "expert_a_decision": "do_not_retain",
+      "expert_b_decision": "do_not_retain",
+      "agreement": true,
+      "review_focus": "过于概括，难以归档为独立UCA",
+      "sample_locator_code": "B-UCA-LC-03"
+    },
+    {
+      "sample_id": "U28",
+      "stage": "uca",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "候选车位识别不准确导致风险",
+      "linked_object": "H-AVP-1/H-AVP-2",
+      "expert_a_decision": "do_not_retain",
+      "expert_b_decision": "do_not_retain",
+      "agreement": true,
+      "review_focus": "偏感知结果摘要，缺少控制行为层表达",
+      "sample_locator_code": "B-UCA-SS-05"
+    },
+    {
+      "sample_id": "U29",
+      "stage": "uca",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "接近终点时前进驱动控制不足导致停位偏差",
+      "linked_object": "H-AVP-2/H-AVP-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "do_not_retain",
+      "agreement": false,
+      "review_focus": "分歧：是否构成独立UCA或与边界控制重复",
+      "sample_locator_code": "B-UCA-FD-01"
+    },
+    {
+      "sample_id": "U30",
+      "stage": "uca",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "转向修正不足导致车辆靠近车位边界",
+      "linked_object": "H-AVP-1/H-AVP-2",
+      "expert_a_decision": "do_not_retain",
+      "expert_b_decision": "retain",
+      "agreement": false,
+      "review_focus": "分歧：是否作为横向控制独立风险形式保留",
+      "sample_locator_code": "B-UCA-LC-04"
+    },
+    {
+      "sample_id": "S01",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "超声波故障致误判无障碍",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "FB/PM锚定清楚",
+      "sample_locator_code": "M-SC-FD-01"
+    },
+    {
+      "sample_id": "S02",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "摄像头雨天误判有障碍导致应前进时未前进",
+      "linked_object": "UCA-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "触发条件和UCA链接明确",
+      "sample_locator_code": "M-SC-FD-02"
+    },
+    {
+      "sample_id": "S03",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "CAN卡顿致使能信号丢失",
+      "linked_object": "UCA-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "反馈异常机制明确",
+      "sample_locator_code": "M-SC-FD-03"
+    },
+    {
+      "sample_id": "S04",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "路径跟踪算法缺陷导致车辆越界",
+      "linked_object": "UCA-2",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "算法偏差与边界风险一致",
+      "sample_locator_code": "M-SC-FD-04"
+    },
+    {
+      "sample_id": "S05",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "软件BUG致前进驱动未退出",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "CA/执行状态异常清楚",
+      "sample_locator_code": "M-SC-FD-05"
+    },
+    {
+      "sample_id": "S06",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "上位指令延迟导致非预期运动",
+      "linked_object": "UCA-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "通信延迟机制独立",
+      "sample_locator_code": "M-SC-FD-06"
+    },
+    {
+      "sample_id": "S07",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "执行反馈误解析为失败导致应前进时未前进",
+      "linked_object": "UCA-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "ACK误判机制明确",
+      "sample_locator_code": "M-SC-FD-07"
+    },
+    {
+      "sample_id": "S08",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "电机过热保护导致无扭矩输出",
+      "linked_object": "UCA-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "执行机构异常与UCA一致",
+      "sample_locator_code": "M-SC-FD-08"
+    },
+    {
+      "sample_id": "S09",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "forward_drive",
+        "zh": "前进驱动",
+        "en": "forward drive"
+      },
+      "item_summary": "协同通信延迟导致碰撞风险",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "上位通信滞后与危害直接",
+      "sample_locator_code": "M-SC-FD-09"
+    },
+    {
+      "sample_id": "S10",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "邻车驶离导致瞬时空位证据，系统过早确认车位",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "动态环境触发与确认错误清楚",
+      "sample_locator_code": "M-SC-SS-01"
+    },
+    {
+      "sample_id": "S11",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "侧向遮挡导致边界不完整，系统确认不可泊入车位",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "感知边界与确认结果链路清楚",
+      "sample_locator_code": "M-SC-SS-02"
+    },
+    {
+      "sample_id": "S12",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "低矮障碍物未被稳定识别，候选车位被错误保留",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "FB异常与错误确认一致",
+      "sample_locator_code": "M-SC-SS-03"
+    },
+    {
+      "sample_id": "S13",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "候选车位稳定性窗口不足导致过早确认",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "CA验证不足明确",
+      "sample_locator_code": "M-SC-SS-04"
+    },
+    {
+      "sample_id": "S14",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "车辆定位偏差导致车位边界投影错误",
+      "linked_object": "UCA-2",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "PM位置偏差与越界风险一致",
+      "sample_locator_code": "M-SC-SS-05"
+    },
+    {
+      "sample_id": "S15",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "历史地图车位信息未更新导致确认已占用车位",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "信息时效性问题明确",
+      "sample_locator_code": "M-SC-SS-06"
+    },
+    {
+      "sample_id": "S16",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "slot_confirmation",
+        "zh": "车位确认",
+        "en": "parking-space confirmation"
+      },
+      "item_summary": "车位识别置信度阈值设置过低导致误确认",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "算法阈值偏差独立",
+      "sample_locator_code": "M-SC-SS-07"
+    },
+    {
+      "sample_id": "S17",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "障碍物测距丢失导致未触发紧急制动",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "FB丢失导致未制动清楚",
+      "sample_locator_code": "M-SC-EB-01"
+    },
+    {
+      "sample_id": "S18",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "虚假障碍物回波导致无风险时急停",
+      "linked_object": "UCA-2",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "误报触发与急停一致",
+      "sample_locator_code": "M-SC-EB-02"
+    },
+    {
+      "sample_id": "S19",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "制动执行确认延迟导致制动触发过晚",
+      "linked_object": "UCA-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "反馈延迟与时机错误一致",
+      "sample_locator_code": "M-SC-EB-03"
+    },
+    {
+      "sample_id": "S20",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "控制器误判车辆仍处于危险距离导致制动持续过长",
+      "linked_object": "UCA-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "PM偏差导致持续时间错误",
+      "sample_locator_code": "M-SC-EB-04"
+    },
+    {
+      "sample_id": "S21",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "低附着路面制动模型不准确导致急停风险上升",
+      "linked_object": "UCA-2",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "环境触发与控制模型偏差明确",
+      "sample_locator_code": "M-SC-EB-05"
+    },
+    {
+      "sample_id": "S22",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "目标跟踪ID切换导致风险解除判断错误",
+      "linked_object": "UCA-4",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "状态关联错误机制清楚",
+      "sample_locator_code": "M-SC-EB-06"
+    },
+    {
+      "sample_id": "S23",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "emergency_brake",
+        "zh": "紧急制动",
+        "en": "emergency braking"
+      },
+      "item_summary": "制动请求被执行器限幅导致未达到预期减速度",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "执行约束与未充分制动一致",
+      "sample_locator_code": "M-SC-EB-07"
+    },
+    {
+      "sample_id": "S24",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "转向电机机械卡滞导致持续危险转向",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "执行反馈异常链路清楚",
+      "sample_locator_code": "M-SC-LC-01"
+    },
+    {
+      "sample_id": "S25",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "车位线局部缺失导致横向边界信念偏差",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "PM边界偏差与横向控制一致",
+      "sample_locator_code": "M-SC-LC-02"
+    },
+    {
+      "sample_id": "S26",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "轮速/偏航反馈延迟导致转向修正滞后",
+      "linked_object": "UCA-3",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "FB延迟和时机错误一致",
+      "sample_locator_code": "M-SC-LC-03"
+    },
+    {
+      "sample_id": "S27",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "路径曲率估计错误导致转向角过大",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "CA/PM偏差与危险转向直接相关",
+      "sample_locator_code": "M-SC-LC-04"
+    },
+    {
+      "sample_id": "S28",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "目标车位边界更新不及时导致车辆靠近边界",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "信息更新滞后机制明确",
+      "sample_locator_code": "M-SC-LC-05"
+    },
+    {
+      "sample_id": "S29",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "转角回读漂移导致控制器误以为修正不足",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "反馈误差与持续修正一致",
+      "sample_locator_code": "M-SC-LC-06"
+    },
+    {
+      "sample_id": "S30",
+      "stage": "causal_scenario",
+      "control_action": {
+        "key": "lateral_control",
+        "zh": "横向控制",
+        "en": "lateral control"
+      },
+      "item_summary": "横向控制器降级逻辑未及时触发导致持续输出",
+      "linked_object": "UCA-1",
+      "expert_a_decision": "retain",
+      "expert_b_decision": "retain",
+      "agreement": true,
+      "review_focus": "降级逻辑与持续危险输出一致",
+      "sample_locator_code": "M-SC-LC-07"
+    }
+  ],
+  "record_integrity": {
+    "sample_records_sha256": "bdb173209b7c20ca35c56982d66a998448c40219de8df45be28c209a11709725",
+    "encoding": "UTF-8 without BOM"
+  }
+}

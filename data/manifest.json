@@ -12,15 +12,15 @@
   "directory_layout": {
     "00_summary": "compact metrics and paper-level summary",
     "01_candidate_generation": "initial generated candidate JSON, split by task/action/method",
-    "03_expert_delivery_audit": "manual expert extraction, semantic merge, final delivery audit, and agreement summaries",
+    "03_expert_delivery_audit": "manual expert extraction, semantic merge, final delivery audit, agreement summary, and item-level agreement sample records",
     "02_quality_gate_scoring": "multidimensional quality-gate scoring JSON, split by task/action/method"
   },
   "file_counts": {
     "summary_files": 1,
     "initial_candidate_generation_files": 32,
-    "expert_delivery_audit_files": 3,
+    "expert_delivery_audit_files": 4,
     "manifest_files": 1,
-    "total_json_files": 69,
+    "total_json_files": 70,
     "quality_gate_scoring_files": 32
   },
   "public_files": [
@@ -91,7 +91,8 @@
     "data/02_quality_gate_scoring/causal_scenario/causal_scenario_quality_gate_scoring__lateral_control__lora.json",
     "data/03_expert_delivery_audit/uca_expert_delivery_audit.json",
     "data/03_expert_delivery_audit/causal_scenario_expert_delivery_audit.json",
-    "data/03_expert_delivery_audit/expert_agreement_review.json"
+    "data/03_expert_delivery_audit/expert_agreement_review.json",
+    "data/03_expert_delivery_audit/expert_agreement_sample_records.json"
   ],
   "action_key_aliases": {
     "search_slot": {
