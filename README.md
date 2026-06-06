@@ -64,7 +64,7 @@ Note: `search_slot` is retained as the historical file/key label for traceabilit
 
 This result release publishes structured JSON result records only. Implementation code is maintained in `CSG-code`; expert identities, local files, and non-public operational metadata are excluded from this dataset repository.
 
-The `02_quality_gate_scoring` files document the multidimensional quality-gate scoring stage described in the paper before system-level semantic consolidation. The `03_expert_delivery_audit` files document manual expert extraction, semantic merge review, final delivery audit, expert agreement summary, and item-level agreement sample records. The public records retain item text, explicit links, scoring fields, rationales, issue notes, suggested revisions, semantic-merge decisions, final audit outcomes, and agreement decisions where applicable.
+The `02_quality_gate_scoring` files document the multidimensional quality-gate scoring stage described in the paper before system-level semantic consolidation. The `03_expert_delivery_audit` files document manual expert extraction, semantic merge review, final delivery audit, expert semantic agreement summary, and item-level semantic agreement sample records. The public records retain item text, explicit links, scoring fields, rationales, issue notes, suggested revisions, semantic-merge decisions, final audit outcomes, and neutral semantic agreement categories where applicable.
 
 ## Metrics
 
@@ -73,7 +73,7 @@ The `02_quality_gate_scoring` files document the multidimensional quality-gate s
 - **RR**: semantic-merge retention rate, calculated as KC / UC.
 - **FDC**: final deliverable count after final expert delivery audit.
 
-The paper reports 282 semantic-merge-kept STPA products, including 83 UCA records and 199 causal-scenario records. After final expert delivery audit, 273 records are retained for final delivery: 74 UCA records and 199 causal-scenario records. Therefore, the overall final retention rate is 273 / 282 = 96.8%; UCA final retention is 74 / 83 = 89.2%; causal-scenario retention is 199 / 199 = 100.0%. Expert agreement review on 60 sampled records reports 58 consistent decisions, 96.7% agreement, and Cohen's kappa of 0.78. The item-level sampled decisions are provided in `data/03_expert_delivery_audit/expert_agreement_sample_records.json`.
+The paper reports 282 semantic-merge-kept STPA products, including 83 UCA records and 199 causal-scenario records. After final expert delivery audit, 273 records are retained for final delivery: 74 UCA records and 199 causal-scenario records. Therefore, the overall final retention rate is 273 / 282 = 96.8%; UCA final retention is 74 / 83 = 89.2%; causal-scenario retention is 199 / 199 = 100.0%. Expert semantic agreement review on 60 sampled records reports 58 consistent decisions, 96.7% agreement, and Cohen's kappa of 0.78. The item-level categories in `data/03_expert_delivery_audit/expert_agreement_sample_records.json` describe clear semantic alignment versus semantic-boundary alignment for agreement analysis only; they are not public acceptance/rejection labels or a second final-delivery acceptance decision.
 
 The expert agreement review uses anonymized public profiles: Expert A has a PhD and 10 years of professional experience; Expert B has a master's degree and 4 years of professional experience. Names, affiliations, and personal identifiers are not disclosed.
 

@@ -238,7 +238,8 @@
     "uca_agreement_rate": 0.933,
     "causal_scenario_agreement_rate": 1.0,
     "cohens_kappa": 0.78,
-    "sample_records_file": "data/03_expert_delivery_audit/expert_agreement_sample_records.json"
+    "sample_records_file": "data/03_expert_delivery_audit/expert_agreement_sample_records.json",
+    "review_scope_note": "Agreement-only semantic review of sampled STPA items. The item-level categories are neutral semantic-boundary classifications and are not public acceptance/rejection labels."
   },
   "structured_release_counts": {
     "uca_candidate_generation_files": 16,
