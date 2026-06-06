@@ -41,21 +41,6 @@
     "causal_scenario_agreement_rate": 1.0,
     "cohens_kappa": 0.78
   },
-  "sample_retain_decision_distribution": {
-    "metric_scope": "sample_level_manual_expert_agreement_review_only",
-    "both_experts_retain_count": 54,
-    "both_experts_do_not_retain_count": 4,
-    "expert_disagreement_count": 2,
-    "at_least_one_expert_retain_count": 56,
-    "both_experts_retain_rate": 0.9,
-    "uca_both_experts_retain_count": 24,
-    "uca_both_experts_do_not_retain_count": 4,
-    "uca_expert_disagreement_count": 2,
-    "causal_scenario_both_experts_retain_count": 30,
-    "causal_scenario_both_experts_do_not_retain_count": 0,
-    "causal_scenario_expert_disagreement_count": 0,
-    "interpretation_note": "This distribution describes the 60 sampled items used for expert agreement checking. It should not be interpreted as the full-corpus final deliverable count."
-  },
   "disagreement_records": [
     {
       "sample_id": "U29",
