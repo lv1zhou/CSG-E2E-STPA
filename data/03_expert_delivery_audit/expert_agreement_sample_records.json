@@ -1028,5 +1028,19 @@
     "boundary_semantic_alignment"
   ],
   "semantic_review_note": "Both public category codes indicate semantically reviewable STPA items. The distinction records whether the item was treated as a clear case or a semantic-boundary case under the same expert review criteria.",
-  "expert_reviewer_profile_note": "Reviewer identities and personal profile details are not disclosed. The public release reports only anonymized manual expert review results and agreement metrics."
+  "expert_reviewer_profile_note": "Reviewer identities, names, affiliations, and personal identifiers are not disclosed. The public profile records only anonymous reviewer ID, education level, and professional experience years.",
+  "expert_reviewer_profiles": [
+    {
+      "reviewer_id": "Expert A",
+      "education_level": "PhD",
+      "professional_experience_years": 10,
+      "identity_disclosure": "anonymous_public_profile"
+    },
+    {
+      "reviewer_id": "Expert B",
+      "education_level": "Master's degree",
+      "professional_experience_years": 4,
+      "identity_disclosure": "anonymous_public_profile"
+    }
+  ]
 }

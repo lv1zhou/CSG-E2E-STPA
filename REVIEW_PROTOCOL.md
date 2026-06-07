@@ -27,9 +27,14 @@ The item-level expert agreement categories are neutral semantic-boundary classif
 
 The public rationales are structured review summaries prepared from manual review records for auditability.
 
-## Expert Reviewer Privacy
+## Expert Reviewer Profiles
 
-Reviewer identities and personal profile details are not disclosed in the public release.
+The public expert profiles are anonymized:
+
+- Expert A: PhD, 10 years of professional experience.
+- Expert B: Master's degree, 4 years of professional experience.
+
+Names, affiliations, and personal identifiers are not disclosed in the public release.
 
 ## Public Sanitization
 

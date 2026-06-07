@@ -1215,8 +1215,22 @@
       "local environment metadata",
       "non-review execution artifacts"
     ],
-    "expert_reviewer_profile_scope": "not disclosed in public release"
+    "expert_reviewer_profile_scope": "anonymous education level and professional experience years only"
   },
   "metric_scope_note": "Per-action/method UC, KC, and RR are reported for the quality-gate and semantic-merge stages. Paper-level UCA FDC is an aggregate final delivery-audit count and should not be reconstructed by summing per-action/method local fields.",
-  "expert_reviewer_profile_note": "Reviewer identities and personal profile details are not disclosed. The public release reports only anonymized manual expert review results and agreement metrics."
+  "expert_reviewer_profile_note": "Reviewer identities, names, affiliations, and personal identifiers are not disclosed. The public profile records only anonymous reviewer ID, education level, and professional experience years.",
+  "expert_reviewer_profiles": [
+    {
+      "reviewer_id": "Expert A",
+      "education_level": "PhD",
+      "professional_experience_years": 10,
+      "identity_disclosure": "anonymous_public_profile"
+    },
+    {
+      "reviewer_id": "Expert B",
+      "education_level": "Master's degree",
+      "professional_experience_years": 4,
+      "identity_disclosure": "anonymous_public_profile"
+    }
+  ]
 }
